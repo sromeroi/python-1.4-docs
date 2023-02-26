@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.4.1 Persistent Objects</TITLE>
+<META NAME="description" CONTENT="11.4.1 Persistent Objects">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1401" HREF="node99.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1399" HREF="node97.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1393" HREF="node97.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1403" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1402" HREF="node99.html">11.4.2 Copying Objects</A>
+<B>Up:</B> <A NAME="tex2html1400" HREF="node97.html">11.4 Object Persistency and </A>
+<B> Previous:</B> <A NAME="tex2html1394" HREF="node97.html">11.4 Object Persistency and </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001241000000000000000">11.4.1 Persistent Objects</A></H2>
+<P>
+The module <CODE>pickle</CODE> provides a general framework for objects to
+disassemble themselves into a stream of bytes and to reassemble such a
+stream back into an object.  It copes with reference sharing,
+recursive objects and instances of user-defined classes, but not
+(directly) with objects that have ``magical'' links into the operating
+system such as open files, sockets or windows.
+<P>
+The <CODE>pickle</CODE> module defines a simple protocol whereby
+user-defined classes can control how they are disassembled and
+assembled.  The method <CODE>__getinitargs__()</CODE>, if defined, returns
+the argument list for the constructor to be used at assembly time (by
+default the constructor is called without arguments).  The methods
+<CODE>__getstate__()</CODE> and <CODE>__setstate__()</CODE> are used to pass
+additional state from disassembly to assembly; by default the
+instance's <CODE>__dict__</CODE> is passed and restored.
+<P>
+Note that <CODE>pickle</CODE> does not open or close any files -- it can be
+used equally well for moving objects around on a network or store them
+in a database.  For ease of debugging, and the inevitable occasional
+manual patch-up, the constructed byte streams consist of printable
+ASCII characters only (though it's not designed to be pretty).
+<P>
+The module <CODE>shelve</CODE> provides a simple model for storing objects
+on files.  The operation <CODE>shelve.open(filename)</CODE> returns a
+``shelf'', which is a simple persistent database with a
+dictionary-like interface.  Database keys are strings, objects stored
+in the database can be anything that <CODE>pickle</CODE> will handle.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

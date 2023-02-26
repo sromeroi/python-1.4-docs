@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.4 Built-in Module macconsole</TITLE>
+<META NAME="description" CONTENT="15.4 Built-in Module macconsole">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4329" HREF="node164.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4327" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4321" HREF="node162.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4331" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4332" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4330" HREF="node164.html">15.4.1 macconsole options object</A>
+<B>Up:</B> <A NAME="tex2html4328" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4322" HREF="node162.html">15.3.1 connection object</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001640000000000000000">15.4 Built-in Module <CODE>macconsole</CODE></A></H1>
+<P>
+This module is available on the Macintosh, provided Python has been
+built using the Think C compiler. It provides an interface to the
+Think console package, with which basic text windows can be created.
+<P>
+<DL><DT><STRONG><A NAME="">options</A></STRONG>
+<DD>
+An object allowing you to set various options when creating windows,
+see below.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">C_ECHO</A></STRONG>
+<DD>
+,C_NOECHO
+,C_CBREAK
+,C_RAW
+Options for the <CODE>setmode</CODE> method. <VAR>C_ECHO</VAR> and <VAR>C_CBREAK</VAR>
+enable character echo, the other two disable it, <VAR>C_ECHO</VAR> and
+<VAR>C_NOECHO</VAR> enable line-oriented input (erase/kill processing,
+etc).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8747">copen</A></STRONG>(<VAR></VAR>)
+<DD>
+Open a new console window. Return a console window object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8751">fopen</A></STRONG>(<VAR>fp</VAR>)
+<DD>
+Return the console window object corresponding with the given file
+object. <VAR>fp</VAR> should be one of <CODE>sys.stdin</CODE>, <CODE>sys.stdout</CODE> or
+<CODE>sys.stderr</CODE>.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4333" HREF="node164.html#SECTION001641000000000000000">15.4.1 macconsole options object</A>
+<LI> <A NAME="tex2html4334" HREF="node165.html#SECTION001642000000000000000">15.4.2 console window object</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

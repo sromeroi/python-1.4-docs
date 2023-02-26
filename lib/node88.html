@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.1 Debugger Commands</TITLE>
+<META NAME="description" CONTENT="9.1 Debugger Commands">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3343" HREF="node89.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3341" HREF="node87.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3335" HREF="node87.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3345" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3346" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3344" HREF="node89.html">9.2 How It Works</A>
+<B>Up:</B> <A NAME="tex2html3342" HREF="node87.html">9 The Python Debugger</A>
+<B> Previous:</B> <A NAME="tex2html3336" HREF="node87.html">9 The Python Debugger</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001010000000000000000">9.1 Debugger Commands</A></H1>
+<P>
+The debugger recognizes the following commands.  Most commands can be
+abbreviated to one or two letters; e.g. ``<CODE>h(elp)</CODE>'' means that
+either ``<CODE>h</CODE>'' or ``<CODE>help</CODE>'' can be used to enter the help
+command (but not ``<CODE>he</CODE>'' or ``<CODE>hel</CODE>'', nor ``<CODE>H</CODE>'' or
+``<CODE>Help</CODE> or ``<CODE>HELP</CODE>'').  Arguments to commands must be
+separated by whitespace (spaces or tabs).  Optional arguments are
+enclosed in square brackets (``<CODE>[]</CODE>'') in the command syntax; the
+square brackets must not be typed.  Alternatives in the command syntax
+are separated by a vertical bar (``<CODE>|</CODE>'').
+<P>
+Entering a blank line repeats the last command entered.  Exception: if
+the last command was a ``<CODE>list</CODE>'' command, the next 11 lines are
+listed.
+<P>
+Commands that the debugger doesn't recognize are assumed to be Python
+statements and are executed in the context of the program being
+debugged.  Python statements can also be prefixed with an exclamation
+point (``<CODE>!</CODE>'').  This is a powerful way to inspect the program
+being debugged; it is even possible to change a variable or call a
+function.  When an
+exception occurs in such a statement, the exception name is printed
+but the debugger's state is not changed.
+<P>
+<DL ><DT><STRONG>h(elp) [<VAR>command</VAR>]</STRONG>
+<DD>
+<P>
+Without argument, print the list of available commands.
+With a <VAR>command</VAR> as argument, print help about that command.
+``<CODE>help pdb</CODE>'' displays the full documentation file; if the
+environment variable <CODE>PAGER</CODE> is defined, the file is piped
+through that command instead.  Since the <VAR>command</VAR> argument must be
+an identifier, ``<CODE>help exec</CODE>'' must be entered to get help on the
+``<CODE>!</CODE>'' command.
+<P>
+<DT><STRONG>w(here)</STRONG>
+<DD>
+<P>
+Print a stack trace, with the most recent frame at the bottom.
+An arrow indicates the current frame, which determines the
+context of most commands.
+<P>
+<DT><STRONG>d(own)</STRONG>
+<DD>
+<P>
+Move the current frame one level down in the stack trace
+(to an older frame).
+<P>
+<DT><STRONG>u(p)</STRONG>
+<DD>
+<P>
+Move the current frame one level up in the stack trace
+(to a newer frame).
+<P>
+<DT><STRONG>b(reak) [<VAR>lineno</VAR><CODE>|</CODE><VAR>function</VAR>]</STRONG>
+<DD>
+<P>
+With a <VAR>lineno</VAR> argument, set a break there in the current
+file.  With a <VAR>function</VAR> argument, set a break at the entry of
+that function.  Without argument, list all breaks.
+<P>
+<DT><STRONG>cl(ear) [<VAR>lineno</VAR>]</STRONG>
+<DD>
+<P>
+With a <VAR>lineno</VAR> argument, clear that break in the current file.
+Without argument, clear all breaks (but first ask confirmation).
+<P>
+<DT><STRONG>s(tep)</STRONG>
+<DD>
+<P>
+Execute the current line, stop at the first possible occasion
+(either in a function that is called or on the next line in the
+current function).
+<P>
+<DT><STRONG>n(ext)</STRONG>
+<DD>
+<P>
+Continue execution until the next line in the current function
+is reached or it returns.  (The difference between <CODE>next</CODE> and
+<CODE>step</CODE> is that <CODE>step</CODE> stops inside a called function, while
+<CODE>next</CODE> executes called functions at (nearly) full speed, only
+stopping at the next line in the current function.)
+<P>
+<DT><STRONG>r(eturn)</STRONG>
+<DD>
+<P>
+Continue execution until the current function returns.
+<P>
+<DT><STRONG>c(ont(inue))</STRONG>
+<DD>
+<P>
+Continue execution, only stop when a breakpoint is encountered.
+<P>
+<DT><STRONG>l(ist) [<VAR>first</VAR> [, <VAR>last</VAR>]</STRONG>
+<DD>]
+<P>
+List source code for the current file.  Without arguments, list 11
+lines around the current line or continue the previous listing.  With
+one argument, list 11 lines around at that line.  With two arguments,
+list the given range; if the second argument is less than the first,
+it is interpreted as a count.
+<P>
+<DT><STRONG>a(rgs)</STRONG>
+<DD>
+<P>
+Print the argument list of the current function.
+<P>
+<DT><STRONG>p <VAR>expression</VAR></STRONG>
+<DD>
+<P>
+Evaluate the <VAR>expression</VAR> in the current context and print its
+value.  (Note: <CODE>print</CODE> can also be used, but is not a debugger
+command -- this executes the Python <CODE>print</CODE> statement.)
+<P>
+<DT><STRONG>[!] <VAR>statement</VAR></STRONG>
+<DD>
+<P>
+Execute the (one-line) <VAR>statement</VAR> in the context of
+the current stack frame.
+The exclamation point can be omitted unless the first word
+of the statement resembles a debugger command.
+To set a global variable, you can prefix the assignment
+command with a ``<CODE>global</CODE>'' command on the same line, e.g.:
+<PRE>(Pdb) global list_options; list_options = ['-l']
+(Pdb)</PRE>
+<P>
+<DT><STRONG>q(uit)</STRONG>
+<DD>
+<P>
+Quit from the debugger.
+The program being executed is aborted.
+<P>
+ </DL><HR><A NAME="tex2html3343" HREF="node89.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3341" HREF="node87.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3335" HREF="node87.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3345" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3346" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3344" HREF="node89.html">9.2 How It Works</A>
+<B>Up:</B> <A NAME="tex2html3342" HREF="node87.html">9 The Python Debugger</A>
+<B> Previous:</B> <A NAME="tex2html3336" HREF="node87.html">9 The Python Debugger</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

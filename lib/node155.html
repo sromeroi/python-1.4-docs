@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>14.1 Built-in Module md5</TITLE>
+<META NAME="description" CONTENT="14.1 Built-in Module md5">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4204" HREF="node156.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4202" HREF="node154.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4196" HREF="node154.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4206" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4207" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4205" HREF="node156.html">14.2 Built-in Module mpz</A>
+<B>Up:</B> <A NAME="tex2html4203" HREF="node154.html">14 Cryptographic Services</A>
+<B> Previous:</B> <A NAME="tex2html4197" HREF="node154.html">14 Cryptographic Services</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001510000000000000000">14.1 Built-in Module <CODE>md5</CODE></A></H1>
+<P>
+This module implements the interface to RSA's MD5 message digest
+algorithm (see also Internet RFC 1321).  Its use is quite
+straightforward: use the <CODE>md5.new()</CODE> to create an md5 object.
+You can now feed this object with arbitrary strings using the
+<CODE>update()</CODE> method, and at any point you can ask it for the
+<I><DFN>digest</DFN></I> (a strong kind of 128-bit checksum,
+a.k.a. ``fingerprint'') of the contatenation of the strings fed to it
+so far using the <CODE>digest()</CODE> method.
+<P>
+For example, to obtain the digest of the string <TT>&quot;Nobody inspects
+the spammish repetition&quot;</TT>:
+<P>
+<PRE>&gt;&gt;&gt; import md5
+&gt;&gt;&gt; m = md5.new()
+&gt;&gt;&gt; m.update(&quot;Nobody inspects&quot;)
+&gt;&gt;&gt; m.update(&quot; the spammish repetition&quot;)
+&gt;&gt;&gt; m.digest()
+'\273d\234\203\335\036\245\311\331\336\311\241\215\360\377\351'</PRE>
+<P>
+More condensed:
+<P>
+<PRE>&gt;&gt;&gt; md5.new(&quot;Nobody inspects the spammish repetition&quot;).digest()
+'\273d\234\203\335\036\245\311\331\336\311\241\215\360\377\351'</PRE>
+<P>
+<DL><DT><STRONG><A NAME="8382">new</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>arg</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a new md5 object.  If <VAR>arg</VAR> is present, the method call
+<CODE>update(<VAR>arg</VAR>)</CODE> is made.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8384">md5</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>arg</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+For backward compatibility reasons, this is an alternative name for the
+<CODE>new()</CODE> function.
+<P>
+</DL>
+<P>
+An md5 object has the following methods:
+<P>
+<DL><DT><STRONG><A NAME="8366">update</A></STRONG>(<VAR>arg</VAR>)
+<DD>
+Update the md5 object with the string <VAR>arg</VAR>.  Repeated calls are
+equivalent to a single call with the concatenation of all the
+arguments, i.e. <CODE>m.update(a); m.update(b)</CODE> is equivalent to
+<CODE>m.update(a+b)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8373">digest</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the digest of the strings passed to the <CODE>update()</CODE>
+method so far.  This is an 16-byte string which may contain
+non-ASCII characters, including null bytes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8379">copy</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a copy (``clone'') of the md5 object.  This can be used to
+efficiently compute the digests of strings that share a common initial
+substring.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

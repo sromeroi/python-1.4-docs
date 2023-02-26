@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>16.3 Standard Module rect</TITLE>
+<META NAME="description" CONTENT="16.3 Standard Module rect">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4799" HREF="node202.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4797" HREF="node191.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4793" HREF="node200.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4801" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4802" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4800" HREF="node202.html">17 SGI IRIX Specific </A>
+<B>Up:</B> <A NAME="tex2html4798" HREF="node191.html">16 Standard Windowing Interface</A>
+<B> Previous:</B> <A NAME="tex2html4794" HREF="node200.html">16.2 Standard Module stdwinevents</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001730000000000000000">16.3 Standard Module <CODE>rect</CODE></A></H1>
+<P>
+This module contains useful operations on rectangles.
+A rectangle is defined as in module
+<CODE>stdwin</CODE>:
+a pair of points, where a point is a pair of integers.
+For example, the rectangle
+<P>
+<PRE>(10, 20), (90, 80)</PRE>
+<P>
+is a rectangle whose left, top, right and bottom edges are 10, 20, 90
+and 80, respectively.
+Note that the positive vertical axis points down (as in
+<CODE>stdwin</CODE>).
+<P>
+The module defines the following objects:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+The exception raised by functions in this module when they detect an
+error.
+The exception argument is a string describing the problem in more
+detail.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">empty</A></STRONG>
+<DD>
+The rectangle returned when some operations return an empty result.
+This makes it possible to quickly check whether a result is empty:
+<P>
+<PRE>&gt;&gt;&gt; import rect
+&gt;&gt;&gt; r1 = (10, 20), (90, 80)
+&gt;&gt;&gt; r2 = (0, 0), (10, 20)
+&gt;&gt;&gt; r3 = rect.intersect([r1, r2])
+&gt;&gt;&gt; if r3 is rect.empty: print 'Empty intersection'
+Empty intersection
+&gt;&gt;&gt;</PRE>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10360">is_empty</A></STRONG>(<VAR>r</VAR>)
+<DD>
+Returns true if the given rectangle is empty.
+A rectangle
+<CODE>(<VAR>left</VAR>, <VAR>top</VAR>), (<VAR>right</VAR>, <VAR>bottom</VAR>)</CODE>
+is empty if
+,
+<CODE><VAR>left</VAR> &gt;= <VAR>right</VAR></CODE> or <CODE><VAR>top</VAR> =&gt; <VAR>bottom</VAR></CODE>.
+,
+ <IMG WIDTH=78 HEIGHT=15 ALIGN=BOTTOM ALT="tex2html_wrap_inline16699" SRC="img21.gif"  >  or  <IMG WIDTH=93 HEIGHT=15 ALIGN=BOTTOM ALT="tex2html_wrap_inline16701" SRC="img22.gif"  > .
+,
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10376">intersect</A></STRONG>(<VAR>list</VAR>)
+<DD>
+Returns the intersection of all rectangles in the list argument.
+It may also be called with a tuple argument.
+Raises
+<CODE>rect.error</CODE>
+if the list is empty.
+Returns
+<CODE>rect.empty</CODE>
+if the intersection of the rectangles is empty.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10382">union</A></STRONG>(<VAR>list</VAR>)
+<DD>
+Returns the smallest rectangle that contains all non-empty rectangles in
+the list argument.
+It may also be called with a tuple argument or with two or more
+rectangles as arguments.
+Returns
+<CODE>rect.empty</CODE>
+if the list is empty or all its rectangles are empty.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10387">pointinrect</A></STRONG>(<VAR>point, rect</VAR>)
+<DD>
+Returns true if the point is inside the rectangle.
+By definition, a point
+<CODE>(<VAR>h</VAR>, <VAR>v</VAR>)</CODE>
+is inside a rectangle
+<CODE>(<VAR>left</VAR>, <VAR>top</VAR>), (<VAR>right</VAR>, <VAR>bottom</VAR>)</CODE> if
+,
+<CODE><VAR>left</VAR> &lt;= <VAR>h</VAR> &lt; <VAR>right</VAR></CODE> and
+<CODE><VAR>top</VAR> &lt;= <VAR>v</VAR> &lt; <VAR>bottom</VAR></CODE>.
+,
+ <IMG WIDTH=110 HEIGHT=15 ALIGN=BOTTOM ALT="tex2html_wrap_inline16703" SRC="img23.gif"  >  and
+ <IMG WIDTH=124 HEIGHT=15 ALIGN=BOTTOM ALT="tex2html_wrap_inline16705" SRC="img24.gif"  > .
+,
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10409">inset</A></STRONG>(<VAR>rect,  <IMG WIDTH=37 HEIGHT=12 ALIGN=BOTTOM ALT="tex2html_wrap16697" SRC="img25.gif"  > </VAR>)
+<DD>
+Returns a rectangle that lies inside the
+<CODE>rect</CODE>
+argument by
+<VAR>dh</VAR>
+pixels horizontally
+and
+<VAR>dv</VAR>
+pixels
+vertically.
+If
+<VAR>dh</VAR>
+or
+<VAR>dv</VAR>
+is negative, the result lies outside
+<VAR>rect</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10419">rect2geom</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Converts a rectangle to geometry representation:
+<CODE>(<VAR>left</VAR>, <VAR>top</VAR>), (<VAR>width</VAR>, <VAR>height</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10427">geom2rect</A></STRONG>(<VAR>geom</VAR>)
+<DD>
+Converts a rectangle given in geometry representation back to the
+standard rectangle representation
+<CODE>(<VAR>left</VAR>, <VAR>top</VAR>), (<VAR>right</VAR>, <VAR>bottom</VAR>)</CODE>.
+<P>
+</DL><HR><A NAME="tex2html4799" HREF="node202.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4797" HREF="node191.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4793" HREF="node200.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4801" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4802" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4800" HREF="node202.html">17 SGI IRIX Specific </A>
+<B>Up:</B> <A NAME="tex2html4798" HREF="node191.html">16 Standard Windowing Interface</A>
+<B> Previous:</B> <A NAME="tex2html4794" HREF="node200.html">16.2 Standard Module stdwinevents</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

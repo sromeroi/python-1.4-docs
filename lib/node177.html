@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.10.2 TCP Status Objects</TITLE>
+<META NAME="description" CONTENT="15.10.2 TCP Status Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4500" HREF="node178.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4498" HREF="node175.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4492" HREF="node176.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4502" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4503" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4501" HREF="node178.html">15.10.3 UDP Stream Objects</A>
+<B>Up:</B> <A NAME="tex2html4499" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<B> Previous:</B> <A NAME="tex2html4493" HREF="node176.html">15.10.1 TCP Stream Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016102000000000000000">15.10.2 TCP Status Objects</A></H2>
+<P>
+This object has no methods, only some members holding information on
+the connection. A complete description of all fields in this objects
+can be found in the Apple documentation. The most interesting ones are:
+<P>
+<DL><DT><STRONG><A NAME="">localHost</A></STRONG>
+<DD>
+,localPort
+,remoteHost
+,remotePort
+The integer IP-addresses and port numbers of both endpoints of the
+connection.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">sendWindow</A></STRONG>
+<DD>
+The current window size.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">amtUnackedData</A></STRONG>
+<DD>
+The number of bytes sent but not yet acknowledged. <CODE>sendWindow -
+amtUnackedData</CODE> is what you can pass to <CODE>Send</CODE> without blocking.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">amtUnreadData</A></STRONG>
+<DD>
+The number of bytes received but not yet read (what you can <CODE>Recv</CODE>
+without blocking).
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

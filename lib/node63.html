@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.3 Standard Module getopt</TITLE>
+<META NAME="description" CONTENT="6.3 Standard Module getopt">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3029" HREF="node64.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3027" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3021" HREF="node62.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3031" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3032" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3030" HREF="node64.html">6.4 Standard Module tempfile</A>
+<B>Up:</B> <A NAME="tex2html3028" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3022" HREF="node62.html">6.2 Built-in Module time</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00730000000000000000">6.3 Standard Module <CODE>getopt</CODE></A></H1>
+<P>
+This module helps scripts to parse the command line arguments in
+<CODE>sys.argv</CODE>.
+It supports the same conventions as the Unix
+<CODE>getopt()</CODE>
+function (including the special meanings of arguments of the form
+`<SAMP>-</SAMP>' and `<SAMP>-</SAMP>').  Long options similar to those supported by
+GNU software may be used as well via an optional third argument.
+It defines the function
+<CODE>getopt.getopt(args, options [, long_options])</CODE>
+and the exception
+<CODE>getopt.error</CODE>.
+<P>
+The first argument to
+<CODE>getopt()</CODE>
+is the argument list passed to the script with its first element
+chopped off (i.e.,
+<CODE>sys.argv[1:]</CODE>).
+The second argument is the string of option letters that the
+script wants to recognize, with options that require an argument
+followed by a colon (i.e., the same format that Unix
+<CODE>getopt()</CODE>
+uses).
+The third option, if specified, is a list of strings with the names of
+the long options which should be supported.  The leading <CODE>'-'</CODE>
+characters should not be included in the option name.  Options which
+require an argument should be followed by an equal sign (<CODE>'='</CODE>).
+The return value consists of two elements: the first is a list of
+option-and-value pairs; the second is the list of program arguments
+left after the option list was stripped (this is a trailing slice of the
+first argument).
+Each option-and-value pair returned has the option as its first element,
+prefixed with a hyphen (e.g.,
+<CODE>'-x'</CODE>),
+and the option argument as its second element, or an empty string if the
+option has no argument.
+The options occur in the list in the same order in which they were
+found, thus allowing multiple occurrences.  Long and short options may
+be mixed.
+<P>
+An example using only Unix style options:
+<P>
+<PRE>&gt;&gt;&gt; import getopt, string
+&gt;&gt;&gt; args = string.split('-a -b -cfoo -d bar a1 a2')
+&gt;&gt;&gt; args
+['-a', '-b', '-cfoo', '-d', 'bar', 'a1', 'a2']
+&gt;&gt;&gt; optlist, args = getopt.getopt(args, 'abc:d:')
+&gt;&gt;&gt; optlist
+[('-a', ''), ('-b', ''), ('-c', 'foo'), ('-d', 'bar')]
+&gt;&gt;&gt; args
+['a1', 'a2']
+&gt;&gt;&gt;</PRE>
+<P>
+Using long option names is equally easy:
+<P>
+<PRE>&gt;&gt;&gt; s = '--condition=foo --testing --output-file abc.def -x a1 a2'
+&gt;&gt;&gt; args = string.split(s)
+&gt;&gt;&gt; args
+['--condition=foo', '--testing', '--output-file', 'abc.def', '-x', 'a1', 'a2']
+&gt;&gt;&gt; optlist, args = getopt.getopt(args, 'x', [
+...     'condition=', 'output-file=', 'testing'])
+&gt;&gt;&gt; optlist
+[('--condition', 'foo'), ('--testing', ''), ('--output-file', 'abc.def'), ('-x', '')]
+&gt;&gt;&gt; args
+['a1', 'a2']
+&gt;&gt;&gt;</PRE>
+<P>
+The exception
+<CODE>getopt.error = 'getopt.error'</CODE>
+is raised when an unrecognized option is found in the argument list or
+when an option requiring an argument is given none.
+The argument to the exception is a string indicating the cause of the
+error.  For long options, an argument given to an option which does
+not require one will also cause this exception to be raised.
+<P>
+<HR><A NAME="tex2html3029" HREF="node64.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3027" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3021" HREF="node62.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3031" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3032" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3030" HREF="node64.html">6.4 Standard Module tempfile</A>
+<B>Up:</B> <A NAME="tex2html3028" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3022" HREF="node62.html">6.2 Built-in Module time</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

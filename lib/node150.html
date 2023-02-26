@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.3 Standard Module aifc</TITLE>
+<META NAME="description" CONTENT="13.3 Standard Module aifc">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4143" HREF="node151.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4141" HREF="node147.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4135" HREF="node149.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4145" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4146" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4144" HREF="node151.html">13.4 Built-in Module jpeg</A>
+<B>Up:</B> <A NAME="tex2html4142" HREF="node147.html">13 Multimedia Services</A>
+<B> Previous:</B> <A NAME="tex2html4136" HREF="node149.html">13.2 Built-in Module imageop</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001430000000000000000">13.3 Standard Module <CODE>aifc</CODE></A></H1>
+<P>
+This module provides support for reading and writing AIFF and AIFF-C
+files.  AIFF is Audio Interchange File Format, a format for storing
+digital audio samples in a file.  AIFF-C is a newer version of the
+format that includes the ability to compress the audio data.
+<P>
+Audio files have a number of parameters that describe the audio data.
+The sampling rate or frame rate is the number of times per second the
+sound is sampled.  The number of channels indicate if the audio is
+mono, stereo, or quadro.  Each frame consists of one sample per
+channel.  The sample size is the size in bytes of each sample.  Thus a
+frame consists of <VAR>nchannels</VAR>*<VAR>samplesize</VAR> bytes, and a
+second's worth of audio consists of
+<VAR>nchannels</VAR>*<VAR>samplesize</VAR>*<VAR>framerate</VAR> bytes.
+<P>
+For example, CD quality audio has a sample size of two bytes (16
+bits), uses two channels (stereo) and has a frame rate of 44,100
+frames/second.  This gives a frame size of 4 bytes (2*2), and a
+second's worth occupies 2*2*44100 bytes, i.e. 176,400 bytes.
+<P>
+Module <CODE>aifc</CODE> defines the following function:
+<P>
+<DL><DT><STRONG><A NAME="8093">open</A></STRONG>(<VAR>file, mode</VAR>)
+<DD>
+Open an AIFF or AIFF-C file and return an object instance with
+methods that are described below.  The argument file is either a
+string naming a file or a file object.  The mode is either the string
+<CODE>'r'</CODE> when the file must be opened for reading, or <CODE>'w'</CODE>
+when the file must be opened for writing.  When used for writing, the
+file object should be seekable, unless you know ahead of time how many
+samples you are going to write in total and use
+<CODE>writeframesraw()</CODE> and <CODE>setnframes()</CODE>.
+<P>
+</DL>
+<P>
+Objects returned by <CODE>aifc.open()</CODE> when a file is opened for
+reading have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="8104">getnchannels</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the number of audio channels (1 for mono, 2 for stereo).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8108">getsampwidth</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the size in bytes of individual samples.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8112">getframerate</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the sampling rate (number of audio frames per second).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8116">getnframes</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the number of audio frames in the file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8120">getcomptype</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a four-character string describing the type of compression used
+in the audio file.  For AIFF files, the returned value is
+<CODE>'NONE'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8125">getcompname</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a human-readable description of the type of compression used in
+the audio file.  For AIFF files, the returned value is <CODE>'not
+compressed'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8130">getparams</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a tuple consisting of all of the above values in the above
+order.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8134">getmarkers</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a list of markers in the audio file.  A marker consists of a
+tuple of three elements.  The first is the mark ID (an integer), the
+second is the mark position in frames from the beginning of the data
+(an integer), the third is the name of the mark (a string).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8138">getmark</A></STRONG>(<VAR>id</VAR>)
+<DD>
+Return the tuple as described in <CODE>getmarkers</CODE> for the mark with
+the given id.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8143">readframes</A></STRONG>(<VAR>nframes</VAR>)
+<DD>
+Read and return the next <VAR>nframes</VAR> frames from the audio file.  The
+returned data is a string containing for each frame the uncompressed
+samples of all channels.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8148">rewind</A></STRONG>(<VAR></VAR>)
+<DD>
+Rewind the read pointer.  The next <CODE>readframes</CODE> will start from
+the beginning.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8153">setpos</A></STRONG>(<VAR>pos</VAR>)
+<DD>
+Seek to the specified frame number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8157">tell</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current frame number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8161">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the AIFF file.  After calling this method, the object can no
+longer be used.
+<P>
+</DL>
+<P>
+Objects returned by <CODE>aifc.open()</CODE> when a file is opened for
+writing have all the above methods, except for <CODE>readframes</CODE> and
+<CODE>setpos</CODE>.  In addition the following methods exist.  The
+<CODE>get</CODE> methods can only be called after the corresponding
+<CODE>set</CODE> methods have been called.  Before the first
+<CODE>writeframes</CODE> or <CODE>writeframesraw</CODE>, all parameters except for
+the number of frames must be filled in.
+<P>
+<DL><DT><STRONG><A NAME="8172">aiff</A></STRONG>(<VAR></VAR>)
+<DD>
+Create an AIFF file.  The default is that an AIFF-C file is created,
+unless the name of the file ends in '.aiff' in which case the default
+is an AIFF file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8176">aifc</A></STRONG>(<VAR></VAR>)
+<DD>
+Create an AIFF-C file.  The default is that an AIFF-C file is created,
+unless the name of the file ends in '.aiff' in which case the default
+is an AIFF file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8180">setnchannels</A></STRONG>(<VAR>nchannels</VAR>)
+<DD>
+Specify the number of channels in the audio file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8184">setsampwidth</A></STRONG>(<VAR>width</VAR>)
+<DD>
+Specify the size in bytes of audio samples.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8188">setframerate</A></STRONG>(<VAR>rate</VAR>)
+<DD>
+Specify the sampling frequency in frames per second.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8192">setnframes</A></STRONG>(<VAR>nframes</VAR>)
+<DD>
+Specify the number of frames that are to be written to the audio file.
+If this parameter is not set, or not set correctly, the file needs to
+support seeking.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8196">setcomptype</A></STRONG>(<VAR>type, name</VAR>)
+<DD>
+Specify the compression type.  If not specified, the audio data will
+not be compressed.  In AIFF files, compression is not possible.  The
+name parameter should be a human-readable description of the
+compression type, the type parameter should be a four-character
+string.  Currently the following compression types are supported:
+NONE, ULAW, ALAW, G722.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8200">setparams</A></STRONG>(<VAR>nchannels, sampwidth, framerate, comptype, compname</VAR>)
+<DD>
+Set all the above parameters at once.  The argument is a tuple
+consisting of the various parameters.  This means that it is possible
+to use the result of a <CODE>getparams</CODE> call as argument to
+<CODE>setparams</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8206">setmark</A></STRONG>(<VAR>id, pos, name</VAR>)
+<DD>
+Add a mark with the given id (larger than 0), and the given name at
+the given position.  This method can be called at any time before
+<CODE>close</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8211">tell</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current write position in the output file.  Useful in
+combination with <CODE>setmark</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8216">writeframes</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Write data to the output file.  This method can only be called after
+the audio file parameters have been set.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8220">writeframesraw</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Like <CODE>writeframes</CODE>, except that the header of the audio file is
+not updated.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8225">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the AIFF file.  The header of the file is updated to reflect the
+actual size of the audio data. After calling this method, the object
+can no longer be used.
+<P>
+</DL><HR><A NAME="tex2html4143" HREF="node151.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4141" HREF="node147.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4135" HREF="node149.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4145" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4146" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4144" HREF="node151.html">13.4 Built-in Module jpeg</A>
+<B>Up:</B> <A NAME="tex2html4142" HREF="node147.html">13 Multimedia Services</A>
+<B> Previous:</B> <A NAME="tex2html4136" HREF="node149.html">13.2 Built-in Module imageop</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>7.3 Built-in Module select</TITLE>
+<META NAME="description" CONTENT="7.3 Built-in Module select">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3129" HREF="node72.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3127" HREF="node66.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3121" HREF="node70.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3131" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3132" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3130" HREF="node72.html">7.4 Built-in Module thread</A>
+<B>Up:</B> <A NAME="tex2html3128" HREF="node66.html">7 Optional Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3122" HREF="node70.html">7.2.2 Example</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00830000000000000000">7.3 Built-in Module <CODE>select</CODE></A></H1>
+<P>
+This module provides access to the function <CODE>select</CODE> available in
+most Unix versions.  It defines the following:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+The exception raised when an error occurs.  The accompanying value is
+a pair containing the numeric error code from <CODE>errno</CODE> and the
+corresponding string, as would be printed by the C function
+<CODE>perror()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4266">select</A></STRONG>(<VAR>iwtd, owtd, ewtd</VAR><BIG>[</BIG><VAR>, timeout</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This is a straightforward interface to the Unix <CODE>select()</CODE>
+system call.  The first three arguments are lists of `waitable
+objects': either integers representing Unix file descriptors or
+objects with a parameterless method named <CODE>fileno()</CODE> returning
+such an integer.  The three lists of waitable objects are for input,
+output and `exceptional conditions', respectively.  Empty lists are
+allowed.  The optional <VAR>timeout</VAR> argument specifies a time-out as a
+floating point number in seconds.  When the <VAR>timeout</VAR> argument
+is omitted the function blocks until at least one file descriptor is
+ready.  A time-out value of zero specifies a poll and never blocks.
+<P>
+The return value is a triple of lists of objects that are ready:
+subsets of the first three arguments.  When the time-out is reached
+without a file descriptor becoming ready, three empty lists are
+returned.
+<P>
+Amongst the acceptable object types in the lists are Python file
+objects (e.g. <CODE>sys.stdin</CODE>, or objects returned by <CODE>open()</CODE>
+or <CODE>posix.popen()</CODE>), socket objects returned by
+<CODE>socket.socket()</CODE>, and the module <CODE>stdwin</CODE> which happens to
+define a function <CODE>fileno()</CODE> for just this purpose.  You may
+also define a <I><DFN>wrapper</DFN></I> class yourself, as long as it has an
+appropriate <CODE>fileno()</CODE> method (that really returns a Unix file
+descriptor, not just a random integer).
+<P>
+</DL>
+<A NAME="4263">&#160;</A>
+<A NAME="4264">&#160;</A>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

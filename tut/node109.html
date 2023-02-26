@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.5 Library Changes</TITLE>
+<META NAME="description" CONTENT="12.5 Library Changes">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1524" HREF="node110.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1522" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1516" HREF="node108.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1526" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1525" HREF="node110.html">12.6 Other Changes</A>
+<B>Up:</B> <A NAME="tex2html1523" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1517" HREF="node108.html">12.4 Changes to Built-in </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001350000000000000000">12.5 Library Changes</A></H1>
+<P>
+<UL><LI>
+There are new module <CODE>ni</CODE> and <CODE>ihooks</CODE> that support
+importing modules with hierarchical names such as <CODE>A.B.C</CODE>.  This
+is enabled by writing <CODE>import ni; ni.ni()</CODE> at the very top of the
+main program.  These modules are amply documented in the Python
+source.<LI>
+The module <CODE>rexec</CODE> has been rewritten (incompatibly) to define a
+class and to use <CODE>ihooks</CODE>.<LI>
+The <CODE>string.split()</CODE> and <CODE>string.splitfields()</CODE> functions
+are now the same function (the presence or absence of the second
+argument determines which operation is invoked); similar for
+<CODE>string.join()</CODE> and <CODE>string.joinfields()</CODE>.<LI>
+The <CODE>Tkinter</CODE> module and its helper <CODE>Dialog</CODE> have been
+revamped to use keyword arguments.  Tk 4.0 is now the standard.  A new
+module <CODE>FileDialog</CODE> has been added which implements standard file
+selection dialogs.<LI>
+The optional built-in modules <CODE>dbm</CODE> and <CODE>gdbm</CODE> are more
+coordinated -- their <CODE>open()</CODE> functions now take the same values
+for their <VAR>flag</VAR> argument, and the <VAR>flag</VAR> and <VAR>mode</VAR>
+argument have default values (to open the database for reading only,
+and to create the database with mode <CODE>0666</CODE> minuse the umask,
+respectively).  The memory leaks have finally been fixed.<LI>
+A new dbm-like module, <CODE>bsddb</CODE>, has been added, which uses the
+BSD DB package's hash method.<LI>
+A portable (though slow) dbm-clone, implemented in Python, has been
+added for systems where none of the above is provided.  It is aptly
+dubbed <CODE>dumbdbm</CODE>.<LI>
+The module <CODE>anydbm</CODE> provides a unified interface to <CODE>bsddb</CODE>,
+<CODE>gdbm</CODE>, <CODE>dbm</CODE>, and <CODE>dumbdbm</CODE>, choosing the first one
+available.<LI>
+A new extension module, <CODE>binascii</CODE>, provides a variety of
+operations for conversion of text-encoded binary data.<LI>
+There are three new or rewritten companion modules implemented in
+Python that can encode and decode the most common such formats:
+<CODE>uu</CODE> (uuencode), <CODE>base64</CODE> and <CODE>binhex</CODE>.<LI>
+A module to handle the MIME encoding quoted-printable has also been
+added: <CODE>quopri</CODE>.<LI>
+The parser module (which provides an interface to the Python parser's
+abstract syntax trees) has been rewritten (incompatibly) by Fred
+Drake.  It now lets you change the parse tree and compile the result!<LI>
+The <CODE>syslog</CODE> module has been upgraded and documented.
+<P>
+</UL><HR><A NAME="tex2html1524" HREF="node110.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1522" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1516" HREF="node108.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1526" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1525" HREF="node110.html">12.6 Other Changes</A>
+<B>Up:</B> <A NAME="tex2html1523" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1517" HREF="node108.html">12.4 Changes to Built-in </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

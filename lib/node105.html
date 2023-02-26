@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.2 Using the cgi module</TITLE>
+<META NAME="description" CONTENT="11.1.2 Using the cgi module">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3602" HREF="node106.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3600" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3594" HREF="node104.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3604" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3605" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3603" HREF="node106.html">11.1.3 Old classes</A>
+<B>Up:</B> <A NAME="tex2html3601" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3595" HREF="node104.html">11.1.1 Introduction</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001212000000000000000">11.1.2 Using the cgi module</A></H2>
+<P>
+<A NAME="Usingthecgimodule">&#160;</A>
+<P>
+Begin by writing <CODE>import cgi</CODE>.  Don't use <CODE>from cgi import *</CODE> - the
+module defines all sorts of names for its own use or for backward 
+compatibility that you don't want in your namespace.
+<P>
+It's best to use the <CODE>FieldStorage</CODE> class.  The other classes define in this 
+module are provided mostly for backward compatibility.  Instantiate it 
+exactly once, without arguments.  This reads the form contents from 
+standard input or the environment (depending on the value of various 
+environment variables set according to the CGI standard).  Since it may 
+consume standard input, it should be instantiated only once.
+<P>
+The <CODE>FieldStorage</CODE> instance can be accessed as if it were a Python 
+dictionary.  For instance, the following code (which assumes that the 
+<CODE>Content-type</CODE> header and blank line have already been printed) checks that 
+the fields <CODE>name</CODE> and <CODE>addr</CODE> are both set to a non-empty string:
+<P>
+<PRE>	form = cgi.FieldStorage()
+	form_ok = 0
+	if form.has_key(&quot;name&quot;) and form.has_key(&quot;addr&quot;):
+		if form[&quot;name&quot;].value != &quot;&quot; and form[&quot;addr&quot;].value != &quot;&quot;:
+			form_ok = 1
+	if not form_ok:
+		print &quot;&lt;H1&gt;Error&lt;/H1&gt;&quot;
+		print &quot;Please fill in the name and addr fields.&quot;
+		return
+	...further form processing here...</PRE>
+<P>
+Here the fields, accessed through <CODE>form[key]</CODE>, are themselves instances
+of <CODE>FieldStorage</CODE> (or <CODE>MiniFieldStorage</CODE>, depending on the form encoding).
+<P>
+If the submitted form data contains more than one field with the same
+name, the object retrieved by <CODE>form[key]</CODE> is not a <CODE>(Mini)FieldStorage</CODE>
+instance but a list of such instances.  If you expect this possibility
+(i.e., when your HTML form comtains multiple fields with the same
+name), use the <CODE>type()</CODE> function to determine whether you have a single
+instance or a list of instances.  For example, here's code that
+concatenates any number of username fields, separated by commas:
+<P>
+<PRE>	username = form[&quot;username&quot;]
+	if type(username) is type([]):
+		# Multiple username fields specified
+		usernames = &quot;&quot;
+		for item in username:
+			if usernames:
+				# Next item -- insert comma
+				usernames = usernames + &quot;,&quot; + item.value
+			else:
+				# First item -- don't insert comma
+				usernames = item.value
+	else:
+		# Single username field specified
+		usernames = username.value</PRE>
+<P>
+If a field represents an uploaded file, the value attribute reads the 
+entire file in memory as a string.  This may not be what you want.  You can 
+test for an uploaded file by testing either the filename attribute or the 
+file attribute.  You can then read the data at leasure from the file 
+attribute:
+<P>
+<PRE>	fileitem = form[&quot;userfile&quot;]
+	if fileitem.file:
+		# It's an uploaded file; count lines
+		linecount = 0
+		while 1:
+			line = fileitem.file.readline()
+			if not line: break
+			linecount = linecount + 1</PRE>
+<P>
+The file upload draft standard entertains the possibility of uploading
+multiple files from one field (using a recursive <CODE>multipart/*</CODE>
+encoding).  When this occurs, the item will be a dictionary-like
+FieldStorage item.  This can be determined by testing its type
+attribute, which should have the value <CODE>multipart/form-data</CODE> (or
+perhaps another string beginning with <CODE>multipart/</CODE>  It this case, it
+can be iterated over recursively just like the top-level form object.
+<P>
+When a form is submitted in the ``old'' format (as the query string or as a 
+single data part of type <CODE>application/x-www-form-urlencoded</CODE>), the items 
+will actually be instances of the class <CODE>MiniFieldStorage</CODE>.  In this case,
+the list, file and filename attributes are always <CODE>None</CODE>.
+<P>
+<HR><A NAME="tex2html3602" HREF="node106.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3600" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3594" HREF="node104.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3604" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3605" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3603" HREF="node106.html">11.1.3 Old classes</A>
+<B>Up:</B> <A NAME="tex2html3601" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3595" HREF="node104.html">11.1.1 Introduction</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

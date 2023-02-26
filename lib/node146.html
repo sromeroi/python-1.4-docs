@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.2 Standard Module Bastion</TITLE>
+<META NAME="description" CONTENT="12.2 Standard Module Bastion">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4089" HREF="node147.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4087" HREF="node143.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4083" HREF="node145.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4091" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4092" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4090" HREF="node147.html">13 Multimedia Services</A>
+<B>Up:</B> <A NAME="tex2html4088" HREF="node143.html">12 Restricted Execution</A>
+<B> Previous:</B> <A NAME="tex2html4084" HREF="node145.html">12.1.1 An example</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001320000000000000000">12.2 Standard Module <CODE>Bastion</CODE></A></H1>
+<P>
+According to the dictionary, a bastion is ``a fortified area or
+position'', or ``something that is considered a stronghold.''  It's a
+suitable name for this module, which provides a way to forbid access
+to certain attributes of an object.  It must always be used with the
+<CODE>rexec</CODE> module, in order to allow restricted-mode programs access
+to certain safe attributes of an object, while denying access to
+other, unsafe attributes.
+<P>
+<DL><DT><STRONG><A NAME="7831">Bastion</A></STRONG>(<VAR>object</VAR><BIG>[</BIG><VAR>, filter, name, class</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Protect the class instance <VAR>object</VAR>, returning a bastion for the
+object.  Any attempt to access one of the object's attributes will
+have to be approved by the <VAR>filter</VAR> function; if the access is
+denied an AttributeError exception will be raised.
+<P>
+If present, <VAR>filter</VAR> must be a function that accepts a string
+containing an attribute name, and returns true if access to that
+attribute will be permitted; if <VAR>filter</VAR> returns false, the access
+is denied.  The default filter denies access to any function beginning
+with an underscore (<CODE>_</CODE>).  The bastion's string representation
+will be <CODE>&lt;Bastion for <VAR>name</VAR>&gt;</CODE> if a value for
+<VAR>name</VAR> is provided; otherwise, <CODE>repr(<VAR>object</VAR>)</CODE> will be used.
+<P>
+<VAR>class</VAR>, if present, would be a subclass of <CODE>BastionClass</CODE>;
+see the code in `<CODE>bastion.py</CODE>' for the details.  Overriding the
+default <CODE>BastionClass</CODE> will rarely be required.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

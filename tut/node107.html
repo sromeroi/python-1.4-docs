@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.3 Other Language Changes</TITLE>
+<META NAME="description" CONTENT="12.3 Other Language Changes">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1502" HREF="node108.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1500" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1494" HREF="node106.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1504" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1503" HREF="node108.html">12.4 Changes to Built-in </A>
+<B>Up:</B> <A NAME="tex2html1501" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1495" HREF="node106.html">12.2 Changes to the </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001330000000000000000">12.3 Other Language Changes</A></H1>
+<P>
+<UL><LI>
+The <CODE>raise</CODE> statement now takes an optional argument which
+specifies the traceback to be used when printing the exception's stack
+trace.  This must be a traceback object, such as found in
+<CODE>sys.exc_traceback</CODE>.  When omitted or given as <CODE>None</CODE>, the
+old behavior (to generate a stack trace entry for the current stack
+frame) is used.<LI>
+The tokenizer is now more tolerant of alien whitespace.  Control-L in
+the leading whitespace of a line resets the column number to zero,
+while Control-R just before the end of the line is ignored.
+<P>
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

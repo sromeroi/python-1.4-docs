@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>5.4 Built-in Module array</TITLE>
+<META NAME="description" CONTENT="5.4 Built-in Module array">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2976" HREF="node60.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2974" HREF="node55.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2970" HREF="node58.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2978" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2979" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2977" HREF="node60.html">6 Generic Operating System </A>
+<B>Up:</B> <A NAME="tex2html2975" HREF="node55.html">5 Miscellaneous Services</A>
+<B> Previous:</B> <A NAME="tex2html2971" HREF="node58.html">5.3 Standard Module whrandom</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00640000000000000000">5.4 Built-in Module <CODE>array</CODE></A></H1>
+<P>
+<A NAME="3145">&#160;</A>
+<P>
+This module defines a new object type which can efficiently represent
+an array of basic values: characters, integers, floating point
+numbers.  Arrays are sequence types and behave very much like lists,
+except that the type of objects stored in them is constrained.  The
+type is specified at object creation time by using a <I><DFN>type code</DFN></I>,
+which is a single character.  The following type codes are defined:
+<P>
+<P><P> <IMG WIDTH=386 HEIGHT=161 ALIGN=BOTTOM ALT="tableiii3146" SRC="img10.gif"  > <P><P>
+<P>
+The actual representation of values is determined by the machine
+architecture (strictly speaking, by the C implementation).  The actual
+size can be accessed through the <VAR>itemsize</VAR> attribute.
+<P>
+See also built-in module <CODE>struct</CODE>.
+<P>
+The module defines the following function:
+<P>
+<DL><DT><STRONG><A NAME="3250">array</A></STRONG>(<VAR>typecode</VAR><BIG>[</BIG><VAR>, initializer</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a new array whose items are restricted by <VAR>typecode</VAR>, and
+initialized from the optional <VAR>initializer</VAR> value, which must be a
+list or a string.  The list or string is passed to the new array's
+<CODE>fromlist()</CODE> or <CODE>fromstring()</CODE> method (see below) to add
+initial items to the array.
+<P>
+</DL>
+<P>
+Array objects support the following data items and methods:
+<P>
+<DL><DT><STRONG><A NAME="">typecode</A></STRONG>
+<DD>
+The typecode character used to create the array.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">itemsize</A></STRONG>
+<DD>
+The length in bytes of one array item in the internal representation.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3196">append</A></STRONG>(<VAR>x</VAR>)
+<DD>
+Append a new item with value <VAR>x</VAR> to the end of the array.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3201">byteswap</A></STRONG>(<VAR>x</VAR>)
+<DD>
+``Byteswap'' all items of the array.  This is only supported for
+integer values.  It is useful when reading data from a file written
+on a machine with a different byte order.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3205">fromfile</A></STRONG>(<VAR>f, n</VAR>)
+<DD>
+Read <VAR>n</VAR> items (as machine values) from the file object <VAR>f</VAR>
+and append them to the end of the array.  If less than <VAR>n</VAR> items
+are available, <CODE>EOFError</CODE> is raised, but the items that were
+available are still inserted into the array.  <VAR>f</VAR> must be a real
+built-in file object; something else with a <CODE>read()</CODE> method won't
+do.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3215">fromlist</A></STRONG>(<VAR>list</VAR>)
+<DD>
+Append items from the list.  This is equivalent to
+<CODE>for x in <VAR>list</VAR>: a.append(x)</CODE>
+except that if there is a type error, the array is unchanged.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3220">fromstring</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Appends items from the string, interpreting the string as an
+array of machine values (i.e. as if it had been read from a
+file using the <CODE>fromfile()</CODE> method).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3225">insert</A></STRONG>(<VAR>i, x</VAR>)
+<DD>
+Insert a new item with value <VAR>x</VAR> in the array before position
+<VAR>i</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3231">tofile</A></STRONG>(<VAR>f</VAR>)
+<DD>
+Write all items (as machine values) to the file object <VAR>f</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3236">tolist</A></STRONG>(<VAR></VAR>)
+<DD>
+Convert the array to an ordinary list with the same items.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3240">tostring</A></STRONG>(<VAR></VAR>)
+<DD>
+Convert the array to an array of machine values and return the
+string representation (the same sequence of bytes that would
+be written to a file by the <CODE>tofile()</CODE> method.)
+<P>
+</DL>
+<P>
+When an array object is printed or converted to a string, it is
+represented as <CODE>array(<VAR>typecode</VAR>, <VAR>initializer</VAR>)</CODE>.  The
+<VAR>initializer</VAR> is omitted if the array is empty, otherwise it is a
+string if the <VAR>typecode</VAR> is <CODE>'c'</CODE>, otherwise it is a list of
+numbers.  The string is guaranteed to be able to be converted back to
+an array with the same type and value using reverse quotes
+(<CODE>``</CODE>).  Examples:
+<P>
+<PRE>array('l')
+array('c', 'hello world')
+array('l', [1, 2, 3, 4, 5])
+array('d', [1.0, 2.0, 3.14])</PRE>
+<P>
+<HR><A NAME="tex2html2976" HREF="node60.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2974" HREF="node55.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2970" HREF="node58.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2978" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2979" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2977" HREF="node60.html">6 Generic Operating System </A>
+<B>Up:</B> <A NAME="tex2html2975" HREF="node55.html">5 Miscellaneous Services</A>
+<B> Previous:</B> <A NAME="tex2html2971" HREF="node58.html">5.3 Standard Module whrandom</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

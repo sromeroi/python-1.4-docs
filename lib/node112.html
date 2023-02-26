@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.9 Common problems and solutions</TITLE>
+<META NAME="description" CONTENT="11.1.9 Common problems and solutions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3684" HREF="node113.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3682" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3678" HREF="node111.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3686" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3687" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3685" HREF="node113.html">11.2 Standard Module urllib</A>
+<B>Up:</B> <A NAME="tex2html3683" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3679" HREF="node111.html">11.1.8 Debugging CGI scripts</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001219000000000000000">11.1.9 Common problems and solutions</A></H2>
+<P>
+<UL><LI> Most HTTP servers buffer the output from CGI scripts until the
+script is completed.  This means that it is not possible to display a
+progress report on the client's display while the script is running.<LI> Check the installation instructions above.<LI> Check the HTTP server's log files.  (<CODE>tail -f logfile</CODE> in a separate
+window may be useful!)<LI> Always check a script for syntax errors first, by doing something
+like <CODE>python script.py</CODE>.<LI> When using any of the debugging techniques, don't forget to add
+<CODE>import sys</CODE> to the top of the script.<LI> When invoking external programs, make sure they can be found.
+Usually, this means using absolute path names - <CODE>$PATH</CODE> is usually not
+set to a very useful value in a CGI script.<LI> When reading or writing external files, make sure they can be read
+or written by every user on the system.<LI> Don't try to give a CGI script a set-uid mode.  This doesn't work on
+most systems, and is a security liability as well.
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

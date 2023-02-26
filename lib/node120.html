@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.6 Standard Module nntplib</TITLE>
+<META NAME="description" CONTENT="11.6 Standard Module nntplib">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3779" HREF="node121.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3777" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3771" HREF="node119.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3781" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3782" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3780" HREF="node121.html">11.6.1 NNTP Objects</A>
+<B>Up:</B> <A NAME="tex2html3778" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3772" HREF="node119.html">11.5 Standard Module gopherlib</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001260000000000000000">11.6 Standard Module <CODE>nntplib</CODE></A></H1>
+<P>
+This module defines the class <CODE>NNTP</CODE> which implements the client
+side of the NNTP protocol.  It can be used to implement a news reader
+or poster, or automated news processors.  For more information on NNTP
+(Network News Transfer Protocol), see Internet RFC 977.
+<P>
+Here are two small examples of how it can be used.  To list some
+statistics about a newsgroup and print the subjects of the last 10
+articles:
+<P>
+<SMALL CLASS=SMALL>
+<PRE>&gt;&gt;&gt; s = NNTP('news.cwi.nl')
+&gt;&gt;&gt; resp, count, first, last, name = s.group('comp.lang.python')
+&gt;&gt;&gt; print 'Group', name, 'has', count, 'articles, range', first, 'to', last
+Group comp.lang.python has 59 articles, range 3742 to 3803
+&gt;&gt;&gt; resp, subs = s.xhdr('subject', first + '-' + last)
+&gt;&gt;&gt; for id, sub in subs[-10:]: print id, sub
+... 
+3792 Re: Removing elements from a list while iterating...
+3793 Re: Who likes Info files?
+3794 Emacs and doc strings
+3795 a few questions about the Mac implementation
+3796 Re: executable python scripts
+3797 Re: executable python scripts
+3798 Re: a few questions about the Mac implementation 
+3799 Re: PROPOSAL: A Generic Python Object Interface for Python C Modules
+3802 Re: executable python scripts 
+3803 Re: POSIX wait and SIGCHLD
+&gt;&gt;&gt; s.quit()
+'205 news.cwi.nl closing connection.  Goodbye.'
+&gt;&gt;&gt;</PRE>
+
+<P>
+To post an article from a file (this assumes that the article has
+valid headers):
+<P>
+<PRE>&gt;&gt;&gt; s = NNTP('news.cwi.nl')
+&gt;&gt;&gt; f = open('/tmp/article')
+&gt;&gt;&gt; s.post(f)
+'240 Article posted successfully.'
+&gt;&gt;&gt; s.quit()
+'205 news.cwi.nl closing connection.  Goodbye.'
+&gt;&gt;&gt;</PRE>
+<P>
+The module itself defines the following items:
+<P>
+<DL><DT><STRONG><A NAME="6491">NNTP</A></STRONG>(<VAR>host</VAR><BIG>[</BIG><VAR>, port</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a new instance of the <CODE>NNTP</CODE> class, representing a
+connection to the NNTP server running on host <VAR>host</VAR>, listening at
+port <VAR>port</VAR>.  The default <VAR>port</VAR> is 119.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_reply</A></STRONG>
+<DD>
+Exception raised when an unexpected reply is received from the server.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_temp</A></STRONG>
+<DD>
+Exception raised when an error code in the range 400-499 is received.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_perm</A></STRONG>
+<DD>
+Exception raised when an error code in the range 500-599 is received.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_proto</A></STRONG>
+<DD>
+Exception raised when a reply is received from the server that does
+not begin with a digit in the range 1-5.
+<P>
+</DL></SMALL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3783" HREF="node121.html#SECTION001261000000000000000">11.6.1 NNTP Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

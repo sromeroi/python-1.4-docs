@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9 The Python Debugger</TITLE>
+<META NAME="description" CONTENT="9 The Python Debugger">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3329" HREF="node88.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3327" HREF="lib.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3321" HREF="node86.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3331" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3332" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3330" HREF="node88.html">9.1 Debugger Commands</A>
+<B>Up:</B> <A NAME="tex2html3328" HREF="lib.html">Python Library Reference</A>
+<B> Previous:</B> <A NAME="tex2html3322" HREF="node86.html">8.12 Built-in Module syslog</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001000000000000000000">9 The Python Debugger</A></H1>
+<P>
+<A NAME="5420">&#160;</A>
+<P>
+The module <CODE>pdb</CODE> defines an interactive source code debugger for
+Python programs.  It supports setting breakpoints and single stepping
+at the source line level, inspection of stack frames, source code
+listing, and evaluation of arbitrary Python code in the context of any
+stack frame.  It also supports post-mortem debugging and can be called
+under program control.
+<P>
+The debugger is extensible -- it is actually defined as a class
+<CODE>Pdb</CODE>.  This is currently undocumented but easily understood by
+reading the source.  The extension interface uses the (also
+undocumented) modules <CODE>bdb</CODE> and <CODE>cmd</CODE>.
+<A NAME="5427">&#160;</A>
+<A NAME="5428">&#160;</A>
+<A NAME="5429">&#160;</A>
+<P>
+A primitive windowing version of the debugger also exists -- this is
+module <CODE>wdb</CODE>, which requires STDWIN (see the chapter on STDWIN
+specific modules).
+<A NAME="5431">&#160;</A>
+<A NAME="5432">&#160;</A>
+<P>
+The debugger's prompt is ``<CODE>(Pdb) </CODE>''.
+Typical usage to run a program under control of the debugger is:
+<P>
+<PRE>&gt;&gt;&gt; import pdb
+&gt;&gt;&gt; import mymodule
+&gt;&gt;&gt; pdb.run('mymodule.test()')
+&gt; &lt;string&gt;(0)?()
+(Pdb) continue
+&gt; &lt;string&gt;(1)?()
+(Pdb) continue
+NameError: 'spam'
+&gt; &lt;string&gt;(1)?()
+(Pdb)</PRE>
+<P>
+Typical usage to inspect a crashed program is:
+<P>
+<PRE>&gt;&gt;&gt; import pdb
+&gt;&gt;&gt; import mymodule
+&gt;&gt;&gt; mymodule.test()
+Traceback (innermost last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in ?
+  File &quot;./mymodule.py&quot;, line 4, in test
+    test2()
+  File &quot;./mymodule.py&quot;, line 3, in test2
+    print spam
+NameError: spam
+&gt;&gt;&gt; pdb.pm()
+&gt; ./mymodule.py(3)test2()
+-&gt; print spam
+(Pdb)</PRE>
+<P>
+The module defines the following functions; each enters the debugger
+in a slightly different way:
+<P>
+<DL><DT><STRONG><A NAME="5547">run</A></STRONG>(<VAR>statement</VAR><BIG>[</BIG><VAR>, globals</VAR><BIG>[</BIG><VAR>, locals</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Execute the <VAR>statement</VAR> (given as a string) under debugger
+control.  The debugger prompt appears before any code is executed; you
+can set breakpoints and type <CODE>continue</CODE>, or you can step through
+the statement using <CODE>step</CODE> or <CODE>next</CODE> (all these commands are
+explained below).  The optional <VAR>globals</VAR> and <VAR>locals</VAR>
+arguments specify the environment in which the code is executed; by
+default the dictionary of the module <CODE>__main__</CODE> is used.  (See
+the explanation of the <CODE>exec</CODE> statement or the <CODE>eval()</CODE>
+built-in function.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5548">runeval</A></STRONG>(<VAR>expression</VAR><BIG>[</BIG><VAR>, globals</VAR><BIG>[</BIG><VAR>, locals</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Evaluate the <VAR>expression</VAR> (given as a a string) under debugger
+control.  When <CODE>runeval()</CODE> returns, it returns the value of the
+expression.  Otherwise this function is similar to
+<CODE>run()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5546">runcall</A></STRONG>(<VAR>function</VAR><BIG>[</BIG><VAR>, argument, ...</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Call the <VAR>function</VAR> (a function or method object, not a string)
+with the given arguments.  When <CODE>runcall()</CODE> returns, it returns
+whatever the function call returned.  The debugger prompt appears as
+soon as the function is entered.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5462">set_trace</A></STRONG>(<VAR></VAR>)
+<DD>
+Enter the debugger at the calling stack frame.  This is useful to
+hard-code a breakpoint at a given point in a program, even if the code
+is not otherwise being debugged (e.g. when an assertion fails).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5466">post_mortem</A></STRONG>(<VAR>traceback</VAR>)
+<DD>
+Enter post-mortem debugging of the given <VAR>traceback</VAR> object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5471">pm</A></STRONG>(<VAR></VAR>)
+<DD>
+Enter post-mortem debugging of the traceback found in
+<CODE>sys.last_traceback</CODE>.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3333" HREF="node88.html#SECTION001010000000000000000">9.1 Debugger Commands</A>
+<LI> <A NAME="tex2html3334" HREF="node89.html#SECTION001020000000000000000">9.2 How It Works</A>
+</UL>
+<HR><A NAME="tex2html3329" HREF="node88.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3327" HREF="lib.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3321" HREF="node86.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3331" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3332" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3330" HREF="node88.html">9.1 Debugger Commands</A>
+<B>Up:</B> <A NAME="tex2html3328" HREF="lib.html">Python Library Reference</A>
+<B> Previous:</B> <A NAME="tex2html3322" HREF="node86.html">8.12 Built-in Module syslog</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.13.1 Application objects</TITLE>
+<META NAME="description" CONTENT="15.13.1 Application objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4587" HREF="node185.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4585" HREF="node183.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4579" HREF="node183.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4589" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4590" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4588" HREF="node185.html">15.13.2 Window Objects</A>
+<B>Up:</B> <A NAME="tex2html4586" HREF="node183.html">15.13 Standard module FrameWork</A>
+<B> Previous:</B> <A NAME="tex2html4580" HREF="node183.html">15.13 Standard module FrameWork</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016131000000000000000">15.13.1 Application objects</A></H2>
+<P>
+Application objects have the following methods, among others:
+<P>
+<DL><DT><STRONG><A NAME="9575">makeusermenus</A></STRONG>(<VAR></VAR>)
+<DD>
+Override this method if you need menus in your application. Append the
+menus to <CODE>self.menubar</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9580">getabouttext</A></STRONG>(<VAR></VAR>)
+<DD>
+Override this method to return a text string describing your
+application. Alternatively, override the <CODE>do_about</CODE> method for
+more elaborate about messages.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9771">mainloop</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>mask, wait</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This routine is the main event loop, call it to set your application
+rolling. <VAR>Mask</VAR> is the mask of events you want to handle,
+<VAR>wait</VAR> is the number of ticks you want to leave to other
+concurrent application (default 0, which is probably not a good
+idea). While raising <CODE>self</CODE> to exit the mainloop is still
+supported it is not recommended, call <CODE>self._quit</CODE> instead.
+<P>
+The event loop is split into many small parts, each of which can be
+overridden. The default methods take care of dispatching events to
+windows and dialogs, handling drags and resizes, Apple Events, events
+for non-FrameWork windows, etc.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9593">_quit</A></STRONG>(<VAR></VAR>)
+<DD>
+Terminate the event <CODE>mainloop</CODE> at the next convenient moment.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9598">do_char</A></STRONG>(<VAR>c, event</VAR>)
+<DD>
+The user typed character <VAR>c</VAR>. The complete details of the event
+can be found in the <VAR>event</VAR> structure. This method can also be
+provided in a <CODE>Window</CODE> object, which overrides the
+application-wide handler if the window is frontmost.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9605">do_dialogevent</A></STRONG>(<VAR>event</VAR>)
+<DD>
+Called early in the event loop to handle modeless dialog events. The
+default method simply dispatches the event to the relevant dialog (not
+through the the <CODE>DialogWindow</CODE> object involved). Override if you
+need special handling of dialog events (keyboard shortcuts, etc).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9610">idle</A></STRONG>(<VAR>event</VAR>)
+<DD>
+Called by the main event loop when no events are available. The
+null-event is passed (so you can look at mouse position, etc).
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

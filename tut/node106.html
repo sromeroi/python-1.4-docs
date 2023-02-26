@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.2 Changes to the WWW and Internet tools</TITLE>
+<META NAME="description" CONTENT="12.2 Changes to the WWW and Internet tools">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1491" HREF="node107.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1489" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1483" HREF="node105.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1493" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1492" HREF="node107.html">12.3 Other Language Changes</A>
+<B>Up:</B> <A NAME="tex2html1490" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1484" HREF="node105.html">12.1 Keyword Arguments</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001320000000000000000">12.2 Changes to the WWW and Internet tools</A></H1>
+<P>
+<UL><LI>
+The <CODE>htmllib</CODE> module has been rewritten in an incompatible
+fashion.  The new version is considerably more complete (HTML 2.0
+except forms, but including all ISO-8859-1 entity definitions), and
+easy to use.  Small changes to <CODE>sgmllib</CODE> have also been made, to
+better match the tokenization of HTML as recognized by other web
+tools.<LI>
+A new module <CODE>formatter</CODE> has been added, for use with the new
+<CODE>htmllib</CODE> module.<LI>
+The <CODE>urllib</CODE>and <CODE>httplib</CODE> modules have been changed somewhat
+to allow overriding unknown URL types and to support authentication.
+They now use <CODE>mimetools.Message</CODE> instead of <CODE>rfc822.Message</CODE>
+to parse headers.  The <CODE>endrequest()</CODE> method has been removed
+from the HTTP class since it breaks the interaction with some servers.<LI>
+The <CODE>rfc822.Message</CODE> class has been changed to allow a flag to be
+passed in that says that the file is unseekable.<LI>
+The <CODE>ftplib</CODE> module has been fixed to be (hopefully) more robust
+on Linux.<LI>
+Several new operations that are optionally supported by servers have
+been added to <CODE>nntplib</CODE>: <CODE>xover</CODE>, <CODE>xgtitle</CODE>,
+<CODE>xpath</CODE> and <CODE>date</CODE>. 
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

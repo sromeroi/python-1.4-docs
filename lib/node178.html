@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.10.3 UDP Stream Objects</TITLE>
+<META NAME="description" CONTENT="15.10.3 UDP Stream Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4510" HREF="node179.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4508" HREF="node175.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4504" HREF="node177.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4512" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4513" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4511" HREF="node179.html">15.11 Built-in Module macspeech</A>
+<B>Up:</B> <A NAME="tex2html4509" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<B> Previous:</B> <A NAME="tex2html4505" HREF="node177.html">15.10.2 TCP Status Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016103000000000000000">15.10.3 UDP Stream Objects</A></H2>
+<P>
+Note that, unlike the name suggests, there is nothing stream-like
+about UDP.
+<P>
+<DL><DT><STRONG><A NAME="">asr</A></STRONG>
+<DD>
+The asynchronous service routine to be called on events such as
+datagram arrival without outstanding <CODE>Read</CODE> call. The <CODE>asr</CODE> has a
+single argument, the event code.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">port</A></STRONG>
+<DD>
+A read-only member giving the port number of this UDP stream.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9385">Read</A></STRONG>(<VAR>timeout</VAR>)
+<DD>
+Read a datagram, waiting at most <VAR>timeout</VAR> seconds (-1 is
+infinite).  Return the data.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9390">Write</A></STRONG>(<VAR>host, port, buf</VAR>)
+<DD>
+Send <VAR>buf</VAR> as a datagram to IP-address <VAR>host</VAR>, port
+<VAR>port</VAR>.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

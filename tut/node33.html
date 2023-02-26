@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.6 Defining Functions</TITLE>
+<META NAME="description" CONTENT="4.6 Defining Functions">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html623" HREF="node34.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html621" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html617" HREF="node32.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html625" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html624" HREF="node34.html">5 Odds and Ends</A>
+<B>Up:</B> <A NAME="tex2html622" HREF="node27.html">4 More Control Flow </A>
+<B> Previous:</B> <A NAME="tex2html618" HREF="node32.html">4.5 Pass Statements</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00560000000000000000">4.6 Defining Functions</A></H1>
+<P>
+We can create a function that writes the Fibonacci series to an
+arbitrary boundary:
+<P>
+<PRE>&gt;&gt;&gt; def fib(n):    # write Fibonacci series up to n
+...     a, b = 0, 1
+...     while b &lt; n:
+...           print b,
+...           a, b = b, a+b
+... 
+&gt;&gt;&gt; # Now call the function we just defined:
+... fib(2000)
+1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
+&gt;&gt;&gt;</PRE>
+The keyword <TT>def</TT> introduces a function <EM>definition</EM>.  It must
+be followed by the function name and the parenthesized list of formal
+parameters.  The statements that form the body of the function starts at
+the next line, indented by a tab stop.
+<P>
+The <EM>execution</EM> of a function introduces a new symbol table used
+for the local variables of the function.  More precisely, all variable
+assignments in a function store the value in the local symbol table;
+whereas
+variable references first look in the local symbol table, then
+in the global symbol table, and then in the table of built-in names.
+Thus,
+global variables cannot be directly assigned a value within a
+function (unless named in a <TT>global</TT> statement), although
+they may be referenced.
+<P>
+The actual parameters (arguments) to a function call are introduced in
+the local symbol table of the called function when it is called; thus,
+arguments are passed using <EM>call by value</EM>.<A NAME="tex2html3" HREF="footnode.html#841"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+When a function calls another function, a new local symbol table is
+created for that call.
+<P>
+A function definition introduces the function name in the
+current
+symbol table.  The value
+of the function name
+has a type that is recognized by the interpreter as a user-defined
+function.  This value can be assigned to another name which can then
+also be used as a function.  This serves as a general renaming
+mechanism:
+<P>
+<PRE>&gt;&gt;&gt; fib
+&lt;function object at 10042ed0&gt;
+&gt;&gt;&gt; f = fib
+&gt;&gt;&gt; f(100)
+1 1 2 3 5 8 13 21 34 55 89
+&gt;&gt;&gt;</PRE>
+You might object that <TT>fib</TT> is not a function but a procedure.  In
+Python, like in C, procedures are just functions that don't return a
+value.  In fact, technically speaking, procedures do return a value,
+albeit a rather boring one.  This value is called <TT>None</TT> (it's a
+built-in name).  Writing the value <TT>None</TT> is normally suppressed by
+the interpreter if it would be the only value written.  You can see it
+if you really want to:
+<P>
+<PRE>&gt;&gt;&gt; print fib(0)
+None
+&gt;&gt;&gt;</PRE>
+It is simple to write a function that returns a list of the numbers of
+the Fibonacci series, instead of printing it:
+<P>
+<PRE>&gt;&gt;&gt; def fib2(n): # return Fibonacci series up to n
+...     result = []
+...     a, b = 0, 1
+...     while b &lt; n:
+...           result.append(b)    # see below
+...           a, b = b, a+b
+...     return result
+... 
+&gt;&gt;&gt; f100 = fib2(100)    # call it
+&gt;&gt;&gt; f100                # write the result
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+&gt;&gt;&gt;</PRE>
+This example, as usual, demonstrates some new Python features:
+<P>
+<UL><LI>
+The <TT>return</TT> statement returns with a value from a function.  <TT>
+return</TT> without an expression argument is used to return from the middle
+of a procedure (falling off the end also returns from a procedure), in
+which case the <TT>None</TT> value is returned.<LI>
+The statement <TT>result.append(b)</TT> calls a <EM>method</EM> of the list
+object <TT>result</TT>.  A method is a function that `belongs' to an
+object and is named <TT>obj.methodname</TT>, where <TT>obj</TT> is some
+object (this may be an expression), and <TT>methodname</TT> is the name
+of a method that is defined by the object's type.  Different types
+define different methods.  Methods of different types may have the
+same name without causing ambiguity.  (It is possible to define your
+own object types and methods, using <EM>classes</EM>, as discussed later
+in this tutorial.)
+The method <TT>append</TT> shown in the example, is defined for
+list objects; it adds a new element at the end of the list.  In this
+example
+it is equivalent to <TT>result = result + [b]</TT>, but more efficient.
+<P>
+</UL><HR><A NAME="tex2html623" HREF="node34.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html621" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html617" HREF="node32.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html625" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html624" HREF="node34.html">5 Odds and Ends</A>
+<B>Up:</B> <A NAME="tex2html622" HREF="node27.html">4 More Control Flow </A>
+<B> Previous:</B> <A NAME="tex2html618" HREF="node32.html">4.5 Pass Statements</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

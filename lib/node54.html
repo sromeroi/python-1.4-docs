@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.4 Built-in Module struct</TITLE>
+<META NAME="description" CONTENT="4.4 Built-in Module struct">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2914" HREF="node55.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2912" HREF="node48.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2908" HREF="node53.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2916" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2917" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2915" HREF="node55.html">5 Miscellaneous Services</A>
+<B>Up:</B> <A NAME="tex2html2913" HREF="node48.html">4 String Services</A>
+<B> Previous:</B> <A NAME="tex2html2909" HREF="node53.html">4.3 Standard Module regsub</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00540000000000000000">4.4 Built-in Module <CODE>struct</CODE></A></H1>
+<P>
+<A NAME="2927">&#160;</A><A NAME="2928">&#160;</A>
+<P>
+This module performs conversions between Python values and C
+structs represented as Python strings.  It uses <I><DFN>format strings</DFN></I>
+(explained below) as compact descriptions of the lay-out of the C
+structs and the intended conversion to/from Python values.
+<P>
+See also built-in module <CODE>array</CODE>.
+<P>
+The module defines the following exception and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+  Exception raised on various occasions; argument is a string
+  describing what is wrong.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2992">pack</A></STRONG>(<VAR>fmt, v1, v2, ...</VAR>)
+<DD>
+  Return a string containing the values
+  <CODE><VAR>v1</VAR>, <VAR>v2</VAR>, ...</CODE> packed according to the given
+  format.  The arguments must match the values required by the format
+  exactly.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2946">unpack</A></STRONG>(<VAR>fmt, string</VAR>)
+<DD>
+  Unpack the string (presumably packed by <CODE>pack(<VAR>fmt</VAR>, ...)</CODE>)
+  according to the given format.  The result is a tuple even if it
+  contains exactly one item.  The string must contain exactly the
+  amount of data required by the format (i.e.  <CODE>len(<VAR>string</VAR>)</CODE> must
+  equal <CODE>calcsize(<VAR>fmt</VAR>)</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2954">calcsize</A></STRONG>(<VAR>fmt</VAR>)
+<DD>
+  Return the size of the struct (and hence of the string)
+  corresponding to the given format.
+<P>
+</DL>
+<P>
+Format characters have the following meaning; the conversion between C
+and Python values should be obvious given their types:
+<P>
+<P><P> <IMG WIDTH=320 HEIGHT=181 ALIGN=BOTTOM ALT="tableiii2955" SRC="img9.gif"  > <P><P>
+<P>
+A format character may be preceded by an integral repeat count; e.g.\
+the format string <CODE>'4h'</CODE> means exactly the same as <CODE>'hhhh'</CODE>.
+<P>
+C numbers are represented in the machine's native format and byte
+order, and properly aligned by skipping pad bytes if necessary
+(according to the rules used by the C compiler).
+<P>
+Examples (all on a big-endian machine):
+<P>
+<PRE>pack('hhl', 1, 2, 3) == '\000\001\000\002\000\000\000\003'
+unpack('hhl', '\000\001\000\002\000\000\000\003') == (1, 2, 3)
+calcsize('hhl') == 8</PRE>
+<P>
+Hint: to align the end of a structure to the alignment requirement of
+a particular type, end the format with the code for that type with a
+repeat count of zero, e.g. the format <CODE>'llh0l'</CODE> specifies two
+pad bytes at the end, assuming longs are aligned on 4-byte boundaries.
+<P>
+(More format characters are planned, e.g. <CODE>'s'</CODE> for character
+arrays, upper case for unsigned variants, and a way to specify the
+byte order, which is useful for [de]constructing network packets and
+reading/writing portable binary file formats like TIFF and AIFF.)
+<P>
+<HR><A NAME="tex2html2914" HREF="node55.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2912" HREF="node48.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2908" HREF="node53.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2916" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2917" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2915" HREF="node55.html">5 Miscellaneous Services</A>
+<B>Up:</B> <A NAME="tex2html2913" HREF="node48.html">4 String Services</A>
+<B> Previous:</B> <A NAME="tex2html2909" HREF="node53.html">4.3 Standard Module regsub</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

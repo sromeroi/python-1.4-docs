@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.1.1 Memory Management</TITLE>
+<META NAME="description" CONTENT="4.1.1 Memory Management">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html577" HREF="node33.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html575" HREF="node31.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html571" HREF="node31.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html579" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html580" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html578" HREF="node33.html">4.2 Object Protocol</A>
+<B>Up:</B> <A NAME="tex2html576" HREF="node31.html">4.1 Introduction</A>
+<B> Previous:</B> <A NAME="tex2html572" HREF="node31.html">4.1 Introduction</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00511000000000000000">4.1.1 Memory Management</A></H2>
+<P>
+  For all of the functions described in this chapter, if a function
+  retains a reference to a Python object passed as an argument, then the
+  function will increase the reference count of the object.  It is
+  unnecessary for the caller to increase the reference count of an
+  argument in anticipation of the object's retention.
+<P>
+  All Python objects returned from functions should be treated as new
+  objects.  Functions that return objects assume that the caller will
+  retain a reference and the reference count of the object has already
+  been incremented to account for this fact.  A caller that does not
+  retain a reference to an object that is returned from a function
+  must decrement the reference count of the object (using
+  DECREF(object)) to prevent memory leaks.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

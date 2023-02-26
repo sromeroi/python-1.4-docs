@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>7.2.2 Example</TITLE>
+<META NAME="description" CONTENT="7.2.2 Example">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3117" HREF="node71.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3115" HREF="node68.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3111" HREF="node69.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3119" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3120" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3118" HREF="node71.html">7.3 Built-in Module select</A>
+<B>Up:</B> <A NAME="tex2html3116" HREF="node68.html">7.2 Built-in Module socket</A>
+<B> Previous:</B> <A NAME="tex2html3112" HREF="node69.html">7.2.1 Socket Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00822000000000000000">7.2.2 Example</A></H2>
+<P>
+<A NAME="SocketExample">&#160;</A>
+<P>
+Here are two minimal example programs using the TCP/IP protocol: a
+server that echoes all data that it receives back (servicing only one
+client), and a client using it.  Note that a server must perform the
+sequence <CODE>socket</CODE>, <CODE>bind</CODE>, <CODE>listen</CODE>, <CODE>accept</CODE>
+(possibly repeating the <CODE>accept</CODE> to service more than one client),
+while a client only needs the sequence <CODE>socket</CODE>, <CODE>connect</CODE>.
+Also note that the server does not <CODE>send</CODE>/<CODE>receive</CODE> on the
+socket it is listening on but on the new socket returned by
+<CODE>accept</CODE>.
+<P>
+<PRE># Echo server program
+from socket import *
+HOST = ''                 # Symbolic name meaning the local host
+PORT = 50007              # Arbitrary non-privileged server
+s = socket(AF_INET, SOCK_STREAM)
+s.bind(HOST, PORT)
+s.listen(1)
+conn, addr = s.accept()
+print 'Connected by', addr
+while 1:
+    data = conn.recv(1024)
+    if not data: break
+    conn.send(data)
+conn.close()</PRE>
+<P>
+<PRE># Echo client program
+from socket import *
+HOST = 'daring.cwi.nl'    # The remote host
+PORT = 50007              # The same port as used by the server
+s = socket(AF_INET, SOCK_STREAM)
+s.connect(HOST, PORT)
+s.send('Hello, world')
+data = s.recv(1024)
+s.close()
+print 'Received', `data`</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

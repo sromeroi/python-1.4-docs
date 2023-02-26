@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>16.1.3 Drawing Objects</TITLE>
+<META NAME="description" CONTENT="16.1.3 Drawing Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4731" HREF="node196.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4729" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4723" HREF="node194.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4733" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4734" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4732" HREF="node196.html">16.1.4 Menu Objects</A>
+<B>Up:</B> <A NAME="tex2html4730" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4724" HREF="node194.html">16.1.2 Window Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001713000000000000000">16.1.3 Drawing Objects</A></H2>
+<P>
+Drawing objects are created exclusively by the window method
+<CODE>begindrawing()</CODE>.
+Only one drawing object can exist at any given time; the drawing object
+must be deleted to finish drawing.
+No drawing object may exist when
+<CODE>stdwin.getevent()</CODE>
+is called.
+Drawing objects have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="10106">box</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Draw a box just inside a rectangle.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10110">circle</A></STRONG>(<VAR>center, radius</VAR>)
+<DD>
+Draw a circle with given center point and radius.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10114">elarc</A></STRONG>(<VAR>center,  <IMG WIDTH=35 HEIGHT=12 ALIGN=BOTTOM ALT="tex2html_wrap16642" SRC="img19.gif"  > ,  <IMG WIDTH=35 HEIGHT=11 ALIGN=BOTTOM ALT="tex2html_wrap16643" SRC="img20.gif"  > </VAR>)
+<DD>
+Draw an elliptical arc with given center point.
+<CODE>(<VAR>rh</VAR>, <VAR>rv</VAR>)</CODE>
+gives the half sizes of the horizontal and vertical radii.
+<CODE>(<VAR>a1</VAR>, <VAR>a2</VAR>)</CODE>
+gives the angles (in degrees) of the begin and end points.
+0 degrees is at 3 o'clock, 90 degrees is at 12 o'clock.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10122">erase</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Erase a rectangle.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10126">fillcircle</A></STRONG>(<VAR>center, radius</VAR>)
+<DD>
+Draw a filled circle with given center point and radius.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10130">fillelarc</A></STRONG>(<VAR>center,  <IMG WIDTH=35 HEIGHT=12 ALIGN=BOTTOM ALT="tex2html_wrap16642" SRC="img19.gif"  > ,  <IMG WIDTH=35 HEIGHT=11 ALIGN=BOTTOM ALT="tex2html_wrap16643" SRC="img20.gif"  > </VAR>)
+<DD>
+Draw a filled elliptical arc; arguments as for <CODE>elarc</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10135">fillpoly</A></STRONG>(<VAR>points</VAR>)
+<DD>
+Draw a filled polygon given by a list (or tuple) of points.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10139">invert</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Invert a rectangle.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10143">line</A></STRONG>(<VAR>p1, p2</VAR>)
+<DD>
+Draw a line from point
+<VAR>p1</VAR>
+to
+<VAR>p2</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10149">paint</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Fill a rectangle.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10153">poly</A></STRONG>(<VAR>points</VAR>)
+<DD>
+Draw the lines connecting the given list (or tuple) of points.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10157">shade</A></STRONG>(<VAR>rect, percent</VAR>)
+<DD>
+Fill a rectangle with a shading pattern that is about
+<VAR>percent</VAR>
+percent filled.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10162">text</A></STRONG>(<VAR>p, str</VAR>)
+<DD>
+Draw a string starting at point p (the point specifies the
+top left coordinate of the string).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10166">xorcircle</A></STRONG>(<VAR>center, radius</VAR>)
+<DD>
+,xorelarccenter,  <IMG WIDTH=35 HEIGHT=12 ALIGN=BOTTOM ALT="tex2html_wrap16642" SRC="img19.gif"  > ,  <IMG WIDTH=35 HEIGHT=11 ALIGN=BOTTOM ALT="tex2html_wrap16643" SRC="img20.gif"  > 
+,xorlinep1, p2
+,xorpolypoints
+Draw a circle, an elliptical arc, a line or a polygon, respectively,
+in XOR mode.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10176">setfgcolor</A></STRONG>(<VAR></VAR>)
+<DD>
+,setbgcolor
+,getfgcolor
+,getbgcolor
+These functions are similar to the corresponding functions described
+above for the
+<CODE>stdwin</CODE>
+module, but affect or return the colors currently used for drawing
+instead of the global default colors.
+When a drawing object is created, its colors are set to the window's
+default colors, which are in turn initialized from the global default
+colors when the window is created.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10187">setfont</A></STRONG>(<VAR></VAR>)
+<DD>
+,baseline
+,lineheight
+,textbreak
+,textwidth
+These functions are similar to the corresponding functions described
+above for the
+<CODE>stdwin</CODE>
+module, but affect or use the current drawing font instead of
+the global default font.
+When a drawing object is created, its font is set to the window's
+default font, which is in turn initialized from the global default
+font when the window is created.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10200">bitmap</A></STRONG>(<VAR>point, bitmap, mask</VAR>)
+<DD>
+Draw the <VAR>bitmap</VAR> with its top left corner at <VAR>point</VAR>.
+If the optional <VAR>mask</VAR> argument is present, it should be either
+the same object as <VAR>bitmap</VAR>, to draw only those bits that are set
+in the bitmap, in the foreground color, or <CODE>None</CODE>, to draw all
+bits (ones are drawn in the foreground color, zeros in the background
+color).
+Not available on the Macintosh.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10209">cliprect</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Set the ``clipping region'' to a rectangle.
+The clipping region limits the effect of all drawing operations, until
+it is changed again or until the drawing object is closed.  When a
+drawing object is created the clipping region is set to the entire
+window.  When an object to be drawn falls partly outside the clipping
+region, the set of pixels drawn is the intersection of the clipping
+region and the set of pixels that would be drawn by the same operation
+in the absence of a clipping region.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10213">noclip</A></STRONG>(<VAR></VAR>)
+<DD>
+Reset the clipping region to the entire window.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10217">close</A></STRONG>(<VAR></VAR>)
+<DD>
+,enddrawing
+Discard the drawing object.  It should not be used again.
+<P>
+</DL><HR><A NAME="tex2html4731" HREF="node196.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4729" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4723" HREF="node194.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4733" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4734" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4732" HREF="node196.html">16.1.4 Menu Objects</A>
+<B>Up:</B> <A NAME="tex2html4730" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4724" HREF="node194.html">16.1.2 Window Objects</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

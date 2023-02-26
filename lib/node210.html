@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.4.2 Form Objects</TITLE>
+<META NAME="description" CONTENT="17.4.2 Form Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4925" HREF="node211.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4923" HREF="node208.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4917" HREF="node209.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4927" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4928" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4926" HREF="node211.html">17.4.3 FORMS Objects</A>
+<B>Up:</B> <A NAME="tex2html4924" HREF="node208.html">17.4 Built-in Module fl</A>
+<B> Previous:</B> <A NAME="tex2html4918" HREF="node209.html">17.4.1 Functions Defined in </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001842000000000000000">17.4.2 Form Objects</A></H2>
+<P>
+Form objects (returned by <CODE>fl.make_form()</CODE> above) have the
+following methods.  Each method corresponds to a C function whose name
+is prefixed with `<SAMP>fl_</SAMP>'; and whose first argument is a form
+pointer; please refer to the official FORMS documentation for
+descriptions.
+<P>
+All the `<SAMP>add_...</SAMP>' functions return a Python object representing
+the FORMS object.  Methods of FORMS objects are described below.  Most
+kinds of FORMS object also have some methods specific to that kind;
+these methods are listed here.
+<P>
+<DIV ALIGN=LEFT><P ALIGN=LEFT><DL><DT><STRONG><A NAME="10942">show_form</A></STRONG>(<VAR>placement, bordertype, name</VAR>)
+<DD>
+  Show the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10946">hide_form</A></STRONG>(<VAR></VAR>)
+<DD>
+  Hide the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10950">redraw_form</A></STRONG>(<VAR></VAR>)
+<DD>
+  Redraw the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10954">set_form_position</A></STRONG>(<VAR>x, y</VAR>)
+<DD>
+Set the form's position.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10958">freeze_form</A></STRONG>(<VAR></VAR>)
+<DD>
+Freeze the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10962">unfreeze_form</A></STRONG>(<VAR></VAR>)
+<DD>
+  Unfreeze the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10966">activate_form</A></STRONG>(<VAR></VAR>)
+<DD>
+  Activate the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10970">deactivate_form</A></STRONG>(<VAR></VAR>)
+<DD>
+  Deactivate the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10974">bgn_group</A></STRONG>(<VAR></VAR>)
+<DD>
+  Begin a new group of objects; return a group object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10978">end_group</A></STRONG>(<VAR></VAR>)
+<DD>
+  End the current group of objects.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10982">find_first</A></STRONG>(<VAR></VAR>)
+<DD>
+  Find the first object in the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10986">find_last</A></STRONG>(<VAR></VAR>)
+<DD>
+  Find the last object in the form.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10990">add_box</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a box object to the form.
+No extra methods.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10994">add_text</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a text object to the form.
+No extra methods.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10998">add_clock</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a clock object to the form. <BR> 
+Method:
+<CODE>get_clock</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11003">add_button</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a button object to the form. <BR> 
+Methods:
+<CODE>get_button</CODE>,
+<CODE>set_button</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11009">add_lightbutton</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a lightbutton object to the form. <BR> 
+Methods:
+<CODE>get_button</CODE>,
+<CODE>set_button</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11015">add_roundbutton</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a roundbutton object to the form. <BR> 
+Methods:
+<CODE>get_button</CODE>,
+<CODE>set_button</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11021">add_slider</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a slider object to the form. <BR> 
+Methods:
+<CODE>set_slider_value</CODE>,
+<CODE>get_slider_value</CODE>,
+<CODE>set_slider_bounds</CODE>,
+<CODE>get_slider_bounds</CODE>,
+<CODE>set_slider_return</CODE>,
+<CODE>set_slider_size</CODE>,
+<CODE>set_slider_precision</CODE>,
+<CODE>set_slider_step</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11033">add_valslider</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a valslider object to the form. <BR> 
+Methods:
+<CODE>set_slider_value</CODE>,
+<CODE>get_slider_value</CODE>,
+<CODE>set_slider_bounds</CODE>,
+<CODE>get_slider_bounds</CODE>,
+<CODE>set_slider_return</CODE>,
+<CODE>set_slider_size</CODE>,
+<CODE>set_slider_precision</CODE>,
+<CODE>set_slider_step</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11045">add_dial</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a dial object to the form. <BR> 
+Methods:
+<CODE>set_dial_value</CODE>,
+<CODE>get_dial_value</CODE>,
+<CODE>set_dial_bounds</CODE>,
+<CODE>get_dial_bounds</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11053">add_positioner</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a positioner object to the form. <BR> 
+Methods:
+<CODE>set_positioner_xvalue</CODE>,
+<CODE>set_positioner_yvalue</CODE>,
+<CODE>set_positioner_xbounds</CODE>,
+<CODE>set_positioner_ybounds</CODE>,
+<CODE>get_positioner_xvalue</CODE>,
+<CODE>get_positioner_yvalue</CODE>,
+<CODE>get_positioner_xbounds</CODE>,
+<CODE>get_positioner_ybounds</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11065">add_counter</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a counter object to the form. <BR> 
+Methods:
+<CODE>set_counter_value</CODE>,
+<CODE>get_counter_value</CODE>,
+<CODE>set_counter_bounds</CODE>,
+<CODE>set_counter_step</CODE>,
+<CODE>set_counter_precision</CODE>,
+<CODE>set_counter_return</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11075">add_input</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a input object to the form. <BR> 
+Methods:
+<CODE>set_input</CODE>,
+<CODE>get_input</CODE>,
+<CODE>set_input_color</CODE>,
+<CODE>set_input_return</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11083">add_menu</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a menu object to the form. <BR> 
+Methods:
+<CODE>set_menu</CODE>,
+<CODE>get_menu</CODE>,
+<CODE>addto_menu</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11090">add_choice</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a choice object to the form. <BR> 
+Methods:
+<CODE>set_choice</CODE>,
+<CODE>get_choice</CODE>,
+<CODE>clear_choice</CODE>,
+<CODE>addto_choice</CODE>,
+<CODE>replace_choice</CODE>,
+<CODE>delete_choice</CODE>,
+<CODE>get_choice_text</CODE>,
+<CODE>set_choice_fontsize</CODE>,
+<CODE>set_choice_fontstyle</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11103">add_browser</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a browser object to the form. <BR> 
+Methods:
+<CODE>set_browser_topline</CODE>,
+<CODE>clear_browser</CODE>,
+<CODE>add_browser_line</CODE>,
+<CODE>addto_browser</CODE>,
+<CODE>insert_browser_line</CODE>,
+<CODE>delete_browser_line</CODE>,
+<CODE>replace_browser_line</CODE>,
+<CODE>get_browser_line</CODE>,
+<CODE>load_browser</CODE>,
+<CODE>get_browser_maxline</CODE>,
+<CODE>select_browser_line</CODE>,
+<CODE>deselect_browser_line</CODE>,
+<CODE>deselect_browser</CODE>,
+<CODE>isselected_browser_line</CODE>,
+<CODE>get_browser</CODE>,
+<CODE>set_browser_fontsize</CODE>,
+<CODE>set_browser_fontstyle</CODE>,
+<CODE>set_browser_specialkey</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11125">add_timer</A></STRONG>(<VAR>type, x, y, w, h, name</VAR>)
+<DD>
+Add a timer object to the form. <BR> 
+Methods:
+<CODE>set_timer</CODE>,
+<CODE>get_timer</CODE>.
+<P>
+</DL></P></DIV>
+<P>
+Form objects have the following data attributes; see the FORMS
+documentation:
+<P>
+<P><P> <IMG WIDTH=480 HEIGHT=201 ALIGN=BOTTOM ALT="tableiii11129" SRC="img26.gif"  > <P><P><HR><A NAME="tex2html4925" HREF="node211.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4923" HREF="node208.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4917" HREF="node209.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4927" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4928" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4926" HREF="node211.html">17.4.3 FORMS Objects</A>
+<B>Up:</B> <A NAME="tex2html4924" HREF="node208.html">17.4 Built-in Module fl</A>
+<B> Previous:</B> <A NAME="tex2html4918" HREF="node209.html">17.4.1 Functions Defined in </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

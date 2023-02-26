@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.4.1 Functions Defined in Module fl</TITLE>
+<META NAME="description" CONTENT="17.4.1 Functions Defined in Module fl">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4913" HREF="node210.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4911" HREF="node208.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4905" HREF="node208.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4915" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4916" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4914" HREF="node210.html">17.4.2 Form Objects</A>
+<B>Up:</B> <A NAME="tex2html4912" HREF="node208.html">17.4 Built-in Module fl</A>
+<B> Previous:</B> <A NAME="tex2html4906" HREF="node208.html">17.4 Built-in Module fl</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001841000000000000000">17.4.1 Functions Defined in Module <CODE>fl</CODE></A></H2>
+<P>
+<A NAME="FLFunctions">&#160;</A>
+<P>
+Module <CODE>fl</CODE> defines the following functions.  For more information
+about what they do, see the description of the equivalent C function
+in the FORMS documentation:
+<P>
+<DL><DT><STRONG><A NAME="10836">make_form</A></STRONG>(<VAR>type, width, height</VAR>)
+<DD>
+Create a form with given type, width and height.  This returns a
+<I><DFN>form</DFN></I> object, whose methods are described below.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10841">do_forms</A></STRONG>(<VAR></VAR>)
+<DD>
+The standard FORMS main loop.  Returns a Python object representing
+the FORMS object needing interaction, or the special value
+<CODE>FL.EVENT</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10846">check_forms</A></STRONG>(<VAR></VAR>)
+<DD>
+Check for FORMS events.  Returns what <CODE>do_forms</CODE> above returns,
+or <CODE>None</CODE> if there is no event that immediately needs
+interaction.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10852">set_event_call_back</A></STRONG>(<VAR>function</VAR>)
+<DD>
+Set the event callback function.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10856">set_graphics_mode</A></STRONG>(<VAR>rgbmode, doublebuffering</VAR>)
+<DD>
+Set the graphics modes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10860">get_rgbmode</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current rgb mode.  This is the value of the C global
+variable <CODE>fl_rgbmode</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10865">show_message</A></STRONG>(<VAR>str1, str2, str3</VAR>)
+<DD>
+Show a dialog box with a three-line message and an OK button.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10869">show_question</A></STRONG>(<VAR>str1, str2, str3</VAR>)
+<DD>
+Show a dialog box with a three-line message and YES and NO buttons.
+It returns <CODE>1</CODE> if the user pressed YES, <CODE>0</CODE> if NO.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11286">show_choice</A></STRONG>(<VAR>str1, str2, str3, but1</VAR><BIG>[</BIG><VAR>, but2,
+but3</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Show a dialog box with a three-line message and up to three buttons.
+It returns the number of the button clicked by the user
+(<CODE>1</CODE>, <CODE>2</CODE> or <CODE>3</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10882">show_input</A></STRONG>(<VAR>prompt, default</VAR>)
+<DD>
+Show a dialog box with a one-line prompt message and text field in
+which the user can enter a string.  The second argument is the default
+input string.  It returns the string value as edited by the user.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10886">show_file_selector</A></STRONG>(<VAR>message, directory, pattern, default</VAR>)
+<DD>
+Show a dialog box in which the user can select a file.  It returns
+the absolute filename selected by the user, or <CODE>None</CODE> if the user
+presses Cancel.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10891">get_directory</A></STRONG>(<VAR></VAR>)
+<DD>
+,get_pattern
+,get_filename
+These functions return the directory, pattern and filename (the tail
+part only) selected by the user in the last <CODE>show_file_selector</CODE>
+call.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10900">qdevice</A></STRONG>(<VAR>dev</VAR>)
+<DD>
+,unqdevicedev
+,isqueueddev
+,qtest
+,qread
+,qreset
+,qenterdev, val
+,get_mouse
+,tiebutton, valuator1, valuator2
+These functions are the FORMS interfaces to the corresponding GL
+functions.  Use these if you want to handle some GL events yourself
+when using <CODE>fl.do_events</CODE>.  When a GL event is detected that
+FORMS cannot handle, <CODE>fl.do_forms()</CODE> returns the special value
+<CODE>FL.EVENT</CODE> and you should call <CODE>fl.qread()</CODE> to read the
+event from the queue.  Don't use the equivalent GL functions!
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10924">color</A></STRONG>(<VAR></VAR>)
+<DD>
+,mapcolor
+,getmcolor
+See the description in the FORMS documentation of <CODE>fl_color</CODE>,
+<CODE>fl_mapcolor</CODE> and <CODE>fl_getmcolor</CODE>.
+<P>
+</DL><HR><A NAME="tex2html4913" HREF="node210.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4911" HREF="node208.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4905" HREF="node208.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4915" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4916" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4914" HREF="node210.html">17.4.2 Form Objects</A>
+<B>Up:</B> <A NAME="tex2html4912" HREF="node208.html">17.4 Built-in Module fl</A>
+<B> Previous:</B> <A NAME="tex2html4906" HREF="node208.html">17.4 Built-in Module fl</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

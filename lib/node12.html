@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Mutable Sequence Types</TITLE>
+<META NAME="description" CONTENT="Mutable Sequence Types">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2380" HREF="node13.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2378" HREF="node10.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2374" HREF="node11.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2382" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2383" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2381" HREF="node13.html">2.1.6 Mapping Types</A>
+<B>Up:</B> <A NAME="tex2html2379" HREF="node10.html">2.1.5 Sequence Types</A>
+<B> Previous:</B> <A NAME="tex2html2375" HREF="node11.html">More String Operations</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00315200000000000000">Mutable Sequence Types</A></H3>
+<P>
+List objects support additional operations that allow in-place
+modification of the object.
+These operations would be supported by other mutable sequence types
+(when added to the language) as well.
+Strings and tuples are immutable sequence types and such objects cannot
+be modified once created.
+The following operations are defined on mutable sequence types (where
+<VAR>x</VAR> is an arbitrary object):
+<A NAME="508">&#160;</A><A NAME="509">&#160;</A><A NAME="510">&#160;</A>
+<A NAME="511">&#160;</A><A NAME="512">&#160;</A>
+<P>
+<P><P> <IMG WIDTH=648 HEIGHT=221 ALIGN=BOTTOM ALT="tableiii513" SRC="img6.gif"  > <P><P>
+<A NAME="591">&#160;</A><A NAME="592">&#160;</A><A NAME="593">&#160;</A><A NAME="594">&#160;</A>
+<A NAME="595">&#160;</A><A NAME="596">&#160;</A><A NAME="597">&#160;</A>
+<A NAME="598">&#160;</A><A NAME="599">&#160;</A><A NAME="600">&#160;</A>
+<A NAME="601">&#160;</A><A NAME="602">&#160;</A>
+<A NAME="603">&#160;</A><A NAME="604">&#160;</A>
+<A NAME="605">&#160;</A><A NAME="605">&#160;</A>
+<P>
+<A NAME="608">&#160;</A>
+<A NAME="609">&#160;</A>
+<A NAME="610">&#160;</A>
+<A NAME="611">&#160;</A>
+<A NAME="612">&#160;</A>
+<A NAME="613">&#160;</A>
+<A NAME="614">&#160;</A>
+<P>
+,
+Notes:
+<DL ><DT><STRONG>(1)</STRONG>
+<DD> Raises an exception when <VAR>x</VAR> is not found in <VAR>s</VAR>.
+<P>
+<DT><STRONG>(2)</STRONG>
+<DD> The <CODE>sort()</CODE> method takes an optional argument
+  specifying a comparison function of two arguments (list items) which
+  should return <CODE>-1</CODE>, <CODE>0</CODE> or <CODE>1</CODE> depending on whether the
+  first argument is considered smaller than, equal to, or larger than the
+  second argument.  Note that this slows the sorting process down
+  considerably; e.g. to sort a list in reverse order it is much faster
+  to use calls to <CODE>sort()</CODE> and <CODE>reverse()</CODE> than to use
+  <CODE>sort()</CODE> with a comparison function that reverses the ordering of
+  the elements.
+<P>
+ </DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

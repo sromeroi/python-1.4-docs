@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Format Strings for PyArg_ParseTuple()</TITLE>
+<META NAME="description" CONTENT="Format Strings for PyArg_ParseTuple()">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html299" HREF="node11.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html297" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html291" HREF="node9.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html301" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html302" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html300" HREF="node11.html">The Py_BuildValue() Function</A>
+<B>Up:</B> <A NAME="tex2html298" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html292" HREF="node9.html">1.7 Calling Python Functions </A>
+<BR><HR><P>
+<H1><A NAME="SECTION00280000000000000000">Format Strings for <TT>PyArg_ParseTuple()</TT></A></H1>
+<P>
+The <CODE>PyArg_ParseTuple()</CODE> function is declared as follows:
+<P>
+<PRE>    int PyArg_ParseTuple(PyObject *arg, char *format, ...);</PRE>
+<P>
+The <VAR>arg</VAR> argument must be a tuple object containing an argument
+list passed from Python to a C function.  The <VAR>format</VAR> argument
+must be a format string, whose syntax is explained below.  The
+remaining arguments must be addresses of variables whose type is
+determined by the format string.  For the conversion to succeed, the
+<VAR>arg</VAR> object must match the format and the format must be
+exhausted.
+<P>
+Note that while <CODE>PyArg_ParseTuple()</CODE> checks that the Python
+arguments have the required types, it cannot check the validity of the
+addresses of C variables passed to the call: if you make mistakes
+there, your code will probably crash or at least overwrite random bits
+in memory.  So be careful!
+<P>
+A format string consists of zero or more ``format units''.  A format
+unit describes one Python object; it is usually a single character or
+a parenthesized sequence of format units.  With a few exceptions, a
+format unit that is not a parenthesized sequence normally corresponds
+to a single address argument to <CODE>PyArg_ParseTuple()</CODE>.  In the
+following description, the quoted form is the format unit; the entry
+in (round) parentheses is the Python object type that matches the
+format unit; and the entry in [square] brackets is the type of the C
+variable(s) whose address should be passed.  (Use the `<SAMP>&amp;</SAMP>'
+operator to pass a variable's address.)
+<P>
+<DL ><DT><STRONG>`<SAMP>s</SAMP>' (string) [char *]</STRONG>
+<DD>
+Convert a Python string to a C pointer to a character string.  You
+must not provide storage for the string itself; a pointer to an
+existing string is stored into the character pointer variable whose
+address you pass.  The C string is null-terminated.  The Python string
+must not contain embedded null bytes; if it does, a <CODE>TypeError</CODE>
+exception is raised.
+<P>
+<DT><STRONG>`<SAMP>s#</SAMP>' (string) [char *, int]</STRONG>
+<DD>
+This variant on <CODE>'s'</CODE> stores into two C variables, the first one
+a pointer to a character string, the second one its length.  In this
+case the Python string may contain embedded null bytes.
+<P>
+<DT><STRONG>`<SAMP>z</SAMP>' (string or <CODE>None</CODE>) [char *]</STRONG>
+<DD>
+Like `<SAMP>s</SAMP>', but the Python object may also be <CODE>None</CODE>, in which
+case the C pointer is set to <CODE>NULL</CODE>.
+<P>
+<DT><STRONG>`<SAMP>z#</SAMP>' (string or <CODE>None</CODE>) [char *, int]</STRONG>
+<DD>
+This is to <CODE>'s#'</CODE> as <CODE>'z'</CODE> is to <CODE>'s'</CODE>.
+<P>
+<DT><STRONG>`<SAMP>b</SAMP>' (integer) [char]</STRONG>
+<DD>
+Convert a Python integer to a tiny int, stored in a C <CODE>char</CODE>.
+<P>
+<DT><STRONG>`<SAMP>h</SAMP>' (integer) [short int]</STRONG>
+<DD>
+Convert a Python integer to a C <CODE>short int</CODE>.
+<P>
+<DT><STRONG>`<SAMP>i</SAMP>' (integer) [int]</STRONG>
+<DD>
+Convert a Python integer to a plain C <CODE>int</CODE>.
+<P>
+<DT><STRONG>`<SAMP>l</SAMP>' (integer) [long int]</STRONG>
+<DD>
+Convert a Python integer to a C <CODE>long int</CODE>.
+<P>
+<DT><STRONG>`<SAMP>c</SAMP>' (string of length 1) [char]</STRONG>
+<DD>
+Convert a Python character, represented as a string of length 1, to a
+C <CODE>char</CODE>.
+<P>
+<DT><STRONG>`<SAMP>f</SAMP>' (float) [float]</STRONG>
+<DD>
+Convert a Python floating point number to a C <CODE>float</CODE>.
+<P>
+<DT><STRONG>`<SAMP>d</SAMP>' (float) [double]</STRONG>
+<DD>
+Convert a Python floating point number to a C <CODE>double</CODE>.
+<P>
+<DT><STRONG>`<SAMP>O</SAMP>' (object) [PyObject *]</STRONG>
+<DD>
+Store a Python object (without any conversion) in a C object pointer.
+The C program thus receives the actual object that was passed.  The
+object's reference count is not increased.  The pointer stored is not
+<CODE>NULL</CODE>.
+<P>
+<DT><STRONG>`<SAMP>O!</SAMP>' (object) [<VAR>typeobject</VAR>, PyObject *]</STRONG>
+<DD>
+Store a Python object in a C object pointer.  This is similar to
+`<SAMP>O</SAMP>', but takes two C arguments: the first is the address of a
+Python type object, the second is the address of the C variable (of
+type <CODE>PyObject *</CODE>) into which the object pointer is stored.
+If the Python object does not have the required type, a
+<CODE>TypeError</CODE> exception is raised.
+<P>
+<DT><STRONG>`<SAMP>O&amp;</SAMP>' (object) [<VAR>converter</VAR>, <VAR>anything</VAR>]</STRONG>
+<DD>
+Convert a Python object to a C variable through a <VAR>converter</VAR>
+function.  This takes two arguments: the first is a function, the
+second is the address of a C variable (of arbitrary type), converted
+to <CODE>void *</CODE>.  The <VAR>converter</VAR> function in turn is called as
+follows:
+<P>
+<CODE><VAR>status</VAR> = <VAR>converter</VAR>(<VAR>object</VAR>, <VAR>address</VAR>);</CODE>
+<P>
+where <VAR>object</VAR> is the Python object to be converted and
+<VAR>address</VAR> is the <CODE>void *</CODE> argument that was passed to
+<CODE>PyArg_ConvertTuple()</CODE>.  The returned <VAR>status</VAR> should be
+<CODE>1</CODE> for a successful conversion and <CODE>0</CODE> if the conversion
+has failed.  When the conversion fails, the <VAR>converter</VAR> function
+should raise an exception.
+<P>
+<DT><STRONG>`<SAMP>S</SAMP>' (string) [PyStringObject *]</STRONG>
+<DD>
+Like `<SAMP>O</SAMP>' but raises a <CODE>TypeError</CODE> exception that the object
+is a string object.  The C variable may also be declared as
+<CODE>PyObject *</CODE>.
+<P>
+<DT><STRONG>`<SAMP>(<VAR>items</VAR>)</SAMP>' (tuple) [<VAR>matching-items</VAR>]</STRONG>
+<DD>
+The object must be a Python tuple whose length is the number of format
+units in <VAR>items</VAR>.  The C arguments must correspond to the
+individual format units in <VAR>items</VAR>.  Format units for tuples may
+be nested.
+<P>
+ </DL>
+<P>
+It is possible to pass Python long integers where integers are
+requested; however no proper range checking is done - the most
+significant bits are silently truncated when the receiving field is
+too small to receive the value (actually, the semantics are inherited
+from downcasts in C -- your milage may vary).
+<P>
+A few other characters have a meaning in a format string.  These may
+not occur inside nested parentheses.  They are:
+<P>
+<DL ><DT><STRONG>`<SAMP>|</SAMP>'</STRONG>
+<DD>
+Indicates that the remaining arguments in the Python argument list are
+optional.  The C variables corresponding to optional arguments should
+be initialized to their default value -- when an optional argument is
+not specified, the <CODE>PyArg_ParseTuple</CODE> does not touch the contents
+of the corresponding C variable(s).
+<P>
+<DT><STRONG>`<SAMP>:</SAMP>'</STRONG>
+<DD>
+The list of format units ends here; the string after the colon is used
+as the function name in error messages (the ``associated value'' of
+the exceptions that <CODE>PyArg_ParseTuple</CODE> raises).
+<P>
+<DT><STRONG>`<SAMP>;</SAMP>'</STRONG>
+<DD>
+The list of format units ends here; the string after the colon is used
+as the error message <EM>instead</EM> of the default error message.
+Clearly, `<SAMP>:</SAMP>' and `<SAMP>;</SAMP>' mutually exclude each other.
+<P>
+ </DL>
+<P>
+Some example calls:
+<P>
+<PRE>    int ok;
+    int i, j;
+    long k, l;
+    char *s;
+    int size;
+
+    ok = PyArg_ParseTuple(args, &quot;&quot;); /* No arguments */
+        /* Python call: f() */
+    
+    ok = PyArg_ParseTuple(args, &quot;s&quot;, &amp;s); /* A string */
+        /* Possible Python call: f('whoops!') */
+
+    ok = PyArg_ParseTuple(args, &quot;lls&quot;, &amp;k, &amp;l, &amp;s); /* Two longs and a string */
+        /* Possible Python call: f(1, 2, 'three') */
+    
+    ok = PyArg_ParseTuple(args, &quot;(ii)s#&quot;, &amp;i, &amp;j, &amp;s, &amp;size);
+        /* A pair of ints and a string, whose size is also returned */
+        /* Possible Python call: f(1, 2, 'three') */
+
+    {
+        char *file;
+        char *mode = &quot;r&quot;;
+        int bufsize = 0;
+        ok = PyArg_ParseTuple(args, &quot;s|si&quot;, &amp;file, &amp;mode, &amp;bufsize);
+        /* A string, and optionally another string and an integer */
+        /* Possible Python calls:
+           f('spam')
+           f('spam', 'w')
+           f('spam', 'wb', 100000) */
+    }
+
+    {
+        int left, top, right, bottom, h, v;
+        ok = PyArg_ParseTuple(args, &quot;((ii)(ii))(ii)&quot;,
+                 &amp;left, &amp;top, &amp;right, &amp;bottom, &amp;h, &amp;v);
+                 /* A rectangle and a point */
+                 /* Possible Python call:
+                    f(((0, 0), (400, 300)), (10, 10)) */
+    }</PRE>
+<P>
+<HR><A NAME="tex2html299" HREF="node11.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html297" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html291" HREF="node9.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html301" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html302" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html300" HREF="node11.html">The Py_BuildValue() Function</A>
+<B>Up:</B> <A NAME="tex2html298" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html292" HREF="node9.html">1.7 Calling Python Functions </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

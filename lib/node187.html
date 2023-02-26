@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.13.4 ScrolledWindow Object</TITLE>
+<META NAME="description" CONTENT="15.13.4 ScrolledWindow Object">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4623" HREF="node188.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4621" HREF="node183.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4615" HREF="node186.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4625" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4626" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4624" HREF="node188.html">15.13.5 DialogWindow Objects</A>
+<B>Up:</B> <A NAME="tex2html4622" HREF="node183.html">15.13 Standard module FrameWork</A>
+<B> Previous:</B> <A NAME="tex2html4616" HREF="node186.html">15.13.3 ControlsWindow Object</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016134000000000000000">15.13.4 ScrolledWindow Object</A></H2>
+<P>
+ScrolledWindow objects are ControlsWindow objects with the following
+extra methods:
+<P>
+<DL><DT><STRONG><A NAME="9772">scrollbars</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>wantx, wanty</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Create (or destroy) horizontal and vertical scrollbars. The arguments
+specify which you want (default: both). The scrollbars always have
+minimum <CODE>0</CODE> and maximum <CODE>32767</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9666">getscrollbarvalues</A></STRONG>(<VAR></VAR>)
+<DD>
+You must supply this method. It should return a tuple <CODE>x, y</CODE>
+giving the current position of the scrollbars (between <CODE>0</CODE> and
+<CODE>32767</CODE>). You can return <CODE>None</CODE> for either to indicate the
+whole document is visible in that direction.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9674">updatescrollbars</A></STRONG>(<VAR></VAR>)
+<DD>
+Call this method when the document has changed. It will call
+<CODE>getscrollbarvalues</CODE> and update the scrollbars.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9679">scrollbar_callback</A></STRONG>(<VAR>which, what, value</VAR>)
+<DD>
+Supplied by you and called after user interaction. <CODE>Which</CODE> will
+be <CODE>'x'</CODE> or <CODE>'y'</CODE>, <CODE>what</CODE> will be <CODE>'-'</CODE>,
+<CODE>'-'</CODE>, <CODE>'set'</CODE>, <CODE>'++'</CODE> or <CODE>'+'</CODE>. For
+<CODE>'set'</CODE>, <CODE>value</CODE> will contain the new scrollbar position.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9694">scalebarvalues</A></STRONG>(<VAR>absmin, absmax, curmin, curmax</VAR>)
+<DD>
+Auxiliary method to help you calculate values to return from
+<CODE>getscrollbarvalues</CODE>. You pass document minimum and maximum value
+and topmost (leftmost) and bottommost (rightmost) visible values and
+it returns the correct number or <CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9700">do_activate</A></STRONG>(<VAR>onoff, event</VAR>)
+<DD>
+Takes care of dimming/highlighting scrollbars when a window becomes
+frontmost vv. If you override this method call this one at the end of
+your method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9704">do_postresize</A></STRONG>(<VAR>width, height, window</VAR>)
+<DD>
+Moves scrollbars to the correct position. Call this method initially
+if you override it.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9708">do_controlhit</A></STRONG>(<VAR>window, control, pcode, event</VAR>)
+<DD>
+Handles scrollbar interaction. If you override it call this method
+first, a nonzero return value indicates the hit was in the scrollbars
+and has been handled.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

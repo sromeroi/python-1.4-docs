@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.8 Standard module macostools</TITLE>
+<META NAME="description" CONTENT="15.8 Standard module macostools">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4449" HREF="node174.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4447" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4441" HREF="node172.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4451" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4452" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4450" HREF="node174.html">15.9 Standard module findertools</A>
+<B>Up:</B> <A NAME="tex2html4448" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4442" HREF="node172.html">15.7 Built-in Module MacOS</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001680000000000000000">15.8 Standard module <CODE>macostools</CODE></A></H1>
+<P>
+This module contains some convenience routines for file-manipulation
+on the Macintosh.
+<P>
+The <CODE>macostools</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="9243">copy</A></STRONG>(<VAR>src, dst</VAR><BIG>[</BIG><VAR>, createpath, copytimes</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Copy file <VAR>src</VAR> to <VAR>dst</VAR>. The files can be specified as
+pathnames or <CODE>FSSpec</CODE> objects. If <VAR>createpath</VAR> is non-zero
+<VAR>dst</VAR> must be a pathname and the folders leading to the
+destination are created if necessary.  The method copies data and
+resource fork and some finder information (creator, type, flags) and
+optionally the creation, modification and backup times (default is to
+copy them). Custom icons, comments and icon position are not copied.
+<P>
+If the source is an alias the original to which the alias points is
+copied, not the aliasfile.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9178">copytree</A></STRONG>(<VAR>src, dst</VAR>)
+<DD>
+Recursively copy a file tree from <VAR>src</VAR> to <VAR>dst</VAR>, creating
+folders as needed. <VAR>Src</VAR> and <VAR>dst</VAR> should be specified as
+pathnames.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9186">mkalias</A></STRONG>(<VAR>src, dst</VAR>)
+<DD>
+Create a finder alias <VAR>dst</VAR> pointing to <VAR>src</VAR>. Both may be
+specified as pathnames or <VAR>FSSpec</VAR> objects.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9193">touched</A></STRONG>(<VAR>dst</VAR>)
+<DD>
+Tell the finder that some bits of finder-information such as creator
+or type for file <VAR>dst</VAR> has changed. The file can be specified by
+pathname or fsspec. This call should prod the finder into redrawing the
+files icon.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">BUFSIZ</A></STRONG>
+<DD>
+The buffer size for <CODE>copy</CODE>, default 1 megabyte.
+<P>
+</DL>
+<P>
+Note that the process of creating finder aliases is not specified in
+the Apple documentation. Hence, aliases created with <CODE>mkalias</CODE>
+could conceivably have incompatible behaviour in some cases.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

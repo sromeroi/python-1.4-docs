@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.11.2 speech channel objects</TITLE>
+<META NAME="description" CONTENT="15.11.2 speech channel objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4546" HREF="node182.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4544" HREF="node179.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4540" HREF="node180.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4548" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4549" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4547" HREF="node182.html">15.12 Standard module EasyDialogs</A>
+<B>Up:</B> <A NAME="tex2html4545" HREF="node179.html">15.11 Built-in Module macspeech</A>
+<B> Previous:</B> <A NAME="tex2html4541" HREF="node180.html">15.11.1 voice objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016112000000000000000">15.11.2 speech channel objects</A></H2>
+<P>
+A speech channel object allows you to speak strings with slightly more
+control than <CODE>SpeakString()</CODE>, and allows you to use multiple
+speakers at the same time. Please note that channel pitch and rate are
+interrelated in some way, so that to make your Macintosh sing you will
+have to adjust both.
+<P>
+<DL><DT><STRONG><A NAME="9447">SpeakText</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Start uttering the given string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9451">Stop</A></STRONG>(<VAR></VAR>)
+<DD>
+Stop babbling.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9455">GetPitch</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current pitch of the channel, as a floating-point number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9459">SetPitch</A></STRONG>(<VAR>pitch</VAR>)
+<DD>
+Set the pitch of the channel.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9463">GetRate</A></STRONG>(<VAR></VAR>)
+<DD>
+Get the speech rate (utterances per minute) of the channel as a
+floating point number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9467">SetRate</A></STRONG>(<VAR>rate</VAR>)
+<DD>
+Set the speech rate of the channel.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

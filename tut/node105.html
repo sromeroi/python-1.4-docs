@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.1 Keyword Arguments</TITLE>
+<META NAME="description" CONTENT="12.1 Keyword Arguments">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1480" HREF="node106.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1478" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1472" HREF="node104.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1482" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1481" HREF="node106.html">12.2 Changes to the </A>
+<B>Up:</B> <A NAME="tex2html1479" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1473" HREF="node104.html">12 New in Release </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001310000000000000000">12.1 Keyword Arguments</A></H1>
+<P>
+Functions and methods written in Python can now be called using
+keyword arguments of the form <CODE><VAR>keyword</VAR> = <VAR>value</VAR></CODE>.  For
+instance, the following function:
+<P>
+<PRE>def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
+    print &quot;-- This parrot wouldn't&quot;, action,
+    print &quot;if you put&quot;, voltage, &quot;Volts through it.&quot;
+    print &quot;-- Lovely plumage, the&quot;, type
+    print &quot;-- It's&quot;, state, &quot;!&quot;</PRE>
+<P>
+could be called in any of the following ways:
+<P>
+<PRE>parrot(1000)
+parrot(action = 'VOOOOOM', voltage = 1000000)
+parrot('a thousand', state = 'pushing up the daisies')
+parrot('a million', 'bereft of life', 'jump')</PRE>
+<P>
+but the following calls would all be invalid:
+<P>
+<PRE>parrot()                     # required argument missing
+parrot(voltage=5.0, 'dead')  # non-keyword argument following keyword
+parrot(110, voltage=220)     # duplicate value for argument
+parrot(actor='John Cleese')  # unknown keyword</PRE>
+<P>
+In general, an argument list must have the form: zero or more
+positional arguments followed by zero or more keyword arguments, where
+the keywords must be chosen from the formal parameter names.  It's not
+important whether a formal parameter has a default value or not.  No
+argument must receive a value more than once -- formal parameter names
+corresponding to positional arguments cannot be used as keywords in
+the same calls.
+<P>
+Note that no special syntax is required to allow a function to be
+called with keyword arguments.  The additional costs incurred by
+keyword arguments are only present when a call uses them.
+<P>
+(As far as I know, these rules are exactly the same as used by
+Modula-3, even if they are enforced by totally different means.  This
+is intentional.)
+<P>
+When a final formal parameter of the form <CODE>**<VAR>name</VAR></CODE> is
+present, it receives a dictionary containing all keyword arguments
+whose keyword doesn't correspond to a formal parameter.  This may be
+combined with a formal parameter of the form <CODE>*<VAR>name</VAR></CODE> which
+receives a tuple containing the positional arguments beyond the formal
+parameter list.  (<CODE>*<VAR>name</VAR></CODE> must occur before
+<CODE>**<VAR>name</VAR></CODE>.)  For example, if we define a function like this:
+<P>
+<PRE>def cheeseshop(kind, *arguments, **keywords):
+    print &quot;-- Do you have any&quot;, kind, '?'
+    print &quot;-- I'm sorry, we're all out of&quot;, kind
+    for arg in arguments: print arg
+    print '-'*40
+    for kw in keywords.keys(): print kw, ':', keywords[kw]</PRE>
+<P>
+It could be called like this:
+<P>
+<PRE>cheeseshop('Limburger', &quot;It's very runny, sir.&quot;,
+           &quot;It's really very, VERY runny, sir.&quot;,
+           client='John Cleese',
+           shopkeeper='Michael Palin',
+           sketch='Cheese Shop Sketch')</PRE>
+<P>
+and of course it would print:
+<P>
+<PRE>-- Do you have any Limburger ?
+-- I'm sorry, we're all out of Limburger
+It's very runny, sir.
+It's really very, VERY runny, sir.
+----------------------------------------
+client : John Cleese
+shopkeeper : Michael Palin
+sketch : Cheese Shop Sketch</PRE>
+<P>
+Consequences of this change include:
+<P>
+<UL><LI>
+The built-in function <CODE>apply()</CODE> now has an optional third
+argument, which is a dictionary specifying any keyword arguments to be
+passed.  For example,
+<PRE>apply(parrot, (), {'voltage': 20, 'action': 'voomm'})</PRE>
+is equivalent to
+<PRE>parrot(voltage=20, action='voomm')</PRE><LI>
+There is also a mechanism for functions and methods defined in an
+extension module (i.e., implemented in C or C++) to receive a
+dictionary of their keyword arguments.  By default, such functions do
+not accept keyword arguments, since the argument names are not
+available to the interpreter.<LI>
+In the effort of implementing keyword arguments, function and
+especially method calls have been sped up significantly -- for a
+method with ten formal parameters, the call overhead has been cut in
+half; for a function with one formal parameters, the overhead has been
+reduced by a third.<LI>
+The format of <CODE>.pyc</CODE> files has changed (again).<LI>
+The <CODE>access</CODE> statement has been disabled.  The syntax is still
+recognized but no code is generated for it.  (There were some
+unpleasant interactions with changes for keyword arguments, and my
+plan is to get rid of <CODE>access</CODE> altogether in favor of a different
+approach.)
+<P>
+</UL><HR><A NAME="tex2html1480" HREF="node106.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1478" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1472" HREF="node104.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1482" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1481" HREF="node106.html">12.2 Changes to the </A>
+<B>Up:</B> <A NAME="tex2html1479" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1473" HREF="node104.html">12 New in Release </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

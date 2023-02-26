@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.12 Standard module EasyDialogs</TITLE>
+<META NAME="description" CONTENT="15.12 Standard module EasyDialogs">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4558" HREF="node183.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4556" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4550" HREF="node181.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4560" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4561" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4559" HREF="node183.html">15.13 Standard module FrameWork</A>
+<B>Up:</B> <A NAME="tex2html4557" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4551" HREF="node181.html">15.11.2 speech channel objects</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0016120000000000000000">15.12 Standard module <CODE>EasyDialogs</CODE></A></H1>
+<P>
+The <CODE>EasyDialogs</CODE> module contains some simple dialogs for
+the Macintosh, modelled after the <CODE>stdwin</CODE> dialogs with similar
+names.
+<P>
+The <CODE>EasyDialogs</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="9479">Message</A></STRONG>(<VAR>str</VAR>)
+<DD>
+A modal dialog with the message text <VAR>str</VAR>, which should be at
+most 255 characters long, is displayed. Control is returned when the
+user clicks ``OK''.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9765">AskString</A></STRONG>(<VAR>prompt</VAR><BIG>[</BIG><VAR>, default</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Ask the user to input a string value, in a modal dialog. <VAR>Prompt</VAR>
+is the promt message, the optional <VAR>default</VAR> arg is the initial
+value for the string. All strings can be at most 255 bytes
+long. <VAR>AskString</VAR> returns the string entered or <CODE>None</CODE> in
+case the user cancelled.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9766">AskYesNoCancel</A></STRONG>(<VAR>question</VAR><BIG>[</BIG><VAR>, default</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Present a dialog with text <VAR>question</VAR> and three buttons labelled
+``yes'', ``no'' and ``cancel''. Return <CODE>1</CODE> for yes, <CODE>0</CODE> for
+no and <CODE>-1</CODE> for cancel. The default return value chosen by
+hitting return is <CODE>0</CODE>. This can be changed with the optional
+<VAR>default</VAR> argument.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9767">ProgressBar</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>label, maxval</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Display a modeless progress dialog with a thermometer bar. <VAR>Label</VAR>
+is the textstring displayed (default ``Working...''), <VAR>maxval</VAR> is
+the value at which progress is complete (default 100). The returned
+object has one method, <CODE>set(value)</CODE>, which sets the value of the
+progress bar. The bar remains visible until the object returned is
+discarded.
+<P>
+The progress bar has a ``cancel'' button, but it is currently
+non-functional.
+<P>
+</DL>
+<P>
+Note that <CODE>EasyDialogs</CODE> does not currently use the notification
+manager. This means that displaying dialogs while the program is in
+the background will lead to unexpected results and possibly
+crashes. Also, all dialogs are modeless and hence expect to be at the
+top of the stacking order. This is true when the dialogs are created,
+but windows that pop-up later (like a console window) may also result
+in crashes.
+<P>
+<HR><A NAME="tex2html4558" HREF="node183.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4556" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4550" HREF="node181.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4560" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4561" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4559" HREF="node183.html">15.13 Standard module FrameWork</A>
+<B>Up:</B> <A NAME="tex2html4557" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4551" HREF="node181.html">15.11.2 speech channel objects</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

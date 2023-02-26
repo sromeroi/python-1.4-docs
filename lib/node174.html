@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.9 Standard module findertools</TITLE>
+<META NAME="description" CONTENT="15.9 Standard module findertools">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4461" HREF="node175.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4459" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4453" HREF="node173.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4463" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4464" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4462" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<B>Up:</B> <A NAME="tex2html4460" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4454" HREF="node173.html">15.8 Standard module macostools</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001690000000000000000">15.9 Standard module <CODE>findertools</CODE></A></H1>
+<P>
+This module contains routines that give Python programs access to some
+functionality provided by the finder. They are implemented as wrappers
+around the AppleEvent interface to the finder.
+<P>
+All file and folder parameters can be specified either as full
+pathnames or as <CODE>FSSpec</CODE> objects.
+<P>
+The <CODE>findertools</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="9209">launch</A></STRONG>(<VAR>file</VAR>)
+<DD>
+Tell the finder to launch <VAR>file</VAR>. What launching means depends on the file:
+applications are started, folders are opened and documents are opened
+in the correct application.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9214">Print</A></STRONG>(<VAR>file</VAR>)
+<DD>
+Tell the finder to print a file (again specified by full pathname or
+FSSpec). The behaviour is identical to selecting the file and using
+the print command in the finder.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9218">copy</A></STRONG>(<VAR>file, destdir</VAR>)
+<DD>
+Tell the finder to copy a file or folder <VAR>file</VAR> to folder
+<VAR>destdir</VAR>. The function returns an <CODE>Alias</CODE> object pointing to
+the new file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9225">move</A></STRONG>(<VAR>file, destdir</VAR>)
+<DD>
+Tell the finder to move a file or folder <VAR>file</VAR> to folder
+<VAR>destdir</VAR>. The function returns an <CODE>Alias</CODE> object pointing to
+the new file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9232">sleep</A></STRONG>(<VAR></VAR>)
+<DD>
+Tell the finder to put the mac to sleep, if your machine supports it.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9236">restart</A></STRONG>(<VAR></VAR>)
+<DD>
+Tell the finder to perform an orderly restart of the machine.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9240">shutdown</A></STRONG>(<VAR></VAR>)
+<DD>
+Tell the finder to perform an orderly shutdown of the machine.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

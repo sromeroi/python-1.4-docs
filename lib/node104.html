@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.1 Introduction</TITLE>
+<META NAME="description" CONTENT="11.1.1 Introduction">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3590" HREF="node105.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3588" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3582" HREF="node103.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3592" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3593" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3591" HREF="node105.html">11.1.2 Using the cgi </A>
+<B>Up:</B> <A NAME="tex2html3589" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3583" HREF="node103.html">11.1 Standard Module cgi</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001211000000000000000">11.1.1 Introduction</A></H2>
+<P>
+<A NAME="IntroductiontotheCGImodule">&#160;</A>
+<P>
+A CGI script is invoked by an HTTP server, usually to process user
+input submitted through an HTML <CODE>&lt;FORM&gt;</CODE> or <CODE>&lt;ISINPUT&gt;</CODE> element.
+<P>
+Most often, CGI scripts live in the server's special <CODE>cgi-bin</CODE>
+directory.  The HTTP server places all sorts of information about the
+request (such as the client's hostname, the requested URL, the query
+string, and lots of other goodies) in the script's shell environment,
+executes the script, and sends the script's output back to the client.
+<P>
+The script's input is connected to the client too, and sometimes the
+form data is read this way; at other times the form data is passed via
+the ``query string'' part of the URL.  This module (<CODE>cgi.py</CODE>) is intended
+to take care of the different cases and provide a simpler interface to
+the Python script.  It also provides a number of utilities that help
+in debugging scripts, and the latest addition is support for file
+uploads from a form (if your browser supports it - Grail 0.3 and
+Netscape 2.0 do).
+<P>
+The output of a CGI script should consist of two sections, separated
+by a blank line.  The first section contains a number of headers,
+telling the client what kind of data is following.  Python code to
+generate a minimal header section looks like this:
+<P>
+<PRE>	print &quot;Content-type: text/html&quot;	# HTML is following
+	print				# blank line, end of headers</PRE>
+<P>
+The second section is usually HTML, which allows the client software
+to display nicely formatted text with header, in-line images, etc.
+Here's Python code that prints a simple piece of HTML:
+<P>
+<PRE>	print &quot;&lt;TITLE&gt;CGI script output&lt;/TITLE&gt;&quot;
+	print &quot;&lt;H1&gt;This is my first CGI script&lt;/H1&gt;&quot;
+	print &quot;Hello, world!&quot;</PRE>
+<P>
+(It may not be fully legal HTML according to the letter of the
+standard, but any browser will understand it.)
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

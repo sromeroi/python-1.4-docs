@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.2.1 Regular Expressions</TITLE>
+<META NAME="description" CONTENT="4.2.1 Regular Expressions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2882" HREF="node52.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2880" HREF="node50.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2874" HREF="node50.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2884" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2885" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2883" HREF="node52.html">4.2.2 Module Contents</A>
+<B>Up:</B> <A NAME="tex2html2881" HREF="node50.html">4.2 Built-in Module regex</A>
+<B> Previous:</B> <A NAME="tex2html2875" HREF="node50.html">4.2 Built-in Module regex</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00521000000000000000">4.2.1 Regular Expressions</A></H2>
+<P>
+A regular expression (or RE) specifies a set of strings that matches
+it; the functions in this module let you check if a particular string
+matches a given regular expression (or if a given regular expression
+matches a particular string, which comes down to the same thing).
+<P>
+Regular expressions can be concatenated to form new regular
+expressions; if <EM>A</EM> and <EM>B</EM> are both regular expressions,
+then <EM>AB</EM> is also an regular expression.  If a string <EM>p</EM>
+matches A and another string <EM>q</EM> matches B, the string <EM>pq</EM>
+will match AB.  Thus, complex expressions can easily be constructed
+from simpler ones like the primitives described here.  For details of
+the theory and implementation of regular expressions, consult almost
+any textbook about compiler construction.
+<P>
+A brief explanation of the format of regular expressions follows.
+<P>
+Regular expressions can contain both special and ordinary characters.
+Ordinary characters, like '<CODE>A</CODE>', '<CODE>a</CODE>', or '<CODE>0</CODE>', are
+the simplest regular expressions; they simply match themselves.  You
+can concatenate ordinary characters, so '<CODE>last</CODE>' matches the
+characters 'last'.  (In the rest of this section, we'll write RE's in
+<CODE>this special font</CODE>, usually without quotes, and strings to be
+matched 'in single quotes'.)
+<P>
+Special characters either stand for classes of ordinary characters, or
+affect how the regular expressions around them are interpreted.
+<P>
+The special characters are:
+<DL COMPACT><DT><STRONG><CODE>.</CODE></STRONG>
+<DD>(Dot.)  Matches any character except a newline.
+<DT><STRONG><CODE>^</CODE></STRONG>
+<DD>(Caret.)  Matches the start of the string.
+<DT><STRONG><CODE>$</CODE></STRONG>
+<DD>Matches the end of the string.  
+<CODE>foo</CODE> matches both 'foo' and 'foobar', while the regular
+expression '<CODE>foo$</CODE>' matches only 'foo'.
+<DT><STRONG><CODE>*</CODE></STRONG>
+<DD> Causes the resulting RE to
+match 0 or more repetitions of the preceding RE.  <CODE>ab*</CODE> will
+match 'a', 'ab', or 'a' followed by any number of 'b's.
+<DT><STRONG><CODE>+</CODE></STRONG>
+<DD> Causes the
+resulting RE to match 1 or more repetitions of the preceding RE.
+<CODE>ab+</CODE> will match 'a' followed by any non-zero number of 'b's; it
+will not match just 'a'.
+<DT><STRONG><CODE>?</CODE></STRONG>
+<DD> Causes the resulting RE to
+match 0 or 1 repetitions of the preceding RE.  <CODE>ab?</CODE> will
+match either 'a' or 'ab'.
+<P>
+<DT><STRONG><CODE>&#92;</CODE></STRONG>
+<DD> Either escapes special characters (permitting you to match
+characters like '*?+&amp;$'), or signals a special sequence; special
+sequences are discussed below.  Remember that Python also uses the
+backslash as an escape sequence in string literals; if the escape
+sequence isn't recognized by Python's parser, the backslash and
+subsequent character are included in the resulting string.  However,
+if Python would recognize the resulting sequence, the backslash should
+be repeated twice.
+<P>
+<DT><STRONG><CODE>[]</CODE></STRONG>
+<DD> Used to indicate a set of characters.  Characters can
+be listed individually, or a range is indicated by giving two
+characters and separating them by a '-'.  Special characters are
+not active inside sets.  For example, <CODE>[akm$]</CODE>
+will match any of the characters 'a', 'k', 'm', or '$'; <CODE>[a-z]</CODE> will
+match any lowercase letter.
+<P>
+If you want to include a <CODE>]</CODE> inside a
+set, it must be the first character of the set; to include a <CODE>-</CODE>,
+place it as the first or last character.
+<P>
+Characters <EM>not</EM> within a range can be matched by including a
+<CODE>^</CODE> as the first character of the set; <CODE>^</CODE> elsewhere will
+simply match the '<CODE>^</CODE>' character.
+<P>
+ </DL>
+<P>
+The special sequences consist of '<CODE>&#92;</CODE>' and a character
+from the list below.  If the ordinary character is not on the list,
+then the resulting RE will match the second character.  For example,
+<CODE>&#92;$</CODE> matches the character '$'.  Ones where the backslash
+should be doubled are indicated.
+<P>
+<DL COMPACT><DT><STRONG><CODE>&#92;|</CODE></STRONG>
+<DD><CODE>A&#92;|B</CODE>, where A and B can be arbitrary REs,
+creates a regular expression that will match either A or B.  This can
+be used inside groups (see below) as well.
+<DT><STRONG><CODE>&#92;( &#92;)</CODE></STRONG>
+<DD>Indicates the start and end of a group; the
+contents of a group can be matched later in the string with the
+<CODE>&#92;1-9]</CODE> special sequence, described next.
+,<DT><STRONG><CODE>&#92;&#92;1, ... &#92;&#92;7, &#92;8, &#92;9</CODE></STRONG>
+<DD>
+Matches the contents of the group of the same
+number.  For example, <CODE>&#92;(.+&#92;) &#92;&#92;1</CODE> matches 'the the' or
+'55 55', but not 'the end' (note the space after the group).  This
+special sequence can only be used to match one of the first 9 groups;
+groups with higher numbers can be matched using the <CODE>&#92;v</CODE>
+sequence.  (<CODE>&#92;8</CODE> and <CODE>&#92;9</CODE> don't need a double backslash
+because they are not octal digits.)
+<DT><STRONG><CODE>&#92;&#92;b</CODE></STRONG>
+<DD>Matches the empty string, but only at the
+beginning or end of a word.  A word is defined as a sequence of
+alphanumeric characters, so the end of a word is indicated by
+whitespace or a non-alphanumeric character.
+<DT><STRONG><CODE>&#92;B</CODE></STRONG>
+<DD>Matches the empty string, but when it is <EM>not</EM> at the
+beginning or end of a word. 
+<DT><STRONG><CODE>&#92;v</CODE></STRONG>
+<DD>Must be followed by a two digit decimal number, and
+matches the contents of the group of the same number.  The group number must be between 1 and 99, inclusive.
+<DT><STRONG><CODE>&#92;w</CODE></STRONG>
+<DD>Matches any alphanumeric character; this is
+equivalent to the set <CODE>[a-zA-Z0-9]</CODE>.
+<DT><STRONG><CODE>&#92;W</CODE></STRONG>
+<DD>Matches any non-alphanumeric character; this is
+equivalent to the set <CODE>[&#226;-zA-Z0-9]</CODE>. 
+<DT><STRONG><CODE>&#92;&lt;</CODE></STRONG>
+<DD>Matches the empty string, but only at the beginning of a
+word.  A word is defined as a sequence of alphanumeric characters, so
+the end of a word is indicated by whitespace or a non-alphanumeric 
+character.
+<DT><STRONG><CODE>&#92;&gt;</CODE></STRONG>
+<DD>Matches the empty string, but only at the end of a
+word.
+<P>
+<DT><STRONG><CODE>&#92;&#92;&#92;&#92;</CODE></STRONG>
+<DD>Matches a literal backslash.
+<P>
+<DT><STRONG><CODE>&#92;`</CODE></STRONG>
+<DD>Like <CODE>^</CODE>, this only matches at the start of the
+string.
+<DT><STRONG><CODE>&#92;&#92;'</CODE></STRONG>
+<DD> Like <CODE>$</CODE>, this only matches at the end of the
+string.
+<P>
+ </DL><HR><A NAME="tex2html2882" HREF="node52.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2880" HREF="node50.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2874" HREF="node50.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2884" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2885" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2883" HREF="node52.html">4.2.2 Module Contents</A>
+<B>Up:</B> <A NAME="tex2html2881" HREF="node50.html">4.2 Built-in Module regex</A>
+<B> Previous:</B> <A NAME="tex2html2875" HREF="node50.html">4.2 Built-in Module regex</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

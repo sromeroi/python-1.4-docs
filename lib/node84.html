@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.10 Built-in Module fcntl</TITLE>
+<META NAME="description" CONTENT="8.10 Built-in Module fcntl">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3295" HREF="node85.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3293" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3287" HREF="node83.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3297" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3298" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3296" HREF="node85.html">8.11 Standard Module posixfile</A>
+<B>Up:</B> <A NAME="tex2html3294" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3288" HREF="node83.html">8.9 Standard Module TERMIOS</A>
+<BR><HR><P>
+<H1><A NAME="SECTION009100000000000000000">8.10 Built-in Module <CODE>fcntl</CODE></A></H1>
+<P>
+<A NAME="5189">&#160;</A><A NAME="5135">&#160;</A>
+<A NAME="5190">&#160;</A><A NAME="5137">&#160;</A>
+<P>
+This module performs file control and I/O control on file descriptors.
+It is an interface to the <I><DFN>fcntl()</DFN></I> and <I><DFN>ioctl()</DFN></I> Unix routines.
+File descriptors can be obtained with the <I><DFN>fileno()</DFN></I> method of a
+file or socket object.
+<P>
+The module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="5191">fcntl</A></STRONG>(<VAR>fd, op</VAR><BIG>[</BIG><VAR>, arg</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Perform the requested operation on file descriptor <CODE><VAR>fd</VAR></CODE>.
+  The operation is defined by <CODE><VAR>op</VAR></CODE> and is operating system
+  dependent.  Typically these codes can be retrieved from the library
+  module <CODE>FCNTL</CODE>. The argument <CODE><VAR>arg</VAR></CODE> is optional, and
+  defaults to the integer value <CODE>0</CODE>.  When
+  it is present, it can either be an integer value, or a string.  With
+  the argument missing or an integer value, the return value of this
+  function is the integer return value of the real <CODE>fcntl()</CODE>
+  call.  When the argument is a string it represents a binary
+  structure, e.g. created by <CODE>struct.pack()</CODE>. The binary data is
+  copied to a buffer whose address is passed to the real <CODE>fcntl()</CODE>
+  call.  The return value after a successful call is the contents of
+  the buffer, converted to a string object.  In case the
+  <CODE>fcntl()</CODE> fails, an <CODE>IOError</CODE> will be raised.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5160">ioctl</A></STRONG>(<VAR>fd, op, arg</VAR>)
+<DD>
+  This function is identical to the <CODE>fcntl()</CODE> function, except
+  that the operations are typically defined in the library module
+  <CODE>IOCTL</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5166">flock</A></STRONG>(<VAR>fd, op</VAR>)
+<DD>
+Perform the lock operation <VAR>op</VAR> on file descriptor <VAR>fd</VAR>.
+See the Unix manual for details.  (On some systems, this function is
+emulated using <CODE>fcntl</CODE>.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5197">lockf</A></STRONG>(<VAR>fd, code, </VAR><BIG>[</BIG><VAR>len, </VAR><BIG>[</BIG><VAR>start, </VAR><BIG>[</BIG><VAR>whence</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This is a wrapper around the <CODE>F_SETLK</CODE> and <CODE>F_SETLKW</CODE>
+<CODE>fcntl()</CODE> calls.  See the Unix manual for details.
+<P>
+</DL>
+<P>
+If the library modules <CODE>FCNTL</CODE> or <CODE>IOCTL</CODE> are missing, you
+can find the opcodes in the C include files <CODE>sys/fcntl</CODE> and
+<CODE>sys/ioctl</CODE>. You can create the modules yourself with the h2py
+script, found in the <CODE>Tools/scripts</CODE> directory.
+<P>
+Examples (all on a SVR4 compliant system):
+<P>
+<PRE>import struct, FCNTL
+
+file = open(...)
+rv = fcntl(file.fileno(), FCNTL.O_NDELAY, 1)
+
+lockdata = struct.pack('hhllhh', FCNTL.F_WRLCK, 0, 0, 0, 0, 0)
+rv = fcntl(file.fileno(), FCNTL.F_SETLKW, lockdata)</PRE>
+<P>
+Note that in the first example the return value variable <CODE>rv</CODE> will
+hold an integer value; in the second example it will hold a string
+value.  The structure lay-out for the <VAR>lockadata</VAR> variable is
+system dependent - therefore using the <CODE>flock()</CODE> call may be
+better.
+<P>
+<HR><A NAME="tex2html3295" HREF="node85.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3293" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3287" HREF="node83.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3297" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3298" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3296" HREF="node85.html">8.11 Standard Module posixfile</A>
+<B>Up:</B> <A NAME="tex2html3294" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3288" HREF="node83.html">8.9 Standard Module TERMIOS</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

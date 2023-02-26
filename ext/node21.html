@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3 Dynamic Loading</TITLE>
+<META NAME="description" CONTENT="3 Dynamic Loading">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html431" HREF="node22.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html429" HREF="ext.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html423" HREF="node20.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html433" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html434" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html432" HREF="node22.html">3.1 Configuring and Building </A>
+<B>Up:</B> <A NAME="tex2html430" HREF="ext.html">Extending and Embedding the </A>
+<B> Previous:</B> <A NAME="tex2html424" HREF="node20.html">Embedding Python in C++</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00400000000000000000">3 Dynamic Loading</A></H1>
+<P>
+On most modern systems it is possible to configure Python to support
+dynamic loading of extension modules implemented in C.  When shared
+libraries are used dynamic loading is configured automatically;
+otherwise you have to select it as a build option (see below).  Once
+configured, dynamic loading is trivial to use: when a Python program
+executes <CODE>import spam</CODE>, the search for modules tries to find a
+file `<CODE>spammodule.o</CODE>' (`<CODE>spammodule.so</CODE>' when using shared
+libraries) in the module search path, and if one is found, it is
+loaded into the executing binary and executed.  Once loaded, the
+module acts just like a built-in extension module.
+<P>
+The advantages of dynamic loading are twofold: the ``core'' Python
+binary gets smaller, and users can extend Python with their own
+modules implemented in C without having to build and maintain their
+own copy of the Python interpreter.  There are also disadvantages:
+dynamic loading isn't available on all systems (this just means that
+on some systems you have to use static loading), and dynamically
+loading a module that was compiled for a different version of Python
+(e.g. with a different representation of objects) may dump core.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html435" HREF="node22.html#SECTION00410000000000000000">3.1 Configuring and Building the Interpreter for Dynamic Loading</A>
+<UL> 
+<LI> <A NAME="tex2html436" HREF="node23.html#SECTION00411000000000000000">3.1.1 Shared Libraries</A>
+<LI> <A NAME="tex2html437" HREF="node24.html#SECTION00412000000000000000">3.1.2 SGI IRIX 4 Dynamic Loading</A>
+<LI> <A NAME="tex2html438" HREF="node25.html#SECTION00413000000000000000">3.1.3 GNU Dynamic Loading</A>
+</UL> 
+<LI> <A NAME="tex2html439" HREF="node26.html#SECTION00420000000000000000">3.2 Building a Dynamically Loadable Module</A>
+<UL> 
+<LI> <A NAME="tex2html440" HREF="node27.html#SECTION00421000000000000000">3.2.1 Shared Libraries</A>
+<LI> <A NAME="tex2html441" HREF="node28.html#SECTION00422000000000000000">3.2.2 SGI IRIX 4 Dynamic Loading</A>
+<LI> <A NAME="tex2html442" HREF="node29.html#SECTION00423000000000000000">3.2.3 GNU Dynamic Loading</A>
+</UL>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

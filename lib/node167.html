@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.5.1 dnr result object</TITLE>
+<META NAME="description" CONTENT="15.5.1 dnr result object">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4376" HREF="node168.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4374" HREF="node166.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4370" HREF="node166.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4378" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4379" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4377" HREF="node168.html">15.6 Built-in Module macfs</A>
+<B>Up:</B> <A NAME="tex2html4375" HREF="node166.html">15.5 Built-in Module macdnr</A>
+<B> Previous:</B> <A NAME="tex2html4371" HREF="node166.html">15.5 Built-in Module macdnr</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001651000000000000000">15.5.1 dnr result object</A></H2>
+<P>
+Since the DNR calls all execute asynchronously you do not get the
+results back immediately.  Instead, you get a dnr result object.  You
+can check this object to see whether the query is complete, and access
+its attributes to obtain the information when it is.
+<P>
+Alternatively, you can also reference the result attributes directly,
+this will result in an implicit wait for the query to complete.
+<P>
+The <VAR>rtnCode</VAR> and <VAR>cname</VAR> attributes are always available, the
+others depend on the type of query (address, hinfo or mx).
+<P>
+<DL><DT><STRONG><A NAME="8881">wait</A></STRONG>(<VAR></VAR>)
+<DD>
+Wait for the query to complete.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8885">isdone</A></STRONG>(<VAR></VAR>)
+<DD>
+Return 1 if the query is complete.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">rtnCode</A></STRONG>
+<DD>
+The error code returned by the query.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">cname</A></STRONG>
+<DD>
+The canonical name of the host that was queried.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ip0</A></STRONG>
+<DD>
+,ip1
+,ip2
+,ip3
+At most four integer IP addresses for this host.  Unused entries are
+zero.  Valid only for address queries.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">cpuType</A></STRONG>
+<DD>
+,osType
+Textual strings giving the machine type an OS name.  Valid for hinfo
+queries.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">exchange</A></STRONG>
+<DD>
+The name of a mail-exchanger host.  Valid for mx queries.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">preference</A></STRONG>
+<DD>
+The preference of this mx record.  Not too useful, since the Macintosh
+will only return a single mx record.  Mx queries only.
+<P>
+</DL>
+<P>
+The simplest way to use the module to convert names to dotted-decimal
+strings, without worrying about idle time, etc:
+<PRE>&gt;&gt;&gt; def gethostname(name):
+...     import macdnr
+...     dnrr = macdnr.StrToAddr(name)
+...     return macdnr.AddrToStr(dnrr.ip0)</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.5 Mapping protocol</TITLE>
+<META NAME="description" CONTENT="4.5 Mapping protocol">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html625" HREF="node37.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html623" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html617" HREF="node35.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html627" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html628" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html626" HREF="node37.html">4.6 Constructors</A>
+<B>Up:</B> <A NAME="tex2html624" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html618" HREF="node35.html">4.4 Sequence protocol</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00550000000000000000">4.5 Mapping protocol</A></H1>
+<P>
+     <DL><DT>int <STRONG><A NAME="1037">PyMapping_Check</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         Return 1 if the object provides mapping protocol, and 0
+	 otherwise.  
+	 This function always succeeds.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1042">PyMapping_Length</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         Returns the number of keys in object <CODE>o</CODE> on success, and -1 on
+	 failure.  For objects that do not provide sequence protocol,
+	 this is equivalent to the Python expression: <CODE>len(o)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1049">PyMapping_DelItemString</A></STRONG>(<VAR>PyObject *o, char *key</VAR>)
+<DD>
+	 Remove the mapping for object <CODE>key</CODE> from the object <CODE>o</CODE>.
+	 Return -1 on failure.  This is equivalent to
+	 the Python statement: <CODE>del o[key]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1057">PyMapping_DelItem</A></STRONG>(<VAR>PyObject *o, PyObject *key</VAR>)
+<DD>
+	 Remove the mapping for object <CODE>key</CODE> from the object <CODE>o</CODE>.
+	 Return -1 on failure.  This is equivalent to
+	 the Python statement: <CODE>del o[key]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1065">PyMapping_HasKeyString</A></STRONG>(<VAR>PyObject *o, char *key</VAR>)
+<DD>
+	 On success, return 1 if the mapping object has the key <CODE>key</CODE>
+	 and 0 otherwise.  This is equivalent to the Python expression:
+	 <CODE>o.has_key(key)</CODE>. 
+	 This function always succeeds.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1072">PyMapping_HasKey</A></STRONG>(<VAR>PyObject *o, PyObject *key</VAR>)
+<DD>
+	 Return 1 if the mapping object has the key <CODE>key</CODE>
+	 and 0 otherwise.  This is equivalent to the Python expression:
+	 <CODE>o.has_key(key)</CODE>. 
+	 This function always succeeds.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1079">PyMapping_Keys</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         On success, return a list of the keys in object <CODE>o</CODE>.  On
+	 failure, return <CODE>NULL</CODE>. This is equivalent to the Python
+	 expression: <CODE>o.keys()</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1087">PyMapping_Values</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         On success, return a list of the values in object <CODE>o</CODE>.  On
+	 failure, return <CODE>NULL</CODE>. This is equivalent to the Python
+	 expression: <CODE>o.values()</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1095">PyMapping_Items</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         On success, return a list of the items in object <CODE>o</CODE>, where
+	 each item is a tuple containing a key-value pair.  On
+	 failure, return <CODE>NULL</CODE>. This is equivalent to the Python
+	 expression: <CODE>o.items()</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1103">PyMapping_Clear</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         Make object <CODE>o</CODE> empty.  Returns 1 on success and 0 on failure.
+	 This is equivalent to the Python statement:
+	 <CODE>for key in o.keys(): del o[key]</CODE>
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1110">PyMapping_GetItemString</A></STRONG>(<VAR>PyObject *o, char *key</VAR>)
+<DD>
+	 Return element of <CODE>o</CODE> corresponding to the object <CODE>key</CODE> or <CODE>NULL</CODE>
+	 on failure. This is the equivalent of the Python expression:
+	 <CODE>o[key]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1119">PyMapping_SetItemString</A></STRONG>(<VAR>PyObject *o, char *key, PyObject *v</VAR>)
+<DD>
+         Map the object <CODE>key</CODE> to the value <CODE>v</CODE> in object <CODE>o</CODE>.  Returns 
+         -1 on failure.  This is the equivalent of the Python
+         statement: <CODE>o[key]=v</CODE>.
+<P>
+</DL><HR><A NAME="tex2html625" HREF="node37.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html623" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html617" HREF="node35.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html627" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html628" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html626" HREF="node37.html">4.6 Constructors</A>
+<B>Up:</B> <A NAME="tex2html624" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html618" HREF="node35.html">4.4 Sequence protocol</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

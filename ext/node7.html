@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.5 The Module's Method Table and Initialization Function</TITLE>
+<META NAME="description" CONTENT="1.5 The Module's Method Table and Initialization Function">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html263" HREF="node8.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html261" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html255" HREF="node6.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html265" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html266" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html264" HREF="node8.html">1.6 Compilation and Linkage</A>
+<B>Up:</B> <A NAME="tex2html262" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html256" HREF="node6.html">1.4 Back to the </A>
+<BR><HR><P>
+<H1><A NAME="SECTION00250000000000000000">1.5 The Module's Method Table and Initialization Function</A></H1>
+<P>
+I promised to show how <CODE>spam_system()</CODE> is called from Python
+programs.  First, we need to list its name and address in a ``method
+table'':
+<P>
+<PRE>    static PyMethodDef SpamMethods[] = {
+        ...
+        {&quot;system&quot;,  spam_system, 1},
+        ...
+        {NULL,      NULL}        /* Sentinel */
+    };</PRE>
+<P>
+Note the third entry (`<SAMP>1</SAMP>').  This is a flag telling the
+interpreter the calling convention to be used for the C function.  It
+should normally always be `<SAMP>1</SAMP>'; a value of `<SAMP>0</SAMP>' means that an
+obsolete variant of <CODE>PyArg_ParseTuple()</CODE> is used.
+<P>
+The method table must be passed to the interpreter in the module's
+initialization function (which should be the only non-<CODE>static</CODE>
+item defined in the module file):
+<P>
+<PRE>    void
+    initspam()
+    {
+        (void) Py_InitModule(&quot;spam&quot;, SpamMethods);
+    }</PRE>
+<P>
+When the Python program imports module <CODE>spam</CODE> for the first time,
+<CODE>initspam()</CODE> is called.  It calls <CODE>Py_InitModule()</CODE>, which
+creates a ``module object'' (which is inserted in the dictionary
+<CODE>sys.modules</CODE> under the key <CODE>&quot;spam&quot;</CODE>), and inserts built-in
+function objects into the newly created module based upon the table
+(an array of <CODE>PyMethodDef</CODE> structures) that was passed as its
+second argument.  <CODE>Py_InitModule()</CODE> returns a pointer to the
+module object that it creates (which is unused here).  It aborts with
+a fatal error if the module could not be initialized satisfactorily,
+so the caller doesn't need to check for errors.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

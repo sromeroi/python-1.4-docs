@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.3 Intermezzo: Errors and Exceptions</TITLE>
+<META NAME="description" CONTENT="1.3 Intermezzo: Errors and Exceptions">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html239" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html237" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html231" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html241" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html242" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html240" HREF="node6.html">1.4 Back to the </A>
+<B>Up:</B> <A NAME="tex2html238" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html232" HREF="node4.html">1.2 A Simple Example</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00230000000000000000">1.3 Intermezzo: Errors and Exceptions</A></H1>
+<P>
+An important convention throughout the Python interpreter is the
+following: when a function fails, it should set an exception condition
+and return an error value (usually a <CODE>NULL</CODE> pointer).  Exceptions
+are stored in a static global variable inside the interpreter; if this
+variable is <CODE>NULL</CODE> no exception has occurred.  A second global
+variable stores the ``associated value'' of the exception (the second
+argument to <CODE>raise</CODE>).  A third variable contains the stack
+traceback in case the error originated in Python code.  These three
+variables are the C equivalents of the Python variables
+<CODE>sys.exc_type</CODE>, <CODE>sys.exc_value</CODE> and <CODE>sys.exc_traceback</CODE>
+(see the section on module <CODE>sys</CODE> in the Library Reference
+Manual).  It is important to know about them to understand how errors
+are passed around.
+<P>
+The Python API defines a number of functions to set various types of
+exceptions.
+<P>
+The most common one is <CODE>PyErr_SetString()</CODE>.  Its arguments are an
+exception object and a C string.  The exception object is usually a
+predefined object like <CODE>PyExc_ZeroDivisionError</CODE>.  The C string
+indicates the cause of the error and is converted to a Python string
+object and stored as the ``associated value'' of the exception.
+<P>
+Another useful function is <CODE>PyErr_SetFromErrno()</CODE>, which only
+takes an exception argument and constructs the associated value by
+inspection of the (Unix) global variable <CODE>errno</CODE>.  The most
+general function is <CODE>PyErr_SetObject()</CODE>, which takes two object
+arguments, the exception and its associated value.  You don't need to
+<CODE>Py_INCREF()</CODE> the objects passed to any of these functions.
+<P>
+You can test non-destructively whether an exception has been set with
+<CODE>PyErr_Occurred()</CODE>.  This returns the current exception object,
+or <CODE>NULL</CODE> if no exception has occurred.  You normally don't need
+to call <CODE>PyErr_Occurred()</CODE> to see whether an error occurred in a
+function call, since you should be able to tell from the return value.
+<P>
+When a function <VAR>f</VAR> that calls another function varg detects
+that the latter fails, <VAR>f</VAR> should itself return an error value
+(e.g. <CODE>NULL</CODE> or <CODE>-1</CODE>).  It should <EM>not</EM> call one of the
+<CODE>PyErr_*()</CODE> functions -- one has already been called by <VAR>g</VAR>.
+<VAR>f</VAR>'s caller is then supposed to also return an error indication
+to <EM>its</EM> caller, again <EM>without</EM> calling <CODE>PyErr_*()</CODE>,
+and so on -- the most detailed cause of the error was already
+reported by the function that first detected it.  Once the error
+reaches the Python interpreter's main loop, this aborts the currently
+executing Python code and tries to find an exception handler specified
+by the Python programmer.
+<P>
+(There are situations where a module can actually give a more detailed
+error message by calling another <CODE>PyErr_*()</CODE> function, and in
+such cases it is fine to do so.  As a general rule, however, this is
+not necessary, and can cause information about the cause of the error
+to be lost: most operations can fail for a variety of reasons.)
+<P>
+To ignore an exception set by a function call that failed, the exception
+condition must be cleared explicitly by calling <CODE>PyErr_Clear()</CODE>. 
+The only time C code should call <CODE>PyErr_Clear()</CODE> is if it doesn't
+want to pass the error on to the interpreter but wants to handle it
+completely by itself (e.g. by trying something else or pretending
+nothing happened).
+<P>
+Note that a failing <CODE>malloc()</CODE> call must be turned into an
+exception -- the direct caller of <CODE>malloc()</CODE> (or
+<CODE>realloc()</CODE>) must call <CODE>PyErr_NoMemory()</CODE> and return a
+failure indicator itself.  All the object-creating functions
+(<CODE>PyInt_FromLong()</CODE> etc.) already do this, so only if you call
+<CODE>malloc()</CODE> directly this note is of importance.
+<P>
+Also note that, with the important exception of
+<CODE>PyArg_ParseTuple()</CODE> and friends, functions that return an
+integer status usually return a positive value or zero for success and
+<CODE>-1</CODE> for failure, like Unix system calls.
+<P>
+Finally, be careful to clean up garbage (by making <CODE>Py_XDECREF()</CODE>
+or <CODE>Py_DECREF()</CODE> calls for objects you have already created) when
+you return an error indicator!
+<P>
+The choice of which exception to raise is entirely yours.  There are
+predeclared C objects corresponding to all built-in Python exceptions,
+e.g. <CODE>PyExc_ZeroDevisionError</CODE> which you can use directly.  Of
+course, you should choose exceptions wisely -- don't use
+<CODE>PyExc_TypeError</CODE> to mean that a file couldn't be opened (that
+should probably be <CODE>PyExc_IOError</CODE>).  If something's wrong with
+the argument list, the <CODE>PyArg_ParseTuple()</CODE> function usually
+raises <CODE>PyExc_TypeError</CODE>.  If you have an argument whose value
+which must be in a particular range or must satisfy other conditions,
+<CODE>PyExc_ValueError</CODE> is appropriate.
+<P>
+You can also define a new exception that is unique to your module.
+For this, you usually declare a static object variable at the
+beginning of your file, e.g.
+<P>
+<PRE>    static PyObject *SpamError;</PRE>
+<P>
+and initialize it in your module's initialization function
+(<CODE>initspam()</CODE>) with a string object, e.g. (leaving out the error
+checking for now):
+<P>
+<PRE>    void
+    initspam()
+    {
+        PyObject *m, *d;
+        m = Py_InitModule(&quot;spam&quot;, SpamMethods);
+        d = PyModule_GetDict(m);
+        SpamError = PyString_FromString(&quot;spam.error&quot;);
+        PyDict_SetItemString(d, &quot;error&quot;, SpamError);
+    }</PRE>
+<P>
+Note that the Python name for the exception object is
+<CODE>spam.error</CODE>.  It is conventional for module and exception names
+to be spelled in lower case.  It is also conventional that the
+<EM>value</EM> of the exception object is the same as its name, e.g.\
+the string <CODE>&quot;spam.error&quot;</CODE>.
+<P>
+<HR><A NAME="tex2html239" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html237" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html231" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html241" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html242" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html240" HREF="node6.html">1.4 Back to the </A>
+<B>Up:</B> <A NAME="tex2html238" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html232" HREF="node4.html">1.2 A Simple Example</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

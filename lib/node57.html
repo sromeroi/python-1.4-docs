@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>5.2 Standard Module rand</TITLE>
+<META NAME="description" CONTENT="5.2 Standard Module rand">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2954" HREF="node58.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2952" HREF="node55.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2946" HREF="node56.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2956" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2957" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2955" HREF="node58.html">5.3 Standard Module whrandom</A>
+<B>Up:</B> <A NAME="tex2html2953" HREF="node55.html">5 Miscellaneous Services</A>
+<B> Previous:</B> <A NAME="tex2html2947" HREF="node56.html">5.1 Built-in Module math</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00620000000000000000">5.2 Standard Module <CODE>rand</CODE></A></H1>
+<P>
+ This module implements a pseudo-random number
+generator with an interface similar to <CODE>rand()</CODE> in C.  It defines
+the following functions:
+<P>
+<DL><DT><STRONG><A NAME="3115">rand</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns an integer random number in the range [0 ... 32768).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3119">choice</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Returns a random element from the sequence (string, tuple or list)
+<VAR>s</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3124">srand</A></STRONG>(<VAR>seed</VAR>)
+<DD>
+Initializes the random number generator with the given integral seed.
+When the module is first imported, the random number is initialized with
+the current time.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

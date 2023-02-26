@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>16.1.7 Example</TITLE>
+<META NAME="description" CONTENT="16.1.7 Example">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4777" HREF="node200.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4775" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4771" HREF="node198.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4779" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4780" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4778" HREF="node200.html">16.2 Standard Module stdwinevents</A>
+<B>Up:</B> <A NAME="tex2html4776" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4772" HREF="node198.html">16.1.6 Text-edit Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001717000000000000000">16.1.7 Example</A></H2>
+<P>
+<A NAME="STDWINExample">&#160;</A>
+<P>
+Here is a minimal example of using STDWIN in Python.
+It creates a window and draws the string ``Hello world'' in the top
+left corner of the window.
+The window will be correctly redrawn when covered and re-exposed.
+The program quits when the close icon or menu item is requested.
+<P>
+<PRE>import stdwin
+from stdwinevents import *
+
+def main():
+    mywin = stdwin.open('Hello')
+    #
+    while 1:
+        (type, win, detail) = stdwin.getevent()
+        if type == WE_DRAW:
+            draw = win.begindrawing()
+            draw.text((0, 0), 'Hello, world')
+            del draw
+        elif type == WE_CLOSE:
+            break
+
+main()</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

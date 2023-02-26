@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9 Classes</TITLE>
+<META NAME="description" CONTENT="9 Classes">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html852" HREF="node54.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html850" HREF="tut.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html844" HREF="node52.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html854" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html853" HREF="node54.html">9.1 A word about </A>
+<B>Up:</B> <A NAME="tex2html851" HREF="tut.html">Python Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html845" HREF="node52.html">8.6 Defining Clean-up Actions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001000000000000000000">9 Classes</A></H1>
+<P>
+Python's class mechanism adds classes to the language with a minimum
+of new syntax and semantics.  It is a mixture of the class mechanisms
+found in C++ and Modula-3.  As is true for modules, classes in Python
+do not put an absolute barrier between definition and user, but rather
+rely on the politeness of the user not to ``break into the
+definition.''  The most important features of classes are retained
+with full power, however: the class inheritance mechanism allows
+multiple base classes, a derived class can override any methods of its
+base class(es), a method can call the method of a base class with the
+same name.  Objects can contain an arbitrary amount of private data.
+<P>
+In C++ terminology, all class members (including the data members) are
+<EM>public</EM>, and all member functions are <EM>virtual</EM>.  There are
+no special constructors or destructors.  As in Modula-3, there are no
+shorthands for referencing the object's members from its methods: the
+method function is declared with an explicit first argument
+representing the object, which is provided implicitly by the call.  As
+in Smalltalk, classes themselves are objects, albeit in the wider
+sense of the word: in Python, all data types are objects.  This
+provides semantics for importing and renaming.  But, just like in C++
+or Modula-3, built-in types cannot be used as base classes for
+extension by the user.  Also, like in C++ but unlike in Modula-3, most
+built-in operators with special syntax (arithmetic operators,
+subscripting etc.) can be redefined for class members.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html855" HREF="node54.html#SECTION001010000000000000000">9.1 A word about terminology</A>
+<LI> <A NAME="tex2html856" HREF="node55.html#SECTION001020000000000000000">9.2 Python scopes and name spaces</A>
+<LI> <A NAME="tex2html857" HREF="node56.html#SECTION001030000000000000000">9.3 A first look at classes</A>
+<UL> 
+<LI> <A NAME="tex2html858" HREF="node57.html#SECTION001031000000000000000">9.3.1 Class definition syntax</A>
+<LI> <A NAME="tex2html859" HREF="node58.html#SECTION001032000000000000000">9.3.2 Class objects</A>
+<LI> <A NAME="tex2html860" HREF="node59.html#SECTION001033000000000000000">9.3.3 Instance objects</A>
+<LI> <A NAME="tex2html861" HREF="node60.html#SECTION001034000000000000000">9.3.4 Method objects</A>
+</UL> 
+<LI> <A NAME="tex2html862" HREF="node61.html#SECTION001040000000000000000">9.4 Random remarks</A>
+<LI> <A NAME="tex2html863" HREF="node62.html#SECTION001050000000000000000">9.5 Inheritance</A>
+<UL> 
+<LI> <A NAME="tex2html864" HREF="node63.html#SECTION001051000000000000000">9.5.1 Multiple inheritance</A>
+</UL> 
+<LI> <A NAME="tex2html865" HREF="node64.html#SECTION001060000000000000000">9.6 Odds and ends</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

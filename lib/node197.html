@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>16.1.5 Bitmap Objects</TITLE>
+<META NAME="description" CONTENT="16.1.5 Bitmap Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4755" HREF="node198.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4753" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4747" HREF="node196.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4757" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4758" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4756" HREF="node198.html">16.1.6 Text-edit Objects</A>
+<B>Up:</B> <A NAME="tex2html4754" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4748" HREF="node196.html">16.1.4 Menu Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001715000000000000000">16.1.5 Bitmap Objects</A></H2>
+<P>
+A bitmap represents a rectangular array of bits.
+The top left bit has coordinate (0, 0).
+A bitmap can be drawn with the <CODE>bitmap</CODE> method of a drawing object.
+Bitmaps are currently not available on the Macintosh.
+<P>
+The following methods are defined:
+<P>
+<DL><DT><STRONG><A NAME="10254">getsize</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a tuple representing the width and height of the bitmap.
+(This returns the values that have been passed to the <CODE>newbitmap</CODE>
+function.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10259">setbit</A></STRONG>(<VAR>point, bit</VAR>)
+<DD>
+Set the value of the bit indicated by <VAR>point</VAR> to <VAR>bit</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10265">getbit</A></STRONG>(<VAR>point</VAR>)
+<DD>
+Return the value of the bit indicated by <VAR>point</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10270">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Discard the bitmap object.  It should not be used again.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

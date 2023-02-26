@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.15 Built-in Module binascii</TITLE>
+<META NAME="description" CONTENT="11.15 Built-in Module binascii">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3981" HREF="node138.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3979" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3973" HREF="node136.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3983" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3984" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3982" HREF="node138.html">11.16 Standard module xdrlib</A>
+<B>Up:</B> <A NAME="tex2html3980" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3974" HREF="node136.html">11.14 Standard module uu</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0012150000000000000000">11.15 Built-in Module <CODE>binascii</CODE></A></H1>
+<P>
+The binascii module contains a number of methods to convert between
+binary and various ascii-encoded binary representations. Normally, you
+will not use these modules directly but use wrapper modules like
+<VAR>uu</VAR> or <VAR>hexbin</VAR> in stead, this module solely exists because
+bit-manipuation of large amounts of data is slow in python.
+<P>
+The <CODE>binascii</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="7339">a2b_uu</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Convert a single line of uuencoded data back to binary and return the
+binary data. Lines normally contain 45 (binary) bytes, except for the
+last line. Line data may be followed by whitespace.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7343">b2a_uu</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Convert binary data to a line of ascii characters, the return value is
+the converted line, including a newline char. The length of <VAR>data</VAR>
+should be at most 45.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7348">a2b_base64</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Convert a block of base64 data back to binary and return the
+binary data. More than one line may be passed at a time.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7352">b2a_base64</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Convert binary data to a line of ascii characters in base64 coding.
+The return value is the converted line, including a newline char.
+The length of <VAR>data</VAR> should be at most 57 to adhere to the base64
+standard.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7357">a2b_hqx</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Convert binhex4 formatted ascii data to binary, without doing
+rle-decompression. The string should contain a complete number of
+binary bytes, or (in case of the last portion of the binhex4 data)
+have the remaining bits zero.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7361">rledecode_hqx</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Perform RLE-decompression on the data, as per the binhex4
+standard. The algorithm uses <CODE>0x90</CODE> after a byte as a repeat
+indicator, followed by a count. A count of <CODE>0</CODE> specifies a byte
+value of <CODE>0x90</CODE>. The routine returns the decompressed data,
+unless data input data ends in an orphaned repeat indicator, in which
+case the <VAR>Incomplete</VAR> exception is raised.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7369">rlecode_hqx</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Perform binhex4 style RLE-compression on <VAR>data</VAR> and return the
+result.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7374">b2a_hqx</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Perform hexbin4 binary-to-ascii translation and return the resulting
+string. The argument should already be rle-coded, and have a length
+divisible by 3 (except possibly the last fragment).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7378">crc_hqx</A></STRONG>(<VAR>data, crc</VAR>)
+<DD>
+Compute the binhex4 crc value of <VAR>data</VAR>, starting with an initial
+<VAR>crc</VAR> and returning the result.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">Error</A></STRONG>
+<DD>
+Exception raised on errors. These are usually programming errors.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">Incomplete</A></STRONG>
+<DD>
+Exception raised on incomplete data. These are usually not programming
+errors, but handled by reading a little more data and trying again.
+<P>
+</DL><HR><A NAME="tex2html3981" HREF="node138.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3979" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3973" HREF="node136.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3983" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3984" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3982" HREF="node138.html">11.16 Standard module xdrlib</A>
+<B>Up:</B> <A NAME="tex2html3980" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3974" HREF="node136.html">11.14 Standard module uu</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

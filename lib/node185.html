@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.13.2 Window Objects</TITLE>
+<META NAME="description" CONTENT="15.13.2 Window Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4599" HREF="node186.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4597" HREF="node183.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4591" HREF="node184.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4601" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4602" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4600" HREF="node186.html">15.13.3 ControlsWindow Object</A>
+<B>Up:</B> <A NAME="tex2html4598" HREF="node183.html">15.13 Standard module FrameWork</A>
+<B> Previous:</B> <A NAME="tex2html4592" HREF="node184.html">15.13.1 Application objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016132000000000000000">15.13.2 Window Objects</A></H2>
+<P>
+Window objects have the following methods, among others:
+<P>
+<DL><DT><STRONG><A NAME="9617">open</A></STRONG>(<VAR></VAR>)
+<DD>
+Override this method to open a window. Store the MacOS window-id in
+<CODE>self.wid</CODE> and call <CODE>self.do_postopen</CODE> to register the
+window with the parent application.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9623">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Override this method to do any special processing on window
+close. Call <CODE>self.do_postclose</CODE> to cleanup the parent state.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9628">do_postresize</A></STRONG>(<VAR>width, height, macoswindowid</VAR>)
+<DD>
+Called after the window is resized. Override if more needs to be done
+than calling <CODE>InvalRect</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9633">do_contentclick</A></STRONG>(<VAR>local, modifiers, event</VAR>)
+<DD>
+The user clicked in the content part of a window. The arguments are
+the coordinates (window-relative), the key modifiers and the raw
+event.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9637">do_update</A></STRONG>(<VAR>macoswindowid, event</VAR>)
+<DD>
+An update event for the window was received. Redraw the window.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9641">do_activate</A></STRONG>(<VAR>activate, event</VAR>)
+<DD>
+The window was activated (<CODE>activate==1</CODE>) or deactivated
+(<CODE>activate==0</CODE>). Handle things like focus highlighting, etc.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

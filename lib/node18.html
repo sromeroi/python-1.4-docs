@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Methods</TITLE>
+<META NAME="description" CONTENT="Methods">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2461" HREF="node19.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2459" HREF="node14.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2453" HREF="node17.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2463" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2464" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2462" HREF="node19.html">Code Objects</A>
+<B>Up:</B> <A NAME="tex2html2460" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2454" HREF="node17.html">Functions</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00317400000000000000">Methods</A></H3>
+<P>
+<A NAME="730">&#160;</A><A NAME="730">&#160;</A>
+<P>
+Methods are functions that are called using the attribute notation.
+There are two flavors: built-in methods (such as <CODE>append()</CODE> on
+lists) and class instance methods.  Built-in methods are described
+with the types that support them.
+<P>
+The implementation adds two special read-only attributes to class
+instance methods: <CODE><VAR>m</VAR>.im_self</CODE> is the object whose method this
+is, and <CODE><VAR>m</VAR>.im_func</CODE> is the function implementing the method.
+Calling <CODE><VAR>m</VAR>(<VAR>arg-1</VAR>, <VAR>arg-2</VAR>, ...,
+<VAR>arg-n</VAR>)</CODE> is completely equivalent to calling
+<CODE><VAR>m</VAR>.im_func(<VAR>m</VAR>.im_self, <VAR>arg-1</VAR>, <VAR>arg-2</VAR>, 
+..., <VAR>arg-n</VAR>)</CODE>.
+<P>
+(See the Python Reference Manual for more info.)
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.6 Standard Module copy</TITLE>
+<META NAME="description" CONTENT="3.6 Standard Module copy">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2655" HREF="node34.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2653" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2647" HREF="node32.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2657" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2658" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2656" HREF="node34.html">3.7 Built-in Module marshal</A>
+<B>Up:</B> <A NAME="tex2html2654" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2648" HREF="node32.html">3.5 Standard Module shelve</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00460000000000000000">3.6 Standard Module <CODE>copy</CODE></A></H1>
+<P>
+<A NAME="1943">&#160;</A>
+<A NAME="1944">&#160;</A>
+<P>
+This module provides generic (shallow and deep) copying operations.
+<P>
+Interface summary:
+<P>
+<PRE>import copy
+
+x = copy.copy(y)        # make a shallow copy of y
+x = copy.deepcopy(y)    # make a deep copy of y</PRE>
+<P>
+For module specific errors, <CODE>copy.error</CODE> is raised.
+<P>
+The difference between shallow and deep copying is only relevant for
+compound objects (objects that contain other objects, like lists or
+class instances):
+<P>
+<UL><LI>
+A <EM>shallow copy</EM> constructs a new compound object and then (to the
+extent possible) inserts <EM>references</EM> into it to the objects found
+in the original.<LI>
+A <EM>deep copy</EM> constructs a new compound object and then,
+recursively, inserts <EM>copies</EM> into it of the objects found in the
+original.
+<P>
+</UL>
+<P>
+Two problems often exist with deep copy operations that don't exist
+with shallow copy operations:
+<P>
+<UL><LI>
+Recursive objects (compound objects that, directly or indirectly,
+contain a reference to themselves) may cause a recursive loop.<LI>
+Because deep copy copies <EM>everything</EM> it may copy too much, e.g.\
+administrative data structures that should be shared even between
+copies.
+<P>
+</UL>
+<P>
+Python's <CODE>deepcopy()</CODE> operation avoids these problems by:
+<P>
+<UL><LI>
+keeping a table of objects already copied during the current
+copying pass; and<LI>
+letting user-defined classes override the copying operation or the
+set of components copied.
+<P>
+</UL>
+<P>
+This version does not copy types like module, class, function, method,
+nor stack trace, stack frame, nor file, socket, window, nor array, nor
+any similar types.
+<P>
+Classes can use the same interfaces to control copying that they use
+to control pickling: they can define methods called
+<CODE>__getinitargs__()</CODE>, <CODE>__getstate__()</CODE> and
+<CODE>__setstate__()</CODE>.  See the description of module <CODE>pickle</CODE>
+for information on these methods.
+<P>
+<A NAME="1965">&#160;</A>
+<A NAME="1966">&#160;</A>
+<A NAME="1967">&#160;</A>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

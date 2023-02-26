@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.10.3 The Writer Interface</TITLE>
+<META NAME="description" CONTENT="11.10.3 The Writer Interface">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3878" HREF="node129.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3876" HREF="node125.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3870" HREF="node127.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3880" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3881" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3879" HREF="node129.html">11.10.4 Writer Implementations</A>
+<B>Up:</B> <A NAME="tex2html3877" HREF="node125.html">11.10 Standard Module formatter</A>
+<B> Previous:</B> <A NAME="tex2html3871" HREF="node127.html">11.10.2 Formatter Implementations</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012103000000000000000">11.10.3 The Writer Interface</A></H2>
+<P>
+Interfaces to create writers are dependent on the specific writer
+class being instantiated.  The interfaces described below are the
+required interfaces which all writers must support once initialized.
+Note that while most applications can use the <CODE>AbstractFormatter</CODE>
+class as a formatter, the writer must typically be provided by the
+application.
+<P>
+<DL><DT><STRONG><A NAME="6974">new_alignment</A></STRONG>(<VAR>align</VAR>)
+<DD>
+Set the alignment style.  The <CODE>align</CODE> value can be any object,
+but by convention is a string or <CODE>None</CODE>, where <CODE>None</CODE>
+indicates that the writer's ``preferred'' alignment should be used.
+Conventional <CODE>align</CODE> values are <CODE>'left'</CODE>, <CODE>'center'</CODE>,
+<CODE>'right'</CODE>, and <CODE>'justify'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6986">new_font</A></STRONG>(<VAR>font</VAR>)
+<DD>
+Set the font style.  The value of <CODE>font</CODE> will be <CODE>None</CODE>,
+indicating that the device's default font should be used, or a tuple
+of the form (<VAR>size</VAR>, <VAR>italic</VAR>, <VAR>bold</VAR>, <VAR>teletype</VAR>).
+Size will be a string indicating the size of font that should be used;
+specific strings and their interpretation must be defined by the
+application.  The <VAR>italic</VAR>, <VAR>bold</VAR>, and <VAR>teletype</VAR> values
+are boolean indicators specifying which of those font attributes
+should be used.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6999">new_margin</A></STRONG>(<VAR>margin, level</VAR>)
+<DD>
+Set the margin level to the integer <CODE>level</CODE> and the logical tag
+to <CODE>margin</CODE>.  Interpretation of the logical tag is at the
+writer's discretion; the only restriction on the value of the logical
+tag is that it not be a false value for non-zero values of
+<CODE>level</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7006">new_spacing</A></STRONG>(<VAR>spacing</VAR>)
+<DD>
+Set the spacing style to <CODE>spacing</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7011">new_styles</A></STRONG>(<VAR>styles</VAR>)
+<DD>
+Set additional styles.  The <CODE>styles</CODE> value is a tuple of
+arbitrary values; the value <CODE>AS_IS</CODE> should be ignored.  The
+<CODE>styles</CODE> tuple may be interpreted either as a set or as a stack
+depending on the requirements of the application and writer
+implementation.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7018">send_line_break</A></STRONG>(<VAR></VAR>)
+<DD>
+Break the current line.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7022">send_paragraph</A></STRONG>(<VAR>blankline</VAR>)
+<DD>
+Produce a paragraph separation of at least <CODE>blankline</CODE> blank
+lines, or the equivelent.  The <CODE>blankline</CODE> value will be an
+integer.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7028">send_hor_rule</A></STRONG>(<VAR>*args, **kw</VAR>)
+<DD>
+Display a horizontal rule on the output device.  The arguments to this
+method are entirely application- and writer-specific, and should be
+interpreted with care.  The method implementation may assume that a
+line break has already been issued via <CODE>send_line_break()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7033">send_flowing_data</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Output character data which may be word-wrapped and re-flowed as
+needed.  Within any sequence of calls to this method, the writer may
+assume that spans of multiple whitespace characters have been
+collapsed to single space characters.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7037">send_literal_data</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Output character data which has already been formatted
+for display.  Generally, this should be interpreted to mean that line
+breaks indicated by newline characters should be preserved and no new
+line breaks should be introduced.  The data may contain embedded
+newline and tab characters, unlike data provided to the
+<CODE>send_formatted_data()</CODE> interface.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7042">send_label_data</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Set <CODE>data</CODE> to the left of the current left margin, if possible.
+The value of <CODE>data</CODE> is not restricted; treatment of non-string
+values is entirely application- and writer-dependent.  This method
+will only be called at the beginning of a line.
+<P>
+</DL><HR><A NAME="tex2html3878" HREF="node129.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3876" HREF="node125.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3870" HREF="node127.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3880" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3881" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3879" HREF="node129.html">11.10.4 Writer Implementations</A>
+<B>Up:</B> <A NAME="tex2html3877" HREF="node125.html">11.10 Standard Module formatter</A>
+<B> Previous:</B> <A NAME="tex2html3871" HREF="node127.html">11.10.2 Formatter Implementations</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

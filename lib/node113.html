@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.2 Standard Module urllib</TITLE>
+<META NAME="description" CONTENT="11.2 Standard Module urllib">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3696" HREF="node114.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3694" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3688" HREF="node112.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3698" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3699" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3697" HREF="node114.html">11.3 Standard Module httplib</A>
+<B>Up:</B> <A NAME="tex2html3695" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3689" HREF="node112.html">11.1.9 Common problems and </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001220000000000000000">11.2 Standard Module <CODE>urllib</CODE></A></H1>
+<P>
+<A NAME="5900">&#160;</A>
+<A NAME="5901">&#160;</A>
+<A NAME="5902">&#160;</A>
+<P>
+This module provides a high-level interface for fetching data across
+the World-Wide Web.  In particular, the <CODE>urlopen</CODE> function is
+similar to the built-in function <CODE>open</CODE>, but accepts URLs
+(Universal Resource Locators) instead of filenames.  Some restrictions
+apply -- it can only open URLs for reading, and no seek operations
+are available.
+<P>
+it defines the following public functions:
+<P>
+<DL><DT><STRONG><A NAME="5909">urlopen</A></STRONG>(<VAR>url</VAR>)
+<DD>
+Open a network object denoted by a URL for reading.  If the URL does
+not have a scheme identifier, or if it has `<SAMP>file:</SAMP>' as its scheme
+identifier, this opens a local file; otherwise it opens a socket to a
+server somewhere on the network.  If the connection cannot be made, or
+if the server returns an error code, the <CODE>IOError</CODE> exception is
+raised.  If all went well, a file-like object is returned.  This
+supports the following methods: <CODE>read()</CODE>, <CODE>readline()</CODE>,
+<CODE>readlines()</CODE>, <CODE>fileno()</CODE>, <CODE>close()</CODE> and <CODE>info()</CODE>.
+Except for the last one, these methods have the same interface as for
+file objects -- see the section on File Objects earlier in this
+manual.  (It's not a built-in file object, however, so it can't be
+used at those few places where a true built-in file object is
+required.)
+<P>
+The <CODE>info()</CODE> method returns an instance of the class
+<CODE>rfc822.Message</CODE> containing the headers received from the server,
+if the protocol uses such headers (currently the only supported
+protocol that uses this is HTTP).  See the description of the
+<CODE>rfc822</CODE> module.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5924">urlretrieve</A></STRONG>(<VAR>url</VAR>)
+<DD>
+Copy a network object denoted by a URL to a local file, if necessary.
+If the URL points to a local file, or a valid cached copy of the
+object exists, the object is not copied.  Return a tuple (<VAR>filename</VAR>,
+<VAR>headers</VAR>) where <VAR>filename</VAR> is the local file name under which
+the object can be found, and <VAR>headers</VAR> is either <CODE>None</CODE> (for
+a local object) or whatever the <CODE>info()</CODE> method of the object
+returned by <CODE>urlopen()</CODE> returned (for a remote object, possibly
+cached).  Exceptions are the same as for <CODE>urlopen()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5936">urlcleanup</A></STRONG>(<VAR></VAR>)
+<DD>
+Clear the cache that may have been built up by previous calls to
+<CODE>urlretrieve()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5977">quote</A></STRONG>(<VAR>string</VAR><BIG>[</BIG><VAR>, addsafe</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Replace special characters in <VAR>string</VAR> using the <CODE>%xx</CODE> escape.
+Letters, digits, and the characters ``<CODE>_,.-</CODE>'' are never quoted.
+The optional <VAR>addsafe</VAR> parameter specifies additional characters
+that should not be quoted -- its default value is <CODE>'/'</CODE>.
+<P>
+Example: <CODE>quote('/conolly/')</CODE> yields <CODE>'/%7econnolly/'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5952">unquote</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Replace `<SAMP>%xx</SAMP>' escapes by their single-character equivalent.
+<P>
+Example: <CODE>unquote('/%7Econnolly/')</CODE> yields <CODE>'/connolly/'</CODE>.
+<P>
+</DL>
+<P>
+Restrictions:
+<P>
+<UL><LI>
+Currently, only the following protocols are supported: HTTP, (versions
+0.9 and 1.0), Gopher (but not Gopher-+), FTP, and local files.
+<A NAME="5958">&#160;</A>
+<A NAME="5959">&#160;</A>
+<A NAME="5960">&#160;</A><LI>
+The caching feature of <CODE>urlretrieve()</CODE> has been disabled until I
+find the time to hack proper processing of Expiration time headers.<LI>
+There should be a function to query whether a particular URL is in
+the cache.<LI>
+For backward compatibility, if a URL appears to point to a local file
+but the file can't be opened, the URL is re-interpreted using the FTP
+protocol.  This can sometimes cause confusing error messages.<LI>
+The <CODE>urlopen()</CODE> and <CODE>urlretrieve()</CODE> functions can cause
+arbitrarily long delays while waiting for a network connection to be
+set up.  This means that it is difficult to build an interactive
+web client using these functions without using threads.<LI>
+The data returned by <CODE>urlopen()</CODE> or <CODE>urlretrieve()</CODE> is the
+raw data returned by the server.  This may be binary data (e.g. an
+image), plain text or (for example) HTML.  The HTTP protocol provides
+type information in the reply header, which can be inspected by
+looking at the <CODE>Content-type</CODE> header.  For the Gopher protocol,
+type information is encoded in the URL; there is currently no easy way
+to extract it.  If the returned data is HTML, you can use the module
+<CODE>htmllib</CODE> to parse it.
+<A NAME="5968">&#160;</A>
+<A NAME="5969">&#160;</A>
+<A NAME="5970">&#160;</A>
+<LI>
+Although the <CODE>urllib</CODE> module contains (undocumented) routines to
+parse and unparse URL strings, the recommended interface for URL
+manipulation is in module <CODE>urlparse</CODE>.
+<P>
+</UL><HR><A NAME="tex2html3696" HREF="node114.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3694" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3688" HREF="node112.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3698" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3699" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3697" HREF="node114.html">11.3 Standard Module httplib</A>
+<B>Up:</B> <A NAME="tex2html3695" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3689" HREF="node112.html">11.1.9 Common problems and </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

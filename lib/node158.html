@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15 Macintosh Specific Services</TITLE>
+<META NAME="description" CONTENT="15 Macintosh Specific Services">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4238" HREF="node159.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4236" HREF="lib.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4230" HREF="node157.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4240" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4241" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4239" HREF="node159.html">15.1 Built-in Module mac</A>
+<B>Up:</B> <A NAME="tex2html4237" HREF="lib.html">Python Library Reference</A>
+<B> Previous:</B> <A NAME="tex2html4231" HREF="node157.html">14.3 Built-in Module rotor</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001600000000000000000">15 Macintosh Specific Services</A></H1>
+<P>
+The modules in this chapter are available on the Apple Macintosh only.
+<P>
+Aside from the modules described here there are also interfaces to
+various MacOS toolboxes, which are currently not extensively
+described. The toolboxes for which modules exist are:
+<CODE>AE</CODE> (Apple Events),
+<CODE>Cm</CODE> (Component Manager),
+<CODE>Ctl</CODE> (Control Manager),
+<CODE>Dlg</CODE> (Dialog Manager),
+<CODE>Evt</CODE> (Event Manager),
+<CODE>Fm</CODE> (Font Manager),
+<CODE>List</CODE> (List Manager),
+<CODE>Menu</CODE> (Moenu Manager),
+<CODE>Qd</CODE> (QuickDraw),
+<CODE>Qt</CODE> (QuickTime),
+<CODE>Res</CODE> (Resource Manager and Handles),
+<CODE>Scrap</CODE> (Scrap Manager),
+<CODE>Snd</CODE> (Sound Manager),
+<CODE>TE</CODE> (TextEdit),
+<CODE>Waste</CODE> (non-Apple TextEdit replacement) and
+<CODE>Win</CODE> (Window Manager).
+<P>
+If applicable the module will define a number of Python objects for
+the various structures declared by the toolbox, and operations will be
+implemented as methods of the object. Other operations will be
+implemented as functions in the module. Not all operations possible in
+C will also be possible in Python (callbacks are often a problem), and
+parameters will occasionally be different in Python (input and output
+buffers, especially). All methods and functions have a <CODE>__doc__</CODE>
+string describing their arguments and return values, and for
+additional description you are referred to Inside Mac or similar
+works.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4242" HREF="node159.html#SECTION001610000000000000000">15.1 Built-in Module <CODE>mac</CODE></A>
+<LI> <A NAME="tex2html4243" HREF="node160.html#SECTION001620000000000000000">15.2 Standard Module <CODE>macpath</CODE></A>
+<LI> <A NAME="tex2html4244" HREF="node161.html#SECTION001630000000000000000">15.3 Built-in Module <CODE>ctb</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4245" HREF="node162.html#SECTION001631000000000000000">15.3.1 connection object</A>
+</UL> 
+<LI> <A NAME="tex2html4246" HREF="node163.html#SECTION001640000000000000000">15.4 Built-in Module <CODE>macconsole</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4247" HREF="node164.html#SECTION001641000000000000000">15.4.1 macconsole options object</A>
+<LI> <A NAME="tex2html4248" HREF="node165.html#SECTION001642000000000000000">15.4.2 console window object</A>
+</UL> 
+<LI> <A NAME="tex2html4249" HREF="node166.html#SECTION001650000000000000000">15.5 Built-in Module <CODE>macdnr</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4250" HREF="node167.html#SECTION001651000000000000000">15.5.1 dnr result object</A>
+</UL> 
+<LI> <A NAME="tex2html4251" HREF="node168.html#SECTION001660000000000000000">15.6 Built-in Module <CODE>macfs</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4252" HREF="node169.html#SECTION001661000000000000000">15.6.1 FSSpec objects</A>
+<LI> <A NAME="tex2html4253" HREF="node170.html#SECTION001662000000000000000">15.6.2 alias objects</A>
+<LI> <A NAME="tex2html4254" HREF="node171.html#SECTION001663000000000000000">15.6.3 FInfo objects</A>
+</UL> 
+<LI> <A NAME="tex2html4255" HREF="node172.html#SECTION001670000000000000000">15.7 Built-in Module <CODE>MacOS</CODE></A>
+<LI> <A NAME="tex2html4256" HREF="node173.html#SECTION001680000000000000000">15.8 Standard module <CODE>macostools</CODE></A>
+<LI> <A NAME="tex2html4257" HREF="node174.html#SECTION001690000000000000000">15.9 Standard module <CODE>findertools</CODE></A>
+<LI> <A NAME="tex2html4258" HREF="node175.html#SECTION0016100000000000000000">15.10 Built-in Module <CODE>mactcp</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4259" HREF="node176.html#SECTION0016101000000000000000">15.10.1 TCP Stream Objects</A>
+<LI> <A NAME="tex2html4260" HREF="node177.html#SECTION0016102000000000000000">15.10.2 TCP Status Objects</A>
+<LI> <A NAME="tex2html4261" HREF="node178.html#SECTION0016103000000000000000">15.10.3 UDP Stream Objects</A>
+</UL> 
+<LI> <A NAME="tex2html4262" HREF="node179.html#SECTION0016110000000000000000">15.11 Built-in Module <CODE>macspeech</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4263" HREF="node180.html#SECTION0016111000000000000000">15.11.1 voice objects</A>
+<LI> <A NAME="tex2html4264" HREF="node181.html#SECTION0016112000000000000000">15.11.2 speech channel objects</A>
+</UL> 
+<LI> <A NAME="tex2html4265" HREF="node182.html#SECTION0016120000000000000000">15.12 Standard module <CODE>EasyDialogs</CODE></A>
+<LI> <A NAME="tex2html4266" HREF="node183.html#SECTION0016130000000000000000">15.13 Standard module <CODE>FrameWork</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4267" HREF="node184.html#SECTION0016131000000000000000">15.13.1 Application objects</A>
+<LI> <A NAME="tex2html4268" HREF="node185.html#SECTION0016132000000000000000">15.13.2 Window Objects</A>
+<LI> <A NAME="tex2html4269" HREF="node186.html#SECTION0016133000000000000000">15.13.3 ControlsWindow Object</A>
+<LI> <A NAME="tex2html4270" HREF="node187.html#SECTION0016134000000000000000">15.13.4 ScrolledWindow Object</A>
+<LI> <A NAME="tex2html4271" HREF="node188.html#SECTION0016135000000000000000">15.13.5 DialogWindow Objects</A>
+</UL> 
+<LI> <A NAME="tex2html4272" HREF="node189.html#SECTION0016140000000000000000">15.14 Standard module <CODE>MiniAEFrame</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html4273" HREF="node190.html#SECTION0016141000000000000000">15.14.1 AEServer Objects</A>
+</UL>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

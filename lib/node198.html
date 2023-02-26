@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>16.1.6 Text-edit Objects</TITLE>
+<META NAME="description" CONTENT="16.1.6 Text-edit Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4767" HREF="node199.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4765" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4759" HREF="node197.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4769" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4770" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4768" HREF="node199.html">16.1.7 Example</A>
+<B>Up:</B> <A NAME="tex2html4766" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4760" HREF="node197.html">16.1.5 Bitmap Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001716000000000000000">16.1.6 Text-edit Objects</A></H2>
+<P>
+A text-edit object represents a text-edit block.
+For semantics, see the STDWIN documentation for C programmers.
+The following methods exist:
+<P>
+<DL><DT><STRONG><A NAME="10277">arrow</A></STRONG>(<VAR>code</VAR>)
+<DD>
+Pass an arrow event to the text-edit block.
+The
+<VAR>code</VAR>
+must be one of
+<CODE>WC_LEFT</CODE>,
+<CODE>WC_RIGHT</CODE>,
+<CODE>WC_UP</CODE>
+or
+<CODE>WC_DOWN</CODE>
+(see module
+<CODE>stdwinevents</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10287">draw</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Pass a draw event to the text-edit block.
+The rectangle specifies the redraw area.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10291">event</A></STRONG>(<VAR>type, window, detail</VAR>)
+<DD>
+Pass an event gotten from
+<CODE>stdwin.getevent()</CODE>
+to the text-edit block.
+Return true if the event was handled.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10296">getfocus</A></STRONG>(<VAR></VAR>)
+<DD>
+Return 2 integers representing the start and end positions of the
+focus, usable as slice indices on the string returned by
+<CODE>gettext()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10301">getfocustext</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the text in the focus.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10305">getrect</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a rectangle giving the actual position of the text-edit block.
+(The bottom coordinate may differ from the initial position because
+the block automatically shrinks or grows to fit.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10309">gettext</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the entire text buffer.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10313">move</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Specify a new position for the text-edit block in the document.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10317">replace</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Replace the text in the focus by the given string.
+The new focus is an insert point at the end of the string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10321">setfocus</A></STRONG>(<VAR>i, j</VAR>)
+<DD>
+Specify the new focus.
+Out-of-bounds values are silently clipped.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10325">settext</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Replace the entire text buffer by the given string and set the focus
+to <CODE>(0, 0)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10330">setview</A></STRONG>(<VAR>rect</VAR>)
+<DD>
+Set the view rectangle to <VAR>rect</VAR>.  If <VAR>rect</VAR> is <CODE>None</CODE>,
+viewing mode is reset.  In viewing mode, all output from the text-edit
+object is clipped to the viewing rectangle.  This may be useful to
+implement your own scrolling text subwindow.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10337">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Discard the text-edit object.  It should not be used again.
+<P>
+</DL><HR><A NAME="tex2html4767" HREF="node199.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4765" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4759" HREF="node197.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4769" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4770" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4768" HREF="node199.html">16.1.7 Example</A>
+<B>Up:</B> <A NAME="tex2html4766" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4760" HREF="node197.html">16.1.5 Bitmap Objects</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

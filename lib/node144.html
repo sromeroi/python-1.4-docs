@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.1 Standard Module rexec</TITLE>
+<META NAME="description" CONTENT="12.1 Standard Module rexec">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4068" HREF="node145.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4066" HREF="node143.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4060" HREF="node143.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4070" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4071" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4069" HREF="node145.html">12.1.1 An example</A>
+<B>Up:</B> <A NAME="tex2html4067" HREF="node143.html">12 Restricted Execution</A>
+<B> Previous:</B> <A NAME="tex2html4061" HREF="node143.html">12 Restricted Execution</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001310000000000000000">12.1 Standard Module <CODE>rexec</CODE></A></H1>
+<P>
+This module contains the <CODE>RExec</CODE> class, which supports
+<CODE>r_exec()</CODE>, <CODE>r_eval()</CODE>, <CODE>r_execfile()</CODE>, and
+<CODE>r_import()</CODE> methods, which are restricted versions of the standard
+Python functions <CODE>exec()</CODE>, <CODE>eval()</CODE>, <CODE>execfile()</CODE>, and
+the <CODE>import</CODE> statement.
+Code executed in this restricted environment will
+only have access to modules and functions that are deemed safe; you
+can subclass <CODE>RExec</CODE> to add or remove capabilities as desired.
+<P>
+<EM>Note:</EM> The <CODE>RExec</CODE> class can prevent code from performing
+unsafe operations like reading or writing disk files, or using TCP/IP
+sockets.  However, it does not protect against code using extremely
+large amounts of memory or CPU time.
+<P>
+<DL><DT><STRONG><A NAME="7807">RExec</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>hooks</VAR><BIG>[</BIG><VAR>, verbose</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Returns an instance of the <CODE>RExec</CODE> class.
+<P>
+<VAR>hooks</VAR> is an instance of the <CODE>RHooks</CODE> class or a subclass of it.
+If it is omitted or <CODE>None</CODE>, the default <CODE>RHooks</CODE> class is
+instantiated.
+Whenever the RExec module searches for a module (even a built-in one)
+or reads a module's code, it doesn't actually go out to the file
+system itself.  Rather, it calls methods of an RHooks instance that
+was passed to or created by its constructor.  (Actually, the RExec
+object doesn't make these calls--they are made by a module loader
+object that's part of the RExec object.  This allows another level of
+flexibility, e.g. using packages.)
+<P>
+By providing an alternate RHooks object, we can control the
+file system accesses made to import a module, without changing the
+actual algorithm that controls the order in which those accesses are
+made.  For instance, we could substitute an RHooks object that passes
+all filesystem requests to a file server elsewhere, via some RPC
+mechanism such as ILU.  Grail's applet loader uses this to support
+importing applets from a URL for a directory.
+<P>
+If <VAR>verbose</VAR> is true, additional debugging output may be sent to
+standard output.
+<P>
+</DL>
+<P>
+The RExec class has the following class attributes, which are used by the
+<CODE>__init__</CODE> method.  Changing them on an existing instance won't
+have any effect; instead, create a subclass of <CODE>RExec</CODE> and assign
+them new values in the class definition.  Instances of the new class
+will then use those new values.  All these attributes are tuples of
+strings.
+<P>
+<DL><DT><STRONG><A NAME="">nok_builtin_names</A></STRONG>
+<DD>
+Contains the names of built-in functions which will <EM>not</EM> be
+available to programs running in the restricted environment.  The
+value for <CODE>RExec</CODE> is <CODE>('open',</CODE> <CODE>'reload',</CODE>
+<CODE>'__import__')</CODE>.  (This gives the exceptions, because by far the
+majority of built-in functions are harmless.  A subclass that wants to
+override this variable should probably start with the value from the
+base class and concatenate additional forbidden functions -- when new
+dangerous built-in functions are added to Python, they will also be
+added to this module.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ok_builtin_modules</A></STRONG>
+<DD>
+Contains the names of built-in modules which can be safely imported.
+The value for <CODE>RExec</CODE> is <CODE>('audioop',</CODE> <CODE>'array',</CODE>
+<CODE>'binascii',</CODE> <CODE>'cmath',</CODE> <CODE>'errno',</CODE> <CODE>'imageop',</CODE>
+<CODE>'marshal',</CODE> <CODE>'math',</CODE> <CODE>'md5',</CODE> <CODE>'operator',</CODE>
+<CODE>'parser',</CODE> <CODE>'regex',</CODE> <CODE>'rotor',</CODE> <CODE>'select',</CODE>
+<CODE>'strop',</CODE> <CODE>'struct',</CODE> <CODE>'time')</CODE>.  A similar remark
+about overriding this variable applies -- use the value from the base
+class as a starting point.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ok_path</A></STRONG>
+<DD>
+Contains the directories which will be searched when an <CODE>import</CODE>
+is performed in the restricted environment.  
+The value for <CODE>RExec</CODE> is the same as <CODE>sys.path</CODE> (at the time
+the module is loaded) for unrestricted code.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ok_posix_names</A></STRONG>
+<DD>
+Contains the names of the functions in the <CODE>os</CODE> module which will be
+available to programs running in the restricted environment.  The
+value for <CODE>RExec</CODE> is <CODE>('error',</CODE> <CODE>'fstat',</CODE>
+<CODE>'listdir',</CODE> <CODE>'lstat',</CODE> <CODE>'readlink',</CODE> <CODE>'stat',</CODE>
+<CODE>'times',</CODE> <CODE>'uname',</CODE> <CODE>'getpid',</CODE> <CODE>'getppid',</CODE>
+<CODE>'getcwd',</CODE> <CODE>'getuid',</CODE> <CODE>'getgid',</CODE> <CODE>'geteuid',</CODE>
+<CODE>'getegid')</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ok_sys_names</A></STRONG>
+<DD>
+Contains the names of the functions and variables in the <CODE>sys</CODE>
+module which will be available to programs running in the restricted
+environment.  The value for <CODE>RExec</CODE> is <CODE>('ps1',</CODE>
+<CODE>'ps2',</CODE> <CODE>'copyright',</CODE> <CODE>'version',</CODE> <CODE>'platform',</CODE>
+<CODE>'exit',</CODE> <CODE>'maxint')</CODE>.
+<P>
+</DL>
+<P>
+RExec instances support the following methods:
+<P>
+<DL><DT><STRONG><A NAME="7718">r_eval</A></STRONG>(<VAR>code</VAR>)
+<DD>
+<VAR>code</VAR> must either be a string containing a Python expression, or
+a compiled code object, which will be evaluated in the restricted
+environment's <CODE>__main__</CODE> module.  The value of the expression or
+code object will be returned.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7724">r_exec</A></STRONG>(<VAR>code</VAR>)
+<DD>
+<VAR>code</VAR> must either be a string containing one or more lines of
+Python code, or a compiled code object, which will be executed in the
+restricted environment's <CODE>__main__</CODE> module.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7730">r_execfile</A></STRONG>(<VAR>filename</VAR>)
+<DD>
+Execute the Python code contained in the file <VAR>filename</VAR> in the
+restricted environment's <CODE>__main__</CODE> module.
+<P>
+</DL>
+<P>
+Methods whose names begin with <CODE>s_</CODE> are similar to the functions
+beginning with <CODE>r_</CODE>, but the code will be granted access to
+restricted versions of the standard I/O streans <CODE>sys.stdin</CODE>,
+<CODE>sys.stderr</CODE>, and <CODE>sys.stdout</CODE>.
+<P>
+<DL><DT><STRONG><A NAME="7741">s_eval</A></STRONG>(<VAR>code</VAR>)
+<DD>
+<VAR>code</VAR> must be a string containing a Python expression, which will
+be evaluated in the restricted environment.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7746">s_exec</A></STRONG>(<VAR>code</VAR>)
+<DD>
+<VAR>code</VAR> must be a string containing one or more lines of Python code,
+which will be executed in the restricted environment.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7751">s_execfile</A></STRONG>(<VAR>code</VAR>)
+<DD>
+Execute the Python code contained in the file <VAR>filename</VAR> in the
+restricted environment.
+<P>
+</DL>
+<P>
+<CODE>RExec</CODE> objects must also support various methods which will be
+implicitly called by code executing in the restricted environment.
+Overriding these methods in a subclass is used to change the policies
+enforced by a restricted environment.
+<P>
+<DL><DT><STRONG><A NAME="7804">r_import</A></STRONG>(<VAR>modulename</VAR><BIG>[</BIG><VAR>, globals, locals, fromlist</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Import the module <VAR>modulename</VAR>, raising an <CODE>ImportError</CODE>
+exception if the module is considered unsafe.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7808">r_open</A></STRONG>(<VAR>filename</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>[</BIG><VAR>, bufsize</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Method called when <CODE>open()</CODE> is called in the restricted
+environment.  The arguments are identical to those of <CODE>open()</CODE>,
+and a file object (or a class instance compatible with file objects)
+should be returned.  <CODE>RExec</CODE>'s default behaviour is allow opening
+any file for reading, but forbidding any attempt to write a file.  See
+the example below for an implementation of a less restrictive
+<CODE>r_open()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7771">r_reload</A></STRONG>(<VAR>module</VAR>)
+<DD>
+Reload the module object <VAR>module</VAR>, re-parsing and re-initializing it.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7776">r_unload</A></STRONG>(<VAR>module</VAR>)
+<DD>
+Unload the module object <VAR>module</VAR> (i.e., remove it from the
+restricted environment's <CODE>sys.modules</CODE> dictionary).
+<P>
+</DL>
+<P>
+And their equivalents with access to restricted standard I/O streams:
+<P>
+<DL><DT><STRONG><A NAME="7806">s_import</A></STRONG>(<VAR>modulename</VAR><BIG>[</BIG><VAR>, globals, locals, fromlist</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Import the module <VAR>modulename</VAR>, raising an <CODE>ImportError</CODE>
+exception if the module is considered unsafe.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7788">s_reload</A></STRONG>(<VAR>module</VAR>)
+<DD>
+Reload the module object <VAR>module</VAR>, re-parsing and re-initializing it.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7793">s_unload</A></STRONG>(<VAR>module</VAR>)
+<DD>
+Unload the module object <VAR>module</VAR>.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4072" HREF="node145.html#SECTION001311000000000000000">12.1.1 An example</A>
+</UL>
+<HR><A NAME="tex2html4068" HREF="node145.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4066" HREF="node143.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4060" HREF="node143.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4070" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4071" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4069" HREF="node145.html">12.1.1 An example</A>
+<B>Up:</B> <A NAME="tex2html4067" HREF="node143.html">12 Restricted Execution</A>
+<B> Previous:</B> <A NAME="tex2html4061" HREF="node143.html">12 Restricted Execution</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.3 Old classes</TITLE>
+<META NAME="description" CONTENT="11.1.3 Old classes">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3614" HREF="node107.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3612" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3606" HREF="node105.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3616" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3617" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3615" HREF="node107.html">11.1.4 Functions</A>
+<B>Up:</B> <A NAME="tex2html3613" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3607" HREF="node105.html">11.1.2 Using the cgi </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001213000000000000000">11.1.3 Old classes</A></H2>
+<P>
+These classes, present in earlier versions of the <CODE>cgi</CODE> module, are still 
+supported for backward compatibility.  New applications should use the
+FieldStorage class.
+<P>
+<CODE>SvFormContentDict</CODE>: single value form content as dictionary; assumes each 
+field name occurs in the form only once.
+<P>
+<CODE>FormContentDict</CODE>: multiple value form content as dictionary (the form
+items are lists of values).  Useful if your form contains multiple
+fields with the same name.
+<P>
+Other classes (<CODE>FormContent</CODE>, <CODE>InterpFormContentDict</CODE>) are present for
+backwards compatibility with really old applications only.  If you still 
+use these and would be inconvenienced when they disappeared from a next 
+version of this module, drop me a note.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

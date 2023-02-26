@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.4 Standard Module tempfile</TITLE>
+<META NAME="description" CONTENT="6.4 Standard Module tempfile">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3041" HREF="node65.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3039" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3033" HREF="node63.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3043" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3044" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3042" HREF="node65.html">6.5 Standard Module errno</A>
+<B>Up:</B> <A NAME="tex2html3040" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3034" HREF="node63.html">6.3 Standard Module getopt</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00740000000000000000">6.4 Standard Module <CODE>tempfile</CODE></A></H1>
+<P>
+<A NAME="3466">&#160;</A><A NAME="3467">&#160;</A>
+<A NAME="3468">&#160;</A><A NAME="3469">&#160;</A>
+<P>
+This module generates temporary file names.  It is not Unix specific,
+but it may require some help on non-Unix systems.
+<P>
+Note: the modules does not create temporary files, nor does it
+automatically remove them when the current process exits or dies.
+<P>
+The module defines a single user-callable function:
+<P>
+<DL><DT><STRONG><A NAME="3476">mktemp</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a unique temporary filename.  This is an absolute pathname of a
+file that does not exist at the time the call is made.  No two calls
+will return the same filename.
+<P>
+</DL>
+<P>
+The module uses two global variables that tell it how to construct a
+temporary name.  The caller may assign values to them; by default they
+are initialized at the first call to <CODE>mktemp()</CODE>.
+<P>
+<DL><DT><STRONG><A NAME="">tempdir</A></STRONG>
+<DD>
+When set to a value other than <CODE>None</CODE>, this variable defines the
+directory in which filenames returned by <CODE>mktemp()</CODE> reside.  The
+default is taken from the environment variable <CODE>TMPDIR</CODE>; if this
+is not set, either <CODE>/usr/tmp</CODE> is used (on Unix), or the current
+working directory (all other systems).  No check is made to see
+whether its value is valid.
+<P>
+</DL>
+<A NAME="3487">&#160;</A>
+<P>
+<DL><DT><STRONG><A NAME="">template</A></STRONG>
+<DD>
+When set to a value other than <CODE>None</CODE>, this variable defines the
+prefix of the final component of the filenames returned by
+<CODE>mktemp()</CODE>.  A string of decimal digits is added to generate
+unique filenames.  The default is either ``<CODE>@<VAR>pid</VAR>.</CODE>'' where
+<VAR>pid</VAR> is the current process ID (on Unix), or ``<CODE>tmp</CODE>'' (all
+other systems).
+<P>
+</DL>
+<P>
+Warning: if a Unix process uses <CODE>mktemp()</CODE>, then calls
+<CODE>fork()</CODE> and both parent and child continue to use
+<CODE>mktemp()</CODE>, the processes will generate conflicting temporary
+names.  To resolve this, the child process should assign <CODE>None</CODE>
+to <CODE>template</CODE>, to force recomputing the default on the next call
+to <CODE>mktemp()</CODE>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.1.3 GNU Dynamic Loading</TITLE>
+<META NAME="description" CONTENT="3.1.3 GNU Dynamic Loading">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html488" HREF="node26.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html486" HREF="node22.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html482" HREF="node24.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html490" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html491" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html489" HREF="node26.html">3.2 Building a Dynamically </A>
+<B>Up:</B> <A NAME="tex2html487" HREF="node22.html">3.1 Configuring and Building </A>
+<B> Previous:</B> <A NAME="tex2html483" HREF="node24.html">3.1.2 SGI IRIX 4 </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00413000000000000000">3.1.3 GNU Dynamic Loading</A></H2>
+<P>
+GNU dynamic loading supports (according to its `<CODE>README</CODE>' file) the
+following hardware and software combinations: VAX (Ultrix), Sun 3
+(SunOS 3.4 and 4.0), Sparc (SunOS 4.0), Sequent Symmetry (Dynix), and
+Atari ST.  There is no reason to use it on a Sparc; I haven't seen a
+Sun 3 for years so I don't know if these have shared libraries or not.
+<P>
+You need to fetch and build two packages.  One is GNU DLD 3.2.3,
+available by anonymous ftp from host `<CODE>ftp.cwi.nl</CODE>', directory
+`<CODE>pub/dynload</CODE>', file `<CODE>dld-3.2.3.tar.Z</CODE>'.  (As far as I know,
+no further development on GNU DLD is being done.)  The other is an
+emulation of Jack Jansen's <CODE>dl</CODE> package that I wrote on top of
+GNU DLD 3.2.3.  This is available from the same host and directory,
+file dl-dld-1.1.tar.Z.  (The version number may change -- but I doubt
+it will.)  Follow the instructions in each package's `<CODE>README</CODE>'
+file to configure build them.
+<P>
+Now configure Python.  Run the `<CODE>configure</CODE>' script with the option
+<CODE>-with-dl-dld=<VAR>dl-directory</VAR>,<VAR>dld-directory</VAR></CODE> where
+<VAR>dl-directory</VAR> is the absolute pathname of the directory where you
+have built the `<CODE>dl-dld</CODE>' package, and <VAR>dld-directory</VAR> is that
+of the GNU DLD package.  The Python interpreter you build hereafter
+will support GNU dynamic loading.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

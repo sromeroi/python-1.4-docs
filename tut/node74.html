@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.3.2 Referencing Variables By Name</TITLE>
+<META NAME="description" CONTENT="10.3.2 Referencing Variables By Name">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1122" HREF="node75.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1120" HREF="node72.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1116" HREF="node73.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1124" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1123" HREF="node75.html">10.4 Optional Function Arguments</A>
+<B>Up:</B> <A NAME="tex2html1121" HREF="node72.html">10.3 The Formatting Operator</A>
+<B> Previous:</B> <A NAME="tex2html1117" HREF="node73.html">10.3.1 Basic Usage</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001132000000000000000">10.3.2 Referencing Variables By Name</A></H2>
+<P>
+If you have a really long format string that you don't want to split
+up, it would be nice if you could reference the variables to be
+formatted by name instead of by position.  This can be done by using
+an extension of C formats using the form <code>%(name)format</code>, e.g.
+<P>
+<PRE>        &gt;&gt;&gt; table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 8637678}
+        &gt;&gt;&gt; print 'Jack: %(Jack)d; Sjoerd: %(Sjoerd)d; Dcab: %(Dcab)d' % table
+        Jack: 4098; Sjoerd: 4127; Dcab: 8637678
+        &gt;&gt;&gt;</PRE>
+<P>
+This is particularly useful in combination with the new built-in
+<code>vars()</code> function, which returns a dictionary containing all
+local variables.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

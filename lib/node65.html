@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.5 Standard Module errno</TITLE>
+<META NAME="description" CONTENT="6.5 Standard Module errno">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3051" HREF="node66.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3049" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3045" HREF="node64.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3053" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3054" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3052" HREF="node66.html">7 Optional Operating System </A>
+<B>Up:</B> <A NAME="tex2html3050" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3046" HREF="node64.html">6.4 Standard Module tempfile</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00750000000000000000">6.5 Standard Module <CODE>errno</CODE></A></H1>
+<P>
+This module makes available standard errno system symbols.
+The value of each symbol is the corresponding integer value.
+The names and descriptions are borrowed from linux/include/errno.h,
+which should be pretty all-inclusive.  Of the following list, symbols
+that are not used on the current platform are not defined by the
+module.
+<P>
+Symbols available can include:
+<DL><DT><STRONG><A NAME="">EPERM</A></STRONG>
+<DD> Operation not permitted 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOENT</A></STRONG>
+<DD> No such file or directory 
+</DL>
+<DL><DT><STRONG><A NAME="">ESRCH</A></STRONG>
+<DD> No such process 
+</DL>
+<DL><DT><STRONG><A NAME="">EINTR</A></STRONG>
+<DD> Interrupted system call 
+</DL>
+<DL><DT><STRONG><A NAME="">EIO</A></STRONG>
+<DD> I/O error 
+</DL>
+<DL><DT><STRONG><A NAME="">ENXIO</A></STRONG>
+<DD> No such device or address 
+</DL>
+<DL><DT><STRONG><A NAME="">E2BIG</A></STRONG>
+<DD> Arg list too long 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOEXEC</A></STRONG>
+<DD> Exec format error 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADF</A></STRONG>
+<DD> Bad file number 
+</DL>
+<DL><DT><STRONG><A NAME="">ECHILD</A></STRONG>
+<DD> No child processes 
+</DL>
+<DL><DT><STRONG><A NAME="">EAGAIN</A></STRONG>
+<DD> Try again 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOMEM</A></STRONG>
+<DD> Out of memory 
+</DL>
+<DL><DT><STRONG><A NAME="">EACCES</A></STRONG>
+<DD> Permission denied 
+</DL>
+<DL><DT><STRONG><A NAME="">EFAULT</A></STRONG>
+<DD> Bad address 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTBLK</A></STRONG>
+<DD> Block device required 
+</DL>
+<DL><DT><STRONG><A NAME="">EBUSY</A></STRONG>
+<DD> Device or resource busy 
+</DL>
+<DL><DT><STRONG><A NAME="">EEXIST</A></STRONG>
+<DD> File exists 
+</DL>
+<DL><DT><STRONG><A NAME="">EXDEV</A></STRONG>
+<DD> Cross-device link 
+</DL>
+<DL><DT><STRONG><A NAME="">ENODEV</A></STRONG>
+<DD> No such device 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTDIR</A></STRONG>
+<DD> Not a directory 
+</DL>
+<DL><DT><STRONG><A NAME="">EISDIR</A></STRONG>
+<DD> Is a directory 
+</DL>
+<DL><DT><STRONG><A NAME="">EINVAL</A></STRONG>
+<DD> Invalid argument 
+</DL>
+<DL><DT><STRONG><A NAME="">ENFILE</A></STRONG>
+<DD> File table overflow 
+</DL>
+<DL><DT><STRONG><A NAME="">EMFILE</A></STRONG>
+<DD> Too many open files 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTTY</A></STRONG>
+<DD> Not a typewriter 
+</DL>
+<DL><DT><STRONG><A NAME="">ETXTBSY</A></STRONG>
+<DD> Text file busy 
+</DL>
+<DL><DT><STRONG><A NAME="">EFBIG</A></STRONG>
+<DD> File too large 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOSPC</A></STRONG>
+<DD> No space left on device 
+</DL>
+<DL><DT><STRONG><A NAME="">ESPIPE</A></STRONG>
+<DD> Illegal seek 
+</DL>
+<DL><DT><STRONG><A NAME="">EROFS</A></STRONG>
+<DD> Read-only file system 
+</DL>
+<DL><DT><STRONG><A NAME="">EMLINK</A></STRONG>
+<DD> Too many links 
+</DL>
+<DL><DT><STRONG><A NAME="">EPIPE</A></STRONG>
+<DD> Broken pipe 
+</DL>
+<DL><DT><STRONG><A NAME="">EDOM</A></STRONG>
+<DD> Math argument out of domain of func 
+</DL>
+<DL><DT><STRONG><A NAME="">ERANGE</A></STRONG>
+<DD> Math result not representable 
+</DL>
+<DL><DT><STRONG><A NAME="">EDEADLK</A></STRONG>
+<DD> Resource deadlock would occur 
+</DL>
+<DL><DT><STRONG><A NAME="">ENAMETOOLONG</A></STRONG>
+<DD> File name too long 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOLCK</A></STRONG>
+<DD> No record locks available 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOSYS</A></STRONG>
+<DD> Function not implemented 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTEMPTY</A></STRONG>
+<DD> Directory not empty 
+</DL>
+<DL><DT><STRONG><A NAME="">ELOOP</A></STRONG>
+<DD> Too many symbolic links encountered 
+</DL>
+<DL><DT><STRONG><A NAME="">EWOULDBLOCK</A></STRONG>
+<DD> Operation would block 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOMSG</A></STRONG>
+<DD> No message of desired type 
+</DL>
+<DL><DT><STRONG><A NAME="">EIDRM</A></STRONG>
+<DD> Identifier removed 
+</DL>
+<DL><DT><STRONG><A NAME="">ECHRNG</A></STRONG>
+<DD> Channel number out of range 
+</DL>
+<DL><DT><STRONG><A NAME="">EL2NSYNC</A></STRONG>
+<DD> Level 2 not synchronized 
+</DL>
+<DL><DT><STRONG><A NAME="">EL3HLT</A></STRONG>
+<DD> Level 3 halted 
+</DL>
+<DL><DT><STRONG><A NAME="">EL3RST</A></STRONG>
+<DD> Level 3 reset 
+</DL>
+<DL><DT><STRONG><A NAME="">ELNRNG</A></STRONG>
+<DD> Link number out of range 
+</DL>
+<DL><DT><STRONG><A NAME="">EUNATCH</A></STRONG>
+<DD> Protocol driver not attached 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOCSI</A></STRONG>
+<DD> No CSI structure available 
+</DL>
+<DL><DT><STRONG><A NAME="">EL2HLT</A></STRONG>
+<DD> Level 2 halted 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADE</A></STRONG>
+<DD> Invalid exchange 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADR</A></STRONG>
+<DD> Invalid request descriptor 
+</DL>
+<DL><DT><STRONG><A NAME="">EXFULL</A></STRONG>
+<DD> Exchange full 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOANO</A></STRONG>
+<DD> No anode 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADRQC</A></STRONG>
+<DD> Invalid request code 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADSLT</A></STRONG>
+<DD> Invalid slot 
+</DL>
+<DL><DT><STRONG><A NAME="">EDEADLOCK</A></STRONG>
+<DD> File locking deadlock error 
+</DL>
+<DL><DT><STRONG><A NAME="">EBFONT</A></STRONG>
+<DD> Bad font file format 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOSTR</A></STRONG>
+<DD> Device not a stream 
+</DL>
+<DL><DT><STRONG><A NAME="">ENODATA</A></STRONG>
+<DD> No data available 
+</DL>
+<DL><DT><STRONG><A NAME="">ETIME</A></STRONG>
+<DD> Timer expired 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOSR</A></STRONG>
+<DD> Out of streams resources 
+</DL>
+<DL><DT><STRONG><A NAME="">ENONET</A></STRONG>
+<DD> Machine is not on the network 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOPKG</A></STRONG>
+<DD> Package not installed 
+</DL>
+<DL><DT><STRONG><A NAME="">EREMOTE</A></STRONG>
+<DD> Object is remote 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOLINK</A></STRONG>
+<DD> Link has been severed 
+</DL>
+<DL><DT><STRONG><A NAME="">EADV</A></STRONG>
+<DD> Advertise error 
+</DL>
+<DL><DT><STRONG><A NAME="">ESRMNT</A></STRONG>
+<DD> Srmount error 
+</DL>
+<DL><DT><STRONG><A NAME="">ECOMM</A></STRONG>
+<DD> Communication error on send 
+</DL>
+<DL><DT><STRONG><A NAME="">EPROTO</A></STRONG>
+<DD> Protocol error 
+</DL>
+<DL><DT><STRONG><A NAME="">EMULTIHOP</A></STRONG>
+<DD> Multihop attempted 
+</DL>
+<DL><DT><STRONG><A NAME="">EDOTDOT</A></STRONG>
+<DD> RFS specific error 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADMSG</A></STRONG>
+<DD> Not a data message 
+</DL>
+<DL><DT><STRONG><A NAME="">EOVERFLOW</A></STRONG>
+<DD> Value too large for defined data type 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTUNIQ</A></STRONG>
+<DD> Name not unique on network 
+</DL>
+<DL><DT><STRONG><A NAME="">EBADFD</A></STRONG>
+<DD> File descriptor in bad state 
+</DL>
+<DL><DT><STRONG><A NAME="">EREMCHG</A></STRONG>
+<DD> Remote address changed 
+</DL>
+<DL><DT><STRONG><A NAME="">ELIBACC</A></STRONG>
+<DD> Can not access a needed shared library 
+</DL>
+<DL><DT><STRONG><A NAME="">ELIBBAD</A></STRONG>
+<DD> Accessing a corrupted shared library 
+</DL>
+<DL><DT><STRONG><A NAME="">ELIBSCN</A></STRONG>
+<DD> .lib section in a.out corrupted 
+</DL>
+<DL><DT><STRONG><A NAME="">ELIBMAX</A></STRONG>
+<DD> Attempting to link in too many shared libraries 
+</DL>
+<DL><DT><STRONG><A NAME="">ELIBEXEC</A></STRONG>
+<DD> Cannot exec a shared library directly 
+</DL>
+<DL><DT><STRONG><A NAME="">EILSEQ</A></STRONG>
+<DD> Illegal byte sequence 
+</DL>
+<DL><DT><STRONG><A NAME="">ERESTART</A></STRONG>
+<DD> Interrupted system call should be restarted 
+</DL>
+<DL><DT><STRONG><A NAME="">ESTRPIPE</A></STRONG>
+<DD> Streams pipe error 
+</DL>
+<DL><DT><STRONG><A NAME="">EUSERS</A></STRONG>
+<DD> Too many users 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTSOCK</A></STRONG>
+<DD> Socket operation on non-socket 
+</DL>
+<DL><DT><STRONG><A NAME="">EDESTADDRREQ</A></STRONG>
+<DD> Destination address required 
+</DL>
+<DL><DT><STRONG><A NAME="">EMSGSIZE</A></STRONG>
+<DD> Message too long 
+</DL>
+<DL><DT><STRONG><A NAME="">EPROTOTYPE</A></STRONG>
+<DD> Protocol wrong type for socket 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOPROTOOPT</A></STRONG>
+<DD> Protocol not available 
+</DL>
+<DL><DT><STRONG><A NAME="">EPROTONOSUPPORT</A></STRONG>
+<DD> Protocol not supported 
+</DL>
+<DL><DT><STRONG><A NAME="">ESOCKTNOSUPPORT</A></STRONG>
+<DD> Socket type not supported 
+</DL>
+<DL><DT><STRONG><A NAME="">EOPNOTSUPP</A></STRONG>
+<DD> Operation not supported on transport endpoint 
+</DL>
+<DL><DT><STRONG><A NAME="">EPFNOSUPPORT</A></STRONG>
+<DD> Protocol family not supported 
+</DL>
+<DL><DT><STRONG><A NAME="">EAFNOSUPPORT</A></STRONG>
+<DD> Address family not supported by protocol 
+</DL>
+<DL><DT><STRONG><A NAME="">EADDRINUSE</A></STRONG>
+<DD> Address already in use 
+</DL>
+<DL><DT><STRONG><A NAME="">EADDRNOTAVAIL</A></STRONG>
+<DD> Cannot assign requested address 
+</DL>
+<DL><DT><STRONG><A NAME="">ENETDOWN</A></STRONG>
+<DD> Network is down 
+</DL>
+<DL><DT><STRONG><A NAME="">ENETUNREACH</A></STRONG>
+<DD> Network is unreachable 
+</DL>
+<DL><DT><STRONG><A NAME="">ENETRESET</A></STRONG>
+<DD> Network dropped connection because of reset 
+</DL>
+<DL><DT><STRONG><A NAME="">ECONNABORTED</A></STRONG>
+<DD> Software caused connection abort 
+</DL>
+<DL><DT><STRONG><A NAME="">ECONNRESET</A></STRONG>
+<DD> Connection reset by peer 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOBUFS</A></STRONG>
+<DD> No buffer space available 
+</DL>
+<DL><DT><STRONG><A NAME="">EISCONN</A></STRONG>
+<DD> Transport endpoint is already connected 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTCONN</A></STRONG>
+<DD> Transport endpoint is not connected 
+</DL>
+<DL><DT><STRONG><A NAME="">ESHUTDOWN</A></STRONG>
+<DD> Cannot send after transport endpoint shutdown 
+</DL>
+<DL><DT><STRONG><A NAME="">ETOOMANYREFS</A></STRONG>
+<DD> Too many references: cannot splice 
+</DL>
+<DL><DT><STRONG><A NAME="">ETIMEDOUT</A></STRONG>
+<DD> Connection timed out 
+</DL>
+<DL><DT><STRONG><A NAME="">ECONNREFUSED</A></STRONG>
+<DD> Connection refused 
+</DL>
+<DL><DT><STRONG><A NAME="">EHOSTDOWN</A></STRONG>
+<DD> Host is down 
+</DL>
+<DL><DT><STRONG><A NAME="">EHOSTUNREACH</A></STRONG>
+<DD> No route to host 
+</DL>
+<DL><DT><STRONG><A NAME="">EALREADY</A></STRONG>
+<DD> Operation already in progress 
+</DL>
+<DL><DT><STRONG><A NAME="">EINPROGRESS</A></STRONG>
+<DD> Operation now in progress 
+</DL>
+<DL><DT><STRONG><A NAME="">ESTALE</A></STRONG>
+<DD> Stale NFS file handle 
+</DL>
+<DL><DT><STRONG><A NAME="">EUCLEAN</A></STRONG>
+<DD> Structure needs cleaning 
+</DL>
+<DL><DT><STRONG><A NAME="">ENOTNAM</A></STRONG>
+<DD> Not a XENIX named type file 
+</DL>
+<DL><DT><STRONG><A NAME="">ENAVAIL</A></STRONG>
+<DD> No XENIX semaphores available 
+</DL>
+<DL><DT><STRONG><A NAME="">EISNAM</A></STRONG>
+<DD> Is a named type file 
+</DL>
+<DL><DT><STRONG><A NAME="">EREMOTEIO</A></STRONG>
+<DD> Remote I/O error 
+</DL>
+<DL><DT><STRONG><A NAME="">EDQUOT</A></STRONG>
+<DD> Quota exceeded 
+</DL><HR><A NAME="tex2html3051" HREF="node66.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3049" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3045" HREF="node64.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3053" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3054" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3052" HREF="node66.html">7 Optional Operating System </A>
+<B>Up:</B> <A NAME="tex2html3050" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3046" HREF="node64.html">6.4 Standard Module tempfile</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

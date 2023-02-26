@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.1.3 Lists</TITLE>
+<META NAME="description" CONTENT="3.1.3 Lists">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html533" HREF="node26.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html531" HREF="node22.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html527" HREF="node24.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html535" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html534" HREF="node26.html">3.2 First Steps Towards </A>
+<B>Up:</B> <A NAME="tex2html532" HREF="node22.html">3.1 Using Python as </A>
+<B> Previous:</B> <A NAME="tex2html528" HREF="node24.html">3.1.2 Strings</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00413000000000000000">3.1.3 Lists</A></H2>
+<P>
+Python knows a number of <EM>compound</EM> data types, used to group
+together other values.  The most versatile is the <EM>list</EM>, which
+can be written as a list of comma-separated values (items) between
+square brackets.  List items need not all have the same type.
+<P>
+<PRE>&gt;&gt;&gt; a = ['spam', 'eggs', 100, 1234]
+&gt;&gt;&gt; a
+['spam', 'eggs', 100, 1234]
+&gt;&gt;&gt;</PRE>
+Like string indices, list indices start at 0, and lists can be sliced,
+concatenated and so on:
+<P>
+<PRE>&gt;&gt;&gt; a[0]
+'spam'
+&gt;&gt;&gt; a[3]
+1234
+&gt;&gt;&gt; a[-2]
+100
+&gt;&gt;&gt; a[1:-1]
+['eggs', 100]
+&gt;&gt;&gt; a[:2] + ['bacon', 2*2]
+['spam', 'eggs', 'bacon', 4]
+&gt;&gt;&gt; 3*a[:3] + ['Boe!']
+['spam', 'eggs', 100, 'spam', 'eggs', 100, 'spam', 'eggs', 100, 'Boe!']
+&gt;&gt;&gt;</PRE>
+Unlike strings, which are <EM>immutable</EM>, it is possible to change
+individual elements of a list:
+<P>
+<PRE>&gt;&gt;&gt; a
+['spam', 'eggs', 100, 1234]
+&gt;&gt;&gt; a[2] = a[2] + 23
+&gt;&gt;&gt; a
+['spam', 'eggs', 123, 1234]
+&gt;&gt;&gt;</PRE>
+Assignment to slices is also possible, and this can even change the size
+of the list:
+<P>
+<PRE>&gt;&gt;&gt; # Replace some items:
+... a[0:2] = [1, 12]
+&gt;&gt;&gt; a
+[1, 12, 123, 1234]
+&gt;&gt;&gt; # Remove some:
+... a[0:2] = []
+&gt;&gt;&gt; a
+[123, 1234]
+&gt;&gt;&gt; # Insert some:
+... a[1:1] = ['bletch', 'xyzzy']
+&gt;&gt;&gt; a
+[123, 'bletch', 'xyzzy', 1234]
+&gt;&gt;&gt; a[:0] = a     # Insert (a copy of) itself at the beginning
+&gt;&gt;&gt; a
+[123, 'bletch', 'xyzzy', 1234, 123, 'bletch', 'xyzzy', 1234]
+&gt;&gt;&gt;</PRE>
+The built-in function <TT>len()</TT> also applies to lists:
+<P>
+<PRE>&gt;&gt;&gt; len(a)
+8
+&gt;&gt;&gt;</PRE>
+It is possible to nest lists (create lists containing other lists),
+for example:
+<P>
+<PRE>&gt;&gt;&gt; q = [2, 3]
+&gt;&gt;&gt; p = [1, q, 4]
+&gt;&gt;&gt; len(p)
+3
+&gt;&gt;&gt; p[1]
+[2, 3]
+&gt;&gt;&gt; p[1][0]
+2
+&gt;&gt;&gt; p[1].append('xtra')     # See section 5.1
+&gt;&gt;&gt; p
+[1, [2, 3, 'xtra'], 4]
+&gt;&gt;&gt; q
+[2, 3, 'xtra']
+&gt;&gt;&gt;</PRE>
+Note that in the last example, <TT>p[1]</TT> and <TT>q</TT> really refer to
+the same object!  We'll come back to <EM>object semantics</EM> later.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

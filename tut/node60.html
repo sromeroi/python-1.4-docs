@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.3.4 Method objects</TITLE>
+<META NAME="description" CONTENT="9.3.4 Method objects">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html942" HREF="node61.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html940" HREF="node56.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html936" HREF="node59.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html944" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html943" HREF="node61.html">9.4 Random remarks</A>
+<B>Up:</B> <A NAME="tex2html941" HREF="node56.html">9.3 A first look </A>
+<B> Previous:</B> <A NAME="tex2html937" HREF="node59.html">9.3.3 Instance objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001034000000000000000">9.3.4 Method objects</A></H2>
+<P>
+Usually, a method is called immediately, e.g.:
+<P>
+<PRE>        x.f()</PRE>
+<P>
+In our example, this will return the string <code>'hello world'</code>.
+However, it is not necessary to call a method right away: <code>x.f</code>
+is a method object, and can be stored away and called at a later
+moment, for example:
+<P>
+<PRE>        xf = x.f
+        while 1:
+                print xf()</PRE>
+<P>
+will continue to print <code>hello world</code> until the end of time.
+<P>
+What exactly happens when a method is called?  You may have noticed
+that <code>x.f()</code> was called without an argument above, even though
+the function definition for <code>f</code> specified an argument.  What
+happened to the argument?  Surely Python raises an exception when a
+function that requires an argument is called without any -- even if
+the argument isn't actually used...
+<P>
+Actually, you may have guessed the answer: the special thing about
+methods is that the object is passed as the first argument of the
+function.  In our example, the call <code>x.f()</code> is exactly equivalent
+to <code>MyClass.f(x)</code>.  In general, calling a method with a list of
+<EM>n</EM> arguments is equivalent to calling the corresponding function
+with an argument list that is created by inserting the method's object
+before the first argument.
+<P>
+If you still don't understand how methods work, a look at the
+implementation can perhaps clarify matters.  When an instance
+attribute is referenced that isn't a data attribute, its class is
+searched.  If the name denotes a valid class attribute that is a
+function object, a method object is created by packing (pointers to)
+the instance object and the function object just found together in an
+abstract object: this is the method object.  When the method object is
+called with an argument list, it is unpacked again, a new argument
+list is constructed from the instance object and the original argument
+list, and the function object is called with this new argument list.
+<P>
+<HR><A NAME="tex2html942" HREF="node61.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html940" HREF="node56.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html936" HREF="node59.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html944" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html943" HREF="node61.html">9.4 Random remarks</A>
+<B>Up:</B> <A NAME="tex2html941" HREF="node56.html">9.3 A first look </A>
+<B> Previous:</B> <A NAME="tex2html937" HREF="node59.html">9.3.3 Instance objects</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.4 Changes to Built-in Operations</TITLE>
+<META NAME="description" CONTENT="12.4 Changes to Built-in Operations">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1513" HREF="node109.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1511" HREF="node104.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1505" HREF="node107.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1515" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1514" HREF="node109.html">12.5 Library Changes</A>
+<B>Up:</B> <A NAME="tex2html1512" HREF="node104.html">12 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1506" HREF="node107.html">12.3 Other Language Changes</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001340000000000000000">12.4 Changes to Built-in Operations</A></H1>
+<P>
+<UL><LI>
+For file objects, <CODE><VAR>f</VAR>.read(0)</CODE> and
+<CODE><VAR>f</VAR>.readline(0)</CODE> now return an empty string rather than
+reading an unlimited number of bytes.  For the latter, omit the
+argument altogether or pass a negative value.<LI>
+A new system variable, <CODE>sys.platform</CODE>, has been added.  It
+specifies the current platform, e.g. <CODE>sunos5</CODE> or <CODE>linux1</CODE>.<LI>
+The built-in functions <CODE>input()</CODE> and <CODE>raw_input()</CODE> now use
+the GNU readline library when it has been configured (formerly, only
+interactive input to the interpreter itself was read using GNU
+readline).  The GNU readline library provides elaborate line editing
+and history.  The Python debugger (<CODE>pdb</CODE>) is the first
+beneficiary of this change.<LI>
+Two new built-in functions, <CODE>globals()</CODE> and <CODE>locals()</CODE>,
+provide access to dictionaries containming current global and local
+variables, respectively.  (These augment rather than replace
+<CODE>vars()</CODE>, which returns the current local variables when called
+without an argument, and a module's global variables when called with
+an argument of type module.)<LI>
+The built-in function <CODE>compile()</CODE> now takes a third possible
+value for the kind of code to be compiled: specifying <CODE>'single'</CODE>
+generates code for a single interactive statement, which prints the
+output of expression statements that evaluate to something else than
+<CODE>None</CODE>.
+<P>
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

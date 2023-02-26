@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.16.1 Packer Objects</TITLE>
+<META NAME="description" CONTENT="11.16.1 Packer Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4007" HREF="node140.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4005" HREF="node138.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3999" HREF="node138.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4009" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4010" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4008" HREF="node140.html">11.16.2 Unpacker Objects</A>
+<B>Up:</B> <A NAME="tex2html4006" HREF="node138.html">11.16 Standard module xdrlib</A>
+<B> Previous:</B> <A NAME="tex2html4000" HREF="node138.html">11.16 Standard module xdrlib</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012161000000000000000">11.16.1 Packer Objects</A></H2>
+<P>
+<CODE>Packer</CODE> is the class for packing data into XDR representation.
+The <CODE>Packer</CODE> class is instantiated with no arguments.
+<P>
+<DL><DT><STRONG><A NAME="7408">get_buffer</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns the current pack buffer as a string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7412">reset</A></STRONG>(<VAR></VAR>)
+<DD>
+Resets the pack buffer to the empty string.
+<P>
+</DL>
+<P>
+In general, you can pack any of the most common XDR data types by
+calling the appropriate <CODE>pack_<VAR>type</VAR></CODE> method.  Each method
+takes a single argument, the value to pack.  The following simple data
+type packing methods are supported: <CODE>pack_uint</CODE>, <CODE>pack_int</CODE>,
+<CODE>pack_enum</CODE>, <CODE>pack_bool</CODE>, <CODE>pack_uhyper</CODE>,
+and <CODE>pack_hyper</CODE>.
+<P>
+The following methods pack floating point numbers, however they
+require C library support.  Without the optional C built-in module,
+both of these methods will raise an <CODE>xdrlib.ConversionError</CODE>
+exception.  See the note at the end of this chapter for details.
+<P>
+<DL><DT><STRONG><A NAME="7424">pack_float</A></STRONG>(<VAR>value</VAR>)
+<DD>
+Packs the single-precision floating point number <VAR>value</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7429">pack_double</A></STRONG>(<VAR>value</VAR>)
+<DD>
+Packs the double-precision floating point number <VAR>value</VAR>.
+<P>
+</DL>
+<P>
+The following methods support packing strings, bytes, and opaque data:
+<P>
+<DL><DT><STRONG><A NAME="7434">pack_fstring</A></STRONG>(<VAR>n, s</VAR>)
+<DD>
+Packs a fixed length string, <VAR>s</VAR>.  <VAR>n</VAR> is the length of the
+string but it is <EM>not</EM> packed into the data buffer.  The string
+is padded with null bytes if necessary to guaranteed 4 byte alignment.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7441">pack_fopaque</A></STRONG>(<VAR>n, data</VAR>)
+<DD>
+Packs a fixed length opaque data stream, similarly to
+<CODE>pack_fstring</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7446">pack_string</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Packs a variable length string, <VAR>s</VAR>.  The length of the string is
+first packed as an unsigned integer, then the string data is packed
+with <CODE>pack_fstring</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7452">pack_opaque</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Packs a variable length opaque data string, similarly to
+<CODE>pack_string</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7457">pack_bytes</A></STRONG>(<VAR>bytes</VAR>)
+<DD>
+Packs a variable length byte stream, similarly to <CODE>pack_string</CODE>.
+<P>
+</DL>
+<P>
+The following methods support packing arrays and lists:
+<P>
+<DL><DT><STRONG><A NAME="7462">pack_list</A></STRONG>(<VAR>list, pack_item</VAR>)
+<DD>
+Packs a <VAR>list</VAR> of homogeneous items.  This method is useful for
+lists with an indeterminate size; i.e. the size is not available until
+the entire list has been walked.  For each item in the list, an
+unsigned integer <CODE>1</CODE> is packed first, followed by the data value
+from the list.  <VAR>pack_item</VAR> is the function that is called to pack
+the individual item.  At the end of the list, an unsigned integer
+<CODE>0</CODE> is packed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7470">pack_farray</A></STRONG>(<VAR>n, array, pack_item</VAR>)
+<DD>
+Packs a fixed length list (<VAR>array</VAR>) of homogeneous items.  <VAR>n</VAR>
+is the length of the list; it is <EM>not</EM> packed into the buffer,
+but a <CODE>ValueError</CODE> exception is raised if <CODE>len(array)</CODE> is not
+equal to <VAR>n</VAR>.  As above, <VAR>pack_item</VAR> is the function used to
+pack each element.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7481">pack_array</A></STRONG>(<VAR>list, pack_item</VAR>)
+<DD>
+Packs a variable length <VAR>list</VAR> of homogeneous items.  First, the
+length of the list is packed as an unsigned integer, then each element
+is packed as in <CODE>pack_farray</CODE> above.
+<P>
+</DL><HR><A NAME="tex2html4007" HREF="node140.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4005" HREF="node138.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3999" HREF="node138.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4009" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4010" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4008" HREF="node140.html">11.16.2 Unpacker Objects</A>
+<B>Up:</B> <A NAME="tex2html4006" HREF="node138.html">11.16 Standard module xdrlib</A>
+<B> Previous:</B> <A NAME="tex2html4000" HREF="node138.html">11.16 Standard module xdrlib</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

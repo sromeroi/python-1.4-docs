@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.9.4 Exceptions and Error Handling</TITLE>
+<META NAME="description" CONTENT="3.9.4 Exceptions and Error Handling">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2758" HREF="node42.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2756" HREF="node37.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2750" HREF="node40.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2760" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2761" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2759" HREF="node42.html">3.9.5 AST Objects</A>
+<B>Up:</B> <A NAME="tex2html2757" HREF="node37.html">3.9 Built-in Module parser</A>
+<B> Previous:</B> <A NAME="tex2html2751" HREF="node40.html">3.9.3 Queries on AST </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00494000000000000000">3.9.4 Exceptions and Error Handling</A></H2>
+<P>
+The parser module defines a single exception, but may also pass other
+built-in exceptions from other portions of the Python runtime
+environment.  See each function for information about the exceptions
+it can raise.
+<P>
+<DL><DT><STRONG><A NAME="">ParserError</A></STRONG>
+<DD>
+Exception raised when a failure occurs within the parser module.  This
+is generally produced for validation failures rather than the built in
+<CODE>SyntaxError</CODE> thrown during normal parsing.
+The exception argument is either a string describing the reason of the
+failure or a tuple containing a sequence causing the failure from a parse
+tree passed to <CODE>sequence2ast()</CODE> and an explanatory string.  Calls to
+<CODE>sequence2ast()</CODE> need to be able to handle either type of exception,
+while calls to other functions in the module will only need to be
+aware of the simple string values.
+<P>
+</DL>
+<P>
+Note that the functions <CODE>compileast()</CODE>, <CODE>expr()</CODE>, and
+<CODE>suite()</CODE> may throw exceptions which are normally thrown by the
+parsing and compilation process.  These include the built in
+exceptions <CODE>MemoryError</CODE>, <CODE>OverflowError</CODE>,
+<CODE>SyntaxError</CODE>, and <CODE>SystemError</CODE>.  In these cases, these
+exceptions carry all the meaning normally associated with them.  Refer
+to the descriptions of each function for detailed information.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

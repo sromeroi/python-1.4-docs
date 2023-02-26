@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.2 Run-time Changes</TITLE>
+<META NAME="description" CONTENT="13.2 Run-time Changes">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1570" HREF="node114.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1568" HREF="node111.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1562" HREF="node112.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1572" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1571" HREF="node114.html">13.3 New or Updated </A>
+<B>Up:</B> <A NAME="tex2html1569" HREF="node111.html">13 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1563" HREF="node112.html">13.1 Language Changes</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001420000000000000000">13.2 Run-time Changes</A></H1>
+<P>
+<UL><LI>
+New built-in function <CODE>list()</CODE> converts any sequence to a new list.
+Note that when the argument is a list, the return value is a fresh 
+copy, similar to what would be returned by <CODE>a[:]</CODE>.<LI>
+Improved syntax error message.  Syntax errors detected by the code
+generation phase of the Python bytecode compiler now include a line
+number.  The line number is appended in parentheses.  It is suppressed
+if the error occurs in line 1 (this usually happens in interactive
+use).<LI>
+Different exception raised.
+Unrecognized keyword arguments now raise a <CODE>TypeError</CODE> exception 
+rather than <CODE>KeyError</CODE>.<LI>
+Exceptions in <CODE>__del__</CODE> methods.  When a <CODE>__del__</CODE> method
+raises an exception, a warning is written to <CODE>sys.stderr</CODE> and the
+exception is ignored.  Formerly, such exceptions were ignored without
+warning.  (Propagating the exception is not an option since it it is
+invoked from an object finalizer, which cannot return any kind of
+status or error.)  (Buglet: The new behavior, while needed in order to
+debug failing <CODE>__del__</CODE> methods, is occasionally annoying,
+because if affects the program's standard error stream.  It honors
+assignments to <CODE>sys.stderr</CODE>, so it can be redirected from within
+a program if desired.)<LI>
+You can now discover from which file (if any) a module was loaded by 
+inspecting its <CODE>__file__</CODE> attribute.  This attribute is not 
+present for built-in or frozen modules.  It points to the shared 
+library file for dynamically loaded modules.  (Buglet: this may be a 
+relative path and is stored in the <CODE>.pyc</CODE> file on compilation.  
+If you manipulate the current directory with <CODE>os.chdir()</CODE> or move 
+<CODE>.pyc</CODE> files around, the value may be incorrect.)
+<P>
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

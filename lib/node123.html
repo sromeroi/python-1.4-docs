@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.8 Standard Module sgmllib</TITLE>
+<META NAME="description" CONTENT="11.8 Standard Module sgmllib">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3814" HREF="node124.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3812" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3806" HREF="node122.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3816" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3817" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3815" HREF="node124.html">11.9 Standard Module htmllib</A>
+<B>Up:</B> <A NAME="tex2html3813" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3807" HREF="node122.html">11.7 Standard Module urlparse</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001280000000000000000">11.8 Standard Module <CODE>sgmllib</CODE></A></H1>
+<P>
+<A NAME="6552">&#160;</A>
+<P>
+This module defines a class <CODE>SGMLParser</CODE> which serves as the
+basis for parsing text files formatted in SGML (Standard Generalized
+Mark-up Language).  In fact, it does not provide a full SGML parser
+-- it only parses SGML insofar as it is used by HTML, and the module
+only exists as a base for the <CODE>htmllib</CODE> module.
+<P>
+In particular, the parser is hardcoded to recognize the following
+constructs:
+<P>
+<UL><LI>
+Opening and closing tags of the form
+``<CODE>&lt;<VAR>tag</VAR> <VAR>attr</VAR>=&quot;<VAR>value</VAR>&quot; ...&gt;</CODE>'' and
+``<CODE>&lt;/<VAR>tag</VAR>&gt;</CODE>'', respectively.<LI>
+Numeric character references of the form ``<CODE>&amp;#<VAR>name</VAR>;</CODE>''.<LI>
+Entity references of the form ``<CODE>&amp;<VAR>name</VAR>;</CODE>''.<LI>
+SGML comments of the form ``<CODE>&lt;!-<VAR>text</VAR>-&gt;</CODE>''.  Note that
+spaces, tabs, and newlines are allowed between the trailing
+``<CODE>&gt;</CODE>'' and the immediately preceeding ``<CODE>-</CODE>''.
+<P>
+</UL>
+<P>
+The <CODE>SGMLParser</CODE> class must be instantiated without arguments.
+It has the following interface methods:
+<P>
+<DL><DT><STRONG><A NAME="6572">reset</A></STRONG>(<VAR></VAR>)
+<DD>
+Reset the instance.  Loses all unprocessed data.  This is called
+implicitly at instantiation time.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6576">setnomoretags</A></STRONG>(<VAR></VAR>)
+<DD>
+Stop processing tags.  Treat all following input as literal input
+(CDATA).  (This is only provided so the HTML tag <CODE>&lt;PLAINTEXT&gt;</CODE>
+can be implemented.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6581">setliteral</A></STRONG>(<VAR></VAR>)
+<DD>
+Enter literal mode (CDATA mode).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6585">feed</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Feed some text to the parser.  It is processed insofar as it consists
+of complete elements; incomplete data is buffered until more data is
+fed or <CODE>close()</CODE> is called.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6590">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Force processing of all buffered data as if it were followed by an
+end-of-file mark.  This method may be redefined by a derived class to
+define additional processing at the end of the input, but the
+redefined version should always call <CODE>SGMLParser.close()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6595">handle_starttag</A></STRONG>(<VAR>tag, method, attributes</VAR>)
+<DD>
+This method is called to handle start tags for which either a
+<CODE>start_<VAR>tag</VAR>()</CODE> or <CODE>do_<VAR>tag</VAR>()</CODE> method has been
+defined.  The <CODE>tag</CODE> argument is the name of the tag converted to
+lower case, and the <CODE>method</CODE> argument is the bound method which
+should be used to support semantic interpretation of the start tag.
+The <VAR>attributes</VAR> argument is a list of (<VAR>name</VAR>, <VAR>value</VAR>)
+pairs containing the attributes found inside the tag's <CODE>&lt;&gt;</CODE>
+brackets.  The <VAR>name</VAR> has been translated to lower case and double
+quotes and backslashes in the <VAR>value</VAR> have been interpreted.  For
+instance, for the tag <CODE>&lt;A HREF=&quot;http://www.cwi.nl/&quot;&gt;</CODE>, this
+method would be called as <CODE>unknown_starttag('a', [('href',
+'http://www.cwi.nl/')])</CODE>.  The base implementation simply calls
+<CODE>method</CODE> with <CODE>attributes</CODE> as the only argument.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6613">handle_endtag</A></STRONG>(<VAR>tag, method</VAR>)
+<DD>
+<P>
+This method is called to handle endtags for which an
+<CODE>end_<VAR>tag</VAR>()</CODE> method has been defined.  The <CODE>tag</CODE>
+argument is the name of the tag converted to lower case, and the
+<CODE>method</CODE> argument is the bound method which should be used to
+support semantic interpretation of the end tag.  If no
+<CODE>end_<VAR>tag</VAR>()</CODE> method is defined for the closing element, this
+handler is not called.  The base implementation simply calls
+<CODE>method</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6622">handle_data</A></STRONG>(<VAR>data</VAR>)
+<DD>
+This method is called to process arbitrary data.  It is intended to be
+overridden by a derived class; the base class implementation does
+nothing.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6626">handle_charref</A></STRONG>(<VAR>ref</VAR>)
+<DD>
+This method is called to process a character reference of the form
+``<CODE>&amp;#<VAR>ref</VAR>;</CODE>''.  In the base implementation, <VAR>ref</VAR> must
+be a decimal number in the
+range 0-255.  It translates the character to ASCII and calls the
+method <CODE>handle_data()</CODE> with the character as argument.  If
+<VAR>ref</VAR> is invalid or out of range, the method
+<CODE>unknown_charref(<VAR>ref</VAR>)</CODE> is called to handle the error.  A
+subclass must override this method to provide support for named
+character entities.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6636">handle_entityref</A></STRONG>(<VAR>ref</VAR>)
+<DD>
+This method is called to process a general entity reference of the form
+``<CODE>&amp;<VAR>ref</VAR>;</CODE>'' where <VAR>ref</VAR> is an general entity
+reference.  It looks for <VAR>ref</VAR> in the instance (or class)
+variable <CODE>entitydefs</CODE> which should be a mapping from entity names
+to corresponding translations.
+If a translation is found, it calls the method <CODE>handle_data()</CODE>
+with the translation; otherwise, it calls the method
+<CODE>unknown_entityref(<VAR>ref</VAR>)</CODE>.  The default <CODE>entitydefs</CODE>
+defines translations for <CODE>&amp;amp;</CODE>, <CODE>&amp;apos</CODE>, <CODE>&amp;gt;</CODE>,
+<CODE>&amp;lt;</CODE>, and <CODE>&amp;quot;</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6652">handle_comment</A></STRONG>(<VAR>comment</VAR>)
+<DD>
+This method is called when a comment is encountered.  The
+<CODE>comment</CODE> argument is a string containing the text between the
+``<CODE>&lt;!-</CODE>'' and ``<CODE>-&gt;</CODE>'' delimiters, but not the delimiters
+themselves.  For example, the comment ``<CODE>&lt;!-text-&gt;</CODE>'' will
+cause this method to be called with the argument <CODE>'text'</CODE>.  The
+default method does nothing.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6661">report_unbalanced</A></STRONG>(<VAR>tag</VAR>)
+<DD>
+This method is called when an end tag is found which does not
+correspond to any open element.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6665">unknown_starttag</A></STRONG>(<VAR>tag, attributes</VAR>)
+<DD>
+This method is called to process an unknown start tag.  It is intended
+to be overridden by a derived class; the base class implementation
+does nothing.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6669">unknown_endtag</A></STRONG>(<VAR>tag</VAR>)
+<DD>
+This method is called to process an unknown end tag.  It is intended
+to be overridden by a derived class; the base class implementation
+does nothing.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6673">unknown_charref</A></STRONG>(<VAR>ref</VAR>)
+<DD>
+This method is called to process unresolvable numeric character
+references.  It is intended to be overridden by a derived class; the
+base class implementation does nothing.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6677">unknown_entityref</A></STRONG>(<VAR>ref</VAR>)
+<DD>
+This method is called to process an unknown entity reference.  It is
+intended to be overridden by a derived class; the base class
+implementation does nothing.
+<P>
+</DL>
+<P>
+Apart from overriding or extending the methods listed above, derived
+classes may also define methods of the following form to define
+processing of specific tags.  Tag names in the input stream are case
+independent; the <VAR>tag</VAR> occurring in method names must be in lower
+case:
+<P>
+<DL><DT><STRONG><A NAME="6682">start_<VAR>tag</VAR></A></STRONG>(<VAR>attributes</VAR>)
+<DD>
+This method is called to process an opening tag <VAR>tag</VAR>.  It has
+preference over <CODE>do_<VAR>tag</VAR>()</CODE>.  The <VAR>attributes</VAR> argument
+has the same meaning as described for <CODE>handle_starttag()</CODE> above.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6690">do_<VAR>tag</VAR></A></STRONG>(<VAR>attributes</VAR>)
+<DD>
+This method is called to process an opening tag <VAR>tag</VAR> that does
+not come with a matching closing tag.  The <VAR>attributes</VAR> argument
+has the same meaning as described for <CODE>handle_starttag()</CODE> above.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6697">end_<VAR>tag</VAR></A></STRONG>(<VAR></VAR>)
+<DD>
+This method is called to process a closing tag <VAR>tag</VAR>.
+<P>
+</DL>
+<P>
+Note that the parser maintains a stack of open elements for which no
+end tag has been found yet.  Only tags processed by
+<CODE>start_<VAR>tag</VAR>()</CODE> are pushed on this stack.  Definition of an
+<CODE>end_<VAR>tag</VAR>()</CODE> method is optional for these tags.  For tags
+processed by <CODE>do_<VAR>tag</VAR>()</CODE> or by <CODE>unknown_tag()</CODE>, no
+<CODE>end_<VAR>tag</VAR>()</CODE> method must be defined; if defined, it will not
+be used.  If both <CODE>start_<VAR>tag</VAR>()</CODE> and <CODE>do_<VAR>tag</VAR>()</CODE>
+methods exist for a tag, the <CODE>start_<VAR>tag</VAR>()</CODE> method takes
+precedence.
+<P>
+<HR><A NAME="tex2html3814" HREF="node124.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3812" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3806" HREF="node122.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3816" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3817" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3815" HREF="node124.html">11.9 Standard Module htmllib</A>
+<B>Up:</B> <A NAME="tex2html3813" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3807" HREF="node122.html">11.7 Standard Module urlparse</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

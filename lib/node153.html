@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.6 Standard module imghdr</TITLE>
+<META NAME="description" CONTENT="13.6 Standard module imghdr">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4177" HREF="node154.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4175" HREF="node147.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4171" HREF="node152.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4179" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4180" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4178" HREF="node154.html">14 Cryptographic Services</A>
+<B>Up:</B> <A NAME="tex2html4176" HREF="node147.html">13 Multimedia Services</A>
+<B> Previous:</B> <A NAME="tex2html4172" HREF="node152.html">13.5 Built-in Module rgbimg</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001460000000000000000">13.6 Standard module <CODE>imghdr</CODE></A></H1>
+<P>
+The <CODE>imghdr</CODE> module determines the type of image contained in a
+file or byte stream.
+<P>
+The <CODE>imghdr</CODE> module defines the following function:
+<P>
+<DL><DT><STRONG><A NAME="8329">what</A></STRONG>(<VAR>filename</VAR><BIG>[</BIG><VAR>, h</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Tests the image data contained in the file named by <VAR>filename</VAR>,
+and returns a string describing the image type.  If optional <VAR>h</VAR>
+is provided, the <VAR>filename</VAR> is ignored and <VAR>h</VAR> is assumed to
+contain the byte stream to test.
+<P>
+</DL>
+<P>
+The following image types are recognized, as listed below with the
+return value from <CODE>what</CODE>:
+<P>
+<DL COMPACT><DT><STRONG>``rgb''</STRONG>
+<DD> SGI ImgLib Files
+<P>
+<DT><STRONG>``gif''</STRONG>
+<DD> GIF 87a and 89a Files
+<P>
+<DT><STRONG>``pbm''</STRONG>
+<DD> Portable Bitmap Files
+<P>
+<DT><STRONG>``pgm''</STRONG>
+<DD> Portable Graymap Files
+<P>
+<DT><STRONG>``ppm''</STRONG>
+<DD> Portable Pixmap Files
+<P>
+<DT><STRONG>``tiff''</STRONG>
+<DD> TIFF Files
+<P>
+<DT><STRONG>``rast''</STRONG>
+<DD> Sun Raster Files
+<P>
+<DT><STRONG>``xbm''</STRONG>
+<DD> X Bitmap Files
+<P>
+<DT><STRONG>``jpeg''</STRONG>
+<DD> JPEG data in JIFF format
+<P>
+ </DL>
+<P>
+You can extend the list of file types <CODE>imghdr</CODE> can recognize by
+appending to this variable:
+<P>
+<DL><DT><STRONG><A NAME="">tests</A></STRONG>
+<DD>
+A list of functions performing the individual tests.  Each function
+takes two arguments: the byte-stream and an open file-like object.
+When <CODE>what()</CODE> is called with a byte-stream, the file-like
+object will be <CODE>None</CODE>.
+<P>
+The test function should return a string describing the image type if
+the test succeeded, or <CODE>None</CODE> if it failed.
+<P>
+</DL>
+<P>
+Example:
+<P>
+<PRE>&gt;&gt;&gt; import imghdr
+&gt;&gt;&gt; imghdr.what('/tmp/bass.gif')
+'gif'</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

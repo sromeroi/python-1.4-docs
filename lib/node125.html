@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.10 Standard Module formatter</TITLE>
+<META NAME="description" CONTENT="11.10 Standard Module formatter">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3838" HREF="node126.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3836" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3830" HREF="node124.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3840" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3841" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3839" HREF="node126.html">11.10.1 The Formatter Interface</A>
+<B>Up:</B> <A NAME="tex2html3837" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3831" HREF="node124.html">11.9 Standard Module htmllib</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0012100000000000000000">11.10 Standard Module <CODE>formatter</CODE></A></H1>
+<P>
+This module supports two interface definitions, each with mulitple
+implementations.  The <EM>formatter</EM> interface is used by the
+<CODE>HTMLParser</CODE> class of the <CODE>htmllib</CODE> module, and the
+<EM>writer</EM> interface is required by the formatter interface.
+<P>
+Formatter objects transform an abstract flow of formatting events into
+specific output events on writer objects.  Formatters manage several
+stack structures to allow various properties of a writer object to be
+changed and restored; writers need not be able to handle relative
+changes nor any sort of ``change back'' operation.  Specific writer
+properties which may be controlled via formatter objects are
+horizontal alignment, font, and left margin indentations.  A mechanism
+is provided which supports providing arbitrary, non-exclusive style
+settings to a writer as well.  Additional interfaces facilitate
+formatting events which are not reversible, such as paragraph
+separation.
+<P>
+Writer objects encapsulate device interfaces.  Abstract devices, such
+as file formats, are supported as well as physical devices.  The
+provided implementations all work with abstract devices.  The
+interface makes available mechanisms for setting the properties which
+formatter objects manage and inserting data into the output.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3842" HREF="node126.html#SECTION0012101000000000000000">11.10.1 The Formatter Interface</A>
+<LI> <A NAME="tex2html3843" HREF="node127.html#SECTION0012102000000000000000">11.10.2 Formatter Implementations</A>
+<LI> <A NAME="tex2html3844" HREF="node128.html#SECTION0012103000000000000000">11.10.3 The Writer Interface</A>
+<LI> <A NAME="tex2html3845" HREF="node129.html#SECTION0012104000000000000000">11.10.4 Writer Implementations</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

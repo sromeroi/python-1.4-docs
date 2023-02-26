@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.1.2 Port Objects</TITLE>
+<META NAME="description" CONTENT="17.1.2 Port Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4862" HREF="node206.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4860" HREF="node203.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4856" HREF="node204.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4864" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4865" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4863" HREF="node206.html">17.2 Standard Module AL</A>
+<B>Up:</B> <A NAME="tex2html4861" HREF="node203.html">17.1 Built-in Module al</A>
+<B> Previous:</B> <A NAME="tex2html4857" HREF="node204.html">17.1.1 Configuration Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001812000000000000000">17.1.2 Port Objects</A></H2>
+<P>
+Port objects (returned by <CODE>al.openport()</CODE> have the following
+methods:
+<P>
+<DL><DT><STRONG><A NAME="10535">closeport</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the port.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10539">getfd</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the file descriptor as an int.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10543">getfilled</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the number of filled samples.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10547">getfillable</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the number of fillable samples.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10551">readsamps</A></STRONG>(<VAR>nsamples</VAR>)
+<DD>
+Read a number of samples from the queue, blocking if necessary.
+Return the data as a string containing the raw data, (e.g., 2 bytes per
+sample in big-endian byte order (high byte, low byte) if you have set
+the sample width to 2 bytes).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10555">writesamps</A></STRONG>(<VAR>samples</VAR>)
+<DD>
+Write samples into the queue, blocking if necessary.  The samples are
+encoded as described for the <CODE>readsamps</CODE> return value.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10560">getfillpoint</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the `fill point'.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10564">setfillpoint</A></STRONG>(<VAR>fillpoint</VAR>)
+<DD>
+Set the `fill point'.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10568">getconfig</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a configuration object containing the current configuration of
+the port.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10572">setconfig</A></STRONG>(<VAR>config</VAR>)
+<DD>
+Set the configuration from the argument, a configuration object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10576">getstatus</A></STRONG>(<VAR>list</VAR>)
+<DD>
+Get status information on last error.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

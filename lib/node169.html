@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.6.1 FSSpec objects</TITLE>
+<META NAME="description" CONTENT="15.6.1 FSSpec objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4403" HREF="node170.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4401" HREF="node168.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4395" HREF="node168.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4405" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4406" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4404" HREF="node170.html">15.6.2 alias objects</A>
+<B>Up:</B> <A NAME="tex2html4402" HREF="node168.html">15.6 Built-in Module macfs</A>
+<B> Previous:</B> <A NAME="tex2html4396" HREF="node168.html">15.6 Built-in Module macfs</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001661000000000000000">15.6.1 FSSpec objects</A></H2>
+<P>
+<DL><DT><STRONG><A NAME="">data</A></STRONG>
+<DD>
+The raw data from the FSSpec object, suitable for passing
+to other applications, for instance.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8998">as_pathname</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the full pathname of the file described by the FSSpec object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9002">as_tuple</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the <CODE>(<VAR>wdRefNum</VAR>, <VAR>parID</VAR>, <VAR>name</VAR>)</CODE> tuple of the file described
+by the FSSpec object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9095">NewAlias</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>file</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Create an Alias object pointing to the file described by this
+FSSpec. If the optional <VAR>file</VAR> parameter is present the alias
+will be relative to that file, otherwise it will be absolute.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9014">NewAliasMinimal</A></STRONG>(<VAR></VAR>)
+<DD>
+Create a minimal alias pointing to this file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9018">GetCreatorType</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the 4-char creator and type of the file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9022">SetCreatorType</A></STRONG>(<VAR>creator, type</VAR>)
+<DD>
+Set the 4-char creator and type of the file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9026">GetFInfo</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a FInfo object describing the finder info for the file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9030">SetFInfo</A></STRONG>(<VAR>finfo</VAR>)
+<DD>
+Set the finder info for the file to the values specified in the
+<VAR>finfo</VAR> object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9035">GetDates</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a tuple with three floating point values representing the
+creation date, modification date and backup date of the file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9039">SetDates</A></STRONG>(<VAR>crdate, moddate, backupdate</VAR>)
+<DD>
+Set the creation, modification and backup date of the file. The values
+are in the standard floating point format used for times throughout
+Python.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

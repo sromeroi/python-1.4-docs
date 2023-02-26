@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>12.1.1 An example</TITLE>
+<META NAME="description" CONTENT="12.1.1 An example">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4079" HREF="node146.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4077" HREF="node144.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4073" HREF="node144.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4081" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4082" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4080" HREF="node146.html">12.2 Standard Module Bastion</A>
+<B>Up:</B> <A NAME="tex2html4078" HREF="node144.html">12.1 Standard Module rexec</A>
+<B> Previous:</B> <A NAME="tex2html4074" HREF="node144.html">12.1 Standard Module rexec</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001311000000000000000">12.1.1 An example</A></H2>
+<P>
+Let us say that we want a slightly more relaxed policy than the
+standard RExec class.  For example, if we're willing to allow files in
+`<CODE>/tmp</CODE>' to be written, we can subclass the <CODE>RExec</CODE> class:
+<P>
+<PRE>class TmpWriterRExec(rexec.RExec):
+    def r_open(self, file, mode='r', buf=-1):
+        if mode in ('r', 'rb'):
+            pass
+        elif mode in ('w', 'wb', 'a', 'ab'):
+            # check filename : must begin with /tmp/
+            if file[:5]!='/tmp/': 
+                raise IOError, &quot;can't write outside /tmp&quot;
+            elif (string.find(file, '/../') &gt;= 0 or
+                 file[:3] == '../' or file[-3:] == '/..'):
+                raise IOError, &quot;'..' in filename forbidden&quot;
+        else: raise IOError, &quot;Illegal open() mode&quot;
+        return open(file, mode, buf)</PRE>
+<P>
+Notice that the above code will occasionally forbid a perfectly valid
+filename; for example, code in the restricted environment won't be
+able to open a file called `<CODE>/tmp/foo/../bar</CODE>'.  To fix this, the
+<CODE>r_open</CODE> method would have to simplify the filename to
+`<CODE>/tmp/bar</CODE>', which would require splitting apart the filename and
+performing various operations on it.  In cases where security is at
+stake, it may be preferable to write simple code which is sometimes
+overly restrictive, instead of more general code that is also more
+complex and may harbor a subtle security hole.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

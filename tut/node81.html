@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Map.</TITLE>
+<META NAME="description" CONTENT="Map.">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1205" HREF="node82.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1203" HREF="node80.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1197" HREF="node80.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1207" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1206" HREF="node82.html">Filter.</A>
+<B>Up:</B> <A NAME="tex2html1204" HREF="node80.html">10.5.2 MapReduce and </A>
+<B> Previous:</B> <A NAME="tex2html1198" HREF="node80.html">10.5.2 MapReduce and </A>
+<BR><HR><P>
+<H3><A NAME="SECTION001152100000000000000">Map.</A></H3>
+<P>
+<code>map(function, sequence)</code> calls <code>function(item)</code> for each of
+the sequence's items and returns a list of the return values.  For
+example, to compute some cubes:
+<P>
+<PRE>        &gt;&gt;&gt; map(lambda x: x*x*x, range(1, 11))
+        [1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+        &gt;&gt;&gt;</PRE>
+<P>
+More than one sequence may be passed; the function must then have as
+many arguments as there are sequences and is called with the
+corresponding item from each sequence (or <code>None</code> if some sequence
+is shorter than another).  If <code>None</code> is passed for the function,
+a function returning its argument(s) is substituted.
+<P>
+Combining these two special cases, we see that
+<code>map(None, list1, list2)</code>  is a convenient way of turning a pair
+of lists into a list of pairs.  For example:
+<P>
+<PRE>        &gt;&gt;&gt; seq = range(8)
+        &gt;&gt;&gt; map(None, seq, map(lambda x: x*x, seq))
+        [(0, 0), (1, 1), (2, 4), (3, 9), (4, 16), (5, 25), (6, 36), (7, 49)]
+        &gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

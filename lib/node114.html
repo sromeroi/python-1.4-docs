@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.3 Standard Module httplib</TITLE>
+<META NAME="description" CONTENT="11.3 Standard Module httplib">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3708" HREF="node115.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3706" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3700" HREF="node113.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3710" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3711" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3709" HREF="node115.html">11.3.1 HTTP Objects</A>
+<B>Up:</B> <A NAME="tex2html3707" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3701" HREF="node113.html">11.2 Standard Module urllib</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001230000000000000000">11.3 Standard Module <CODE>httplib</CODE></A></H1>
+<P>
+<A NAME="5980">&#160;</A>
+<P>
+This module defines a class which implements the client side of the
+HTTP protocol.  It is normally not used directly -- the module
+<CODE>urllib</CODE> uses it to handle URLs that use HTTP.
+<P>
+The module defines one class, <CODE>HTTP</CODE>.  An <CODE>HTTP</CODE> instance
+represents one transaction with an HTTP server.  It should be
+instantiated passing it a host and optional port number.  If no port
+number is passed, the port is extracted from the host string if it has
+the form <CODE>host:port</CODE>, else the default HTTP port (80) is used.
+If no host is passed, no connection is made, and the <CODE>connect</CODE>
+method should be used to connect to a server.  For example, the
+following calls all create instances that connect to the server at the
+same host and port:
+<P>
+<PRE>&gt;&gt;&gt; h1 = httplib.HTTP('www.cwi.nl')
+&gt;&gt;&gt; h2 = httplib.HTTP('www.cwi.nl:80')
+&gt;&gt;&gt; h3 = httplib.HTTP('www.cwi.nl', 80)</PRE>
+<P>
+Once an <CODE>HTTP</CODE> instance has been connected to an HTTP server, it
+should be used as follows:
+<P>
+<DL COMPACT><DT><STRONG>1.</STRONG>
+<DD> Make exactly one call to the <CODE>putrequest()</CODE> method.
+<P>
+<DT><STRONG>2.</STRONG>
+<DD> Make zero or more calls to the <CODE>putheader()</CODE> method.
+<P>
+<DT><STRONG>3.</STRONG>
+<DD> Call the <CODE>endheaders()</CODE> method (this can be omitted if
+step 4 makes no calls).
+<P>
+<DT><STRONG>4.</STRONG>
+<DD> Optional calls to the <CODE>send()</CODE> method.
+<P>
+<DT><STRONG>5.</STRONG>
+<DD> Call the <CODE>getreply()</CODE> method.
+<P>
+<DT><STRONG>6.</STRONG>
+<DD> Call the <CODE>getfile()</CODE> method and read the data off the
+file object that it returns.
+<P>
+ </DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3712" HREF="node115.html#SECTION001231000000000000000">11.3.1 HTTP Objects</A>
+<LI> <A NAME="tex2html3713" HREF="node116.html#SECTION001232000000000000000">11.3.2 Example</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

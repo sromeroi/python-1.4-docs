@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.6 Defining Clean-up Actions</TITLE>
+<META NAME="description" CONTENT="8.6 Defining Clean-up Actions">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html841" HREF="node53.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html839" HREF="node46.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html835" HREF="node51.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html843" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html842" HREF="node53.html">9 Classes</A>
+<B>Up:</B> <A NAME="tex2html840" HREF="node46.html">8 Errors and Exceptions</A>
+<B> Previous:</B> <A NAME="tex2html836" HREF="node51.html">8.5 User-defined Exceptions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00960000000000000000">8.6 Defining Clean-up Actions</A></H1>
+<P>
+The <TT>try</TT> statement has another optional clause which is intended to
+define clean-up actions that must be executed under all circumstances.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; try:
+...     raise KeyboardInterrupt
+... finally:
+...     print 'Goodbye, world!'
+... 
+Goodbye, world!
+Traceback (innermost last):
+  File &quot;&lt;stdin&gt;&quot;, line 2
+KeyboardInterrupt
+&gt;&gt;&gt;</PRE>
+A <TT>finally</TT> clause is executed whether or not an exception has
+occurred in the <TT>try</TT> clause.  When an exception has occurred, it
+is re-raised after the <TT>finally</TT> clause is executed.  The
+<TT>finally</TT> clause is also executed ``on the way out'' when the
+<TT>try</TT> statement is left via a <TT>break</TT> or <TT>return</TT>
+statement.
+<P>
+A <TT>try</TT> statement must either have one or more <TT>except</TT>
+clauses or one <TT>finally</TT> clause, but not both.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

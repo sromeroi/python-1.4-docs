@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.11.1 Message Objects</TITLE>
+<META NAME="description" CONTENT="11.11.1 Message Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3911" HREF="node132.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3909" HREF="node130.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3905" HREF="node130.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3913" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3914" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3912" HREF="node132.html">11.12 Standard Module mimetools</A>
+<B>Up:</B> <A NAME="tex2html3910" HREF="node130.html">11.11 Standard Module rfc822</A>
+<B> Previous:</B> <A NAME="tex2html3906" HREF="node130.html">11.11 Standard Module rfc822</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012111000000000000000">11.11.1 Message Objects</A></H2>
+<P>
+A <CODE>Message</CODE> instance has the following methods:
+<P>
+<DL><DT><STRONG><A NAME="7091">rewindbody</A></STRONG>(<VAR></VAR>)
+<DD>
+Seek to the start of the message body.  This only works if the file
+object is seekable.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7095">getallmatchingheaders</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return a list of lines consisting of all headers matching
+<VAR>name</VAR>, if any.  Each physical line, whether it is a continuation
+line or not, is a separate list item.  Return the empty list if no
+header matches <VAR>name</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7101">getfirstmatchingheader</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return a list of lines comprising the first header matching
+<VAR>name</VAR>, and its continuation line(s), if any.  Return <CODE>None</CODE>
+if there is no header matching <VAR>name</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7108">getrawheader</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return a single string consisting of the text after the colon in the
+first header matching <VAR>name</VAR>.  This includes leading whitespace,
+the trailing linefeed, and internal linefeeds and whitespace if there
+any continuation line(s) were present.  Return <CODE>None</CODE> if there is
+no header matching <VAR>name</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7115">getheader</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Like <CODE>getrawheader(<VAR>name</VAR>)</CODE>, but strip leading and trailing
+whitespace (but not internal whitespace).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7120">getaddr</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return a pair (full name, email address) parsed from the string
+returned by <CODE>getheader(<VAR>name</VAR>)</CODE>.  If no header matching
+<VAR>name</VAR> exists, return <CODE>None, None</CODE>; otherwise both the full
+name and the address are (possibly empty )strings.
+<P>
+Example: If <CODE>m</CODE>'s first <CODE>From</CODE> header contains the string<BR> 
+<CODE>'jack@cwi.nl (Jack Jansen)'</CODE>, then
+<CODE>m.getaddr('From')</CODE> will yield the pair
+<CODE>('Jack Jansen', 'jack@cwi.nl')</CODE>.
+If the header contained
+<CODE>'Jack Jansen &lt;jack@cwi.nl&gt;'</CODE> instead, it would yield the
+exact same result.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7133">getaddrlist</A></STRONG>(<VAR>name</VAR>)
+<DD>
+This is similar to <CODE>getaddr(<VAR>list</VAR>)</CODE>, but parses a header
+containing a list of email addresses (e.g. a <CODE>To</CODE> header) and
+returns a list of (full name, email address) pairs (even if there was
+only one address in the header).  If there is no header matching
+<VAR>name</VAR>, return an empty list.
+<P>
+XXX The current version of this function is not really correct.  It
+yields bogus results if a full name contains a comma.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7140">getdate</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Retrieve a header using <CODE>getheader</CODE> and parse it into a 9-tuple
+compatible with <CODE>time.mktime()</CODE>.  If there is no header matching
+<VAR>name</VAR>, or it is unparsable, return <CODE>None</CODE>.
+<P>
+Date parsing appears to be a black art, and not all mailers adhere to
+the standard.  While it has been tested and found correct on a large
+collection of email from many sources, it is still possible that this
+function may occasionally yield an incorrect result.
+<P>
+</DL>
+<P>
+<CODE>Message</CODE> instances also support a read-only mapping interface.
+In particular: <CODE>m[name]</CODE> is the same as <CODE>m.getheader(name)</CODE>;
+and <CODE>len(m)</CODE>, <CODE>m.has_key(name)</CODE>, <CODE>m.keys()</CODE>,
+<CODE>m.values()</CODE> and <CODE>m.items()</CODE> act as expected (and
+consistently).
+<P>
+Finally, <CODE>Message</CODE> instances have two public instance variables:
+<P>
+<DL><DT><STRONG><A NAME="">headers</A></STRONG>
+<DD>
+A list containing the entire set of header lines, in the order in
+which they were read.  Each line contains a trailing newline.  The
+blank line terminating the headers is not contained in the list.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">fp</A></STRONG>
+<DD>
+The file object passed at instantiation time.
+<P>
+</DL><HR><A NAME="tex2html3911" HREF="node132.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3909" HREF="node130.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3905" HREF="node130.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3913" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3914" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3912" HREF="node132.html">11.12 Standard Module mimetools</A>
+<B>Up:</B> <A NAME="tex2html3910" HREF="node130.html">11.11 Standard Module rfc822</A>
+<B> Previous:</B> <A NAME="tex2html3906" HREF="node130.html">11.11 Standard Module rfc822</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

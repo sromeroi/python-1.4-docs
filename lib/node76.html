@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.3 Built-in Module pwd</TITLE>
+<META NAME="description" CONTENT="8.3 Built-in Module pwd">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3200" HREF="node77.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3198" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3192" HREF="node75.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3202" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3203" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3201" HREF="node77.html">8.4 Built-in Module grp</A>
+<B>Up:</B> <A NAME="tex2html3199" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3193" HREF="node75.html">8.2 Standard Module posixpath</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00930000000000000000">8.3 Built-in Module <CODE>pwd</CODE></A></H1>
+<P>
+This module provides access to the Unix password database.
+It is available on all Unix versions.
+<P>
+Password database entries are reported as 7-tuples containing the
+following items from the password database (see `<CODE>&lt;pwd.h&gt;</CODE>'), in order:
+<CODE>pw_name</CODE>,
+<CODE>pw_passwd</CODE>,
+<CODE>pw_uid</CODE>,
+<CODE>pw_gid</CODE>,
+<CODE>pw_gecos</CODE>,
+<CODE>pw_dir</CODE>,
+<CODE>pw_shell</CODE>.
+The uid and gid items are integers, all others are strings.
+An exception is raised if the entry asked for cannot be found.
+<P>
+It defines the following items:
+<P>
+<DL><DT><STRONG><A NAME="4952">getpwuid</A></STRONG>(<VAR>uid</VAR>)
+<DD>
+Return the password database entry for the given numeric user ID.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4956">getpwnam</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return the password database entry for the given user name.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4960">getpwall</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a list of all available password database entries, in arbitrary order.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

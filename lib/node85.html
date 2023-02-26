@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.11 Standard Module posixfile</TITLE>
+<META NAME="description" CONTENT="8.11 Standard Module posixfile">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3307" HREF="node86.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3305" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3299" HREF="node84.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3309" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3310" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3308" HREF="node86.html">8.12 Built-in Module syslog</A>
+<B>Up:</B> <A NAME="tex2html3306" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3300" HREF="node84.html">8.10 Built-in Module fcntl</A>
+<BR><HR><P>
+<H1><A NAME="SECTION009110000000000000000">8.11 Standard Module <CODE>posixfile</CODE></A></H1>
+<P>
+<A NAME="5200">&#160;</A><A NAME="5201">&#160;</A>
+<P>
+<EM>Note:</EM> This module will become obsolete in a future release.
+The locking operation that it provides is done better and more
+portably by the <CODE>fcntl.lockf()</CODE> call.
+<P>
+This module implements some additional functionality over the built-in
+file objects.  In particular, it implements file locking, control over
+the file flags, and an easy interface to duplicate the file object.
+The module defines a new file object, the posixfile object.  It
+has all the standard file object methods and adds the methods
+described below.  This module only works for certain flavors of
+Unix, since it uses <CODE>fcntl()</CODE> for file locking.
+<P>
+To instantiate a posixfile object, use the <CODE>open()</CODE> function in
+the posixfile module.  The resulting object looks and feels roughly
+the same as a standard file object.
+<P>
+The posixfile module defines the following constants:
+<P>
+<DL><DT><STRONG><A NAME="">SEEK_SET</A></STRONG>
+<DD>
+offset is calculated from the start of the file
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">SEEK_CUR</A></STRONG>
+<DD>
+offset is calculated from the current position in the file
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">SEEK_END</A></STRONG>
+<DD>
+offset is calculated from the end of the file
+<P>
+</DL>
+<P>
+The posixfile module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="5339">open</A></STRONG>(<VAR>filename</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>[</BIG><VAR>, bufsize</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+ Create a new posixfile object with the given filename and mode.  The
+ <VAR>filename</VAR>, <VAR>mode</VAR> and <VAR>bufsize</VAR> arguments are
+ interpreted the same way as by the built-in <CODE>open()</CODE> function.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5230">fileopen</A></STRONG>(<VAR>fileobject</VAR>)
+<DD>
+ Create a new posixfile object with the given standard file object.
+ The resulting object has the same filename and mode as the original
+ file object.
+<P>
+</DL>
+<P>
+The posixfile object defines the following additional methods:
+<P>
+<DL><DT><STRONG><A NAME="5341">lock</A></STRONG>(<VAR>fmt, </VAR><BIG>[</BIG><VAR>len</VAR><BIG>[</BIG><VAR>, start
+</VAR><BIG>[</BIG><VAR>, whence</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+ Lock the specified section of the file that the file object is
+ referring to.  The format is explained
+ below in a table.  The <VAR>len</VAR> argument specifies the length of the
+ section that should be locked. The default is <CODE>0</CODE>. <VAR>start</VAR>
+ specifies the starting offset of the section, where the default is
+ <CODE>0</CODE>.  The <VAR>whence</VAR> argument specifies where the offset is
+ relative to. It accepts one of the constants <CODE>SEEK_SET</CODE>,
+ <CODE>SEEK_CUR</CODE> or <CODE>SEEK_END</CODE>.  The default is <CODE>SEEK_SET</CODE>.
+ For more information about the arguments refer to the fcntl
+ manual page on your system.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5337">flags</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>flags</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+ Set the specified flags for the file that the file object is referring
+ to.  The new flags are ORed with the old flags, unless specified
+ otherwise.  The format is explained below in a table.  Without
+ the <VAR>flags</VAR> argument
+ a string indicating the current flags is returned (this is
+ the same as the '?' modifier).  For more information about the flags
+ refer to the fcntl manual page on your system.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5254">dup</A></STRONG>(<VAR></VAR>)
+<DD>
+ Duplicate the file object and the underlying file pointer and file
+ descriptor.  The resulting object behaves as if it were newly
+ opened.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5258">dup2</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+ Duplicate the file object and the underlying file pointer and file
+ descriptor.  The new object will have the given file descriptor.
+ Otherwise the resulting object behaves as if it were newly opened.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5262">file</A></STRONG>(<VAR></VAR>)
+<DD>
+ Return the standard file object that the posixfile object is based
+ on.  This is sometimes necessary for functions that insist on a
+ standard file object.
+<P>
+</DL>
+<P>
+All methods return <CODE>IOError</CODE> when the request fails.
+<P>
+Format characters for the <CODE>lock()</CODE> method have the following meaning:
+<P>
+<P><P> <IMG WIDTH=432 HEIGHT=82 ALIGN=BOTTOM ALT="tableiii5265" SRC="img12.gif"  > <P><P>
+<P>
+In addition the following modifiers can be added to the format:
+<P>
+<P><P> <IMG WIDTH=786 HEIGHT=62 ALIGN=BOTTOM ALT="tableiii5281" SRC="img13.gif"  > <P><P>
+<P>
+Note:
+<P>
+(1) The lock returned is in the format <CODE>(mode, len, start,
+whence, pid)</CODE> where mode is a character representing the type of lock
+('r' or 'w').  This modifier prevents a request from being granted; it
+is for query purposes only.
+<P>
+Format character for the <CODE>flags()</CODE> method have the following meaning:
+<P>
+<P><P> <IMG WIDTH=428 HEIGHT=102 ALIGN=BOTTOM ALT="tableiii5296" SRC="img14.gif"  > <P><P>
+<P>
+In addition the following modifiers can be added to the format:
+<P>
+<P><P> <IMG WIDTH=675 HEIGHT=82 ALIGN=BOTTOM ALT="tableiii5315" SRC="img15.gif"  > <P><P>
+<P>
+Note:
+<P>
+(1) The <CODE>!</CODE> and <CODE>=</CODE> modifiers are mutually exclusive.
+<P>
+(2) This string represents the flags after they may have been altered
+by the same call.
+<P>
+Examples:
+<P>
+<PRE>from posixfile import *
+
+file = open('/tmp/test', 'w')
+file.lock('w|')
+...
+file.lock('u')
+file.close()</PRE>
+<P>
+<HR><A NAME="tex2html3307" HREF="node86.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3305" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3299" HREF="node84.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3309" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3310" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3308" HREF="node86.html">8.12 Built-in Module syslog</A>
+<B>Up:</B> <A NAME="tex2html3306" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3300" HREF="node84.html">8.10 Built-in Module fcntl</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

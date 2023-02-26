@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Code Objects</TITLE>
+<META NAME="description" CONTENT="Code Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2473" HREF="node20.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2471" HREF="node14.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2465" HREF="node18.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2475" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2476" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2474" HREF="node20.html">Type Objects</A>
+<B>Up:</B> <A NAME="tex2html2472" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2466" HREF="node18.html">Methods</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00317500000000000000">Code Objects</A></H3>
+<P>
+<A NAME="746">&#160;</A><A NAME="746">&#160;</A>
+<P>
+Code objects are used by the implementation to represent
+``pseudo-compiled'' executable Python code such as a function body.
+They differ from function objects because they don't contain a
+reference to their global execution environment.  Code objects are
+returned by the built-in <CODE>compile()</CODE> function and can be
+extracted from function objects through their <CODE>func_code</CODE>
+attribute.
+<P>
+<A NAME="750">&#160;</A>
+<P>
+A code object can be executed or evaluated by passing it (instead of a
+source string) to the <CODE>exec</CODE> statement or the built-in
+<CODE>eval()</CODE> function.
+<A NAME="753">&#160;</A><A NAME="753">&#160;</A>
+<P>
+(See the Python Reference Manual for more info.)
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

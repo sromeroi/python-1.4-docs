@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>7.2.1 Socket Objects</TITLE>
+<META NAME="description" CONTENT="7.2.1 Socket Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3107" HREF="node70.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3105" HREF="node68.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3099" HREF="node68.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3109" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3110" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3108" HREF="node70.html">7.2.2 Example</A>
+<B>Up:</B> <A NAME="tex2html3106" HREF="node68.html">7.2 Built-in Module socket</A>
+<B> Previous:</B> <A NAME="tex2html3100" HREF="node68.html">7.2 Built-in Module socket</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00821000000000000000">7.2.1 Socket Objects</A></H2>
+<P>
+,
+Socket objects have the following methods.  Except for
+<CODE>makefile()</CODE> these correspond to Unix system calls applicable to
+sockets.
+<P>
+<DL><DT><STRONG><A NAME="4083">accept</A></STRONG>(<VAR></VAR>)
+<DD>
+Accept a connection.
+The socket must be bound to an address and listening for connections.
+The return value is a pair <CODE>(<VAR>conn</VAR>, <VAR>address</VAR>)</CODE>
+where <VAR>conn</VAR> is a <EM>new</EM> socket object usable to send and
+receive data on the connection, and <VAR>address</VAR> is the address bound
+to the socket on the other end of the connection.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4092">bind</A></STRONG>(<VAR>address</VAR>)
+<DD>
+Bind the socket to <VAR>address</VAR>.  The socket must not already be bound.
+(The format of <VAR>address</VAR> depends on the address family -- see above.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4098">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the socket.  All future operations on the socket object will fail.
+The remote end will receive no more data (after queued data is flushed).
+Sockets are automatically closed when they are garbage-collected.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4102">connect</A></STRONG>(<VAR>address</VAR>)
+<DD>
+Connect to a remote socket at <VAR>address</VAR>.
+(The format of <VAR>address</VAR> depends on the address family -- see above.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4108">fileno</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the socket's file descriptor (a small integer).  This is useful
+with <CODE>select</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4113">getpeername</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the remote address to which the socket is connected.  This is
+useful to find out the port number of a remote IP socket, for instance.
+(The format of the address returned depends on the address family --
+see above.)  On some systems this function is not supported.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4117">getsockname</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the socket's own address.  This is useful to find out the port
+number of an IP socket, for instance.
+(The format of the address returned depends on the address family --
+see above.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4225">getsockopt</A></STRONG>(<VAR>level, optname</VAR><BIG>[</BIG><VAR>, buflen</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return the value of the given socket option (see the Unix man page
+<I>getsockopt</I>(2)).  The needed symbolic constants (<CODE>SO_*</CODE> etc.)
+are defined in this module.  If <VAR>buflen</VAR>
+is absent, an integer option is assumed and its integer value
+is returned by the function.  If <VAR>buflen</VAR> is present, it specifies
+the maximum length of the buffer used to receive the option in, and
+this buffer is returned as a string.  It is up to the caller to decode
+the contents of the buffer (see the optional built-in module
+<CODE>struct</CODE> for a way to decode C structures encoded as strings).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4131">listen</A></STRONG>(<VAR>backlog</VAR>)
+<DD>
+Listen for connections made to the socket.  The <VAR>backlog</VAR> argument
+specifies the maximum number of queued connections and should be at
+least 1; the maximum value is system-dependent (usually 5).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4232">makefile</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>mode</VAR><BIG>[</BIG><VAR>, bufsize</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a <I><DFN>file object</DFN></I> associated with the socket.  (File objects
+were described earlier under Built-in Types.)  The file object
+references a <CODE>dup()</CODE>ped version of the socket file descriptor, so
+the file object and socket object may be closed or garbage-collected
+independently.  The optional <VAR>mode</VAR> and <VAR>bufsize</VAR> arguments
+are interpreted the same way as by the built-in
+<CODE>open()</CODE> function.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4227">recv</A></STRONG>(<VAR>bufsize</VAR><BIG>[</BIG><VAR>, flags</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Receive data from the socket.  The return value is a string representing
+the data received.  The maximum amount of data to be received
+at once is specified by <VAR>bufsize</VAR>.  See the Unix manual page
+for the meaning of the optional argument <VAR>flags</VAR>; it defaults to
+zero.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4228">recvfrom</A></STRONG>(<VAR>bufsize</VAR><BIG>[</BIG><VAR>, flags</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Receive data from the socket.  The return value is a pair
+<CODE>(<VAR>string</VAR>, <VAR>address</VAR>)</CODE> where <VAR>string</VAR> is a string
+representing the data received and <VAR>address</VAR> is the address of the
+socket sending the data.  The optional <VAR>flags</VAR> argument has the
+same meaning as for <CODE>recv()</CODE> above.
+(The format of <VAR>address</VAR> depends on the address family -- see above.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4230">send</A></STRONG>(<VAR>string</VAR><BIG>[</BIG><VAR>, flags</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Send data to the socket.  The socket must be connected to a remote
+socket.  The optional <VAR>flags</VAR> argument has the same meaning as for
+<CODE>recv()</CODE> above.  Return the number of bytes sent.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4231">sendto</A></STRONG>(<VAR>string</VAR><BIG>[</BIG><VAR>, flags</VAR><BIG>]</BIG><VAR>, address</VAR>)
+<DD>
+Send data to the socket.  The socket should not be connected to a
+remote socket, since the destination socket is specified by
+<CODE>address</CODE>.  The optional <VAR>flags</VAR> argument has the same
+meaning as for <CODE>recv()</CODE> above.  Return the number of bytes sent.
+(The format of <VAR>address</VAR> depends on the address family -- see above.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4177">setblocking</A></STRONG>(<VAR>flag</VAR>)
+<DD>
+Set blocking or non-blocking mode of the socket: if <VAR>flag</VAR> is 0,
+the socket is set to non-blocking, else to blocking mode.  Initially
+all sockets are in blocking mode.  In non-blocking mode, if a
+<CODE>recv</CODE> call doesn't find any data, or if a <CODE>send</CODE> call can't
+immediately dispose of the data, a <CODE>socket.error</CODE> exception is
+raised; in blocking mode, the calls block until they can proceed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4185">setsockopt</A></STRONG>(<VAR>level, optname, value</VAR>)
+<DD>
+Set the value of the given socket option (see the Unix man page
+<I>setsockopt</I>(2)).  The needed symbolic constants are defined in
+the <CODE>socket</CODE> module (<CODE>SO_*</CODE> etc.).  The value can be an
+integer or a string representing a buffer.  In the latter case it is
+up to the caller to ensure that the string contains the proper bits
+(see the optional built-in module
+<CODE>struct</CODE> for a way to encode C structures as strings).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4194">shutdown</A></STRONG>(<VAR>how</VAR>)
+<DD>
+Shut down one or both halves of the connection.  If <VAR>how</VAR> is <CODE>0</CODE>,
+further receives are disallowed.  If <VAR>how</VAR> is <CODE>1</CODE>, further sends are
+disallowed.  If <VAR>how</VAR> is <CODE>2</CODE>, further sends and receives are
+disallowed.
+<P>
+</DL>
+<P>
+Note that there are no methods <CODE>read()</CODE> or <CODE>write()</CODE>; use
+<CODE>recv()</CODE> and <CODE>send()</CODE> without <VAR>flags</VAR> argument instead.
+<P>
+<HR><A NAME="tex2html3107" HREF="node70.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3105" HREF="node68.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3099" HREF="node68.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3109" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3110" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3108" HREF="node70.html">7.2.2 Example</A>
+<B>Up:</B> <A NAME="tex2html3106" HREF="node68.html">7.2 Built-in Module socket</A>
+<B> Previous:</B> <A NAME="tex2html3100" HREF="node68.html">7.2 Built-in Module socket</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.5 Inheritance</TITLE>
+<META NAME="description" CONTENT="9.5 Inheritance">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html964" HREF="node63.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html962" HREF="node53.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html956" HREF="node61.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html966" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html965" HREF="node63.html">9.5.1 Multiple inheritance</A>
+<B>Up:</B> <A NAME="tex2html963" HREF="node53.html">9 Classes</A>
+<B> Previous:</B> <A NAME="tex2html957" HREF="node61.html">9.4 Random remarks</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001050000000000000000">9.5 Inheritance</A></H1>
+<P>
+Of course, a language feature would not be worthy of the name ``class''
+without supporting inheritance.  The syntax for a derived class
+definition looks as follows:
+<P>
+<PRE>        class DerivedClassName(BaseClassName):
+                &lt;statement-1&gt;
+                .
+                .
+                .
+                &lt;statement-N&gt;</PRE>
+<P>
+The name <code>BaseClassName</code> must be defined in a scope containing
+the derived class definition.  Instead of a base class name, an
+expression is also allowed.  This is useful when the base class is
+defined in another module, e.g.,
+<P>
+<PRE>        class DerivedClassName(modname.BaseClassName):</PRE>
+<P>
+Execution of a derived class definition proceeds the same as for a
+base class.  When the class object is constructed, the base class is
+remembered.  This is used for resolving attribute references: if a
+requested attribute is not found in the class, it is searched in the
+base class.  This rule is applied recursively if the base class itself
+is derived from some other class.
+<P>
+There's nothing special about instantiation of derived classes:
+<code>DerivedClassName()</code> creates a new instance of the class.  Method
+references are resolved as follows: the corresponding class attribute
+is searched, descending down the chain of base classes if necessary,
+and the method reference is valid if this yields a function object.
+<P>
+Derived classes may override methods of their base classes.  Because
+methods have no special privileges when calling other methods of the
+same object, a method of a base class that calls another method
+defined in the same base class, may in fact end up calling a method of
+a derived class that overrides it.  (For C++ programmers: all methods
+in Python are ``virtual functions''.)
+<P>
+An overriding method in a derived class may in fact want to extend
+rather than simply replace the base class method of the same name.
+There is a simple way to call the base class method directly: just
+call <code>BaseClassName.methodname(self, arguments)</code>.  This is
+occasionally useful to clients as well.  (Note that this only works if
+the base class is defined or imported directly in the global scope.)
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html967" HREF="node63.html#SECTION001051000000000000000">9.5.1 Multiple inheritance</A>
+</UL>
+<HR><A NAME="tex2html964" HREF="node63.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html962" HREF="node53.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html956" HREF="node61.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html966" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html965" HREF="node63.html">9.5.1 Multiple inheritance</A>
+<B>Up:</B> <A NAME="tex2html963" HREF="node53.html">9 Classes</A>
+<B> Previous:</B> <A NAME="tex2html957" HREF="node61.html">9.4 Random remarks</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

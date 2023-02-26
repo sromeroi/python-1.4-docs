@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>5.4 Dictionaries</TITLE>
+<META NAME="description" CONTENT="5.4 Dictionaries">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html684" HREF="node39.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html682" HREF="node34.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html676" HREF="node37.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html686" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html685" HREF="node39.html">5.5 More on Conditions</A>
+<B>Up:</B> <A NAME="tex2html683" HREF="node34.html">5 Odds and Ends</A>
+<B> Previous:</B> <A NAME="tex2html677" HREF="node37.html">5.3 Tuples and Sequences</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00640000000000000000">5.4 Dictionaries</A></H1>
+<P>
+Another useful data type built into Python is the <EM>dictionary</EM>.
+Dictionaries are sometimes found in other languages as ``associative
+memories'' or ``associative arrays''.  Unlike sequences, which are
+indexed by a range of numbers, dictionaries are indexed by <EM>keys</EM>,
+which are strings (the use of non-string values as keys
+is supported, but beyond the scope of this tutorial).
+It is best to think of a dictionary as an unordered set of
+<EM>key:value</EM> pairs, with the requirement that the keys are unique
+(within one dictionary).
+A pair of braces creates an empty dictionary: <code>{}</code>.
+Placing a comma-separated list of key:value pairs within the
+braces adds initial key:value pairs to the dictionary; this is also the
+way dictionaries are written on output.
+<P>
+The main operations on a dictionary are storing a value with some key
+and extracting the value given the key.  It is also possible to delete
+a key:value pair
+with <TT>del</TT>.
+If you store using a key that is already in use, the old value
+associated with that key is forgotten.  It is an error to extract a
+value using a non-existent key.
+<P>
+The <TT>keys()</TT> method of a dictionary object returns a list of all the
+keys used in the dictionary, in random order (if you want it sorted,
+just apply the <TT>sort()</TT> method to the list of keys).  To check
+whether a single key is in the dictionary, use the <code>has_key()</code>
+method of the dictionary.
+<P>
+Here is a small example using a dictionary:
+<P>
+<PRE>&gt;&gt;&gt; tel = {'jack': 4098, 'sape': 4139}
+&gt;&gt;&gt; tel['guido'] = 4127
+&gt;&gt;&gt; tel
+{'sape': 4139, 'guido': 4127, 'jack': 4098}
+&gt;&gt;&gt; tel['jack']
+4098
+&gt;&gt;&gt; del tel['sape']
+&gt;&gt;&gt; tel['irv'] = 4127
+&gt;&gt;&gt; tel
+{'guido': 4127, 'irv': 4127, 'jack': 4098}
+&gt;&gt;&gt; tel.keys()
+['guido', 'irv', 'jack']
+&gt;&gt;&gt; tel.has_key('guido')
+1
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

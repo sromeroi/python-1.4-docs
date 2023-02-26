@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.7 Python and the World-Wide Web</TITLE>
+<META NAME="description" CONTENT="11.7 Python and the World-Wide Web">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1443" HREF="node103.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1441" HREF="node93.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1435" HREF="node101.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1445" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1444" HREF="node103.html">11.8 Miscellaneous</A>
+<B>Up:</B> <A NAME="tex2html1442" HREF="node93.html">11 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1436" HREF="node101.html">11.6 Customizing Import and </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001270000000000000000">11.7 Python and the World-Wide Web</A></H1>
+<P>
+There is a growing number of modules available for writing WWW tools.
+The previous release already sported modules <CODE>gopherlib</CODE>,
+<CODE>ftplib</CODE>, <CODE>httplib</CODE> and <CODE>urllib</CODE> (which unifies the
+other three) for accessing data through the commonest WWW protocols.
+This release also provides <CODE>cgi</CODE>, to ease the writing of
+server-side scripts that use the Common Gateway Interface protocol,
+supported by most WWW servers.  The module <CODE>urlparse</CODE> provides
+precise parsing of a URL string into its components (address scheme,
+network location, path, parameters, query, and fragment identifier).
+<P>
+A rudimentary, parser for HTML files is available in the module
+<CODE>htmllib</CODE>.  It currently supports a subset of HTML 1.0 (if you
+bring it up to date, I'd love to receive your fixes!).  Unfortunately
+Python seems to be too slow for real-time parsing and formatting of
+HTML such as required by interactive WWW browsers -- but it's good
+enough to write a ``robot'' (an automated WWW browser that searches
+the web for information).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.9 Miscellaneous New Built-in Functions</TITLE>
+<META NAME="description" CONTENT="10.9 Miscellaneous New Built-in Functions">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1269" HREF="node88.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1267" HREF="node65.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1261" HREF="node86.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1271" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1270" HREF="node88.html">10.10 Else Clause For </A>
+<B>Up:</B> <A NAME="tex2html1268" HREF="node65.html">10 Recent Additions as </A>
+<B> Previous:</B> <A NAME="tex2html1262" HREF="node86.html">10.8 Generalized Dictionaries</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001190000000000000000">10.9 Miscellaneous New Built-in Functions</A></H1>
+<P>
+The function <code>vars()</code> returns a dictionary containing the current
+local variables.  With a module argument, it returns that module's
+global variables.  The old function <code>dir(x)</code> returns
+<code>vars(x).keys()</code>.
+<P>
+The function <code>round(x)</code> returns a floating point number rounded
+to the nearest integer (but still expressed as a floating point
+number).  E.g. <code>round(3.4) == 3.0</code> and <code>round(3.5) == 4.0</code>.
+With a second argument it rounds to the specified number of digits,
+e.g. <code>round(math.pi, 4) == 3.1416</code> or even
+<code>round(123.4, -2) == 100.0</code>.
+<P>
+The function <code>hash(x)</code> returns a hash value for an object.
+All object types acceptable as dictionary keys have a hash value (and
+it is this hash value that the dictionary implementation uses).
+<P>
+The function <code>id(x)</code> return a unique identifier for an object.
+For two objects x and y, <code>id(x) == id(y)</code> if and only if
+<code>x is y</code>.  (In fact the object's address is used.)
+<P>
+The function <code>hasattr(x, name)</code> returns whether an object has an
+attribute with the given name (a string value).  The function
+<code>getattr(x, name)</code> returns the object's attribute with the given
+name.  The function <code>setattr(x, name, value)</code> assigns a value to
+an object's attribute with the given name.  These three functions are
+useful if the attribute names are not known beforehand.  Note that
+<code>getattr(x, 'spam')</code> is equivalent to <code>x.spam</code>, and
+<code>setattr(x, 'spam', y)</code> is equivalent to <code>x.spam = y</code>.  By
+definition, <code>hasattr(x, name)</code> returns true if and only if
+<code>getattr(x, name)</code> returns without raising an exception.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

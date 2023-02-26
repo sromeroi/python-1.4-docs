@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.14 Standard module uu</TITLE>
+<META NAME="description" CONTENT="11.14 Standard module uu">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3969" HREF="node137.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3967" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3961" HREF="node135.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3971" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3972" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3970" HREF="node137.html">11.15 Built-in Module binascii</A>
+<B>Up:</B> <A NAME="tex2html3968" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3962" HREF="node135.html">11.13.1 notes</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0012140000000000000000">11.14 Standard module <CODE>uu</CODE></A></H1>
+<P>
+This module encodes and decodes files in uuencode format, allowing
+arbitrary binary data to be transferred over ascii-only connections.
+Whereever a file argument is expected, the methods accept either a
+pathname (<CODE>'-'</CODE> for stdin/stdout) or a file-like object.
+<P>
+Normally you would pass filenames, but there is one case where you
+have to open the file yourself: if you are on a non-unix platform and
+your binary file is actually a textfile that you want encoded
+unix-compatible you will have to open the file yourself as a textfile,
+so newline conversion is performed.
+<P>
+This code was contributed by Lance Ellinghouse, and modified by Jack
+Jansen.
+<P>
+The <CODE>uu</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="7391">encode</A></STRONG>(<VAR>in_file, out_file</VAR><BIG>[</BIG><VAR>, name, mode</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Uuencode file <VAR>in_file</VAR> into file <VAR>out_file</VAR>.  The uuencoded
+file will have the header specifying <VAR>name</VAR> and <VAR>mode</VAR> as the
+defaults for the results of decoding the file. The default defaults
+are taken from <VAR>in_file</VAR>, or <CODE>'-'</CODE> and <CODE>0666</CODE>
+respectively.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7392">decode</A></STRONG>(<VAR>in_file</VAR><BIG>[</BIG><VAR>, out_file, mode</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This call decodes uuencoded file <VAR>in_file</VAR> placing the result on
+file <VAR>out_file</VAR>. If <VAR>out_file</VAR> is a pathname the <VAR>mode</VAR> is
+also set. Defaults for <VAR>out_file</VAR> and <VAR>mode</VAR> are taken from
+the uuencode header.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

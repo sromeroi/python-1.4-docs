@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.6 Installing your CGI script on a Unix system</TITLE>
+<META NAME="description" CONTENT="11.1.6 Installing your CGI script on a Unix system">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3650" HREF="node110.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3648" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3642" HREF="node108.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3652" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3653" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3651" HREF="node110.html">11.1.7 Testing your CGI </A>
+<B>Up:</B> <A NAME="tex2html3649" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3643" HREF="node108.html">11.1.5 Caring about security</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001216000000000000000">11.1.6 Installing your CGI script on a Unix system</A></H2>
+<P>
+Read the documentation for your HTTP server and check with your local
+system administrator to find the directory where CGI scripts should be
+installed; usually this is in a directory <CODE>cgi-bin</CODE> in the server tree.
+<P>
+Make sure that your script is readable and executable by ``others''; the
+Unix file mode should be 755 (use <CODE>chmod 755 filename</CODE>).  Make sure
+that the first line of the script contains <CODE>#!</CODE> starting in column 1
+followed by the pathname of the Python interpreter, for instance:
+<P>
+<PRE>	#!/usr/local/bin/python</PRE>
+<P>
+Make sure the Python interpreter exists and is executable by ``others''.
+<P>
+Make sure that any files your script needs to read or write are
+readable or writable, respectively, by ``others'' - their mode should
+be 644 for readable and 666 for writable.  This is because, for
+security reasons, the HTTP server executes your script as user
+``nobody'', without any special privileges.  It can only read (write,
+execute) files that everybody can read (write, execute).  The current
+directory at execution time is also different (it is usually the
+server's cgi-bin directory) and the set of environment variables is
+also different from what you get at login.  in particular, don't count
+on the shell's search path for executables (<CODE>$PATH</CODE>) or the Python
+module search path (<CODE>$PYTHONPATH</CODE>) to be set to anything interesting.
+<P>
+If you need to load modules from a directory which is not on Python's
+default module search path, you can change the path in your script,
+before importing other modules, e.g.:
+<P>
+<PRE>	import sys
+	sys.path.insert(0, &quot;/usr/home/joe/lib/python&quot;)
+	sys.path.insert(0, &quot;/usr/local/lib/python&quot;)</PRE>
+<P>
+(This way, the directory inserted last will be searched first!)
+<P>
+Instructions for non-Unix systems will vary; check your HTTP server's
+documentation (it will usually have a section on CGI scripts).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

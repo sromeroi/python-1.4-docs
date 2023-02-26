@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Modules</TITLE>
+<META NAME="description" CONTENT="Modules">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2425" HREF="node16.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2423" HREF="node14.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2417" HREF="node14.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2427" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2428" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2426" HREF="node16.html">Classes and Class Instances</A>
+<B>Up:</B> <A NAME="tex2html2424" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2418" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00317100000000000000">Modules</A></H3>
+<P>
+The only special operation on a module is attribute access:
+<CODE><VAR>m</VAR>.<VAR>name</VAR></CODE>, where <VAR>m</VAR> is a module and <VAR>name</VAR> accesses
+a name defined in <VAR>m</VAR>'s symbol table.  Module attributes can be
+assigned to.  (Note that the <CODE>import</CODE> statement is not, strictly
+spoken, an operation on a module object; <CODE>import <VAR>foo</VAR></CODE> does not
+require a module object named <VAR>foo</VAR> to exist, rather it requires
+an (external) <EM>definition</EM> for a module named <VAR>foo</VAR>
+somewhere.)
+<P>
+A special member of every module is <CODE>__dict__</CODE>.
+This is the dictionary containing the module's symbol table.
+Modifying this dictionary will actually change the module's symbol
+table, but direct assignment to the <CODE>__dict__</CODE> attribute is not
+possible (i.e., you can write <CODE><VAR>m</VAR>.__dict__['a'] = 1</CODE>, which
+defines <CODE><VAR>m</VAR>.a</CODE> to be <CODE>1</CODE>, but you can't write <CODE><VAR>m</VAR>.__dict__ = {}</CODE>.
+<P>
+Modules are written like this: <CODE>&lt;module 'sys'&gt;</CODE>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

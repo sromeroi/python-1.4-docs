@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>16.1.1 Functions Defined in Module stdwin</TITLE>
+<META NAME="description" CONTENT="16.1.1 Functions Defined in Module stdwin">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4707" HREF="node194.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4705" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4699" HREF="node192.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4709" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4710" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4708" HREF="node194.html">16.1.2 Window Objects</A>
+<B>Up:</B> <A NAME="tex2html4706" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4700" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001711000000000000000">16.1.1 Functions Defined in Module <CODE>stdwin</CODE></A></H2>
+<P>
+<A NAME="STDWINFunctions">&#160;</A>
+<P>
+The following functions are defined in the <CODE>stdwin</CODE> module:
+<P>
+<DL><DT><STRONG><A NAME="9790">open</A></STRONG>(<VAR>title</VAR>)
+<DD>
+Open a new window whose initial title is given by the string argument.
+Return a window object; window object methods are described below.<A NAME="tex2html1528" HREF="footnode.html#9791"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9795">getevent</A></STRONG>(<VAR></VAR>)
+<DD>
+Wait for and return the next event.
+An event is returned as a triple: the first element is the event
+type, a small integer; the second element is the window object to which
+the event applies, or
+<CODE>None</CODE>
+if it applies to no window in particular;
+the third element is type-dependent.
+Names for event types and command codes are defined in the standard
+module
+<CODE>stdwinevent</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9801">pollevent</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the next event, if one is immediately available.
+If no event is available, return <CODE>()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9806">getactive</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the window that is currently active, or <CODE>None</CODE> if no
+window is currently active.  (This can be emulated by monitoring
+WE_ACTIVATE and WE_DEACTIVATE events.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9811">listfontnames</A></STRONG>(<VAR>pattern</VAR>)
+<DD>
+Return the list of font names in the system that match the pattern (a
+string).  The pattern should normally be <CODE>'*'</CODE>; returns all
+available fonts.  If the underlying window system is X11, other
+patterns follow the standard X11 font selection syntax (as used e.g.
+in resource definitions), i.e. the wildcard character <CODE>'*'</CODE>
+matches any sequence of characters (including none) and <CODE>'?'</CODE>
+matches any single character.
+On the Macintosh this function currently returns an empty list.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9818">setdefscrollbars</A></STRONG>(<VAR>hflag, vflag</VAR>)
+<DD>
+Set the flags controlling whether subsequently opened windows will
+have horizontal and/or vertical scroll bars.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9822">setdefwinpos</A></STRONG>(<VAR>h, v</VAR>)
+<DD>
+Set the default window position for windows opened subsequently.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9826">setdefwinsize</A></STRONG>(<VAR>width, height</VAR>)
+<DD>
+Set the default window size for windows opened subsequently.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9830">getdefscrollbars</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the flags controlling whether subsequently opened windows will
+have horizontal and/or vertical scroll bars.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9834">getdefwinpos</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the default window position for windows opened subsequently.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9838">getdefwinsize</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the default window size for windows opened subsequently.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9842">getscrsize</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the screen size in pixels.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9846">getscrmm</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the screen size in millimeters.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9850">fetchcolor</A></STRONG>(<VAR>colorname</VAR>)
+<DD>
+Return the pixel value corresponding to the given color name.
+Return the default foreground color for unknown color names.
+Hint: the following code tests whether you are on a machine that
+supports more than two colors:
+<PRE>if stdwin.fetchcolor('black') &lt;&gt; \
+          stdwin.fetchcolor('red') &lt;&gt; \
+          stdwin.fetchcolor('white'):
+    print 'color machine'
+else:
+    print 'monochrome machine'</PRE>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9854">setfgcolor</A></STRONG>(<VAR>pixel</VAR>)
+<DD>
+Set the default foreground color.
+This will become the default foreground color of windows opened
+subsequently, including dialogs.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9858">setbgcolor</A></STRONG>(<VAR>pixel</VAR>)
+<DD>
+Set the default background color.
+This will become the default background color of windows opened
+subsequently, including dialogs.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9862">getfgcolor</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the pixel value of the current default foreground color.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9866">getbgcolor</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the pixel value of the current default background color.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9870">setfont</A></STRONG>(<VAR>fontname</VAR>)
+<DD>
+Set the current default font.
+This will become the default font for windows opened subsequently,
+and is also used by the text measuring functions <CODE>textwidth</CODE>,
+<CODE>textbreak</CODE>, <CODE>lineheight</CODE> and <CODE>baseline</CODE> below.
+This accepts two more optional parameters, size and style:
+Size is the font size (in `points').
+Style is a single character specifying the style, as follows:
+<CODE>'b'</CODE> = bold,
+<CODE>'i'</CODE> = italic,
+<CODE>'o'</CODE> = bold + italic,
+<CODE>'u'</CODE> = underline;
+default style is roman.
+Size and style are ignored under X11 but used on the Macintosh.
+(Sorry for all this complexity -- a more uniform interface is being designed.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9882">menucreate</A></STRONG>(<VAR>title</VAR>)
+<DD>
+Create a menu object referring to a global menu (a menu that appears in
+all windows).
+Methods of menu objects are described below.
+Note: normally, menus are created locally; see the window method
+<CODE>menucreate</CODE> below.
+<STRONG>Warning:</STRONG> the menu only appears in a window as long as the object
+returned by this call exists.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9888">newbitmap</A></STRONG>(<VAR>width, height</VAR>)
+<DD>
+Create a new bitmap object of the given dimensions.
+Methods of bitmap objects are described below.
+Not available on the Macintosh.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9892">fleep</A></STRONG>(<VAR></VAR>)
+<DD>
+Cause a beep or bell (or perhaps a `visual bell' or flash, hence the
+name).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9896">message</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Display a dialog box containing the string.
+The user must click OK before the function returns.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9900">askync</A></STRONG>(<VAR>prompt, default</VAR>)
+<DD>
+Display a dialog that prompts the user to answer a question with yes or
+no.
+Return 0 for no, 1 for yes.
+If the user hits the Return key, the default (which must be 0 or 1) is
+returned.
+If the user cancels the dialog, the
+<CODE>KeyboardInterrupt</CODE>
+exception is raised.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9905">askstr</A></STRONG>(<VAR>prompt, default</VAR>)
+<DD>
+Display a dialog that prompts the user for a string.
+If the user hits the Return key, the default string is returned.
+If the user cancels the dialog, the
+<CODE>KeyboardInterrupt</CODE>
+exception is raised.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9910">askfile</A></STRONG>(<VAR>prompt, default, new</VAR>)
+<DD>
+Ask the user to specify a filename.
+If
+<VAR>new</VAR>
+is zero it must be an existing file; otherwise, it must be a new file.
+If the user cancels the dialog, the
+<CODE>KeyboardInterrupt</CODE>
+exception is raised.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9916">setcutbuffer</A></STRONG>(<VAR>i, string</VAR>)
+<DD>
+Store the string in the system's cut buffer number
+<VAR>i</VAR>,
+where it can be found (for pasting) by other applications.
+On X11, there are 8 cut buffers (numbered 0..7).
+Cut buffer number 0 is the `clipboard' on the Macintosh.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9921">getcutbuffer</A></STRONG>(<VAR>i</VAR>)
+<DD>
+Return the contents of the system's cut buffer number
+<VAR>i</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9926">rotatecutbuffers</A></STRONG>(<VAR>n</VAR>)
+<DD>
+On X11, rotate the 8 cut buffers by
+<VAR>n</VAR>.
+Ignored on the Macintosh.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9931">getselection</A></STRONG>(<VAR>i</VAR>)
+<DD>
+Return X11 selection number
+<VAR>i.</VAR>
+Selections are not cut buffers.
+Selection numbers are defined in module
+<CODE>stdwinevents</CODE>.
+Selection <CODE>WS_PRIMARY</CODE> is the
+<I><DFN>primary</DFN></I>
+selection (used by
+xterm,
+for instance);
+selection <CODE>WS_SECONDARY</CODE> is the
+<I><DFN>secondary</DFN></I>
+selection; selection <CODE>WS_CLIPBOARD</CODE> is the
+<I><DFN>clipboard</DFN></I>
+selection (used by
+xclipboard).
+On the Macintosh, this always returns an empty string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9943">resetselection</A></STRONG>(<VAR>i</VAR>)
+<DD>
+Reset selection number
+<VAR>i</VAR>,
+if this process owns it.
+(See window method
+<CODE>setselection()</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9949">baseline</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the baseline of the current font (defined by STDWIN as the
+vertical distance between the baseline and the top of the
+characters).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9953">lineheight</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the total line height of the current font.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9957">textbreak</A></STRONG>(<VAR>str, width</VAR>)
+<DD>
+Return the number of characters of the string that fit into a space of
+<VAR>width</VAR>
+bits wide when drawn in the curent font.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9962">textwidth</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Return the width in bits of the string when drawn in the current font.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9966">connectionnumber</A></STRONG>(<VAR></VAR>)
+<DD>
+,fileno
+(X11 under Unix only) Return the ``connection number'' used by the
+underlying X11 implementation.  (This is normally the file number of
+the socket.)  Both functions return the same value;
+<CODE>connectionnumber()</CODE> is named after the corresponding function in
+X11 and STDWIN, while <CODE>fileno()</CODE> makes it possible to use the
+<CODE>stdwin</CODE> module as a ``file'' object parameter to
+<CODE>select.select()</CODE>.  Note that if <CODE>select()</CODE> implies that
+input is possible on <CODE>stdwin</CODE>, this does not guarantee that an
+event is ready -- it may be some internal communication going on
+between the X server and the client library.  Thus, you should call
+<CODE>stdwin.pollevent()</CODE> until it returns <CODE>None</CODE> to check for
+events if you don't want your program to block.  Because of internal
+buffering in X11, it is also possible that <CODE>stdwin.pollevent()</CODE>
+returns an event while <CODE>select()</CODE> does not find <CODE>stdwin</CODE> to
+be ready, so you should read any pending events with
+<CODE>stdwin.pollevent()</CODE> until it returns <CODE>None</CODE> before entering
+a blocking <CODE>select()</CODE> call.
+<A NAME="9984">&#160;</A>
+<P>
+</DL><HR><A NAME="tex2html4707" HREF="node194.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4705" HREF="node192.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4699" HREF="node192.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4709" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4710" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4708" HREF="node194.html">16.1.2 Window Objects</A>
+<B>Up:</B> <A NAME="tex2html4706" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<B> Previous:</B> <A NAME="tex2html4700" HREF="node192.html">16.1 Built-in Module stdwin</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

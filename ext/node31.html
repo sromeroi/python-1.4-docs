@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.1 Introduction</TITLE>
+<META NAME="description" CONTENT="4.1 Introduction">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html566" HREF="node32.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html564" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html558" HREF="node30.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html568" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html569" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html567" HREF="node32.html">4.1.1 Memory Management</A>
+<B>Up:</B> <A NAME="tex2html565" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html559" HREF="node30.html">4 Extension Reference</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00510000000000000000">4.1 Introduction</A></H1>
+<P>
+From the viewpoint of of C access to Python services, we have:
+<P>
+<OL><LI> &quot;Very high level layer&quot;: two or three functions that let you exec or
+    eval arbitrary Python code given as a string in a module whose name is
+    given, passing C values in and getting C values out using
+    mkvalue/getargs style format strings.  This does not require the user
+    to declare any variables of type &quot;PyObject *&quot;.  This should be enough
+    to write a simple application that gets Python code from the user,
+    execs it, and returns the output or errors.<LI> &quot;Abstract objects layer&quot;: which is the subject of this chapter.
+    It has many functions operating on objects, and lest you do many
+    things from C that you can also write in Python, without going
+    through the Python parser.<LI> &quot;Concrete objects layer&quot;: This is the public type-dependent
+    interface provided by the standard built-in types, such as floats,
+    strings, and lists.  This interface exists and is currently
+    documented by the collection of include files provides with the
+    Python distributions.
+<P>
+  From the point of view of Python accessing services provided by C
+  modules:<LI> &quot;Python module interface&quot;: this interface consist of the basic
+    routines used to define modules and their members.  Most of the
+    current extensions-writing guide deals with this interface.<LI> &quot;Built-in object interface&quot;: this is the interface that a new
+    built-in type must provide and the mechanisms and rules that a
+    developer of a new built-in type must use and follow.
+</OL>
+<P>
+  The Python C object interface provides four protocols: object,
+  numeric, sequence, and mapping.  Each protocol consists of a
+  collection of related operations.  If an operation that is not
+  provided by a particular type is invoked, then a standard exception,
+  NotImplementedError is raised with a operation name as an argument.
+  In addition, for convenience this interface defines a set of
+  constructors for building objects of built-in types.  This is needed
+  so new objects can be returned from C functions that otherwise treat
+  objects generically.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html570" HREF="node32.html#SECTION00511000000000000000">4.1.1 Memory Management</A>
+</UL>
+<HR><A NAME="tex2html566" HREF="node32.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html564" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html558" HREF="node30.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html568" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html569" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html567" HREF="node32.html">4.1.1 Memory Management</A>
+<B>Up:</B> <A NAME="tex2html565" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html559" HREF="node30.html">4 Extension Reference</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

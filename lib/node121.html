@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.6.1 NNTP Objects</TITLE>
+<META NAME="description" CONTENT="11.6.1 NNTP Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3790" HREF="node122.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3788" HREF="node120.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3784" HREF="node120.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3792" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3793" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3791" HREF="node122.html">11.7 Standard Module urlparse</A>
+<B>Up:</B> <A NAME="tex2html3789" HREF="node120.html">11.6 Standard Module nntplib</A>
+<B> Previous:</B> <A NAME="tex2html3785" HREF="node120.html">11.6 Standard Module nntplib</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001261000000000000000">11.6.1 NNTP Objects</A></H2>
+<P>
+NNTP instances have the following methods.  The <VAR>response</VAR> that is
+returned as the first item in the return tuple of almost all methods
+is the server's response: a string beginning with a three-digit code.
+If the server's response indicates an error, the method raises one of
+the above exceptions.
+<P>
+<DL><DT><STRONG><A NAME="6308">getwelcome</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the welcome message sent by the server in reply to the initial
+connection.  (This message sometimes contains disclaimers or help
+information that may be relevant to the user.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6312">set_debuglevel</A></STRONG>(<VAR>level</VAR>)
+<DD>
+Set the instance's debugging level.  This controls the amount of
+debugging output printed.  The default, 0, produces no debugging
+output.  A value of 1 produces a moderate amount of debugging output,
+generally a single line per request or response.  A value of 2 or
+higher produces the maximum amount of debugging output, logging each
+line sent and received on the connection (including message text).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6316">newgroups</A></STRONG>(<VAR>date, time</VAR>)
+<DD>
+Send a `<SAMP>NEWGROUPS</SAMP>' command.  The <VAR>date</VAR> argument should be a
+string of the form <CODE>&quot;<VAR>yy</VAR><VAR>mm</VAR><VAR>dd</VAR>&quot;</CODE> indicating the
+date, and <VAR>time</VAR> should be a string of the form
+<CODE>&quot;<VAR>hh</VAR><VAR>mm</VAR><VAR>ss</VAR>&quot;</CODE> indicating the time.  Return a pair
+<CODE>(<VAR>response</VAR>, <VAR>groups</VAR>)</CODE> where <VAR>groups</VAR> is a list of
+group names that are new since the given date and time.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6332">newnews</A></STRONG>(<VAR>group, date, time</VAR>)
+<DD>
+Send a `<SAMP>NEWNEWS</SAMP>' command.  Here, <VAR>group</VAR> is a group name or
+<CODE>&quot;*&quot;</CODE>, and <VAR>date</VAR> and <VAR>time</VAR> have the same meaning as for
+<CODE>newgroups()</CODE>.  Return a pair <CODE>(<VAR>response</VAR>,
+<VAR>articles</VAR>)</CODE> where <VAR>articles</VAR> is a list of article ids.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6345">list</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>LIST</SAMP>' command.  Return a pair <CODE>(<VAR>response</VAR>,
+<VAR>list</VAR>)</CODE> where <VAR>list</VAR> is a list of tuples.  Each tuple has the
+form <CODE>(<VAR>group</VAR>, <VAR>last</VAR>, <VAR>first</VAR>, <VAR>flag</VAR>)</CODE>, where
+<VAR>group</VAR> is a group name, <VAR>last</VAR> and <VAR>first</VAR> are the last
+and first article numbers (as strings), and <VAR>flag</VAR> is <CODE>'y'</CODE>
+if posting is allowed, <CODE>'n'</CODE> if not, and <CODE>'m'</CODE> if the
+newsgroup is moderated.  (Note the ordering: <VAR>last</VAR>, <VAR>first</VAR>.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6366">group</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Send a `<SAMP>GROUP</SAMP>' command, where <VAR>name</VAR> is the group name.
+Return a tuple <CODE>(<VAR>response</VAR>, <VAR>count</VAR>, <VAR>first</VAR>,
+<VAR>last</VAR>, <VAR>name</VAR>)</CODE> where <VAR>count</VAR> is the (estimated) number
+of articles in the group, <VAR>first</VAR> is the first article number in
+the group, <VAR>last</VAR> is the last article number in the group, and
+<VAR>name</VAR> is the group name.  The numbers are returned as strings.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6381">help</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>HELP</SAMP>' command.  Return a pair <CODE>(<VAR>response</VAR>,
+<VAR>list</VAR>)</CODE> where <VAR>list</VAR> is a list of help strings.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6389">stat</A></STRONG>(<VAR>id</VAR>)
+<DD>
+Send a `<SAMP>STAT</SAMP>' command, where <VAR>id</VAR> is the message id (enclosed
+in `<SAMP>&lt;</SAMP>' and `<SAMP>&gt;</SAMP>') or an article number (as a string).
+Return a triple <CODE>(varresponse, <VAR>number</VAR>, <VAR>id</VAR>)</CODE> where
+<VAR>number</VAR> is the article number (as a string) and <VAR>id</VAR> is the
+article id  (enclosed in `<SAMP>&lt;</SAMP>' and `<SAMP>&gt;</SAMP>').
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6404">next</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>NEXT</SAMP>' command.  Return as for <CODE>stat()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6410">last</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>LAST</SAMP>' command.  Return as for <CODE>stat()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6416">head</A></STRONG>(<VAR>id</VAR>)
+<DD>
+Send a `<SAMP>HEAD</SAMP>' command, where <VAR>id</VAR> has the same meaning as for
+<CODE>stat()</CODE>.  Return a pair <CODE>(<VAR>response</VAR>, <VAR>list</VAR>)</CODE>
+where <VAR>list</VAR> is a list of the article's headers (an uninterpreted
+list of lines, without trailing newlines).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6426">body</A></STRONG>(<VAR>id</VAR>)
+<DD>
+Send a `<SAMP>BODY</SAMP>' command, where <VAR>id</VAR> has the same meaning as for
+<CODE>stat()</CODE>.  Return a pair <CODE>(<VAR>response</VAR>, <VAR>list</VAR>)</CODE>
+where <VAR>list</VAR> is a list of the article's body text (an
+uninterpreted list of lines, without trailing newlines).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6436">article</A></STRONG>(<VAR>id</VAR>)
+<DD>
+Send a `<SAMP>ARTICLE</SAMP>' command, where <VAR>id</VAR> has the same meaning as
+for <CODE>stat()</CODE>.  Return a pair <CODE>(<VAR>response</VAR>, <VAR>list</VAR>)</CODE>
+where <VAR>list</VAR> is a list of the article's header and body text (an
+uninterpreted list of lines, without trailing newlines).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6446">slave</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>SLAVE</SAMP>' command.  Return the server's <VAR>response</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6452">xhdr</A></STRONG>(<VAR>header, string</VAR>)
+<DD>
+Send an `<SAMP>XHDR</SAMP>' command.  This command is not defined in the RFC
+but is a common extension.  The <VAR>header</VAR> argument is a header
+keyword, e.g. <CODE>&quot;subject&quot;</CODE>.  The <VAR>string</VAR> argument should have
+the form <CODE>&quot;<VAR>first</VAR>-<VAR>last</VAR>&quot;</CODE> where <VAR>first</VAR> and
+<VAR>last</VAR> are the first and last article numbers to search.  Return a
+pair <CODE>(<VAR>response</VAR>, <VAR>list</VAR>)</CODE>, where <VAR>list</VAR> is a list of
+pairs <CODE>(<VAR>id</VAR>, <VAR>text</VAR>)</CODE>, where <VAR>id</VAR> is an article id
+(as a string) and <VAR>text</VAR> is the text of the requested header for
+that article.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6471">post</A></STRONG>(<VAR>file</VAR>)
+<DD>
+Post an article using the `<SAMP>POST</SAMP>' command.  The <VAR>file</VAR>
+argument is an open file object which is read until EOF using its
+<CODE>readline()</CODE> method.  It should be a well-formed news article,
+including the required headers.  The <CODE>post()</CODE> method
+automatically escapes lines beginning with `<SAMP>.</SAMP>'.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6480">ihave</A></STRONG>(<VAR>id, file</VAR>)
+<DD>
+Send an `<SAMP>IHAVE</SAMP>' command.  If the response is not an error, treat
+<VAR>file</VAR> exactly as for the <CODE>post()</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6487">quit</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>QUIT</SAMP>' command and close the connection.  Once this method
+has been called, no other methods of the NNTP object should be called.
+<P>
+</DL><HR><A NAME="tex2html3790" HREF="node122.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3788" HREF="node120.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3784" HREF="node120.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3792" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3793" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3791" HREF="node122.html">11.7 Standard Module urlparse</A>
+<B>Up:</B> <A NAME="tex2html3789" HREF="node120.html">11.6 Standard Module nntplib</A>
+<B> Previous:</B> <A NAME="tex2html3785" HREF="node120.html">11.6 Standard Module nntplib</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

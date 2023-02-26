@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.6 Constructors</TITLE>
+<META NAME="description" CONTENT="4.6 Constructors">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html635" HREF="node38.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html633" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html629" HREF="node36.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html637" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html638" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html636" HREF="node38.html">Index</A>
+<B>Up:</B> <A NAME="tex2html634" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html630" HREF="node36.html">4.5 Mapping protocol</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00560000000000000000">4.6 Constructors</A></H1>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1129">PyFile_FromString</A></STRONG>(<VAR>char *file_name, char *mode</VAR>)
+<DD>
+	 On success, returns a new file object that is opened on the
+	 file given by <CODE>file_name</CODE>, with a file mode given by <CODE>mode</CODE>,
+	 where <CODE>mode</CODE> has the same semantics as the standard C routine,
+	 fopen.  On failure, return -1.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1137">PyFile_FromFile</A></STRONG>(<VAR>FILE *fp, char *file_name, char *mode, int close_on_del</VAR>)
+<DD>
+	 Return a new file object for an already opened standard C
+	 file pointer, <CODE>fp</CODE>.  A file name, <CODE>file_name</CODE>, and open mode,
+	 <CODE>mode</CODE>, must be provided as well as a flag, <CODE>close_on_del</CODE>, that
+	 indicates whether the file is to be closed when the file
+	 object is destroyed.  On failure, return -1.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1146">PyFloat_FromDouble</A></STRONG>(<VAR>double v</VAR>)
+<DD>
+	 Returns a new float object with the value <CODE>v</CODE> on success, and
+	 <CODE>NULL</CODE> on failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1153">PyInt_FromLong</A></STRONG>(<VAR>long v</VAR>)
+<DD>
+	 Returns a new int object with the value <CODE>v</CODE> on success, and
+	 <CODE>NULL</CODE> on failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1160">PyList_New</A></STRONG>(<VAR>int l</VAR>)
+<DD>
+	 Returns a new list of length <CODE>l</CODE> on success, and <CODE>NULL</CODE> on
+	 failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1167">PyLong_FromLong</A></STRONG>(<VAR>long v</VAR>)
+<DD>
+	 Returns a new long object with the value <CODE>v</CODE> on success, and
+	 <CODE>NULL</CODE> on failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1174">PyLong_FromDouble</A></STRONG>(<VAR>double v</VAR>)
+<DD>
+	 Returns a new long object with the value <CODE>v</CODE> on success, and
+	 <CODE>NULL</CODE> on failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1181">PyDict_New</A></STRONG>(<VAR></VAR>)
+<DD>
+	 Returns a new empty dictionary on success, and <CODE>NULL</CODE> on
+	 failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1187">PyString_FromString</A></STRONG>(<VAR>char *v</VAR>)
+<DD>
+	 Returns a new string object with the value <CODE>v</CODE> on success, and
+	 <CODE>NULL</CODE> on failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1194">PyString_FromStringAndSize</A></STRONG>(<VAR>char *v, int l</VAR>)
+<DD>
+	 Returns a new string object with the value <CODE>v</CODE> and length <CODE>l</CODE>
+	 on success, and <CODE>NULL</CODE> on failure.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1202">PyTuple_New</A></STRONG>(<VAR>int l</VAR>)
+<DD>
+	 Returns a new tuple of length <CODE>l</CODE> on success, and <CODE>NULL</CODE> on
+	 failure.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

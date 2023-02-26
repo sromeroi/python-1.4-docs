@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.3 Number Protocol</TITLE>
+<META NAME="description" CONTENT="4.3 Number Protocol">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html601" HREF="node35.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html599" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html593" HREF="node33.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html603" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html604" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html602" HREF="node35.html">4.4 Sequence protocol</A>
+<B>Up:</B> <A NAME="tex2html600" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html594" HREF="node33.html">4.2 Object Protocol</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00530000000000000000">4.3 Number Protocol</A></H1>
+<P>
+     <DL><DT>int <STRONG><A NAME="753">PyNumber_Check</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         Returns 1 if the object <CODE>o</CODE> provides numeric protocols, and
+	 false otherwise. 
+	 This function always succeeds.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="759">PyNumber_Add</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of adding <CODE>o1</CODE> and <CODE>o2</CODE>, or null on failure.
+	 This is the equivalent of the Python expression: <CODE>o1+o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="767">PyNumber_Subtract</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of subtracting <CODE>o2</CODE> from <CODE>o1</CODE>, or null on
+	 failure.  This is the equivalent of the Python expression:
+	 <CODE>o1-o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="775">PyNumber_Multiply</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of multiplying <CODE>o1</CODE> and <CODE>o2</CODE>, or null on
+	 failure.  This is the equivalent of the Python expression:
+	 <CODE>o1*o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="783">PyNumber_Divide</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of dividing <CODE>o1</CODE> by <CODE>o2</CODE>, or null on failure.
+	 This is the equivalent of the Python expression: <CODE>o1/o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="791">PyNumber_Remainder</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the remainder of dividing <CODE>o1</CODE> by <CODE>o2</CODE>, or null on
+	 failure.  This is the equivalent of the Python expression:
+	 <CODE>o1%o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="799">PyNumber_Divmod</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 See the built-in function divmod.  Returns <CODE>NULL</CODE> on failure.
+	 This is the equivalent of the Python expression:
+	 <CODE>divmod(o1,o2)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="806">PyNumber_Power</A></STRONG>(<VAR>PyObject *o1, PyObject *o2, PyObject *o3</VAR>)
+<DD>
+	 See the built-in function pow.  Returns <CODE>NULL</CODE> on failure.
+	 This is the equivalent of the Python expression:
+	 <CODE>pow(o1,o2,o3)</CODE>, where <CODE>o3</CODE> is optional.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="814">PyNumber_Negative</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the negation of <CODE>o</CODE> on success, or null on failure.
+	 This is the equivalent of the Python expression: <CODE>-o</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="821">PyNumber_Positive</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         Returns <CODE>o</CODE> on success, or <CODE>NULL</CODE> on failure.
+	 This is the equivalent of the Python expression: <CODE>+o</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="829">PyNumber_Absolute</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the absolute value of <CODE>o</CODE>, or null on failure.  This is
+	 the equivalent of the Python expression: <CODE>abs(o)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="836">PyNumber_Invert</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the bitwise negation of <CODE>o</CODE> on success, or <CODE>NULL</CODE> on
+	 failure.  This is the equivalent of the Python expression:
+	 <CODE>&nbsp;o</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="844">PyNumber_Lshift</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of left shifting <CODE>o1</CODE> by <CODE>o2</CODE> on success, or
+	 <CODE>NULL</CODE> on failure.  This is the equivalent of the Python
+	 expression: <CODE>o1 &lt;&lt; o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="853">PyNumber_Rshift</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of right shifting <CODE>o1</CODE> by <CODE>o2</CODE> on success, or
+	 <CODE>NULL</CODE> on failure.  This is the equivalent of the Python
+	 expression: <CODE>o1 &gt;&gt; o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="862">PyNumber_And</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result of &quot;anding&quot; <CODE>o2</CODE> and <CODE>o2</CODE> on success and <CODE>NULL</CODE>
+	 on failure. This is the equivalent of the Python
+	 expression: <CODE>o1 and o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="871">PyNumber_Xor</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the bitwise exclusive or of <CODE>o1</CODE> by <CODE>o2</CODE> on success, or
+	 <CODE>NULL</CODE> on failure.  This is the equivalent of the Python
+	 expression: <CODE>o1^ o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="880">PyNumber_Or</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Returns the result or <CODE>o1</CODE> and <CODE>o2</CODE> on success, or <CODE>NULL</CODE> on
+	 failure.  This is the equivalent of the Python expression: 
+	 <CODE>o1 or o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="889">PyNumber_Coerce</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 This function takes the addresses of two variables of type
+         <CODE>PyObject*</CODE>.
+<P>
+         If the objects pointed to by <CODE>*p1</CODE> and <CODE>*p2</CODE> have the same type,
+         increment their reference count and return 0 (success).
+         If the objects can be converted to a common numeric type,
+         replace <CODE>*p1</CODE> and <CODE>*p2</CODE> by their converted value (with 'new'
+         reference counts), and return 0.
+         If no conversion is possible, or if some other error occurs,
+         return -1 (failure) and don't increment the reference counts.
+         The call <CODE>PyNumber_Coerce(&amp;o1, &amp;o2)</CODE> is equivalent to the Python
+         statement <CODE>o1, o2 = coerce(o1, o2)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="901">PyNumber_Int</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the <CODE>o</CODE> converted to an integer object on success, or
+	 <CODE>NULL</CODE> on failure.  This is the equivalent of the Python
+	 expression: <CODE>int(o)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="909">PyNumber_Long</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the <CODE>o</CODE> converted to a long integer object on success,
+	 or <CODE>NULL</CODE> on failure.  This is the equivalent of the Python
+	 expression: <CODE>long(o)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="917">PyNumber_Float</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the <CODE>o</CODE> converted to a float object on success, or <CODE>NULL</CODE>
+	 on failure.  This is the equivalent of the Python expression:
+	 <CODE>float(o)</CODE>.
+<P>
+</DL><HR><A NAME="tex2html601" HREF="node35.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html599" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html593" HREF="node33.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html603" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html604" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html602" HREF="node35.html">4.4 Sequence protocol</A>
+<B>Up:</B> <A NAME="tex2html600" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html594" HREF="node33.html">4.2 Object Protocol</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

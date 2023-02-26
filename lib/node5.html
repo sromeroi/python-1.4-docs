@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.1.1 Truth Value Testing</TITLE>
+<META NAME="description" CONTENT="2.1.1 Truth Value Testing">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2297" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2295" HREF="node4.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2289" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2299" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2300" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2298" HREF="node6.html">2.1.2 Boolean Operations</A>
+<B>Up:</B> <A NAME="tex2html2296" HREF="node4.html">2.1 Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2290" HREF="node4.html">2.1 Built-in Types</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00311000000000000000">2.1.1 Truth Value Testing</A></H2>
+<P>
+Any object can be tested for truth value, for use in an <CODE>if</CODE> or
+<CODE>while</CODE> condition or as operand of the Boolean operations below.
+The following values are considered false:
+<A NAME="45">&#160;</A><A NAME="45">&#160;</A>
+<A NAME="46">&#160;</A><A NAME="46">&#160;</A>
+<A NAME="47">&#160;</A><A NAME="48">&#160;</A>
+<A NAME="49">&#160;</A><A NAME="50">&#160;</A>
+<A NAME="51">&#160;</A>
+<P>
+<UL><LI>	<CODE>None</CODE>
+	<A NAME="56">&#160;</A><LI>	zero of any numeric type, e.g., <CODE>0</CODE>, <CODE>0L</CODE>, <CODE>0.0</CODE>.<LI>	any empty sequence, e.g., <CODE>''</CODE>, <CODE>()</CODE>, <CODE>[]</CODE>.<LI>	any empty mapping, e.g., <CODE>{}</CODE>.<LI>	instances of user-defined classes, if the class defines a
+	<CODE>__nonzero__()</CODE> or <CODE>__len__()</CODE> method, when that
+	method returns zero.
+<P>
+</UL>
+<P>
+All other values are considered true -- so objects of many types are
+always true.
+<A NAME="67">&#160;</A>
+<P>
+Operations and built-in functions that have a Boolean result always
+return <CODE>0</CODE> for false and <CODE>1</CODE> for true, unless otherwise
+stated.  (Important exception: the Boolean operations `<SAMP>or</SAMP>' and
+`<SAMP>and</SAMP>' always return one of their operands.)
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

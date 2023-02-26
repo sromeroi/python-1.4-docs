@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.16.4 Supporting Floating Point Data</TITLE>
+<META NAME="description" CONTENT="11.16.4 Supporting Floating Point Data">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4041" HREF="node143.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4039" HREF="node138.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4035" HREF="node141.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4043" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4044" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4042" HREF="node143.html">12 Restricted Execution</A>
+<B>Up:</B> <A NAME="tex2html4040" HREF="node138.html">11.16 Standard module xdrlib</A>
+<B> Previous:</B> <A NAME="tex2html4036" HREF="node141.html">11.16.3 Exceptions</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012164000000000000000">11.16.4 Supporting Floating Point Data</A></H2>
+<P>
+Packing and unpacking floating point data,
+i.e. <CODE>Packer.pack_float</CODE>, <CODE>Packer.pack_double</CODE>,
+<CODE>Unpacker.unpack_float</CODE>, and <CODE>Unpacker.unpack_double</CODE>, are
+only supported with the helper built-in <CODE>_xdr</CODE> module, which
+relies on your operating system having the appropriate XDR library
+routines.
+<P>
+If you have built the Python interpeter with the <CODE>_xdr</CODE> module,
+or have built the <CODE>_xdr</CODE> module as a shared library,
+<CODE>xdrlib</CODE> will use these to pack and unpack floating point
+numbers.  Otherwise, using these routines will raise a
+<CODE>ConversionError</CODE> exception.
+<P>
+See the Python installation instructions for details on building the
+<CODE>_xdr</CODE> module.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

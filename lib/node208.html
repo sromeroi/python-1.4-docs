@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.4 Built-in Module fl</TITLE>
+<META NAME="description" CONTENT="17.4 Built-in Module fl">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4898" HREF="node209.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4896" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4890" HREF="node207.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4900" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4901" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4899" HREF="node209.html">17.4.1 Functions Defined in </A>
+<B>Up:</B> <A NAME="tex2html4897" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4891" HREF="node207.html">17.3 Built-in Module cd</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001840000000000000000">17.4 Built-in Module <CODE>fl</CODE></A></H1>
+<P>
+This module provides an interface to the FORMS Library by Mark
+Overmars.  The source for the library can be retrieved by anonymous
+ftp from host `<SAMP>ftp.cs.ruu.nl</SAMP>', directory `<CODE>SGI/FORMS</CODE>'.  It
+was last tested with version 2.0b.
+<P>
+Most functions are literal translations of their C equivalents,
+dropping the initial `<SAMP>fl_</SAMP>' from their name.  Constants used by
+the library are defined in module <CODE>FL</CODE> described below.
+<P>
+The creation of objects is a little different in Python than in C:
+instead of the `current form' maintained by the library to which new
+FORMS objects are added, all functions that add a FORMS object to a
+form are methods of the Python object representing the form.
+Consequently, there are no Python equivalents for the C functions
+<CODE>fl_addto_form</CODE> and <CODE>fl_end_form</CODE>, and the equivalent of
+<CODE>fl_bgn_form</CODE> is called <CODE>fl.make_form</CODE>.
+<P>
+Watch out for the somewhat confusing terminology: FORMS uses the word
+<I><DFN>object</DFN></I> for the buttons, sliders etc. that you can place in a form.
+In Python, `object' means any value.  The Python interface to FORMS
+introduces two new Python object types: form objects (representing an
+entire form) and FORMS objects (representing one button, slider etc.).
+Hopefully this isn't too confusing...
+<P>
+There are no `free objects' in the Python interface to FORMS, nor is
+there an easy way to add object classes written in Python.  The FORMS
+interface to GL event handling is available, though, so you can mix
+FORMS with pure GL windows.
+<P>
+<STRONG>Please note:</STRONG> importing <CODE>fl</CODE> implies a call to the GL function
+<CODE>foreground()</CODE> and to the FORMS routine <CODE>fl_init()</CODE>.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4902" HREF="node209.html#SECTION001841000000000000000">17.4.1 Functions Defined in Module <CODE>fl</CODE></A>
+<LI> <A NAME="tex2html4903" HREF="node210.html#SECTION001842000000000000000">17.4.2 Form Objects</A>
+<LI> <A NAME="tex2html4904" HREF="node211.html#SECTION001843000000000000000">17.4.3 FORMS Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

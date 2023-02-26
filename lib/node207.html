@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.3 Built-in Module cd</TITLE>
+<META NAME="description" CONTENT="17.3 Built-in Module cd">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4886" HREF="node208.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4884" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4878" HREF="node206.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4888" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4889" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4887" HREF="node208.html">17.4 Built-in Module fl</A>
+<B>Up:</B> <A NAME="tex2html4885" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4879" HREF="node206.html">17.2 Standard Module AL</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001830000000000000000">17.3 Built-in Module <CODE>cd</CODE></A></H1>
+<P>
+This module provides an interface to the Silicon Graphics CD library.
+It is available only on Silicon Graphics systems.
+<P>
+The way the library works is as follows.  A program opens the CD-ROM
+device with <CODE>cd.open()</CODE> and creates a parser to parse the data
+from the CD with <CODE>cd.createparser()</CODE>.  The object returned by
+<CODE>cd.open()</CODE> can be used to read data from the CD, but also to get
+status information for the CD-ROM device, and to get information about
+the CD, such as the table of contents.  Data from the CD is passed to
+the parser, which parses the frames, and calls any callback
+functions that have previously been added.
+<P>
+An audio CD is divided into <I><DFN>tracks</DFN></I> or <I><DFN>programs</DFN></I> (the terms
+are used interchangeably).  Tracks can be subdivided into
+<I><DFN>indices</DFN></I>.  An audio CD contains a <I><DFN>table of contents</DFN></I> which
+gives the starts of the tracks on the CD.  Index 0 is usually the
+pause before the start of a track.  The start of the track as given by
+the table of contents is normally the start of index 1.
+<P>
+Positions on a CD can be represented in two ways.  Either a frame
+number or a tuple of three values, minutes, seconds and frames.  Most
+functions use the latter representation.  Positions can be both
+relative to the beginning of the CD, and to the beginning of the
+track.
+<P>
+Module <CODE>cd</CODE> defines the following functions and constants:
+<P>
+<DL><DT><STRONG><A NAME="10601">createparser</A></STRONG>(<VAR></VAR>)
+<DD>
+Create and return an opaque parser object.  The methods of the parser
+object are described below.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10605">msftoframe</A></STRONG>(<VAR>min, sec, frame</VAR>)
+<DD>
+Converts a <CODE>(minutes, seconds, frames)</CODE> triple representing time
+in absolute time code into the corresponding CD frame number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10813">open</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>device</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Open the CD-ROM device.  The return value is an opaque player object;
+methods of the player object are described below.  The device is the
+name of the SCSI device file, e.g. /dev/scsi/sc0d4l0, or <CODE>None</CODE>.
+If omited or <CODE>None</CODE>, the hardware inventory is consulted to
+locate a CD-ROM drive.  The <CODE>mode</CODE>, if not omited, should be the
+string 'r'.
+<P>
+</DL>
+<P>
+The module defines the following variables:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+Exception raised on various errors.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">DATASIZE</A></STRONG>
+<DD>
+The size of one frame's worth of audio data.  This is the size of the
+audio data as passed to the callback of type <CODE>audio</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">BLOCKSIZE</A></STRONG>
+<DD>
+The size of one uninterpreted frame of audio data.
+<P>
+</DL>
+<P>
+The following variables are states as returned by <CODE>getstatus</CODE>:
+<P>
+<DL><DT><STRONG><A NAME="">READY</A></STRONG>
+<DD>
+The drive is ready for operation loaded with an audio CD.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">NODISC</A></STRONG>
+<DD>
+The drive does not have a CD loaded.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">CDROM</A></STRONG>
+<DD>
+The drive is loaded with a CD-ROM.  Subsequent play or read operations
+will return I/O errors.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ERROR</A></STRONG>
+<DD>
+An error aoocurred while trying to read the disc or its table of
+contents.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">PLAYING</A></STRONG>
+<DD>
+The drive is in CD player mode playing an audio CD through its audio
+jacks.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">PAUSED</A></STRONG>
+<DD>
+The drive is in CD layer mode with play paused.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">STILL</A></STRONG>
+<DD>
+The equivalent of <CODE>PAUSED</CODE> on older (non 3301) model Toshiba
+CD-ROM drives.  Such drives have never been shipped by SGI.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">audio</A></STRONG>
+<DD>
+,pnum
+,index
+,ptime
+,atime
+,catalog
+,ident
+,control
+Integer constants describing the various types of parser callbacks
+that can be set by the <CODE>addcallback()</CODE> method of CD parser
+objects (see below).
+<P>
+</DL>
+<P>
+Player objects (returned by <CODE>cd.open()</CODE>) have the following
+methods:
+<P>
+<DL><DT><STRONG><A NAME="10664">allowremoval</A></STRONG>(<VAR></VAR>)
+<DD>
+Unlocks the eject button on the CD-ROM drive permitting the user to
+eject the caddy if desired.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10668">bestreadsize</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns the best value to use for the <CODE>num_frames</CODE> parameter of
+the <CODE>readda</CODE> method.  Best is defined as the value that permits a
+continuous flow of data from the CD-ROM drive.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10674">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Frees the resources associated with the player object.  After calling
+<CODE>close</CODE>, the methods of the object should no longer be used.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10679">eject</A></STRONG>(<VAR></VAR>)
+<DD>
+Ejects the caddy from the CD-ROM drive.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10683">getstatus</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns information pertaining to the current state of the CD-ROM
+drive.  The returned information is a tuple with the following values:
+<CODE>state</CODE>, <CODE>track</CODE>, <CODE>rtime</CODE>, <CODE>atime</CODE>, <CODE>ttime</CODE>,
+<CODE>first</CODE>, <CODE>last</CODE>, <CODE>scsi_audio</CODE>, <CODE>cur_block</CODE>.
+<CODE>rtime</CODE> is the time relative to the start of the current track;
+<CODE>atime</CODE> is the time relative to the beginning of the disc;
+<CODE>ttime</CODE> is the total time on the disc.  For more information on
+the meaning of the values, see the manual for CDgetstatus.
+The value of <CODE>state</CODE> is one of the following: <CODE>cd.ERROR</CODE>,
+<CODE>cd.NODISC</CODE>, <CODE>cd.READY</CODE>, <CODE>cd.PLAYING</CODE>,
+<CODE>cd.PAUSED</CODE>, <CODE>cd.STILL</CODE>, or <CODE>cd.CDROM</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10707">gettrackinfo</A></STRONG>(<VAR>track</VAR>)
+<DD>
+Returns information about the specified track.  The returned
+information is a tuple consisting of two elements, the start time of
+the track and the duration of the track.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10711">msftoblock</A></STRONG>(<VAR>min, sec, frame</VAR>)
+<DD>
+Converts a minutes, seconds, frames triple representing a time in
+absolute time code into the corresponding logical block number for the
+given CD-ROM drive.  You should use <CODE>cd.msftoframe()</CODE> rather than
+<CODE>msftoblock()</CODE> for comparing times.  The logical block number
+differs from the frame number by an offset required by certain CD-ROM
+drives.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10717">play</A></STRONG>(<VAR>start, play</VAR>)
+<DD>
+Starts playback of an audio CD in the CD-ROM drive at the specified
+track.  The audio output appears on the CD-ROM drive's headphone and
+audio jacks (if fitted).  Play stops at the end of the disc.
+<CODE>start</CODE> is the number of the track at which to start playing the
+CD; if <CODE>play</CODE> is 0, the CD will be set to an initial paused
+state.  The method <CODE>togglepause()</CODE> can then be used to commence
+play.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10724">playabs</A></STRONG>(<VAR>min, sec, frame, play</VAR>)
+<DD>
+Like <CODE>play()</CODE>, except that the start is given in minutes,
+seconds, frames instead of a track number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10729">playtrack</A></STRONG>(<VAR>start, play</VAR>)
+<DD>
+Like <CODE>play()</CODE>, except that playing stops at the end of the track.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10734">playtrackabs</A></STRONG>(<VAR>track, min, sec, frame, play</VAR>)
+<DD>
+Like <CODE>play()</CODE>, except that playing begins at the spcified
+absolute time and ends at the end of the specified track.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10739">preventremoval</A></STRONG>(<VAR></VAR>)
+<DD>
+Locks the eject button on the CD-ROM drive thus preventing the user
+from arbitrarily ejecting the caddy.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10743">readda</A></STRONG>(<VAR>num_frames</VAR>)
+<DD>
+Reads the specified number of frames from an audio CD mounted in the
+CD-ROM drive.  The return value is a string representing the audio
+frames.  This string can be passed unaltered to the <CODE>parseframe</CODE>
+method of the parser object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10748">seek</A></STRONG>(<VAR>min, sec, frame</VAR>)
+<DD>
+Sets the pointer that indicates the starting point of the next read of
+digital audio data from a CD-ROM.  The pointer is set to an absolute
+time code location specified in minutes, seconds, and frames.  The
+return value is the logical block number to which the pointer has been
+set.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10752">seekblock</A></STRONG>(<VAR>block</VAR>)
+<DD>
+Sets the pointer that indicates the starting point of the next read of
+digital audio data from a CD-ROM.  The pointer is set to the specified
+logical block number.  The return value is the logical block number to
+which the pointer has been set.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10756">seektrack</A></STRONG>(<VAR>track</VAR>)
+<DD>
+Sets the pointer that indicates the starting point of the next read of
+digital audio data from a CD-ROM.  The pointer is set to the specified
+track.  The return value is the logical block number to which the
+pointer has been set.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10760">stop</A></STRONG>(<VAR></VAR>)
+<DD>
+Stops the current playing operation.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10764">togglepause</A></STRONG>(<VAR></VAR>)
+<DD>
+Pauses the CD if it is playing, and makes it play if it is paused.
+<P>
+</DL>
+<P>
+Parser objects (returned by <CODE>cd.createparser()</CODE>) have the
+following methods:
+<P>
+<DL><DT><STRONG><A NAME="10771">addcallback</A></STRONG>(<VAR>type, func, arg</VAR>)
+<DD>
+Adds a callback for the parser.  The parser has callbacks for eight
+different types of data in the digital audio data stream.  Constants
+for these types are defined at the <CODE>cd</CODE> module level (see above).
+The callback is called as follows: <CODE>func(arg, type, data)</CODE>, where
+<CODE>arg</CODE> is the user supplied argument, <CODE>type</CODE> is the
+particular type of callback, and <CODE>data</CODE> is the data returned for
+this <CODE>type</CODE> of callback.  The type of the data depends on the
+<CODE>type</CODE> of callback as follows:
+<DL ><DT><STRONG><CODE>cd.audio</CODE>: </STRONG>
+<DD>
+The argument is a string which can be passed unmodified to
+<CODE>al.writesamps()</CODE>.
+<DT><STRONG><CODE>cd.pnum</CODE>: </STRONG>
+<DD>
+The argument is an integer giving the program (track) number.
+<DT><STRONG><CODE>cd.index</CODE>: </STRONG>
+<DD>
+The argument is an integer giving the index number.
+<DT><STRONG><CODE>cd.ptime</CODE>: </STRONG>
+<DD>
+The argument is a tuple consisting of the program time in minutes,
+seconds, and frames.
+<DT><STRONG><CODE>cd.atime</CODE>: </STRONG>
+<DD>
+The argument is a tuple consisting of the absolute time in minutes,
+seconds, and frames.
+<DT><STRONG><CODE>cd.catalog</CODE>: </STRONG>
+<DD>
+The argument is a string of 13 characters, giving the catalog number
+of the CD.
+<DT><STRONG><CODE>cd.ident</CODE>: </STRONG>
+<DD>
+The argument is a string of 12 characters, giving the ISRC
+identification number of the recording.  The string consists of two
+characters country code, three characters owner code, two characters
+giving the year, and five characters giving a serial number.
+<DT><STRONG><CODE>cd.control</CODE>: </STRONG>
+<DD>
+The argument is an integer giving the control bits from the CD subcode
+data.
+<P>
+ </DL>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10793">deleteparser</A></STRONG>(<VAR></VAR>)
+<DD>
+Deletes the parser and frees the memory it was using.  The object
+should not be used after this call.  This call is done automatically
+when the last reference to the object is removed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10797">parseframe</A></STRONG>(<VAR>frame</VAR>)
+<DD>
+Parses one or more frames of digital audio data from a CD such as
+returned by <CODE>readda</CODE>.  It determines which subcodes are present
+in the data.  If these subcodes have changed since the last frame,
+then <CODE>parseframe</CODE> executes a callback of the appropriate type
+passing to it the subcode data found in the frame.
+Unlike the C function, more than one frame of digital audio data can
+be passed to this method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10803">removecallback</A></STRONG>(<VAR>type</VAR>)
+<DD>
+Removes the callback for the given <CODE>type</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10808">resetparser</A></STRONG>(<VAR></VAR>)
+<DD>
+Resets the fields of the parser used for tracking subcodes to an
+initial state.  <CODE>resetparser</CODE> should be called after the disc has
+been changed.
+<P>
+</DL><HR><A NAME="tex2html4886" HREF="node208.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4884" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4878" HREF="node206.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4888" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4889" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4887" HREF="node208.html">17.4 Built-in Module fl</A>
+<B>Up:</B> <A NAME="tex2html4885" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4879" HREF="node206.html">17.2 Standard Module AL</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

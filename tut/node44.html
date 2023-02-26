@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.3 The dir() function</TITLE>
+<META NAME="description" CONTENT="6.3 The dir() function">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html749" HREF="node45.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html747" HREF="node41.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html743" HREF="node43.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html751" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html750" HREF="node45.html">7 Output Formatting</A>
+<B>Up:</B> <A NAME="tex2html748" HREF="node41.html">6 Modules</A>
+<B> Previous:</B> <A NAME="tex2html744" HREF="node43.html">6.2 Standard Modules</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00730000000000000000">6.3 The <TT>dir()</TT> function</A></H1>
+<P>
+The built-in function <TT>dir</TT> is used to find out which names a module
+defines.  It returns a sorted list of strings:
+<P>
+<PRE>&gt;&gt;&gt; import fibo, sys
+&gt;&gt;&gt; dir(fibo)
+['__name__', 'fib', 'fib2']
+&gt;&gt;&gt; dir(sys)
+['__name__', 'argv', 'builtin_module_names', 'copyright', 'exit',
+'maxint', 'modules', 'path', 'ps1', 'ps2', 'setprofile', 'settrace',
+'stderr', 'stdin', 'stdout', 'version']
+&gt;&gt;&gt;</PRE>
+Without arguments, <TT>dir()</TT> lists the names you have defined currently:
+<P>
+<PRE>&gt;&gt;&gt; a = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; import fibo, sys
+&gt;&gt;&gt; fib = fibo.fib
+&gt;&gt;&gt; dir()
+['__name__', 'a', 'fib', 'fibo', 'sys']
+&gt;&gt;&gt;</PRE>
+Note that it lists all types of names: variables, modules, functions, etc.
+<P>
+<TT>dir()</TT> does not list the names of built-in functions and variables.
+If you want a list of those, they are defined in the standard module
+<TT>__builtin__</TT>:
+<P>
+<PRE>&gt;&gt;&gt; import __builtin__
+&gt;&gt;&gt; dir(__builtin__)
+['AccessError', 'AttributeError', 'ConflictError', 'EOFError', 'IOError',
+'ImportError', 'IndexError', 'KeyError', 'KeyboardInterrupt',
+'MemoryError', 'NameError', 'None', 'OverflowError', 'RuntimeError',
+'SyntaxError', 'SystemError', 'SystemExit', 'TypeError', 'ValueError',
+'ZeroDivisionError', '__name__', 'abs', 'apply', 'chr', 'cmp', 'coerce',
+'compile', 'dir', 'divmod', 'eval', 'execfile', 'filter', 'float',
+'getattr', 'hasattr', 'hash', 'hex', 'id', 'input', 'int', 'len', 'long',
+'map', 'max', 'min', 'oct', 'open', 'ord', 'pow', 'range', 'raw_input',
+'reduce', 'reload', 'repr', 'round', 'setattr', 'str', 'type', 'xrange']
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

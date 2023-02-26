@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.5 Caring about security</TITLE>
+<META NAME="description" CONTENT="11.1.5 Caring about security">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3638" HREF="node109.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3636" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3630" HREF="node107.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3640" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3641" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3639" HREF="node109.html">11.1.6 Installing your CGI </A>
+<B>Up:</B> <A NAME="tex2html3637" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3631" HREF="node107.html">11.1.4 Functions</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001215000000000000000">11.1.5 Caring about security</A></H2>
+<P>
+There's one important rule: if you invoke an external program (e.g.
+via the <CODE>os.system()</CODE> or <CODE>os.popen()</CODE> functions), make very sure you don't
+pass arbitrary strings received from the client to the shell.  This is
+a well-known security hole whereby clever hackers anywhere on the web
+can exploit a gullible CGI script to invoke arbitrary shell commands.
+Even parts of the URL or field names cannot be trusted, since the
+request doesn't have to come from your form!
+<P>
+To be on the safe side, if you must pass a string gotten from a form
+to a shell command, you should make sure the string contains only
+alphanumeric characters, dashes, underscores, and periods.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

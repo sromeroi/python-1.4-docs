@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.1.5 Sequence Types</TITLE>
+<META NAME="description" CONTENT="2.1.5 Sequence Types">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2356" HREF="node11.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2354" HREF="node4.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2348" HREF="node9.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2358" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2359" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2357" HREF="node11.html">More String Operations</A>
+<B>Up:</B> <A NAME="tex2html2355" HREF="node4.html">2.1 Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2349" HREF="node9.html">Bit-string Operations on Integer </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00315000000000000000">2.1.5 Sequence Types</A></H2>
+<P>
+There are three sequence types: strings, lists and tuples.
+<P>
+Strings literals are written in single or double quotes:
+<CODE>'xyzzy'</CODE>, <CODE>&quot;frobozz&quot;</CODE>.  See Chapter 2 of the Python
+Reference Manual for more about string literals.  Lists are
+constructed with square brackets, separating items with commas:
+<CODE>[a, b, c]</CODE>.  Tuples are constructed by the comma operator (not
+within square brackets), with or without enclosing parentheses, but an
+empty tuple must have the enclosing parentheses, e.g.,
+<CODE>a, b, c</CODE> or <CODE>()</CODE>.  A single item tuple must have a trailing
+comma, e.g., <CODE>(d,)</CODE>.
+<A NAME="373">&#160;</A><A NAME="374">&#160;</A>
+<A NAME="375">&#160;</A><A NAME="376">&#160;</A>
+<A NAME="377">&#160;</A><A NAME="378">&#160;</A>
+<A NAME="379">&#160;</A><A NAME="380">&#160;</A>
+<P>
+Sequence types support the following operations.  The `<SAMP>in</SAMP>' and
+`<SAMP>not,in</SAMP>' operations have the same priorities as the comparison
+operations.  The `<SAMP>+</SAMP>' and `<SAMP>*</SAMP>' operations have the same
+priority as the corresponding numeric operations.<A NAME="tex2html120" HREF="footnode.html#385"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+This table lists the sequence operations sorted in ascending priority
+(operations in the same box have the same priority).  In the table,
+<VAR>s</VAR> and <VAR>t</VAR> are sequences of the same type; <VAR>n</VAR>, <VAR>i</VAR>
+and <VAR>j</VAR> are integers:
+<P>
+<P><P> <IMG WIDTH=480 HEIGHT=204 ALIGN=BOTTOM ALT="tableiii391" SRC="img5.gif"  > <P><P>
+<A NAME="446">&#160;</A><A NAME="447">&#160;</A><A NAME="448">&#160;</A>
+<P>
+<A NAME="452">&#160;</A><A NAME="453">&#160;</A>
+<A NAME="454">&#160;</A><A NAME="455">&#160;</A>
+<A NAME="456">&#160;</A><A NAME="457">&#160;</A>
+<A NAME="458">&#160;</A><A NAME="459">&#160;</A>
+<A NAME="460">&#160;</A><A NAME="460">&#160;</A>
+<A NAME="461">&#160;</A><A NAME="461">&#160;</A>
+<P>
+,
+Notes:
+<P>
+<DL ><DT><STRONG>(1)</STRONG>
+<DD> If <VAR>i</VAR> or <VAR>j</VAR> is negative, the index is relative to
+  the end of the string, i.e., <CODE>len(<VAR>s</VAR>) + <VAR>i</VAR></CODE> or
+  <CODE>len(<VAR>s</VAR>) + <VAR>j</VAR></CODE> is substituted.  But note that <CODE>-0</CODE> is
+  still <CODE>0</CODE>.
+<P>
+<DT><STRONG>(2)</STRONG>
+<DD> The slice of <VAR>s</VAR> from <VAR>i</VAR> to <VAR>j</VAR> is defined as
+  the sequence of items with index <VAR>k</VAR> such that <CODE><VAR>i</VAR> &lt;=
+  <VAR>k</VAR> &lt; <VAR>j</VAR></CODE>.  If <VAR>i</VAR> or <VAR>j</VAR> is greater than
+  <CODE>len(<VAR>s</VAR>)</CODE>, use <CODE>len(<VAR>s</VAR>)</CODE>.  If <VAR>i</VAR> is omitted,
+  use <CODE>0</CODE>.  If <VAR>j</VAR> is omitted, use <CODE>len(<VAR>s</VAR>)</CODE>.  If
+  <VAR>i</VAR> is greater than or equal to <VAR>j</VAR>, the slice is empty.
+<P>
+ </DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html2360" HREF="node11.html#SECTION00315100000000000000">More String Operations</A>
+<LI> <A NAME="tex2html2361" HREF="node12.html#SECTION00315200000000000000">Mutable Sequence Types</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

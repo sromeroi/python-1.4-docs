@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.10 Built-in Module imgfile</TITLE>
+<META NAME="description" CONTENT="17.10 Built-in Module imgfile">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html5005" HREF="node218.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html5003" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4999" HREF="node216.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html5007" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html5008" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html5006" HREF="node218.html">18 SunOS Specific Services</A>
+<B>Up:</B> <A NAME="tex2html5004" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html5000" HREF="node216.html">17.9 Standard Modules GL </A>
+<BR><HR><P>
+<H1><A NAME="SECTION0018100000000000000000">17.10 Built-in Module <CODE>imgfile</CODE></A></H1>
+<P>
+The imgfile module allows python programs to access SGI imglib image
+files (also known as `<CODE>.rgb</CODE>' files).  The module is far from
+complete, but is provided anyway since the functionality that there is
+is enough in some cases.  Currently, colormap files are not supported.
+<P>
+The module defines the following variables and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+This exception is raised on all errors, such as unsupported file type, etc.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11480">getsizes</A></STRONG>(<VAR>file</VAR>)
+<DD>
+This function returns a tuple <CODE>(<VAR>x</VAR>, <VAR>y</VAR>, <VAR>z</VAR>)</CODE> where
+<VAR>x</VAR> and <VAR>y</VAR> are the size of the image in pixels and
+<VAR>z</VAR> is the number of
+bytes per pixel. Only 3 byte RGB pixels and 1 byte greyscale pixels
+are currently supported.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11490">read</A></STRONG>(<VAR>file</VAR>)
+<DD>
+This function reads and decodes the image on the specified file, and
+returns it as a python string. The string has either 1 byte greyscale
+pixels or 4 byte RGBA pixels. The bottom left pixel is the first in
+the string. This format is suitable to pass to <CODE>gl.lrectwrite</CODE>,
+for instance.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11525">readscaled</A></STRONG>(<VAR>file, x, y, filter</VAR><BIG>[</BIG><VAR>, blur</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This function is identical to read but it returns an image that is
+scaled to the given <VAR>x</VAR> and <VAR>y</VAR> sizes. If the <VAR>filter</VAR> and
+<VAR>blur</VAR> parameters are omitted scaling is done by
+simply dropping or duplicating pixels, so the result will be less than
+perfect, especially for computer-generated images.
+<P>
+Alternatively, you can specify a filter to use to smoothen the image
+after scaling. The filter forms supported are <CODE>'impulse'</CODE>,
+<CODE>'box'</CODE>, <CODE>'triangle'</CODE>, <CODE>'quadratic'</CODE> and
+<CODE>'gaussian'</CODE>. If a filter is specified <VAR>blur</VAR> is an optional
+parameter specifying the blurriness of the filter. It defaults to <CODE>1.0</CODE>.
+<P>
+<CODE>readscaled</CODE> makes no
+attempt to keep the aspect ratio correct, so that is the users'
+responsibility.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11511">ttob</A></STRONG>(<VAR>flag</VAR>)
+<DD>
+This function sets a global flag which defines whether the scan lines
+of the image are read or written from bottom to top (flag is zero,
+compatible with SGI GL) or from top to bottom(flag is one,
+compatible with X).  The default is zero.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11515">write</A></STRONG>(<VAR>file, data, x, y, z</VAR>)
+<DD>
+This function writes the RGB or greyscale data in <VAR>data</VAR> to image
+file <VAR>file</VAR>. <VAR>x</VAR> and <VAR>y</VAR> give the size of the image,
+<VAR>z</VAR> is 1 for 1 byte greyscale images or 3 for RGB images (which are
+stored as 4 byte values of which only the lower three bytes are used).
+These are the formats returned by <CODE>gl.lrectread</CODE>.
+<P>
+</DL><HR><A NAME="tex2html5005" HREF="node218.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html5003" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4999" HREF="node216.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html5007" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html5008" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html5006" HREF="node218.html">18 SunOS Specific Services</A>
+<B>Up:</B> <A NAME="tex2html5004" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html5000" HREF="node216.html">17.9 Standard Modules GL </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

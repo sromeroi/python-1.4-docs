@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.3 Standard Module traceback</TITLE>
+<META NAME="description" CONTENT="3.3 Standard Module traceback">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2619" HREF="node31.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2617" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2611" HREF="node29.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2621" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2622" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2620" HREF="node31.html">3.4 Standard Module pickle</A>
+<B>Up:</B> <A NAME="tex2html2618" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2612" HREF="node29.html">3.2 Standard Module types</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00430000000000000000">3.3 Standard Module <CODE>traceback</CODE></A></H1>
+<P>
+This module provides a standard interface to format and print stack
+traces of Python programs.  It exactly mimics the behavior of the
+Python interpreter when it prints a stack trace.  This is useful when
+you want to print stack traces under program control, e.g. in a
+``wrapper'' around the interpreter.
+<P>
+The module uses traceback objects -- this is the object type
+that is stored in the variables <CODE>sys.exc_traceback</CODE> and
+<CODE>sys.last_traceback</CODE>.
+<P>
+The module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="1801">print_tb</A></STRONG>(<VAR>traceback</VAR><BIG>[</BIG><VAR>, limit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Print up to <VAR>limit</VAR> stack trace entries from <VAR>traceback</VAR>.  If
+<VAR>limit</VAR> is omitted or <CODE>None</CODE>, all entries are printed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1802">extract_tb</A></STRONG>(<VAR>traceback</VAR><BIG>[</BIG><VAR>, limit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a list of up to <VAR>limit</VAR> ``pre-processed'' stack trace
+entries extracted from <VAR>traceback</VAR>.  It is useful for alternate
+formatting of stack traces.  If <VAR>limit</VAR> is omitted or <CODE>None</CODE>,
+all entries are extracted.  A ``pre-processed'' stack trace entry is a
+quadruple (<VAR>filename</VAR>, <VAR>line number</VAR>, <VAR>function name</VAR>,
+<VAR>line text</VAR>) representing the information that is usually printed
+for a stack trace.  The <VAR>line text</VAR> is a string with leading and
+trailing whitespace stripped; if the source is not available it is
+<CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1803">print_exception</A></STRONG>(<VAR>type, value, traceback</VAR><BIG>[</BIG><VAR>, limit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Print exception information and up to <VAR>limit</VAR> stack trace entries
+from <VAR>traceback</VAR>.  This differs from <CODE>print_tb</CODE> in the
+following ways: (1) if <VAR>traceback</VAR> is not <CODE>None</CODE>, it prints a
+header ``<CODE>Traceback (innermost last):</CODE>''; (2) it prints the
+exception <VAR>type</VAR> and <VAR>value</VAR> after the stack trace; (3) if
+<VAR>type</VAR> is <CODE>SyntaxError</CODE> and <VAR>value</VAR> has the appropriate
+format, it prints the line where the syntax error occurred with a
+caret indication the approximate position of the error.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1804">print_exc</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>limit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This is a shorthand for <CODE>print_exception(sys.exc_type,</CODE>
+<CODE>sys.exc_value,</CODE> <CODE>sys.exc_traceback,</CODE> <CODE>limit)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1805">print_last</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>limit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This is a shorthand for <CODE>print_exception(sys.last_type,</CODE>
+<CODE>sys.last_value,</CODE> <CODE>sys.last_traceback,</CODE> <CODE>limit)</CODE>.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

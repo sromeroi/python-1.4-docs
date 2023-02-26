@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.3 The range() Function</TITLE>
+<META NAME="description" CONTENT="4.3 The range() Function">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html592" HREF="node31.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html590" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html584" HREF="node29.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html594" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html593" HREF="node31.html">4.4 Break and Continue </A>
+<B>Up:</B> <A NAME="tex2html591" HREF="node27.html">4 More Control Flow </A>
+<B> Previous:</B> <A NAME="tex2html585" HREF="node29.html">4.2 For Statements</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00530000000000000000">4.3 The <TT>range()</TT> Function</A></H1>
+<P>
+If you do need to iterate over a sequence of numbers, the built-in
+function <TT>range()</TT> comes in handy.  It generates lists containing
+arithmetic progressions, e.g.:
+<P>
+<PRE>&gt;&gt;&gt; range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt;</PRE>
+The given end point is never part of the generated list; <TT>range(10)</TT>
+generates a list of 10 values, exactly the legal indices for items of a
+sequence of length 10.  It is possible to let the range start at another
+number, or to specify a different increment (even negative):
+<P>
+<PRE>&gt;&gt;&gt; range(5, 10)
+[5, 6, 7, 8, 9]
+&gt;&gt;&gt; range(0, 10, 3)
+[0, 3, 6, 9]
+&gt;&gt;&gt; range(-10, -100, -30)
+[-10, -40, -70]
+&gt;&gt;&gt;</PRE>
+To iterate over the indices of a sequence, combine <TT>range()</TT> and
+<TT>len()</TT> as follows:
+<P>
+<PRE>&gt;&gt;&gt; a = ['Mary', 'had', 'a', 'little', 'lamb']
+&gt;&gt;&gt; for i in range(len(a)):
+...     print i, a[i]
+... 
+0 Mary
+1 had
+2 a
+3 little
+4 lamb
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

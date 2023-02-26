@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.1 A word about terminology</TITLE>
+<META NAME="description" CONTENT="9.1 A word about terminology">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html874" HREF="node55.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html872" HREF="node53.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html866" HREF="node53.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html876" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html875" HREF="node55.html">9.2 Python scopes and </A>
+<B>Up:</B> <A NAME="tex2html873" HREF="node53.html">9 Classes</A>
+<B> Previous:</B> <A NAME="tex2html867" HREF="node53.html">9 Classes</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001010000000000000000">9.1 A word about terminology</A></H1>
+<P>
+Lacking universally accepted terminology to talk about classes, I'll
+make occasional use of Smalltalk and C++ terms.  (I'd use Modula-3
+terms, since its object-oriented semantics are closer to those of
+Python than C++, but I expect that few readers have heard of it...)
+<P>
+I also have to warn you that there's a terminological pitfall for
+object-oriented readers: the word ``object'' in Python does not
+necessarily mean a class instance.  Like C++ and Modula-3, and unlike
+Smalltalk, not all types in Python are classes: the basic built-in
+types like integers and lists aren't, and even somewhat more exotic
+types like files aren't.  However, <EM>all</EM> Python types share a little
+bit of common semantics that is best described by using the word
+object.
+<P>
+Objects have individuality, and multiple names (in multiple scopes)
+can be bound to the same object.  This is known as aliasing in other
+languages.  This is usually not appreciated on a first glance at
+Python, and can be safely ignored when dealing with immutable basic
+types (numbers, strings, tuples).  However, aliasing has an
+(intended!) effect on the semantics of Python code involving mutable
+objects such as lists, dictionaries, and most types representing
+entities outside the program (files, windows, etc.).  This is usually
+used to the benefit of the program, since aliases behave like pointers
+in some respects.  For example, passing an object is cheap since only
+a pointer is passed by the implementation; and if a function modifies
+an object passed as an argument, the caller will see the change -- this
+obviates the need for two different argument passing mechanisms as in
+Pascal.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

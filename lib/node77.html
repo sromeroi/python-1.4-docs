@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.4 Built-in Module grp</TITLE>
+<META NAME="description" CONTENT="8.4 Built-in Module grp">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3212" HREF="node78.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3210" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3204" HREF="node76.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3214" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3215" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3213" HREF="node78.html">8.5 Built-in module crypt</A>
+<B>Up:</B> <A NAME="tex2html3211" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3205" HREF="node76.html">8.3 Built-in Module pwd</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00940000000000000000">8.4 Built-in Module <CODE>grp</CODE></A></H1>
+<P>
+This module provides access to the Unix group database.
+It is available on all Unix versions.
+<P>
+Group database entries are reported as 4-tuples containing the
+following items from the group database (see `<CODE>&lt;grp.h&gt;</CODE>'), in order:
+<CODE>gr_name</CODE>,
+<CODE>gr_passwd</CODE>,
+<CODE>gr_gid</CODE>,
+<CODE>gr_mem</CODE>.
+The gid is an integer, name and password are strings, and the member
+list is a list of strings.
+(Note that most users are not explicitly listed as members of the
+group they are in according to the password database.)
+An exception is raised if the entry asked for cannot be found.
+<P>
+It defines the following items:
+<P>
+<DL><DT><STRONG><A NAME="4976">getgrgid</A></STRONG>(<VAR>gid</VAR>)
+<DD>
+Return the group database entry for the given numeric group ID.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4980">getgrnam</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return the group database entry for the given group name.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4984">getgrall</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a list of all available group entries, in arbitrary order.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

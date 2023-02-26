@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.10.4 Writer Implementations</TITLE>
+<META NAME="description" CONTENT="11.10.4 Writer Implementations">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3888" HREF="node130.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3886" HREF="node125.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3882" HREF="node128.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3890" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3891" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3889" HREF="node130.html">11.11 Standard Module rfc822</A>
+<B>Up:</B> <A NAME="tex2html3887" HREF="node125.html">11.10 Standard Module formatter</A>
+<B> Previous:</B> <A NAME="tex2html3883" HREF="node128.html">11.10.3 The Writer Interface</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012104000000000000000">11.10.4 Writer Implementations</A></H2>
+<P>
+Three implementations of the writer object interface are provided as
+examples by this module.  Most applications will need to derive new
+writer classes from the <CODE>NullWriter</CODE> class.
+<P>
+<DL><DT><STRONG><A NAME="7052">NullWriter</A></STRONG>(<VAR></VAR>)
+<DD>
+A writer which only provides the interface definition; no actions are
+taken on any methods.  This should be the base class for all writers
+which do not need to inherit any implementation methods.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7056">AbstractWriter</A></STRONG>(<VAR></VAR>)
+<DD>
+A writer which can be used in debugging formatters, but not much
+else.  Each method simply accounces itself by printing its name and
+arguments on standard output.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7077">DumbWriter</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>file<CODE> = None</CODE></VAR><BIG>[</BIG><VAR>, maxcol<CODE> = 72</CODE></VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Simple writer class which writes output on the file object passed in
+as <CODE>file</CODE> or, if <CODE>file</CODE> is omitted, on standard output.  The
+output is simply word-wrapped to the number of columns specified by
+<CODE>maxcol</CODE>.  This class is suitable for reflowing a sequence of
+paragraphs.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

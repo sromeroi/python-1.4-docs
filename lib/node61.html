@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.1 Standard Module os</TITLE>
+<META NAME="description" CONTENT="6.1 Standard Module os">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3005" HREF="node62.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3003" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2997" HREF="node60.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3007" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3008" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3006" HREF="node62.html">6.2 Built-in Module time</A>
+<B>Up:</B> <A NAME="tex2html3004" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html2998" HREF="node60.html">6 Generic Operating System </A>
+<BR><HR><P>
+<H1><A NAME="SECTION00710000000000000000">6.1 Standard Module <CODE>os</CODE></A></H1>
+<P>
+This module provides a more portable way of using operating system
+(OS) dependent functionality than importing an OS dependent built-in
+module like <CODE>posix</CODE>.
+<P>
+When the optional built-in module <CODE>posix</CODE> is available, this
+module exports the same functions and data as <CODE>posix</CODE>; otherwise,
+it searches for an OS dependent built-in module like <CODE>mac</CODE> and
+exports the same functions and data as found there.  The design of all
+Python's built-in OS dependent modules is such that as long as the same
+functionality is available, it uses the same interface; e.g., the
+function <CODE>os.stat(<VAR>file</VAR>)</CODE> returns stat info about a <VAR>file</VAR> in a
+format compatible with the POSIX interface.
+<P>
+Extensions peculiar to a particular OS are also available through the
+<CODE>os</CODE> module, but using them is of course a threat to portability!
+<P>
+Note that after the first time <CODE>os</CODE> is imported, there is <EM>no</EM>
+performance penalty in using functions from <CODE>os</CODE> instead of
+directly from the OS dependent built-in module, so there should be
+<EM>no</EM> reason not to use <CODE>os</CODE>!
+<P>
+In addition to whatever the correct OS dependent module exports, the
+following variables and functions are always exported by <CODE>os</CODE>:
+<P>
+<DL><DT><STRONG><A NAME="">name</A></STRONG>
+<DD>
+The name of the OS dependent module imported.  The following names
+have currently been registered: <CODE>'posix'</CODE>, <CODE>'nt'</CODE>,
+<CODE>'dos'</CODE>, <CODE>'mac'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">path</A></STRONG>
+<DD>
+The corresponding OS dependent standard module for pathname
+operations, e.g., <CODE>posixpath</CODE> or <CODE>macpath</CODE>.  Thus, (given
+the proper imports), <CODE>os.path.split(<VAR>file</VAR>)</CODE> is equivalent to but
+more portable than <CODE>posixpath.split(<VAR>file</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">curdir</A></STRONG>
+<DD>
+The constant string used by the OS to refer to the current directory,
+e.g. <CODE>'.'</CODE> for POSIX or <CODE>':'</CODE> for the Mac.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">pardir</A></STRONG>
+<DD>
+The constant string used by the OS to refer to the parent directory,
+e.g. <CODE>'..'</CODE> for POSIX or <CODE>'::'</CODE> for the Mac.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">sep</A></STRONG>
+<DD>
+The character used by the OS to separate pathname components, e.g.\
+<CODE>'/'</CODE> for POSIX or <CODE>':'</CODE> for the Mac.  Note that knowing this
+is not sufficient to be able to parse or concatenate pathnames--better
+use <CODE>os.path.split()</CODE> and <CODE>os.path.join()</CODE>--but it is
+occasionally useful.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">pathsep</A></STRONG>
+<DD>
+The character conventionally used by the OS to separate search patch
+components (as in <CODE>$PATH</CODE>), e.g. <CODE>':'</CODE> for POSIX or
+<CODE>';'</CODE> for MS-DOS.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">defpath</A></STRONG>
+<DD>
+The default search path used by <CODE>os.exec*p*()</CODE> if the environment
+doesn't have a <CODE>'PATH'</CODE> key.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3318">execl</A></STRONG>(<VAR>path, arg0, arg1, ...</VAR>)
+<DD>
+This is equivalent to
+<CODE>os.execv(<VAR>path</VAR>, (<VAR>arg0</VAR>, <VAR>arg1</VAR>, ...))</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3325">execle</A></STRONG>(<VAR>path, arg0, arg1, ..., env</VAR>)
+<DD>
+This is equivalent to
+<CODE>os.execve(<VAR>path</VAR>, (<VAR>arg0</VAR>, <VAR>arg1</VAR>, ...), <VAR>env</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3333">execlp</A></STRONG>(<VAR>path, arg0, arg1, ...</VAR>)
+<DD>
+This is equivalent to
+<CODE>os.execvp(<VAR>path</VAR>, (<VAR>arg0</VAR>, <VAR>arg1</VAR>, ...))</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3340">execvp</A></STRONG>(<VAR>path, args</VAR>)
+<DD>
+This is like <CODE>os.execv(<VAR>path</VAR>, <VAR>args</VAR>)</CODE> but duplicates
+the shell's actions in searching for an executable file in a list of
+directories.  The directory list is obtained from
+<CODE>os.environ['PATH']</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3347">execvpe</A></STRONG>(<VAR>path, args, env</VAR>)
+<DD>
+This is a cross between <CODE>os.execve()</CODE> and <CODE>os.execvp()</CODE>.
+The directory list is obtained from <CODE><VAR>env</VAR>['PATH']</CODE>.
+<P>
+</DL>
+<P>
+(The functions <CODE>os.execv()</CODE> and <CODE>execve()</CODE> are not
+documented here, since they are implemented by the OS dependent
+module.  If the OS dependent module doesn't define either of these,
+the functions that rely on it will raise an exception.  They are
+documented in the section on module <CODE>posix</CODE>, together with all
+other functions that <CODE>os</CODE> imports from the OS dependent module.)
+<P>
+<HR><A NAME="tex2html3005" HREF="node62.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3003" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2997" HREF="node60.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3007" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3008" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3006" HREF="node62.html">6.2 Built-in Module time</A>
+<B>Up:</B> <A NAME="tex2html3004" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html2998" HREF="node60.html">6 Generic Operating System </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.8 Built-in Module termios</TITLE>
+<META NAME="description" CONTENT="8.8 Built-in Module termios">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3260" HREF="node82.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3258" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3252" HREF="node80.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3262" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3263" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3261" HREF="node82.html">8.8.1 Example</A>
+<B>Up:</B> <A NAME="tex2html3259" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3253" HREF="node80.html">8.7 Built-in Module gdbm</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00980000000000000000">8.8 Built-in Module <CODE>termios</CODE></A></H1>
+<P>
+<A NAME="5042">&#160;</A><A NAME="5043">&#160;</A>
+<A NAME="5044">&#160;</A><A NAME="5045">&#160;</A>
+<P>
+This module provides an interface to the Posix calls for tty I/O
+control.  For a complete description of these calls, see the Posix or
+Unix manual pages.  It is only available for those Unix versions
+that support Posix <CODE>termios</CODE> style tty I/O control (and then
+only if configured at installation time).
+<P>
+All functions in this module take a file descriptor <VAR>fd</VAR> as their
+first argument.  This must be an integer file descriptor, such as
+returned by <CODE>sys.stdin.fileno()</CODE>.
+<P>
+This module should be used in conjunction with the <CODE>TERMIOS</CODE>
+module, which defines the relevant symbolic constants (see the next
+section).
+<P>
+The module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="5056">tcgetattr</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+Return a list containing the tty attributes for file descriptor
+<VAR>fd</VAR>, as follows: <CODE>[<VAR>iflag</VAR>, <VAR>oflag</VAR>, <VAR>cflag</VAR>,
+<VAR>lflag</VAR>, <VAR>ispeed</VAR>, <VAR>ospeed</VAR>, <VAR>cc</VAR>]</CODE> where <VAR>cc</VAR> is
+a list of the tty special characters (each a string of length 1,
+except the items with indices <CODE>VMIN</CODE> and <CODE>VTIME</CODE>, which are
+integers when these fields are defined).  The interpretation of the
+flags and the speeds as well as the indexing in the <VAR>cc</VAR> array
+must be done using the symbolic constants defined in the
+<CODE>TERMIOS</CODE> module.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5073">tcsetattr</A></STRONG>(<VAR>fd, when, attributes</VAR>)
+<DD>
+Set the tty attributes for file descriptor <VAR>fd</VAR> from the
+<VAR>attributes</VAR>, which is a list like the one returned by
+<CODE>tcgetattr()</CODE>.  The <VAR>when</VAR> argument determines when the
+attributes are changed: <CODE>TERMIOS.TCSANOW</CODE> to change immediately,
+<CODE>TERMIOS.TCSADRAIN</CODE> to change after transmitting all queued
+output, or <CODE>TERMIOS.TCSAFLUSH</CODE> to change after transmitting all
+queued output and discarding all queued input.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5084">tcsendbreak</A></STRONG>(<VAR>fd, duration</VAR>)
+<DD>
+Send a break on file descriptor <VAR>fd</VAR>.  A zero <VAR>duration</VAR> sends
+a break for 0.25-0.5 seconds; a nonzero <VAR>duration</VAR> has a system
+dependent meaning.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5091">tcdrain</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+Wait until all output written to file descriptor <VAR>fd</VAR> has been
+transmitted.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5096">tcflush</A></STRONG>(<VAR>fd, queue</VAR>)
+<DD>
+Discard queued data on file descriptor <VAR>fd</VAR>.  The <VAR>queue</VAR>
+selector specifies which queue: <CODE>TERMIOS.TCIFLUSH</CODE> for the input
+queue, <CODE>TERMIOS.TCOFLUSH</CODE> for the output queue, or
+<CODE>TERMIOS.TCIOFLUSH</CODE> for both queues.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5105">tcflow</A></STRONG>(<VAR>fd, action</VAR>)
+<DD>
+Suspend or resume input or output on file descriptor <VAR>fd</VAR>.  The
+<VAR>action</VAR> argument can be <CODE>TERMIOS.TCOOFF</CODE> to suspend output,
+<CODE>TERMIOS.TCOON</CODE> to restart output, <CODE>TERMIOS.TCIOFF</CODE> to
+suspend input, or <CODE>TERMIOS.TCION</CODE> to restart input.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3264" HREF="node82.html#SECTION00981000000000000000">8.8.1 Example</A>
+</UL>
+<HR><A NAME="tex2html3260" HREF="node82.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3258" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3252" HREF="node80.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3262" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3263" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3261" HREF="node82.html">8.8.1 Example</A>
+<B>Up:</B> <A NAME="tex2html3259" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3253" HREF="node80.html">8.7 Built-in Module gdbm</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

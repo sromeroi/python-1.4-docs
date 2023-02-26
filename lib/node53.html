@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.3 Standard Module regsub</TITLE>
+<META NAME="description" CONTENT="4.3 Standard Module regsub">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2904" HREF="node54.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2902" HREF="node48.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2896" HREF="node52.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2906" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2907" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2905" HREF="node54.html">4.4 Built-in Module struct</A>
+<B>Up:</B> <A NAME="tex2html2903" HREF="node48.html">4 String Services</A>
+<B> Previous:</B> <A NAME="tex2html2897" HREF="node52.html">4.2.2 Module Contents</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00530000000000000000">4.3 Standard Module <CODE>regsub</CODE></A></H1>
+<P>
+This module defines a number of functions useful for working with
+regular expressions (see built-in module <CODE>regex</CODE>).
+<P>
+Warning: these functions are not thread-safe.
+<P>
+<DL><DT><STRONG><A NAME="2878">sub</A></STRONG>(<VAR>pat, repl, str</VAR>)
+<DD>
+Replace the first occurrence of pattern <VAR>pat</VAR> in string
+<VAR>str</VAR> by replacement <VAR>repl</VAR>.  If the pattern isn't found,
+the string is returned unchanged.  The pattern may be a string or an
+already compiled pattern.  The replacement may contain references
+`<SAMP>&#92;<VAR>digit</VAR></SAMP>' to subpatterns and escaped backslashes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2886">gsub</A></STRONG>(<VAR>pat, repl, str</VAR>)
+<DD>
+Replace all (non-overlapping) occurrences of pattern <VAR>pat</VAR> in
+string <VAR>str</VAR> by replacement <VAR>repl</VAR>.  The same rules as for
+<CODE>sub()</CODE> apply.  Empty matches for the pattern are replaced only
+when not adjacent to a previous match, so e.g.
+<CODE>gsub('', '-', 'abc')</CODE> returns <CODE>'-a-b-c-'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2922">split</A></STRONG>(<VAR>str, pat</VAR><BIG>[</BIG><VAR>, maxsplit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Split the string <VAR>str</VAR> in fields separated by delimiters matching
+the pattern <VAR>pat</VAR>, and return a list containing the fields.  Only
+non-empty matches for the pattern are considered, so e.g.
+<CODE>split('a:b', ':*')</CODE> returns <CODE>['a', 'b']</CODE> and
+<CODE>split('abc', '')</CODE> returns <CODE>['abc']</CODE>.  The <VAR>maxsplit</VAR>
+defaults to 0. If it is nonzero, only <VAR>maxsplit</VAR> number of splits
+occur, and the remainder of the string is returned as the final
+element of the list.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2923">splitx</A></STRONG>(<VAR>str, pat</VAR><BIG>[</BIG><VAR>, maxsplit</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Split the string <VAR>str</VAR> in fields separated by delimiters matching
+the pattern <VAR>pat</VAR>, and return a list containing the fields as well
+as the separators.  For example, <CODE>splitx('a:::b', ':*')</CODE> returns
+<CODE>['a', ':::', 'b']</CODE>.  Otherwise, this function behaves the same
+as <CODE>split</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2924">capwords</A></STRONG>(<VAR>s</VAR><BIG>[</BIG><VAR>, pat</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Capitalize words separated by optional pattern <VAR>pat</VAR>.  The default
+pattern uses any characters except letters, digits and underscores as
+word delimiters.  Capitalization is done by changing the first
+character of each word to upper case.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

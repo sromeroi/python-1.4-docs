@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2 Embedding Python in another application</TITLE>
+<META NAME="description" CONTENT="2 Embedding Python in another application">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html408" HREF="node20.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html406" HREF="ext.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html400" HREF="node18.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html410" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html411" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html409" HREF="node20.html">Embedding Python in C++</A>
+<B>Up:</B> <A NAME="tex2html407" HREF="ext.html">Extending and Embedding the </A>
+<B> Previous:</B> <A NAME="tex2html401" HREF="node18.html">Writing Extensions in C++</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00300000000000000000">2 Embedding Python in another application</A></H1>
+<P>
+Embedding Python is similar to extending it, but not quite.  The
+difference is that when you extend Python, the main program of the
+application is still the Python interpreter, while if you embed
+Python, the main program may have nothing to do with Python --
+instead, some parts of the application occasionally call the Python
+interpreter to run some Python code.
+<P>
+So if you are embedding Python, you are providing your own main
+program.  One of the things this main program has to do is initialize
+the Python interpreter.  At the very least, you have to call the
+function <CODE>Py_Initialize()</CODE>.  There are optional calls to pass command
+line arguments to Python.  Then later you can call the interpreter
+from any part of the application.
+<P>
+There are several different ways to call the interpreter: you can pass
+a string containing Python statements to <CODE>PyRun_SimpleString()</CODE>,
+or you can pass a stdio file pointer and a file name (for
+identification in error messages only) to <CODE>PyRun_SimpleFile()</CODE>.  You
+can also call the lower-level operations described in the previous
+chapters to construct and use Python objects.
+<P>
+A simple demo of embedding Python can be found in the directory
+`<CODE>Demo/embed</CODE>'.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html412" HREF="node20.html#SECTION00310000000000000000">Embedding Python in C++</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

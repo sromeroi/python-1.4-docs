@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Bit-string Operations on Integer Types</TITLE>
+<META NAME="description" CONTENT="Bit-string Operations on Integer Types">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2344" HREF="node10.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2342" HREF="node8.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2338" HREF="node8.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2346" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2347" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2345" HREF="node10.html">2.1.5 Sequence Types</A>
+<B>Up:</B> <A NAME="tex2html2343" HREF="node8.html">2.1.4 Numeric Types</A>
+<B> Previous:</B> <A NAME="tex2html2339" HREF="node8.html">2.1.4 Numeric Types</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00314100000000000000">Bit-string Operations on Integer Types</A></H3>
+<P>
+<A NAME="BitstringOperations">&#160;</A>
+<P>
+Plain and long integer types support additional operations that make
+sense only for bit-strings.  Negative numbers are treated as their 2's
+complement value (for long integers, this assumes a sufficiently large
+number of bits that no overflow occurs during the operation).
+<P>
+The priorities of the binary bit-wise operations are all lower than
+the numeric operations and higher than the comparisons; the unary
+operation `<SAMP>&nbsp;</SAMP>' has the same priority as the other unary numeric
+operations (`<SAMP>+</SAMP>' and `<SAMP>-</SAMP>').
+<P>
+This table lists the bit-string operations sorted in ascending
+priority (operations in the same box have the same priority):
+<P>
+<P><P> <IMG WIDTH=410 HEIGHT=147 ALIGN=BOTTOM ALT="tableiii311" SRC="img4.gif"  > <P><P>
+<A NAME="351">&#160;</A><A NAME="352">&#160;</A><A NAME="353">&#160;</A>
+<A NAME="354">&#160;</A><A NAME="355">&#160;</A>
+<A NAME="356">&#160;</A><A NAME="357">&#160;</A>
+<A NAME="358">&#160;</A><A NAME="359">&#160;</A>
+<P>
+,
+Notes:
+<DL ><DT><STRONG>(1)</STRONG>
+<DD> Negative shift counts are illegal.
+<DT><STRONG>(2)</STRONG>
+<DD> A left shift by <VAR>n</VAR> bits is equivalent to
+multiplication by <CODE>pow(2, <VAR>n</VAR>)</CODE> without overflow check.
+<DT><STRONG>(3)</STRONG>
+<DD> A right shift by <VAR>n</VAR> bits is equivalent to
+division by <CODE>pow(2, <VAR>n</VAR>)</CODE> without overflow check.
+<P>
+ </DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

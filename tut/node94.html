@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1 New Class Features</TITLE>
+<META NAME="description" CONTENT="11.1 New Class Features">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1355" HREF="node95.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1353" HREF="node93.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1347" HREF="node93.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1357" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1356" HREF="node95.html">11.2 Unix Signal Handling</A>
+<B>Up:</B> <A NAME="tex2html1354" HREF="node93.html">11 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1348" HREF="node93.html">11 New in Release </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001210000000000000000">11.1 New Class Features</A></H1>
+<P>
+The semantics of <CODE>__coerce__</CODE> have been changed to be more
+reasonable.  As an example, the new standard module <CODE>Complex</CODE>
+implements fairly complete complex numbers using this.  Additional
+examples of classes with and without <CODE>__coerce__</CODE> methods can be
+found in the <CODE>Demo/classes</CODE> subdirectory, modules <CODE>Rat</CODE> and
+<CODE>Dates</CODE>.
+<P>
+If a class defines no <CODE>__coerce__</CODE> method, this is equivalent to
+the following definition:
+<P>
+<PRE>def __coerce__(self, other): return self, other</PRE>
+<P>
+If <CODE>__coerce__</CODE> coerces itself to an object of a different type,
+the operation is carried out using that type -- in release 1.1, this
+would cause an error.
+<P>
+Comparisons involving class instances now invoke <CODE>__coerce__</CODE>
+exactly as if <CODE>cmp(x, y)</CODE> were a binary operator like <CODE>+</CODE>
+(except if <CODE>x</CODE> and <CODE>y</CODE> are the same object).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

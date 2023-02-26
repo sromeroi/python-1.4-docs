@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.2 How Is This Profiler Different From The Old Profiler?</TITLE>
+<META NAME="description" CONTENT="10.2 How Is This Profiler Different From The Old Profiler?">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3400" HREF="node93.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3398" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3392" HREF="node91.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3402" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3403" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3401" HREF="node93.html">10.3 Instant Users Manual</A>
+<B>Up:</B> <A NAME="tex2html3399" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3393" HREF="node91.html">10.1 Introduction to the </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001120000000000000000">10.2 How Is This Profiler Different From The Old Profiler?</A></H1>
+<P>
+<A NAME="ProfilerChanges">&#160;</A>
+<P>
+The big changes from old profiling module are that you get more
+information, and you pay less CPU time.  It's not a trade-off, it's a
+trade-up.
+<P>
+To be specific:
+<P>
+<DL ><DT><STRONG>Bugs removed:</STRONG>
+<DD>
+Local stack frame is no longer molested, execution time is now charged
+to correct functions.
+<P>
+<DT><STRONG>Accuracy increased:</STRONG>
+<DD>
+Profiler execution time is no longer charged to user's code,
+calibration for platform is supported, file reads are not done <EM>by</EM>
+profiler <EM>during</EM> profiling (and charged to user's code!).
+<P>
+<DT><STRONG>Speed increased:</STRONG>
+<DD>
+Overhead CPU cost was reduced by more than a factor of two (perhaps a
+factor of five), lightweight profiler module is all that must be
+loaded, and the report generating module (<CODE>pstats</CODE>) is not needed
+during profiling.
+<P>
+<DT><STRONG>Recursive functions support:</STRONG>
+<DD>
+Cumulative times in recursive functions are correctly calculated;
+recursive entries are counted.
+<P>
+<DT><STRONG>Large growth in report generating UI:</STRONG>
+<DD>
+Distinct profiles runs can be added together forming a comprehensive
+report; functions that import statistics take arbitrary lists of
+files; sorting criteria is now based on keywords (instead of 4 integer
+options); reports shows what functions were profiled as well as what
+profile file was referenced; output format has been improved.
+<P>
+ </DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>5.3 Tuples and Sequences</TITLE>
+<META NAME="description" CONTENT="5.3 Tuples and Sequences">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html673" HREF="node38.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html671" HREF="node34.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html665" HREF="node36.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html675" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html674" HREF="node38.html">5.4 Dictionaries</A>
+<B>Up:</B> <A NAME="tex2html672" HREF="node34.html">5 Odds and Ends</A>
+<B> Previous:</B> <A NAME="tex2html666" HREF="node36.html">5.2 The del statement</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00630000000000000000">5.3 Tuples and Sequences</A></H1>
+<P>
+We saw that lists and strings have many common properties, e.g.,
+indexing and slicing operations.  They are two examples of <EM>
+sequence</EM> data types.  Since Python is an evolving language, other
+sequence data types may be added.  There is also another standard
+sequence data type: the <EM>tuple</EM>.
+<P>
+A tuple consists of a number of values separated by commas, for
+instance:
+<P>
+<PRE>&gt;&gt;&gt; t = 12345, 54321, 'hello!'
+&gt;&gt;&gt; t[0]
+12345
+&gt;&gt;&gt; t
+(12345, 54321, 'hello!')
+&gt;&gt;&gt; # Tuples may be nested:
+... u = t, (1, 2, 3, 4, 5)
+&gt;&gt;&gt; u
+((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
+&gt;&gt;&gt;</PRE>
+As you see, on output tuples are alway enclosed in parentheses, so
+that nested tuples are interpreted correctly; they may be input with
+or without surrounding parentheses, although often parentheses are
+necessary anyway (if the tuple is part of a larger expression).
+<P>
+Tuples have many uses, e.g., (x, y) coordinate pairs, employee records
+from a database, etc.  Tuples, like strings, are immutable: it is not
+possible to assign to the individual items of a tuple (you can
+simulate much of the same effect with slicing and concatenation,
+though).
+<P>
+A special problem is the construction of tuples containing 0 or 1
+items: the syntax has some extra quirks to accommodate these.  Empty
+tuples are constructed by an empty pair of parentheses; a tuple with
+one item is constructed by following a value with a comma
+(it is not sufficient to enclose a single value in parentheses).
+Ugly, but effective.  For example:
+<P>
+<PRE>&gt;&gt;&gt; empty = ()
+&gt;&gt;&gt; singleton = 'hello',    # &lt;-- note trailing comma
+&gt;&gt;&gt; len(empty)
+0
+&gt;&gt;&gt; len(singleton)
+1
+&gt;&gt;&gt; singleton
+('hello',)
+&gt;&gt;&gt;</PRE>
+The statement <TT>t = 12345, 54321, 'hello!'</TT> is an example of <EM>
+tuple packing</EM>: the values <TT>12345</TT>, <TT>54321</TT> and <TT>'hello!'</TT>
+are packed together in a tuple.  The reverse operation is also
+possible, e.g.:
+<P>
+<PRE>&gt;&gt;&gt; x, y, z = t
+&gt;&gt;&gt;</PRE>
+This is called, appropriately enough, <EM>tuple unpacking</EM>.  Tuple
+unpacking requires that the list of variables on the left has the same
+number of elements as the length of the tuple.  Note that multiple
+assignment is really just a combination of tuple packing and tuple
+unpacking!
+<P>
+Occasionally, the corresponding operation on lists is useful: <EM>list
+unpacking</EM>.  This is supported by enclosing the list of variables in
+square brackets:
+<P>
+<PRE>&gt;&gt;&gt; a = ['spam', 'eggs', 100, 1234]
+&gt;&gt;&gt; [a1, a2, a3, a4] = a
+&gt;&gt;&gt;</PRE>
+<P>
+<HR><A NAME="tex2html673" HREF="node38.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html671" HREF="node34.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html665" HREF="node36.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html675" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html674" HREF="node38.html">5.4 Dictionaries</A>
+<B>Up:</B> <A NAME="tex2html672" HREF="node34.html">5 Odds and Ends</A>
+<B> Previous:</B> <A NAME="tex2html666" HREF="node36.html">5.2 The del statement</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

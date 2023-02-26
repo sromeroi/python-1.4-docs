@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.6 Odds and ends</TITLE>
+<META NAME="description" CONTENT="9.6 Odds and ends">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html983" HREF="node65.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html981" HREF="node53.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html977" HREF="node63.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html985" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html984" HREF="node65.html">10 Recent Additions as </A>
+<B>Up:</B> <A NAME="tex2html982" HREF="node53.html">9 Classes</A>
+<B> Previous:</B> <A NAME="tex2html978" HREF="node63.html">9.5.1 Multiple inheritance</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001060000000000000000">9.6 Odds and ends</A></H1>
+<P>
+Sometimes it is useful to have a data type similar to the Pascal
+``record'' or C ``struct'', bundling together a couple of named data
+items.  An empty class definition will do nicely, e.g.:
+<P>
+<PRE>        class Employee:
+                pass
+
+        john = Employee() # Create an empty employee record
+
+        # Fill the fields of the record
+        john.name = 'John Doe'
+        john.dept = 'computer lab'
+        john.salary = 1000</PRE>
+<P>
+A piece of Python code that expects a particular abstract data type
+can often be passed a class that emulates the methods of that data
+type instead.  For instance, if you have a function that formats some
+data from a file object, you can define a class with methods
+<code>read()</code> and <code>readline()</code> that gets the data from a string
+buffer instead, and pass it as an argument.  (Unfortunately, this
+technique has its limitations: a class can't define operations that
+are accessed by special syntax such as sequence subscripting or
+arithmetic operators, and assigning such a ``pseudo-file'' to
+<code>sys.stdin</code> will not cause the interpreter to read further input
+from it.)
+<P>
+Instance method objects have attributes, too: <code>m.im_self</code> is the
+object of which the method is an instance, and <code>m.im_func</code> is the
+function object corresponding to the method.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

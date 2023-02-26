@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.1 Built-in Module al</TITLE>
+<META NAME="description" CONTENT="17.1 Built-in Module al">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4838" HREF="node204.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4836" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4830" HREF="node202.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4840" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4841" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4839" HREF="node204.html">17.1.1 Configuration Objects</A>
+<B>Up:</B> <A NAME="tex2html4837" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4831" HREF="node202.html">17 SGI IRIX Specific </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001810000000000000000">17.1 Built-in Module <CODE>al</CODE></A></H1>
+<P>
+This module provides access to the audio facilities of the SGI Indy
+and Indigo workstations.  See section 3A of the IRIX man pages for
+details.  You'll need to read those man pages to understand what these
+functions do!  Some of the functions are not available in IRIX
+releases before 4.0.5.  Again, see the manual to check whether a
+specific function is available on your platform.
+<P>
+All functions and methods defined in this module are equivalent to
+the C functions with `<SAMP>AL</SAMP>' prefixed to their name.
+<P>
+Symbolic constants from the C header file `<CODE>&lt;audio.h&gt;</CODE>' are defined
+in the standard module <CODE>AL</CODE>, see below.
+<P>
+<STRONG>Warning:</STRONG> the current version of the audio library may dump core
+when bad argument values are passed rather than returning an error
+status.  Unfortunately, since the precise circumstances under which
+this may happen are undocumented and hard to check, the Python
+interface can provide no protection against this kind of problems.
+(One example is specifying an excessive queue size -- there is no
+documented upper limit.)
+<P>
+The module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="10585">openport</A></STRONG>(<VAR>name, direction</VAR><BIG>[</BIG><VAR>, config</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+The name and direction arguments are strings.  The optional config
+argument is a configuration object as returned by
+<CODE>al.newconfig()</CODE>.  The return value is an <I><DFN>port object</DFN></I>;
+methods of port objects are described below.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10468">newconfig</A></STRONG>(<VAR></VAR>)
+<DD>
+The return value is a new <I><DFN>configuration object</DFN></I>; methods of
+configuration objects are described below.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10473">queryparams</A></STRONG>(<VAR>device</VAR>)
+<DD>
+The device argument is an integer.  The return value is a list of
+integers containing the data returned by ALqueryparams().
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10477">getparams</A></STRONG>(<VAR>device, list</VAR>)
+<DD>
+The device argument is an integer.  The list argument is a list such
+as returned by <CODE>queryparams</CODE>; it is modified in place (!).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="10482">setparams</A></STRONG>(<VAR>device, list</VAR>)
+<DD>
+The device argument is an integer.  The list argument is a list such
+as returned by <CODE>al.queryparams</CODE>.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4842" HREF="node204.html#SECTION001811000000000000000">17.1.1 Configuration Objects</A>
+<LI> <A NAME="tex2html4843" HREF="node205.html#SECTION001812000000000000000">17.1.2 Port Objects</A>
+</UL>
+<HR><A NAME="tex2html4838" HREF="node204.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4836" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4830" HREF="node202.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4840" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4841" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4839" HREF="node204.html">17.1.1 Configuration Objects</A>
+<B>Up:</B> <A NAME="tex2html4837" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4831" HREF="node202.html">17 SGI IRIX Specific </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

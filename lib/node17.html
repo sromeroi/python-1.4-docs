@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Functions</TITLE>
+<META NAME="description" CONTENT="Functions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2449" HREF="node18.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2447" HREF="node14.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2441" HREF="node16.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2451" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2452" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2450" HREF="node18.html">Methods</A>
+<B>Up:</B> <A NAME="tex2html2448" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2442" HREF="node16.html">Classes and Class Instances</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00317300000000000000">Functions</A></H3>
+<P>
+Function objects are created by function definitions.  The only
+operation on a function object is to call it:
+<CODE><VAR>func</VAR>(<VAR>argument-list</VAR>)</CODE>.
+<P>
+There are really two flavors of function objects: built-in functions
+and user-defined functions.  Both support the same operation (to call
+the function), but the implementation is different, hence the
+different object types.
+<P>
+The implementation adds two special read-only attributes:
+<CODE><VAR>f</VAR>.func_code</CODE> is a function's <I><DFN>code object</DFN></I> (see below) and
+<CODE><VAR>f</VAR>.func_globals</CODE> is the dictionary used as the function's
+global name space (this is the same as <CODE><VAR>m</VAR>.__dict__</CODE> where
+<VAR>m</VAR> is the module in which the function <VAR>f</VAR> was defined).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.11 Built-in Module macspeech</TITLE>
+<META NAME="description" CONTENT="15.11 Built-in Module macspeech">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4522" HREF="node180.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4520" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4514" HREF="node178.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4524" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4525" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4523" HREF="node180.html">15.11.1 voice objects</A>
+<B>Up:</B> <A NAME="tex2html4521" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4515" HREF="node178.html">15.10.3 UDP Stream Objects</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0016110000000000000000">15.11 Built-in Module <CODE>macspeech</CODE></A></H1>
+<P>
+This module provides an interface to the Macintosh Speech Manager,
+allowing you to let the Macintosh utter phrases. You need a version of
+the speech manager extension (version 1 and 2 have been tested) in
+your <CODE>Extensions</CODE> folder for this to work. The module does not
+provide full access to all features of the Speech Manager yet.  It may
+not be available in all Mac Python versions.
+<P>
+<DL><DT><STRONG><A NAME="9405">Available</A></STRONG>(<VAR></VAR>)
+<DD>
+Test availability of the Speech Manager extension (and, on the
+PowerPC, the Speech Manager shared library). Return 0 or 1.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9409">Version</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the (integer) version number of the Speech Manager.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9413">SpeakString</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Utter the string <VAR>str</VAR> using the default voice,
+asynchronously. This aborts any speech that may still be active from
+prior <CODE>SpeakString</CODE> invocations.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9419">Busy</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the number of speech channels busy, system-wide.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9423">CountVoices</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the number of different voices available.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9427">GetIndVoice</A></STRONG>(<VAR>num</VAR>)
+<DD>
+Return a voice object for voice number <VAR>num</VAR>.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4526" HREF="node180.html#SECTION0016111000000000000000">15.11.1 voice objects</A>
+<LI> <A NAME="tex2html4527" HREF="node181.html#SECTION0016112000000000000000">15.11.2 speech channel objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

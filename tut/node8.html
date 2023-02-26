@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.1.1 Argument Passing</TITLE>
+<META NAME="description" CONTENT="2.1.1 Argument Passing">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html339" HREF="node9.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html337" HREF="node7.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html331" HREF="node7.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html341" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html340" HREF="node9.html">2.1.2 Interactive Mode</A>
+<B>Up:</B> <A NAME="tex2html338" HREF="node7.html">2.1 Invoking the Interpreter</A>
+<B> Previous:</B> <A NAME="tex2html332" HREF="node7.html">2.1 Invoking the Interpreter</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00311000000000000000">2.1.1 Argument Passing</A></H2>
+<P>
+When known to the interpreter, the script name and additional
+arguments thereafter are passed to the script in the variable <TT>
+sys.argv</TT>, which is a list of strings.  Its length is at least one;
+when no script and no arguments are given, <TT>sys.argv[0]</TT> is an
+empty string.  When the script name is given as <TT>'-'</TT> (meaning
+standard input), <TT>sys.argv[0]</TT> is set to <TT>'-'</TT>.  When <TT>-c
+command</TT> is used, <TT>sys.argv[0]</TT> is set to <TT>'-c'</TT>.  Options
+found after <TT>-c command</TT> are not consumed by the Python
+interpreter's option processing but left in <TT>sys.argv</TT> for the
+command to handle.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

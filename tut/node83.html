@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Reduce.</TITLE>
+<META NAME="description" CONTENT="Reduce.">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1225" HREF="node84.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1223" HREF="node80.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1219" HREF="node82.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1227" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1226" HREF="node84.html">10.6 Continuation Lines Without </A>
+<B>Up:</B> <A NAME="tex2html1224" HREF="node80.html">10.5.2 MapReduce and </A>
+<B> Previous:</B> <A NAME="tex2html1220" HREF="node82.html">Filter.</A>
+<BR><HR><P>
+<H3><A NAME="SECTION001152300000000000000">Reduce.</A></H3>
+<P>
+<code>reduce(function, sequence)</code> returns a single value constructed
+by calling the (binary) function on the first two items of the
+sequence, then on the result and the next item, and so on.  For
+example, to compute the sum of the numbers 1 through 10:
+<P>
+<PRE>        &gt;&gt;&gt; reduce(lambda x, y: x+y, range(1, 11))
+        55
+        &gt;&gt;&gt;</PRE>
+<P>
+If there's only one item in the sequence, its value is returned; if
+the sequence is empty, an exception is raised.
+<P>
+A third argument can be passed to indicate the starting value.  In this
+case the starting value is returned for an empty sequence, and the
+function is first applied to the starting value and the first sequence
+item, then to the result and the next item, and so on.  For example,
+<P>
+<PRE>        &gt;&gt;&gt; def sum(seq):
+        ...     return reduce(lambda x, y: x+y, seq, 0)
+        ... 
+        &gt;&gt;&gt; sum(range(1, 11))
+        55
+        &gt;&gt;&gt; sum([])
+        0
+        &gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

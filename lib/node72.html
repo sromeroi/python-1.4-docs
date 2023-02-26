@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>7.4 Built-in Module thread</TITLE>
+<META NAME="description" CONTENT="7.4 Built-in Module thread">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3139" HREF="node73.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3137" HREF="node66.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3133" HREF="node71.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3141" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3142" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3140" HREF="node73.html">8 UNIX Specific Services</A>
+<B>Up:</B> <A NAME="tex2html3138" HREF="node66.html">7 Optional Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3134" HREF="node71.html">7.3 Built-in Module select</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00840000000000000000">7.4 Built-in Module <CODE>thread</CODE></A></H1>
+<P>
+This module provides low-level primitives for working with multiple
+threads (a.k.a. <I><DFN>light-weight processes</DFN></I> or <I><DFN>tasks</DFN></I>) -- multiple
+threads of control sharing their global data space.  For
+synchronization, simple locks (a.k.a. <I><DFN>mutexes</DFN></I> or <I><DFN>binary
+semaphores</DFN></I>) are provided.
+<P>
+The module is optional and supported on SGI IRIX 4.x and 5.x and Sun
+Solaris 2.x systems, as well as on systems that have a PTHREAD
+implementation (e.g. KSR).
+<P>
+It defines the following constant and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+Raised on thread-specific errors.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4280">start_new_thread</A></STRONG>(<VAR>func, arg</VAR>)
+<DD>
+Start a new thread.  The thread executes the function <VAR>func</VAR>
+with the argument list <VAR>arg</VAR> (which must be a tuple).  When the
+function returns, the thread silently exits.  When the function
+terminates with an unhandled exception, a stack trace is printed and
+then the thread exits (but other threads continue to run).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4286">exit</A></STRONG>(<VAR></VAR>)
+<DD>
+This is a shorthand for <CODE>thread.exit_thread()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4291">exit_thread</A></STRONG>(<VAR></VAR>)
+<DD>
+Raise the <CODE>SystemExit</CODE> exception.  When not caught, this will
+cause the thread to exit silently.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4296">allocate_lock</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a new lock object.  Methods of locks are described below.  The
+lock is initially unlocked.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4300">get_ident</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the `thread identifier' of the current thread.  This is a
+nonzero integer.  Its value has no direct meaning; it is intended as a
+magic cookie to be used e.g. to index a dictionary of thread-specific
+data.  Thread identifiers may be recycled when a thread exits and
+another thread is created.
+<P>
+</DL>
+<P>
+Lock objects have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="4330">acquire</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>waitflag</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Without the optional argument, this method acquires the lock
+unconditionally, if necessary waiting until it is released by another
+thread (only one thread at a time can acquire a lock -- that's their
+reason for existence), and returns <CODE>None</CODE>.  If the integer
+<VAR>waitflag</VAR> argument is present, the action depends on its value:\
+if it is zero, the lock is only acquired if it can be acquired
+immediately without waiting, while if it is nonzero, the lock is
+acquired unconditionally as before.  If an argument is present, the
+return value is 1 if the lock is acquired successfully, 0 if not.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4312">release</A></STRONG>(<VAR></VAR>)
+<DD>
+Releases the lock.  The lock must have been acquired earlier, but not
+necessarily by the same thread.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4316">locked</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the status of the lock: 1 if it has been acquired by some
+thread, 0 if not.
+<P>
+</DL>
+<P>
+<B>Caveats:</B>
+<P>
+<UL><LI>
+Threads interact strangely with interrupts: the
+<CODE>KeyboardInterrupt</CODE> exception will be received by an arbitrary
+thread.  (When the <CODE>signal</CODE> module is available, interrupts
+always go to the main thread.)<LI>
+Calling <CODE>sys.exit()</CODE> or raising the <CODE>SystemExit</CODE> is
+equivalent to calling <CODE>thread.exit_thread()</CODE>.<LI>
+Not all built-in functions that may block waiting for I/O allow other
+threads to run.  (The most popular ones (<CODE>sleep</CODE>, <CODE>read</CODE>,
+<CODE>select</CODE>) work as expected.)
+<P>
+</UL><HR><A NAME="tex2html3139" HREF="node73.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3137" HREF="node66.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3133" HREF="node71.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3141" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3142" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3140" HREF="node73.html">8 UNIX Specific Services</A>
+<B>Up:</B> <A NAME="tex2html3138" HREF="node66.html">7 Optional Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3134" HREF="node71.html">7.3 Built-in Module select</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

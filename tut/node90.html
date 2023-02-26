@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.11.1 New Operator Overloading</TITLE>
+<META NAME="description" CONTENT="10.11.1 New Operator Overloading">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1303" HREF="node91.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1301" HREF="node89.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1295" HREF="node89.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1305" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1304" HREF="node91.html">10.11.2 Trapping Attribute Access</A>
+<B>Up:</B> <A NAME="tex2html1302" HREF="node89.html">10.11 New Class Features </A>
+<B> Previous:</B> <A NAME="tex2html1296" HREF="node89.html">10.11 New Class Features </A>
+<BR><HR><P>
+<H2><A NAME="SECTION0011111000000000000000">10.11.1 New Operator Overloading</A></H2>
+<P>
+It is no longer necessary to coerce both sides of an operator to the
+same class or type.  A class may still provide a <CODE>__coerce__</CODE>
+method, but this method may return objects of different types or
+classes if it feels like it.  If no <CODE>__coerce__</CODE> is defined, any
+argument type or class is acceptable.
+<P>
+In order to make it possible to implement binary operators where the
+right-hand side is a class instance but the left-hand side is not,
+without using coercions, right-hand versions of all binary operators
+may be defined.  These have an `r' prepended to their name,
+e.g. <CODE>__radd__</CODE>.
+<P>
+For example, here's a very simple class for representing times.  Times
+are initialized from a number of seconds (like time.time()).  Times
+are printed like this: <CODE>Wed Mar 15 12:28:48 1995</CODE>.  Subtracting
+two Times gives their difference in seconds.  Adding or subtracting a
+Time and a number gives a new Time.  You can't add two times, nor can
+you subtract a Time from a number.
+<P>
+<PRE>import time
+
+class Time:
+    def __init__(self, seconds):
+        self.seconds = seconds
+    def __repr__(self):
+        return time.ctime(self.seconds)
+    def __add__(self, x):
+        return Time(self.seconds + x)
+    __radd__ = __add__            # support for x+t
+    def __sub__(self, x):
+        if hasattr(x, 'seconds'): # test if x could be a Time
+            return self.seconds - x.seconds
+        else:
+            return self.seconds - x
+
+now = Time(time.time())
+tomorrow = 24*3600 + now
+yesterday = now - today
+print tomorrow - yesterday        # prints 172800</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

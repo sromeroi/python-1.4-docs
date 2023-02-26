@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6 Modules</TITLE>
+<META NAME="description" CONTENT="6 Modules">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html715" HREF="node42.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html713" HREF="tut.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html707" HREF="node40.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html717" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html716" HREF="node42.html">6.1 More on Modules</A>
+<B>Up:</B> <A NAME="tex2html714" HREF="tut.html">Python Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html708" HREF="node40.html">5.6 Comparing Sequences and </A>
+<BR><HR><P>
+<H1><A NAME="SECTION00700000000000000000">6 Modules</A></H1>
+<P>
+If you quit from the Python interpreter and enter it again, the
+definitions you have made (functions and variables) are lost.
+Therefore, if you want to write a somewhat longer program, you are
+better off using a text editor to prepare the input for the interpreter
+and running it with that file as input instead.  This is known as creating a
+<EM>script</EM>.  As your program gets longer, you may want to split it
+into several files for easier maintenance.  You may also want to use a
+handy function that you've written in several programs without copying
+its definition into each program.
+<P>
+To support this, Python has a way to put definitions in a file and use
+them in a script or in an interactive instance of the interpreter.
+Such a file is called a <EM>module</EM>; definitions from a module can be
+<EM>imported</EM> into other modules or into the <EM>main</EM> module (the
+collection of variables that you have access to in a script
+executed at the top level
+and in calculator mode).
+<P>
+A module is a file containing Python definitions and statements.  The
+file name is the module name with the suffix <TT>.py</TT> appended.  Within
+a module, the module's name (as a string) is available as the value of
+the global variable <TT>__name__</TT>.  For instance, use your favorite text
+editor to create a file called <TT>fibo.py</TT> in the current directory
+with the following contents:
+<P>
+<PRE># Fibonacci numbers module
+
+def fib(n):    # write Fibonacci series up to n
+    a, b = 0, 1
+    while b &lt; n:
+          print b,
+          a, b = b, a+b
+
+def fib2(n): # return Fibonacci series up to n
+    result = []
+    a, b = 0, 1
+    while b &lt; n:
+          result.append(b)
+          a, b = b, a+b
+    return result</PRE>
+Now enter the Python interpreter and import this module with the
+following command:
+<P>
+<PRE>&gt;&gt;&gt; import fibo
+&gt;&gt;&gt;</PRE>
+This does not enter the names of the functions defined in
+<TT>fibo</TT>
+directly in the current symbol table; it only enters the module name
+<TT>fibo</TT>
+there.
+Using the module name you can access the functions:
+<P>
+<PRE>&gt;&gt;&gt; fibo.fib(1000)
+1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+&gt;&gt;&gt; fibo.fib2(100)
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+&gt;&gt;&gt; fibo.__name__
+'fibo'
+&gt;&gt;&gt;</PRE>
+If you intend to use a function often you can assign it to a local name:
+<P>
+<PRE>&gt;&gt;&gt; fib = fibo.fib
+&gt;&gt;&gt; fib(500)
+1 1 2 3 5 8 13 21 34 55 89 144 233 377
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html718" HREF="node42.html#SECTION00710000000000000000">6.1 More on Modules</A>
+<LI> <A NAME="tex2html719" HREF="node43.html#SECTION00720000000000000000">6.2 Standard Modules</A>
+<LI> <A NAME="tex2html720" HREF="node44.html#SECTION00730000000000000000">6.3 The <TT>dir()</TT> function</A>
+</UL>
+<HR><A NAME="tex2html715" HREF="node42.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html713" HREF="tut.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html707" HREF="node40.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html717" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html716" HREF="node42.html">6.1 More on Modules</A>
+<B>Up:</B> <A NAME="tex2html714" HREF="tut.html">Python Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html708" HREF="node40.html">5.6 Comparing Sequences and </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

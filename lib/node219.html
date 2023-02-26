@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>18.1 Built-in Module sunaudiodev</TITLE>
+<META NAME="description" CONTENT="18.1 Built-in Module sunaudiodev">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html5029" HREF="node220.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html5027" HREF="node218.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html5023" HREF="node218.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html5031" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html5032" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html5030" HREF="node220.html">18.1.1 Audio Device Objects</A>
+<B>Up:</B> <A NAME="tex2html5028" HREF="node218.html">18 SunOS Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html5024" HREF="node218.html">18 SunOS Specific Services</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001910000000000000000">18.1 Built-in Module <CODE>sunaudiodev</CODE></A></H1>
+<P>
+This module allows you to access the sun audio interface. The sun
+audio hardware is capable of recording and playing back audio data
+in U-LAW format with a sample rate of 8K per second. A full
+description can be gotten with `<SAMP>man audio</SAMP>'.
+<P>
+The module defines the following variables and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+This exception is raised on all errors. The argument is a string
+describing what went wrong.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11537">open</A></STRONG>(<VAR>mode</VAR>)
+<DD>
+This function opens the audio device and returns a sun audio device
+object. This object can then be used to do I/O on. The <VAR>mode</VAR> parameter
+is one of <CODE>'r'</CODE> for record-only access, <CODE>'w'</CODE> for play-only
+access, <CODE>'rw'</CODE> for both and <CODE>'control'</CODE> for access to the
+control device. Since only one process is allowed to have the recorder
+or player open at the same time it is a good idea to open the device
+only for the activity needed. See the audio manpage for details.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html5033" HREF="node220.html#SECTION001911000000000000000">18.1.1 Audio Device Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

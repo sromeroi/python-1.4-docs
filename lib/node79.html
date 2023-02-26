@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.6 Built-in Module dbm</TITLE>
+<META NAME="description" CONTENT="8.6 Built-in Module dbm">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3236" HREF="node80.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3234" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3228" HREF="node78.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3238" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3239" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3237" HREF="node80.html">8.7 Built-in Module gdbm</A>
+<B>Up:</B> <A NAME="tex2html3235" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3229" HREF="node78.html">8.5 Built-in module crypt</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00960000000000000000">8.6 Built-in Module <CODE>dbm</CODE></A></H1>
+<P>
+The <CODE>dbm</CODE> module provides an interface to the Unix
+<CODE>(n)dbm</CODE> library.  Dbm objects behave like mappings
+(dictionaries), except that keys and values are always strings.
+Printing a dbm object doesn't print the keys and values, and the
+<CODE>items()</CODE> and <CODE>values()</CODE> methods are not supported.
+<P>
+See also the <CODE>gdbm</CODE> module, which provides a similar interface
+using the GNU GDBM library.
+<P>
+The module defines the following constant and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+Raised on dbm-specific errors, such as I/O errors. <CODE>KeyError</CODE> is
+raised for general mapping errors like specifying an incorrect key.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5034">open</A></STRONG>(<VAR>filename, </VAR><BIG>[</BIG><VAR>flag, </VAR><BIG>[</BIG><VAR>mode</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Open a dbm database and return a dbm object.  The <VAR>filename</VAR>
+argument is the name of the database file (without the `<CODE>.dir</CODE>' or
+`<CODE>.pag</CODE>' extensions).
+<P>
+The optional <VAR>flag</VAR> argument can be
+<CODE>'r'</CODE> (to open an existing database for reading only -- default),
+<CODE>'w'</CODE> (to open an existing database for reading and writing),
+<CODE>'c'</CODE> (which creates the database if it doesn't exist), or
+<CODE>'n'</CODE> (which always creates a new empty database).
+<P>
+The optional <VAR>mode</VAR> argument is the Unix mode of the file, used
+only when the database has to be created.  It defaults to octal
+<CODE>0666</CODE>.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

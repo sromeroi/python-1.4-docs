@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.2.2 Module Contents</TITLE>
+<META NAME="description" CONTENT="4.2.2 Module Contents">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2892" HREF="node53.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2890" HREF="node50.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2886" HREF="node51.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2894" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2895" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2893" HREF="node53.html">4.3 Standard Module regsub</A>
+<B>Up:</B> <A NAME="tex2html2891" HREF="node50.html">4.2 Built-in Module regex</A>
+<B> Previous:</B> <A NAME="tex2html2887" HREF="node51.html">4.2.1 Regular Expressions</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00522000000000000000">4.2.2 Module Contents</A></H2>
+<P>
+The module defines these functions, and an exception:
+<P>
+<DL><DT><STRONG><A NAME="2734">match</A></STRONG>(<VAR>pattern, string</VAR>)
+<DD>
+  Return how many characters at the beginning of <VAR>string</VAR> match
+  the regular expression <VAR>pattern</VAR>.  Return <CODE>-1</CODE> if the
+  string does not match the pattern (this is different from a
+  zero-length match!).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2741">search</A></STRONG>(<VAR>pattern, string</VAR>)
+<DD>
+  Return the first position in <VAR>string</VAR> that matches the regular
+  expression <VAR>pattern</VAR>.  Return <CODE>-1</CODE> if no position in the string
+  matches the pattern (this is different from a zero-length match
+  anywhere!).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2866">compile</A></STRONG>(<VAR>pattern</VAR><BIG>[</BIG><VAR>, translate</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Compile a regular expression pattern into a regular expression
+  object, which can be used for matching using its <CODE>match</CODE> and
+  <CODE>search</CODE> methods, described below.  The optional argument
+  <VAR>translate</VAR>, if present, must be a 256-character string
+  indicating how characters (both of the pattern and of the strings to
+  be matched) are translated before comparing them; the <CODE>i</CODE>-th
+  element of the string gives the translation for the character with
+  ASCII code <CODE>i</CODE>.  This can be used to implement
+  case-insensitive matching; see the <CODE>casefold</CODE> data item below.
+<P>
+  The sequence
+<P>
+<PRE>prog = regex.compile(pat)
+result = prog.match(str)</PRE>
+<P>
+is equivalent to
+<P>
+<PRE>result = regex.match(pat, str)</PRE>
+<P>
+but the version using <CODE>compile()</CODE> is more efficient when multiple
+regular expressions are used concurrently in a single program.  (The
+compiled version of the last pattern passed to <CODE>regex.match()</CODE> or
+<CODE>regex.search()</CODE> is cached, so programs that use only a single
+regular expression at a time needn't worry about compiling regular
+expressions.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2762">set_syntax</A></STRONG>(<VAR>flags</VAR>)
+<DD>
+  Set the syntax to be used by future calls to <CODE>compile</CODE>,
+  <CODE>match</CODE> and <CODE>search</CODE>.  (Already compiled expression objects
+  are not affected.)  The argument is an integer which is the OR of
+  several flag bits.  The return value is the previous value of
+  the syntax flags.  Names for the flags are defined in the standard
+  module <CODE>regex_syntax</CODE>; read the file `<CODE>regex_syntax.py</CODE>' for
+  more information.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2867">symcomp</A></STRONG>(<VAR>pattern</VAR><BIG>[</BIG><VAR>, translate</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This is like <CODE>compile</CODE>, but supports symbolic group names: if a
+parenthesis-enclosed group begins with a group name in angular
+brackets, e.g. <CODE>'&#92;(&lt;id&gt;[a-z][a-z0-9]*&#92;)'</CODE>, the group can
+be referenced by its name in arguments to the <CODE>group</CODE> method of
+the resulting compiled regular expression object, like this:
+<CODE>p.group('id')</CODE>.  Group names may contain alphanumeric characters
+and <CODE>'_'</CODE> only.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+  Exception raised when a string passed to one of the functions here
+  is not a valid regular expression (e.g., unmatched parentheses) or
+  when some other error occurs during compilation or matching.  (It is
+  never an error if a string contains no match for a pattern.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">casefold</A></STRONG>
+<DD>
+A string suitable to pass as <VAR>translate</VAR> argument to
+<CODE>compile</CODE> to map all upper case characters to their lowercase
+equivalents.
+<P>
+</DL>
+<P>
+,
+Compiled regular expression objects support these methods:
+<P>
+<DL><DT><STRONG><A NAME="2868">match</A></STRONG>(<VAR>string</VAR><BIG>[</BIG><VAR>, pos</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Return how many characters at the beginning of <VAR>string</VAR> match
+  the compiled regular expression.  Return <CODE>-1</CODE> if the string
+  does not match the pattern (this is different from a zero-length
+  match!).
+<P>
+  The optional second parameter <VAR>pos</VAR> gives an index in the string
+  where the search is to start; it defaults to <CODE>0</CODE>.  This is not
+  completely equivalent to slicing the string; the <CODE>''</CODE> pattern
+  character matches at the real begin of the string and at positions
+  just after a newline, not necessarily at the index where the search
+  is to start.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2869">search</A></STRONG>(<VAR>string</VAR><BIG>[</BIG><VAR>, pos</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Return the first position in <VAR>string</VAR> that matches the regular
+  expression <CODE>pattern</CODE>.  Return <CODE>-1</CODE> if no position in the
+  string matches the pattern (this is different from a zero-length
+  match anywhere!).
+<P>
+  The optional second parameter has the same meaning as for the
+  <CODE>match</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2807">group</A></STRONG>(<VAR>index, index, ...</VAR>)
+<DD>
+This method is only valid when the last call to the <CODE>match</CODE>
+or <CODE>search</CODE> method found a match.  It returns one or more
+groups of the match.  If there is a single <VAR>index</VAR> argument,
+the result is a single string; if there are multiple arguments, the
+result is a tuple with one item per argument.  If the <VAR>index</VAR> is
+zero, the corresponding return value is the entire matching string; if
+it is in the inclusive range [1..99], it is the string matching the
+the corresponding parenthesized group (using the default syntax,
+groups are parenthesized using <CODE><BR> (</CODE> and <CODE><BR> )</CODE>).  If no
+such group exists, the corresponding result is <CODE>None</CODE>.
+<P>
+If the regular expression was compiled by <CODE>symcomp</CODE> instead of
+<CODE>compile</CODE>, the <VAR>index</VAR> arguments may also be strings
+identifying groups by their group name.
+<P>
+</DL>
+<P>
+,
+Compiled regular expressions support these data attributes:
+<P>
+<DL><DT><STRONG><A NAME="">regs</A></STRONG>
+<DD>
+When the last call to the <CODE>match</CODE> or <CODE>search</CODE> method found a
+match, this is a tuple of pairs of indices corresponding to the
+beginning and end of all parenthesized groups in the pattern.  Indices
+are relative to the string argument passed to <CODE>match</CODE> or
+<CODE>search</CODE>.  The 0-th tuple gives the beginning and end or the
+whole pattern.  When the last match or search failed, this is
+<CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">last</A></STRONG>
+<DD>
+When the last call to the <CODE>match</CODE> or <CODE>search</CODE> method found a
+match, this is the string argument passed to that method.  When the
+last match or search failed, this is <CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">translate</A></STRONG>
+<DD>
+This is the value of the <VAR>translate</VAR> argument to
+<CODE>regex.compile</CODE> that created this regular expression object.  If
+the <VAR>translate</VAR> argument was omitted in the <CODE>regex.compile</CODE>
+call, this is <CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">givenpat</A></STRONG>
+<DD>
+The regular expression pattern as passed to <CODE>compile</CODE> or
+<CODE>symcomp</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">realpat</A></STRONG>
+<DD>
+The regular expression after stripping the group names for regular
+expressions compiled with <CODE>symcomp</CODE>.  Same as <CODE>givenpat</CODE>
+otherwise.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">groupindex</A></STRONG>
+<DD>
+A dictionary giving the mapping from symbolic group names to numerical
+group indices for regular expressions compiled with <CODE>symcomp</CODE>.
+<CODE>None</CODE> otherwise.
+<P>
+</DL><HR><A NAME="tex2html2892" HREF="node53.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2890" HREF="node50.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2886" HREF="node51.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2894" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2895" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2893" HREF="node53.html">4.3 Standard Module regsub</A>
+<B>Up:</B> <A NAME="tex2html2891" HREF="node50.html">4.2 Built-in Module regex</A>
+<B> Previous:</B> <A NAME="tex2html2887" HREF="node51.html">4.2.1 Regular Expressions</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

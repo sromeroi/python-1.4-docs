@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.2 Built-in Module regex</TITLE>
+<META NAME="description" CONTENT="4.2 Built-in Module regex">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2868" HREF="node51.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2866" HREF="node48.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2860" HREF="node49.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2870" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2871" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2869" HREF="node51.html">4.2.1 Regular Expressions</A>
+<B>Up:</B> <A NAME="tex2html2867" HREF="node48.html">4 String Services</A>
+<B> Previous:</B> <A NAME="tex2html2861" HREF="node49.html">4.1 Standard Module string</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00520000000000000000">4.2 Built-in Module <CODE>regex</CODE></A></H1>
+<P>
+This module provides regular expression matching operations similar to
+those found in Emacs.  It is always available.
+<P>
+By default the patterns are Emacs-style regular expressions
+(with one exception).  There is
+a way to change the syntax to match that of several well-known
+Unix utilities.  The exception is that Emacs' `<SAMP>&#92;s</SAMP>'
+pattern is not supported, since the original implementation references
+the Emacs syntax tables.
+<P>
+This module is 8-bit clean: both patterns and strings may contain null
+bytes and characters whose high bit is set.
+<P>
+<STRONG>Please note:</STRONG> There is a little-known fact about Python string
+literals which means that you don't usually have to worry about
+doubling backslashes, even though they are used to escape special
+characters in string literals as well as in regular expressions.  This
+is because Python doesn't remove backslashes from string literals if
+they are followed by an unrecognized escape character.
+<EM>However</EM>, if you want to include a literal <I><DFN>backslash</DFN></I> in a
+regular expression represented as a string literal, you have to
+<EM>quadruple</EM> it.  E.g.  to extract LaTeX `<SAMP>&#92;section{
+...}</SAMP>' headers from a document, you can use this pattern:
+<CODE>'&#92;&#92;&#92;&#92;section{&#92;(.*&#92;)}'</CODE>.  <EM>Another exception:</EM>
+the escape sequece `<SAMP>&#92;b</SAMP>' is significant in string literals
+(where it means the ASCII bell character) as well as in Emacs regular
+expressions (where it stands for a word boundary), so in order to
+search for a word boundary, you should use the pattern <CODE>'&#92;&#92;b'</CODE>.
+Similarly, a backslash followed by a digit 0-7 should be doubled to
+avoid interpretation as an octal escape.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html2872" HREF="node51.html#SECTION00521000000000000000">4.2.1 Regular Expressions</A>
+<LI> <A NAME="tex2html2873" HREF="node52.html#SECTION00522000000000000000">4.2.2 Module Contents</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.1.8 Special Attributes</TITLE>
+<META NAME="description" CONTENT="2.1.8 Special Attributes">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2529" HREF="node25.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2527" HREF="node4.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2523" HREF="node23.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2531" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2532" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2530" HREF="node25.html">2.2 Built-in Exceptions</A>
+<B>Up:</B> <A NAME="tex2html2528" HREF="node4.html">2.1 Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2524" HREF="node23.html">Internal Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00318000000000000000">2.1.8 Special Attributes</A></H2>
+<P>
+The implementation adds a few special read-only attributes to several
+object types, where they are relevant:
+<P>
+<UL><LI>
+<CODE><VAR>x</VAR>.__dict__</CODE> is a dictionary of some sort used to store an
+object's (writable) attributes;<LI>
+<CODE><VAR>x</VAR>.__methods__</CODE> lists the methods of many built-in object types,
+e.g., <CODE>[].__methods__</CODE> yields
+<CODE>['append', 'count', 'index', 'insert', 'remove', 'reverse', 'sort']</CODE>;<LI>
+<CODE><VAR>x</VAR>.__members__</CODE> lists data attributes;<LI>
+<CODE><VAR>x</VAR>.__class__</CODE> is the class to which a class instance belongs;<LI>
+<CODE><VAR>x</VAR>.__bases__</CODE> is the tuple of base classes of a class object.
+<P>
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.5 Built-in Module macdnr</TITLE>
+<META NAME="description" CONTENT="15.5 Built-in Module macdnr">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4365" HREF="node167.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4363" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4357" HREF="node165.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4367" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4368" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4366" HREF="node167.html">15.5.1 dnr result object</A>
+<B>Up:</B> <A NAME="tex2html4364" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4358" HREF="node165.html">15.4.2 console window object</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001650000000000000000">15.5 Built-in Module <CODE>macdnr</CODE></A></H1>
+<P>
+This module provides an interface to the Macintosh Domain Name
+Resolver.  It is usually used in conjunction with the <VAR>mactcp</VAR>
+module, to map hostnames to IP-addresses.  It may not be available in
+all Mac Python versions.
+<P>
+The <CODE>macdnr</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="8912">Open</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>filename</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Open the domain name resolver extension.  If <VAR>filename</VAR> is given it
+should be the pathname of the extension, otherwise a default is
+used.  Normally, this call is not needed since the other calls will
+open the extension automatically.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8846">Close</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the resolver extension.  Again, not needed for normal use.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8850">StrToAddr</A></STRONG>(<VAR>hostname</VAR>)
+<DD>
+Look up the IP address for <VAR>hostname</VAR>.  This call returns a dnr
+result object of the ``address'' variation.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8855">AddrToName</A></STRONG>(<VAR>addr</VAR>)
+<DD>
+Do a reverse lookup on the 32-bit integer IP-address
+<VAR>addr</VAR>.  Returns a dnr result object of the ``address'' variation.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8860">AddrToStr</A></STRONG>(<VAR>addr</VAR>)
+<DD>
+Convert the 32-bit integer IP-address <VAR>addr</VAR> to a dotted-decimal
+string.  Returns the string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8865">HInfo</A></STRONG>(<VAR>hostname</VAR>)
+<DD>
+Query the nameservers for a <CODE>HInfo</CODE> record for host
+<VAR>hostname</VAR>.  These records contain hardware and software
+information about the machine in question (if they are available in
+the first place).  Returns a dnr result object of the ``hinfo''
+variety.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8871">MXInfo</A></STRONG>(<VAR>domain</VAR>)
+<DD>
+Query the nameservers for a mail exchanger for <VAR>domain</VAR>.  This is
+the hostname of a host willing to accept SMTP mail for the given
+domain.  Returns a dnr result object of the ``mx'' variety.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4369" HREF="node167.html#SECTION001651000000000000000">15.5.1 dnr result object</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.1 Syntax Errors</TITLE>
+<META NAME="description" CONTENT="8.1 Syntax Errors">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html788" HREF="node48.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html786" HREF="node46.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html780" HREF="node46.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html790" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html789" HREF="node48.html">8.2 Exceptions</A>
+<B>Up:</B> <A NAME="tex2html787" HREF="node46.html">8 Errors and Exceptions</A>
+<B> Previous:</B> <A NAME="tex2html781" HREF="node46.html">8 Errors and Exceptions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00910000000000000000">8.1 Syntax Errors</A></H1>
+<P>
+Syntax errors, also known as parsing errors, are perhaps the most common
+kind of complaint you get while you are still learning Python:
+<P>
+<PRE>&gt;&gt;&gt; while 1 print 'Hello world'
+  File &quot;&lt;stdin&gt;&quot;, line 1
+    while 1 print 'Hello world'
+                ^
+SyntaxError: invalid syntax
+&gt;&gt;&gt;</PRE>
+The parser repeats the offending line and displays a little `arrow'
+pointing at the earliest point in the line where the error was detected.
+The error is caused by (or at least detected at) the token
+<EM>preceding</EM>
+the arrow: in the example, the error is detected at the keyword
+<TT>print</TT>, since a colon (<TT>:</TT>) is missing before it.
+File name and line number are printed so you know where to look in case
+the input came from a script.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

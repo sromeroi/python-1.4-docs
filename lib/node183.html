@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.13 Standard module FrameWork</TITLE>
+<META NAME="description" CONTENT="15.13 Standard module FrameWork">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4570" HREF="node184.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4568" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4562" HREF="node182.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4572" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4573" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4571" HREF="node184.html">15.13.1 Application objects</A>
+<B>Up:</B> <A NAME="tex2html4569" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4563" HREF="node182.html">15.12 Standard module EasyDialogs</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0016130000000000000000">15.13 Standard module <CODE>FrameWork</CODE></A></H1>
+<P>
+The <CODE>FrameWork</CODE> module contains classes that together provide a
+framework for an interactive Macintosh application. The programmer
+builds an application by creating subclasses that override various
+methods of the bases classes, thereby implementing the functionality
+wanted. Overriding functionality can often be done on various
+different levels, i.e. to handle clicks in a single dialog window in a
+non-standard way it is not necessary to override the complete event
+handling.
+<P>
+The <CODE>FrameWork</CODE> is still very much work-in-progress, and the
+documentation describes only the most important functionality, and not
+in the most logical manner at that. Examine the source or the examples
+for more details.
+<P>
+The <CODE>FrameWork</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="9517">Application</A></STRONG>(<VAR></VAR>)
+<DD>
+An object representing the complete application. See below for a
+description of the methods. The default <CODE>__init__</CODE> routine
+creates an empty window dictionary and a menu bar with an apple menu.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9522">MenuBar</A></STRONG>(<VAR></VAR>)
+<DD>
+An object representing the menubar. This object is usually not created
+by the user.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9769">Menu</A></STRONG>(<VAR>bar, title</VAR><BIG>[</BIG><VAR>, after</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+An object representing a menu. Upon creation you pass the
+<CODE>MenuBar</CODE> the menu appears in, the <VAR>title</VAR> string and a
+position (1-based) <VAR>after</VAR> where the menu should appear (default:
+at the end).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9770">MenuItem</A></STRONG>(<VAR>menu, title</VAR><BIG>[</BIG><VAR>, shortcut, callback</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Create a menu item object. The arguments are the menu to crate the
+item it, the item title string and optionally the keyboard shortcut
+and a callback routine. The callback is called with the arguments
+menu-id, item number within menu (1-based), current front window and
+the event record.
+<P>
+In stead of a callable object the callback can also be a string. In
+this case menu selection causes the lookup of a method in the topmost
+window and the application. The method name is the callback string
+with <CODE>'domenu_'</CODE> prepended.
+<P>
+Calling the <CODE>MenuBar</CODE> <CODE>fixmenudimstate</CODE> method sets the
+correct dimming for all menu items based on the current front window.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9540">Separator</A></STRONG>(<VAR>menu</VAR>)
+<DD>
+Add a separator to the end of a menu.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9544">SubMenu</A></STRONG>(<VAR>menu, label</VAR>)
+<DD>
+Create a submenu named <VAR>label</VAR> under menu <VAR>menu</VAR>. The menu
+object is returned.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9550">Window</A></STRONG>(<VAR>parent</VAR>)
+<DD>
+Creates a (modeless) window. <VAR>Parent</VAR> is the application object to
+which the window belongs. The window is not displayed until later.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9555">DialogWindow</A></STRONG>(<VAR>parent</VAR>)
+<DD>
+Creates a modeless dialog window.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9559">windowbounds</A></STRONG>(<VAR>width, height</VAR>)
+<DD>
+Return a <CODE>(left, top, right, bottom)</CODE> tuple suitable for creation
+of a window of given width and height. The window will be staggered
+with respect to previous windows, and an attempt is made to keep the
+whole window on-screen. The window will however always be exact the
+size given, so parts may be offscreen.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9564">setwatchcursor</A></STRONG>(<VAR></VAR>)
+<DD>
+Set the mouse cursor to a watch.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9568">setarrowcursor</A></STRONG>(<VAR></VAR>)
+<DD>
+Set the mouse cursor to an arrow.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4574" HREF="node184.html#SECTION0016131000000000000000">15.13.1 Application objects</A>
+<LI> <A NAME="tex2html4575" HREF="node185.html#SECTION0016132000000000000000">15.13.2 Window Objects</A>
+<LI> <A NAME="tex2html4576" HREF="node186.html#SECTION0016133000000000000000">15.13.3 ControlsWindow Object</A>
+<LI> <A NAME="tex2html4577" HREF="node187.html#SECTION0016134000000000000000">15.13.4 ScrolledWindow Object</A>
+<LI> <A NAME="tex2html4578" HREF="node188.html#SECTION0016135000000000000000">15.13.5 DialogWindow Objects</A>
+</UL>
+<HR><A NAME="tex2html4570" HREF="node184.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4568" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4562" HREF="node182.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4572" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4573" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4571" HREF="node184.html">15.13.1 Application objects</A>
+<B>Up:</B> <A NAME="tex2html4569" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4563" HREF="node182.html">15.12 Standard module EasyDialogs</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.7 Calling Python Functions From C</TITLE>
+<META NAME="description" CONTENT="1.7 Calling Python Functions From C">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html287" HREF="node10.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html285" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html279" HREF="node8.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html289" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html290" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html288" HREF="node10.html">Format Strings for PyArg_ParseTuple()</A>
+<B>Up:</B> <A NAME="tex2html286" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html280" HREF="node8.html">1.6 Compilation and Linkage</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00270000000000000000">1.7 Calling Python Functions From C</A></H1>
+<P>
+So far we have concentrated on making C functions callable from
+Python.  The reverse is also useful: calling Python functions from C.
+This is especially the case for libraries that support so-called
+``callback'' functions.  If a C interface makes use of callbacks, the
+equivalent Python often needs to provide a callback mechanism to the
+Python programmer; the implementation will require calling the Python
+callback functions from a C callback.  Other uses are also imaginable.
+<P>
+Fortunately, the Python interpreter is easily called recursively, and
+there is a standard interface to call a Python function.  (I won't
+dwell on how to call the Python parser with a particular string as
+input -- if you're interested, have a look at the implementation of
+the `<SAMP>-c</SAMP>' command line option in `<CODE>Python/pythonmain.c</CODE>'.)
+<P>
+Calling a Python function is easy.  First, the Python program must
+somehow pass you the Python function object.  You should provide a
+function (or some other interface) to do this.  When this function is
+called, save a pointer to the Python function object (be careful to
+<CODE>Py_INCREF()</CODE> it!) in a global variable -- or whereever you see fit.
+For example, the following function might be part of a module
+definition:
+<P>
+<PRE>    static PyObject *my_callback = NULL;
+
+    static PyObject *
+    my_set_callback(dummy, arg)
+        PyObject *dummy, *arg;
+    {
+        Py_XDECREF(my_callback); /* Dispose of previous callback */
+        Py_XINCREF(arg); /* Add a reference to new callback */
+        my_callback = arg; /* Remember new callback */
+        /* Boilerplate to return &quot;None&quot; */
+        Py_INCREF(Py_None);
+        return Py_None;
+    }</PRE>
+<P>
+The macros <CODE>Py_XINCREF()</CODE> and <CODE>Py_XDECREF()</CODE> increment/decrement
+the reference count of an object and are safe in the presence of
+<CODE>NULL</CODE> pointers.  More info on them in the section on Reference
+Counts below.
+<P>
+Later, when it is time to call the function, you call the C function
+<CODE>PyEval_CallObject()</CODE>.  This function has two arguments, both
+pointers to arbitrary Python objects: the Python function, and the
+argument list.  The argument list must always be a tuple object, whose
+length is the number of arguments.  To call the Python function with
+no arguments, pass an empty tuple; to call it with one argument, pass
+a singleton tuple.  <CODE>Py_BuildValue()</CODE> returns a tuple when its
+format string consists of zero or more format codes between
+parentheses.  For example:
+<P>
+<PRE>    int arg;
+    PyObject *arglist;
+    PyObject *result;
+    ...
+    arg = 123;
+    ...
+    /* Time to call the callback */
+    arglist = Py_BuildValue(&quot;(i)&quot;, arg);
+    result = PyEval_CallObject(my_callback, arglist);
+    Py_DECREF(arglist);</PRE>
+<P>
+<CODE>PyEval_CallObject()</CODE> returns a Python object pointer: this is
+the return value of the Python function.  <CODE>PyEval_CallObject()</CODE> is
+``reference-count-neutral'' with respect to its arguments.  In the
+example a new tuple was created to serve as the argument list, which
+is <CODE>Py_DECREF()</CODE>-ed immediately after the call.
+<P>
+The return value of <CODE>PyEval_CallObject()</CODE> is ``new'': either it
+is a brand new object, or it is an existing object whose reference
+count has been incremented.  So, unless you want to save it in a
+global variable, you should somehow <CODE>Py_DECREF()</CODE> the result,
+even (especially!) if you are not interested in its value.
+<P>
+Before you do this, however, it is important to check that the return
+value isn't <CODE>NULL</CODE>.  If it is, the Python function terminated by raising
+an exception.  If the C code that called <CODE>PyEval_CallObject()</CODE> is
+called from Python, it should now return an error indication to its
+Python caller, so the interpreter can print a stack trace, or the
+calling Python code can handle the exception.  If this is not possible
+or desirable, the exception should be cleared by calling
+<CODE>PyErr_Clear()</CODE>.  For example:
+<P>
+<PRE>    if (result == NULL)
+        return NULL; /* Pass error back */
+    ...use result...
+    Py_DECREF(result);</PRE>
+<P>
+Depending on the desired interface to the Python callback function,
+you may also have to provide an argument list to <CODE>PyEval_CallObject()</CODE>.
+In some cases the argument list is also provided by the Python
+program, through the same interface that specified the callback
+function.  It can then be saved and used in the same manner as the
+function object.  In other cases, you may have to construct a new
+tuple to pass as the argument list.  The simplest way to do this is to
+call <CODE>Py_BuildValue()</CODE>.  For example, if you want to pass an integral
+event code, you might use the following code:
+<P>
+<PRE>    PyObject *arglist;
+    ...
+    arglist = Py_BuildValue(&quot;(l)&quot;, eventcode);
+    result = PyEval_CallObject(my_callback, arglist);
+    Py_DECREF(arglist);
+    if (result == NULL)
+        return NULL; /* Pass error back */
+    /* Here maybe use the result */
+    Py_DECREF(result);</PRE>
+<P>
+Note the placement of <CODE>Py_DECREF(argument)</CODE> immediately after the call,
+before the error check!  Also note that strictly spoken this code is
+not complete: <CODE>Py_BuildValue()</CODE> may run out of memory, and this should
+be checked.
+<P>
+<HR><A NAME="tex2html287" HREF="node10.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html285" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html279" HREF="node8.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html289" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html290" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html288" HREF="node10.html">Format Strings for PyArg_ParseTuple()</A>
+<B>Up:</B> <A NAME="tex2html286" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html280" HREF="node8.html">1.6 Compilation and Linkage</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

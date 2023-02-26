@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.10.1 Introduction</TITLE>
+<META NAME="description" CONTENT="1.10.1 Introduction">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html340" HREF="node14.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html338" HREF="node12.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html332" HREF="node12.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html342" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html343" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html341" HREF="node14.html">1.10.2 Reference Counting in </A>
+<B>Up:</B> <A NAME="tex2html339" HREF="node12.html">1.10 Reference Counts</A>
+<B> Previous:</B> <A NAME="tex2html333" HREF="node12.html">1.10 Reference Counts</A>
+<BR><HR><P>
+<H2><A NAME="SECTION002101000000000000000">1.10.1 Introduction</A></H2>
+<P>
+In languages like C or C++, the programmer is responsible for
+dynamic allocation and deallocation of memory on the heap.  In C, this
+is done using the functions <CODE>malloc()</CODE> and <CODE>free()</CODE>.  In
+C++, the operators <CODE>new</CODE> and <CODE>delete</CODE> are used with
+essentially the same meaning; they are actually implemented using
+<CODE>malloc()</CODE> and <CODE>free()</CODE>, so we'll restrict the following
+discussion to the latter.
+<P>
+Every block of memory allocated with <CODE>malloc()</CODE> should eventually
+be returned to the pool of available memory by exactly one call to
+<CODE>free()</CODE>.  It is important to call <CODE>free()</CODE> at the right
+time.  If a block's address is forgotten but <CODE>free()</CODE> is not
+called for it, the memory it occupies cannot be reused until the
+program terminates.  This is called a <I><DFN>memory leak</DFN></I>.  On the other
+hand, if a program calls <CODE>free()</CODE> for a block and then continues
+to use the block, it creates a conflict with re-use of the block
+through another <CODE>malloc()</CODE> call.  This is called <I><DFN>using freed
+memory</DFN></I> has the same bad consequences as referencing uninitialized
+data -- core dumps, wrong results, mysterious crashes.
+<P>
+Common causes of memory leaks are unusual paths through the code.  For
+instance, a function may allocate a block of memory, do some
+calculation, and then free the block again.  Now a change in the
+requirements for the function may add a test to the calculation that
+detects an error condition and can return prematurely from the
+function.  It's easy to forget to free the allocated memory block when
+taking this premature exit, especially when it is added later to the
+code.  Such leaks, once introduced, often go undetected for a long
+time: the error exit is taken only in a small fraction of all calls,
+and most modern machines have plenty of virtual memory, so the leak
+only becomes apparent in a long-running process that uses the leaking
+function frequently.  Therefore, it's important to prevent leaks from
+happening by having a coding convention or strategy that minimizes
+this kind of errors.
+<P>
+Since Python makes heavy use of <CODE>malloc()</CODE> and <CODE>free()</CODE>, it
+needs a strategy to avoid memory leaks as well as the use of freed
+memory.  The chosen method is called <I><DFN>reference counting</DFN></I>.  The
+principle is simple: every object contains a counter, which is
+incremented when a reference to the object is stored somewhere, and
+which is decremented when a reference to it is deleted.  When the
+counter reaches zero, the last reference to the object has been
+deleted and the object is freed.
+<P>
+An alternative strategy is called <I><DFN>automatic garbage collection</DFN></I>.
+(Sometimes, reference counting is also referred to as a garbage
+collection strategy, hence my use of ``automatic'' to distinguish the
+two.)  The big advantage of automatic garbage collection is that the
+user doesn't need to call <CODE>free()</CODE> explicitly.  (Another claimed
+advantage is an improvement in speed or memory usage -- this is no
+hard fact however.)  The disadvantage is that for C, there is no
+truly portable automatic garbage collector, while reference counting
+can be implemented portably (as long as the functions <CODE>malloc()</CODE>
+and <CODE>free()</CODE> are available -- which the C Standard guarantees).
+Maybe some day a sufficiently portable automatic garbage collector
+will be available for C.  Until then, we'll have to live with
+reference counts.
+<P>
+<HR><A NAME="tex2html340" HREF="node14.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html338" HREF="node12.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html332" HREF="node12.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html342" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html343" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html341" HREF="node14.html">1.10.2 Reference Counting in </A>
+<B>Up:</B> <A NAME="tex2html339" HREF="node12.html">1.10 Reference Counts</A>
+<B> Previous:</B> <A NAME="tex2html333" HREF="node12.html">1.10 Reference Counts</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

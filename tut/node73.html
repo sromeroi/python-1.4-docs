@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.3.1 Basic Usage</TITLE>
+<META NAME="description" CONTENT="10.3.1 Basic Usage">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1113" HREF="node74.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1111" HREF="node72.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1105" HREF="node72.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1115" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1114" HREF="node74.html">10.3.2 Referencing Variables By </A>
+<B>Up:</B> <A NAME="tex2html1112" HREF="node72.html">10.3 The Formatting Operator</A>
+<B> Previous:</B> <A NAME="tex2html1106" HREF="node72.html">10.3 The Formatting Operator</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001131000000000000000">10.3.1 Basic Usage</A></H2>
+<P>
+The chapter on output formatting is really out of date: there is now
+an almost complete interface to C-style printf formats.  This is done
+by overloading the modulo operator (<code>%</code>) for a left operand
+which is a string, e.g.
+<P>
+<PRE>        &gt;&gt;&gt; import math
+        &gt;&gt;&gt; print 'The value of PI is approximately %5.3f.' % math.pi
+        The value of PI is approximately 3.142.
+        &gt;&gt;&gt;</PRE>
+<P>
+If there is more than one format in the string you pass a tuple as
+right operand, e.g.
+<P>
+<PRE>        &gt;&gt;&gt; table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 8637678}
+        &gt;&gt;&gt; for name, phone in table.items():
+        ...     print '%-10s ==&gt; %10d' % (name, phone)
+        ... 
+        Jack       ==&gt;       4098
+        Dcab       ==&gt;    8637678
+        Sjoerd     ==&gt;       4127
+        &gt;&gt;&gt;</PRE>
+<P>
+Most formats work exactly as in C and require that you pass the proper
+type (however, if you don't you get an exception, not a core dump).
+The <code>%s</code> format is more relaxed: if the corresponding argument is
+not a string object, it is converted to string using the <code>str()</code>
+built-in function.  Using <code>*</code> to pass the width or precision in
+as a separate (integer) argument is supported.  The C formats
+<code>%n</code> and <code>%p</code> are not supported.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

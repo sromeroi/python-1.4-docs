@@ -1,0 +1,579 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.3 Built-in Functions</TITLE>
+<META NAME="description" CONTENT="2.3 Built-in Functions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2551" HREF="node27.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2549" HREF="node3.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2545" HREF="node25.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2553" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2554" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2552" HREF="node27.html">3 Python Services</A>
+<B>Up:</B> <A NAME="tex2html2550" HREF="node3.html">2 Built-in TypesExceptions </A>
+<B> Previous:</B> <A NAME="tex2html2546" HREF="node25.html">2.2 Built-in Exceptions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00330000000000000000">2.3 Built-in Functions</A></H1>
+<P>
+The Python interpreter has a number of functions built into it that
+are always available.  They are listed here in alphabetical order.
+<P>
+<DL><DT><STRONG><A NAME="1105">abs</A></STRONG>(<VAR>x</VAR>)
+<DD>
+  Return the absolute value of a number.  The argument may be a plain
+  or long integer or a floating point number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1494">apply</A></STRONG>(<VAR>function, args</VAR><BIG>[</BIG><VAR>, keywords</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+The <VAR>function</VAR> argument must be a callable object (a user-defined or
+built-in function or method, or a class object) and the <VAR>args</VAR>
+argument must be a tuple.  The <VAR>function</VAR> is called with
+<VAR>args</VAR> as argument list; the number of arguments is the the length
+of the tuple.  (This is different from just calling
+<CODE><VAR>func</VAR>(<VAR>args</VAR>)</CODE>, since in that case there is always
+exactly one argument.)
+If the optional <VAR>keywords</VAR> argument is present, it must be a
+dictionary whose keys are strings.  It specifies keyword arguments to
+be added to the end of the the argument list.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1120">chr</A></STRONG>(<VAR>i</VAR>)
+<DD>
+  Return a string of one character whose ASCII code is the integer
+  <VAR>i</VAR>, e.g., <CODE>chr(97)</CODE> returns the string <CODE>'a'</CODE>.  This is the
+  inverse of <CODE>ord()</CODE>.  The argument must be in the range [0..255],
+  inclusive.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1129">cmp</A></STRONG>(<VAR>x, y</VAR>)
+<DD>
+  Compare the two objects <VAR>x</VAR> and <VAR>y</VAR> and return an integer
+  according to the outcome.  The return value is negative if <CODE><VAR>x</VAR>
+  &lt; <VAR>y</VAR></CODE>, zero if <CODE><VAR>x</VAR> == <VAR>y</VAR></CODE> and strictly positive if
+  <CODE><VAR>x</VAR> &gt; <VAR>y</VAR></CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1141">coerce</A></STRONG>(<VAR>x, y</VAR>)
+<DD>
+  Return a tuple consisting of the two numeric arguments converted to
+  a common type, using the same rules as used by arithmetic
+  operations.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1145">compile</A></STRONG>(<VAR>string, filename, kind</VAR>)
+<DD>
+  Compile the <VAR>string</VAR> into a code object.  Code objects can be
+  executed by an <CODE>exec</CODE> statement or evaluated by a call to
+  <CODE>eval()</CODE>.  The <VAR>filename</VAR> argument should
+  give the file from which the code was read; pass e.g. <CODE>'&lt;string&gt;'</CODE>
+  if it wasn't read from a file.  The <VAR>kind</VAR> argument specifies
+  what kind of code must be compiled; it can be <CODE>'exec'</CODE> if
+  <VAR>string</VAR> consists of a sequence of statements, <CODE>'eval'</CODE>
+  if it consists of a single expression, or <CODE>'single'</CODE> if
+  it consists of a single interactive statement (in the latter case,
+  expression statements that evaluate to something else than
+  <CODE>None</CODE> will printed).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1160">delattr</A></STRONG>(<VAR>object, name</VAR>)
+<DD>
+  This is a relative of <CODE>setattr</CODE>.  The arguments are an
+  object and a string.  The string must be the name
+  of one of the object's attributes.  The function deletes
+  the named attribute, provided the object allows it.  For example,
+  <CODE>delattr(<VAR>x</VAR>, '<VAR>foobar</VAR>')</CODE> is equivalent to
+  <CODE>del <VAR>x</VAR>.<VAR>foobar</VAR></CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1169">dir</A></STRONG>(<VAR></VAR>)
+<DD>
+  Without arguments, return the list of names in the current local
+  symbol table.  With a module, class or class instance object as
+  argument (or anything else that has a <CODE>__dict__</CODE> attribute),
+  returns the list of names in that object's attribute dictionary.
+  The resulting list is sorted.  For example:
+<P>
+<PRE>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; dir()
+['sys']
+&gt;&gt;&gt; dir(sys)
+['argv', 'exit', 'modules', 'path', 'stderr', 'stdin', 'stdout']
+&gt;&gt;&gt;</PRE>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1174">divmod</A></STRONG>(<VAR>a, b</VAR>)
+<DD>
+  Take two numbers as arguments and return a pair of integers
+  consisting of their integer quotient and remainder.  With mixed
+  operand types, the rules for binary arithmetic operators apply.  For
+  plain and long integers, the result is the same as
+  <CODE>(<VAR>a</VAR> / <VAR>b</VAR>, <VAR>a</VAR> % <VAR>b</VAR>)</CODE>.
+  For floating point numbers the result is the same as
+  <CODE>(math.floor(<VAR>a</VAR> / <VAR>b</VAR>), <VAR>a</VAR> % <VAR>b</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1526">eval</A></STRONG>(<VAR>expression</VAR><BIG>[</BIG><VAR>, globals</VAR><BIG>[</BIG><VAR>, locals</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  The arguments are a string and two optional dictionaries.  The
+  <VAR>expression</VAR> argument is parsed and evaluated as a Python
+  expression (technically speaking, a condition list) using the
+  <VAR>globals</VAR> and <VAR>locals</VAR> dictionaries as global and local name
+  space.  If the <VAR>locals</VAR> dictionary is omitted it defaults to
+  the <VAR>globals</VAR> dictionary.  If both dictionaries are omitted, the
+  expression is executed in the environment where <CODE>eval</CODE> is
+  called.  The return value is the result of the evaluated expression.
+  Syntax errors are reported as exceptions.  Example:
+<P>
+<PRE>&gt;&gt;&gt; x = 1
+&gt;&gt;&gt; print eval('x+1')
+2
+&gt;&gt;&gt;</PRE>
+<P>
+  This function can also be used to execute arbitrary code objects
+  (e.g. created by <CODE>compile()</CODE>).  In this case pass a code
+  object instead of a string.  The code object must have been compiled
+  passing <CODE>'eval'</CODE> to the <VAR>kind</VAR> argument.
+<P>
+  Hints: dynamic execution of statements is supported by the
+  <CODE>exec</CODE> statement.  Execution of statements from a file is
+  supported by the <CODE>execfile()</CODE> function.  The <CODE>globals()</CODE>
+  and <CODE>locals()</CODE> functions returns the current global and local
+  dictionary, respectively, which may be useful
+  to pass around for use by <CODE>eval()</CODE> or <CODE>execfile()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1527">execfile</A></STRONG>(<VAR>file</VAR><BIG>[</BIG><VAR>, globals</VAR><BIG>[</BIG><VAR>, locals</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  This function is similar to the
+  <CODE>exec</CODE> statement, but parses a file instead of a string.  It is
+  different from the <CODE>import</CODE> statement in that it does not use
+  the module administration -- it reads the file unconditionally and
+  does not create a new module.<A NAME="tex2html270" HREF="footnode.html#1210"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+  The arguments are a file name and two optional dictionaries.  The
+  file is parsed and evaluated as a sequence of Python statements
+  (similarly to a module) using the <VAR>globals</VAR> and <VAR>locals</VAR>
+  dictionaries as global and local name space.  If the <VAR>locals</VAR>
+  dictionary is omitted it defaults to the <VAR>globals</VAR> dictionary.
+  If both dictionaries are omitted, the expression is executed in the
+  environment where <CODE>execfile()</CODE> is called.  The return value is
+  <CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1220">filter</A></STRONG>(<VAR>function, list</VAR>)
+<DD>
+Construct a list from those elements of <VAR>list</VAR> for which
+<VAR>function</VAR> returns true.  If <VAR>list</VAR> is a string or a tuple,
+the result also has that type; otherwise it is always a list.  If
+<VAR>function</VAR> is <CODE>None</CODE>, the identity function is assumed,
+i.e. all elements of <VAR>list</VAR> that are false (zero or empty) are
+removed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1230">float</A></STRONG>(<VAR>x</VAR>)
+<DD>
+  Convert a number to floating point.  The argument may be a plain or
+  long integer or a floating point number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1234">getattr</A></STRONG>(<VAR>object, name</VAR>)
+<DD>
+  The arguments are an object and a string.  The string must be the
+  name
+  of one of the object's attributes.  The result is the value of that
+  attribute.  For example, <CODE>getattr(<VAR>x</VAR>, '<VAR>foobar</VAR>')</CODE> is equivalent to
+  <CODE><VAR>x</VAR>.<VAR>foobar</VAR></CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1242">globals</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a dictionary representing the current global symbol table.
+This is always the dictionary of the current module (inside a
+function or method, this is the module where it is defined, not the
+module from which it is called).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1246">hasattr</A></STRONG>(<VAR>object, name</VAR>)
+<DD>
+  The arguments are an object and a string.  The result is 1 if the
+  string is the name of one of the object's attributes, 0 if not.
+  (This is implemented by calling <CODE>getattr(object, name)</CODE> and
+  seeing whether it raises an exception or not.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1251">hash</A></STRONG>(<VAR>object</VAR>)
+<DD>
+  Return the hash value of the object (if it has one).  Hash values
+  are 32-bit integers.  They are used to quickly compare dictionary
+  keys during a dictionary lookup.  Numeric values that compare equal
+  have the same hash value (even if they are of different types, e.g.
+  1 and 1.0).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1255">hex</A></STRONG>(<VAR>x</VAR>)
+<DD>
+  Convert an integer number (of any size) to a hexadecimal string.
+  The result is a valid Python expression.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1259">id</A></STRONG>(<VAR>object</VAR>)
+<DD>
+  Return the `identity' of an object.  This is an integer which is
+  guaranteed to be unique and constant for this object during its
+  lifetime.  (Two objects whose lifetimes are disjunct may have the
+  same id() value.)  (Implementation note: this is the address of the
+  object.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1507">input</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>prompt</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Almost equivalent to <CODE>eval(raw_input(<VAR>prompt</VAR>))</CODE>.  Like
+  <CODE>raw_input()</CODE>, the <VAR>prompt</VAR> argument is optional.  The difference
+  is that a long input expression may be broken over multiple lines using
+  the backslash convention.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1270">int</A></STRONG>(<VAR>x</VAR>)
+<DD>
+  Convert a number to a plain integer.  The argument may be a plain or
+  long integer or a floating point number.  Conversion of floating
+  point numbers to integers is defined by the C semantics; normally
+  the conversion truncates towards zero.<A NAME="tex2html271" HREF="footnode.html#1271"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1275">len</A></STRONG>(<VAR>s</VAR>)
+<DD>
+  Return the length (the number of items) of an object.  The argument
+  may be a sequence (string, tuple or list) or a mapping (dictionary).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1279">locals</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a dictionary representing the current local symbol table.
+Inside a function, modifying this dictionary does not always have the
+desired effect.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1283">long</A></STRONG>(<VAR>x</VAR>)
+<DD>
+  Convert a number to a long integer.  The argument may be a plain or
+  long integer or a floating point number.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1287">map</A></STRONG>(<VAR>function, list, ...</VAR>)
+<DD>
+Apply <VAR>function</VAR> to every item of <VAR>list</VAR> and return a list
+of the results.  If additional <VAR>list</VAR> arguments are passed, 
+<VAR>function</VAR> must take that many arguments and is applied to
+the items of all lists in parallel; if a list is shorter than another
+it is assumed to be extended with <CODE>None</CODE> items.  If
+<VAR>function</VAR> is <CODE>None</CODE>, the identity function is assumed; if
+there are multiple list arguments, <CODE>map</CODE> returns a list
+consisting of tuples containing the corresponding items from all lists
+(i.e. a kind of transpose operation).  The <VAR>list</VAR> arguments may be
+any kind of sequence; the result is always a list.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1300">max</A></STRONG>(<VAR>s</VAR>)
+<DD>
+  Return the largest item of a non-empty sequence (string, tuple or
+  list).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1304">min</A></STRONG>(<VAR>s</VAR>)
+<DD>
+  Return the smallest item of a non-empty sequence (string, tuple or
+  list).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1308">oct</A></STRONG>(<VAR>x</VAR>)
+<DD>
+  Convert an integer number (of any size) to an octal string.  The
+  result is a valid Python expression.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1528">open</A></STRONG>(<VAR>filename</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>[</BIG><VAR>, bufsize</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Return a new file object (described earlier under Built-in Types).
+  The first two arguments are the same as for <CODE>stdio</CODE>'s
+  <CODE>fopen()</CODE>: <VAR>filename</VAR> is the file name to be opened,
+  <VAR>mode</VAR> indicates how the file is to be opened: <CODE>'r'</CODE> for
+  reading, <CODE>'w'</CODE> for writing (truncating an existing file), and
+  <CODE>'a'</CODE> opens it for appending (which on <EM>some</EM> Unix
+  systems means that <EM>all</EM> writes append to the end of the file,
+  regardless of the current seek position).
+  Modes <CODE>'r+'</CODE>, <CODE>'w+'</CODE> and
+  <CODE>'a+'</CODE> open the file for updating, provided the underlying
+  <CODE>stdio</CODE> library understands this.  On systems that differentiate
+  between binary and text files, <CODE>'b'</CODE> appended to the mode opens
+  the file in binary mode.  If the file cannot be opened, <CODE>IOError</CODE>
+  is raised.
+If <VAR>mode</VAR> is omitted, it defaults to <CODE>'r'</CODE>.
+The optional <VAR>bufsize</VAR> argument specifies the file's desired
+buffer size: 0 means unbuffered, 1 means line buffered, any other
+positive value means use a buffer of (approximately) that size.  A
+negative <VAR>bufsize</VAR> means to use the system default, which is
+usually line buffered for for tty devices and fully buffered for other
+files.<A NAME="tex2html272" HREF="footnode.html#1510"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1338">ord</A></STRONG>(<VAR>c</VAR>)
+<DD>
+  Return the ASCII value of a string of one character.  E.g.,
+  <CODE>ord('a')</CODE> returns the integer <CODE>97</CODE>.  This is the inverse of
+  <CODE>chr()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1511">pow</A></STRONG>(<VAR>x, y</VAR><BIG>[</BIG><VAR>, z</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Return <VAR>x</VAR> to the power <VAR>y</VAR>; if <VAR>z</VAR> is present, return
+  <VAR>x</VAR> to the power <VAR>y</VAR>, modulo <VAR>z</VAR> (computed more
+  efficiently than <CODE>pow(<VAR>x</VAR>, <VAR>y</VAR>) % <VAR>z</VAR></CODE>).
+  The arguments must have
+  numeric types.  With mixed operand types, the rules for binary
+  arithmetic operators apply.  The effective operand type is also the
+  type of the result; if the result is not expressible in this type, the
+  function raises an exception; e.g., <CODE>pow(2, -1)</CODE> or <CODE>pow(2,
+  35000)</CODE> is not allowed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1513">range</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>start,</VAR><BIG>]</BIG><VAR> end</VAR><BIG>[</BIG><VAR>, step</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  This is a versatile function to create lists containing arithmetic
+  progressions.  It is most often used in <CODE>for</CODE> loops.  The
+  arguments must be plain integers.  If the <VAR>step</VAR> argument is
+  omitted, it defaults to <CODE>1</CODE>.  If the <VAR>start</VAR> argument is
+  omitted, it defaults to <CODE>0</CODE>.  The full form returns a list of
+  plain integers <CODE>[<VAR>start</VAR>, <VAR>start</VAR> + <VAR>step</VAR>,
+  <VAR>start</VAR> + 2 * <VAR>step</VAR>, ...]</CODE>.  If <VAR>step</VAR> is positive,
+  the last element is the largest <CODE><VAR>start</VAR> + <VAR>i</VAR> *
+  <VAR>step</VAR></CODE> less than <VAR>end</VAR>; if <VAR>step</VAR> is negative, the last
+  element is the largest <CODE><VAR>start</VAR> + <VAR>i</VAR> * <VAR>step</VAR></CODE>
+  greater than <VAR>end</VAR>.  <VAR>step</VAR> must not be zero (or else an
+  exception is raised).  Example:
+<P>
+<PRE>&gt;&gt;&gt; range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; range(1, 11)
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+&gt;&gt;&gt; range(0, 30, 5)
+[0, 5, 10, 15, 20, 25]
+&gt;&gt;&gt; range(0, 10, 3)
+[0, 3, 6, 9]
+&gt;&gt;&gt; range(0, -10, -1)
+[0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+&gt;&gt;&gt; range(0)
+[]
+&gt;&gt;&gt; range(1, 0)
+[]
+&gt;&gt;&gt;</PRE>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1517">raw_input</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>prompt</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  If the <VAR>prompt</VAR> argument is present, it is written to standard output
+  without a trailing newline.  The function then reads a line from input,
+  converts it to a string (stripping a trailing newline), and returns that.
+  When EOF is read, <CODE>EOFError</CODE> is raised. Example:
+<P>
+<PRE>&gt;&gt;&gt; s = raw_input('--&gt; ')
+--&gt; Monty Python's Flying Circus
+&gt;&gt;&gt; s
+&quot;Monty Python's Flying Circus&quot;
+&gt;&gt;&gt;</PRE>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1518">reduce</A></STRONG>(<VAR>function, list</VAR><BIG>[</BIG><VAR>, initializer</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Apply the binary <VAR>function</VAR> to the items of <VAR>list</VAR> so as to
+reduce the list to a single value.  E.g.,
+<CODE>reduce(lambda x, y: x*y, <VAR>list</VAR>, 1)</CODE> returns the product of
+the elements of <VAR>list</VAR>.  The optional <VAR>initializer</VAR> can be
+thought of as being prepended to <VAR>list</VAR> so as to allow reduction
+of an empty <VAR>list</VAR>.  The <VAR>list</VAR> arguments may be any kind of
+sequence.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1406">reload</A></STRONG>(<VAR>module</VAR>)
+<DD>
+Re-parse and re-initialize an already imported <VAR>module</VAR>.  The
+argument must be a module object, so it must have been successfully
+imported before.  This is useful if you have edited the module source
+file using an external editor and want to try out the new version
+without leaving the Python interpreter.  The return value is the
+module object (i.e. the same as the <VAR>module</VAR> argument).
+<P>
+There are a number of caveats:
+<P>
+If a module is syntactically correct but its initialization fails, the
+first <CODE>import</CODE> statement for it does not bind its name locally,
+but does store a (partially initialized) module object in
+<CODE>sys.modules</CODE>.  To reload the module you must first
+<CODE>import</CODE> it again (this will bind the name to the partially
+initialized module object) before you can <CODE>reload()</CODE> it.
+<P>
+When a module is reloaded, its dictionary (containing the module's
+global variables) is retained.  Redefinitions of names will override
+the old definitions, so this is generally not a problem.  If the new
+version of a module does not define a name that was defined by the old
+version, the old definition remains.  This feature can be used to the
+module's advantage if it maintains a global table or cache of objects
+-- with a <CODE>try</CODE> statement it can test for the table's presence
+and skip its initialization if desired.
+<P>
+It is legal though generally not very useful to reload built-in or
+dynamically loaded modules, except for <CODE>sys</CODE>, <CODE>__main__</CODE> and
+<CODE>__builtin__</CODE>.  In certain cases, however, extension modules are
+not designed to be initialized more than once, and may fail in
+arbitrary ways when reloaded.
+<P>
+If a module imports objects from another module using <CODE>from</CODE>
+... <CODE>import</CODE> ..., calling <CODE>reload()</CODE> for the other
+module does not redefine the objects imported from it -- one way
+around this is to re-execute the <CODE>from</CODE> statement, another is to
+use <CODE>import</CODE> and qualified names (<VAR>module</VAR>.<VAR>name</VAR>)
+instead.
+<P>
+If a module instantiates instances of a class, reloading the module
+that defines the class does not affect the method definitions of the
+instances -- they continue to use the old class definition.  The same
+is true for derived classes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1429">repr</A></STRONG>(<VAR>object</VAR>)
+<DD>
+Return a string containing a printable representation of an object.
+This is the same value yielded by conversions (reverse quotes).
+It is sometimes useful to be able to access this operation as an
+ordinary function.  For many types, this function makes an attempt
+to return a string that would yield an object with the same value
+when passed to <CODE>eval()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1434">round</A></STRONG>(<VAR>x, n</VAR>)
+<DD>
+  Return the floating point value <VAR>x</VAR> rounded to <VAR>n</VAR> digits
+  after the decimal point.  If <VAR>n</VAR> is omitted, it defaults to zero.
+  The result is a floating point number.  Values are rounded to the
+  closest multiple of 10 to the power minus <VAR>n</VAR>; if two multiples
+  are equally close, rounding is done away from 0 (so e.g.
+  <CODE>round(0.5)</CODE> is <CODE>1.0</CODE> and <CODE>round(-0.5)</CODE> is <CODE>-1.0</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1446">setattr</A></STRONG>(<VAR>object, name, value</VAR>)
+<DD>
+  This is the counterpart of <CODE>getattr</CODE>.  The arguments are an
+  object, a string and an arbitrary value.  The string must be the name
+  of one of the object's attributes.  The function assigns the value to
+  the attribute, provided the object allows it.  For example,
+  <CODE>setattr(<VAR>x</VAR>, '<VAR>foobar</VAR>', 123)</CODE> is equivalent to
+  <CODE><VAR>x</VAR>.<VAR>foobar</VAR> = 123</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1455">str</A></STRONG>(<VAR>object</VAR>)
+<DD>
+Return a string containing a nicely printable representation of an
+object.  For strings, this returns the string itself.  The difference
+with <CODE>repr(<VAR>object</VAR>)</CODE> is that <CODE>str(<VAR>object</VAR>)</CODE> does not
+always attempt to return a string that is acceptable to <CODE>eval()</CODE>;
+its goal is to return a printable string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1462">tuple</A></STRONG>(<VAR>sequence</VAR>)
+<DD>
+Return a tuple whose items are the same and in the same order as
+<VAR>sequence</VAR>'s items.  If <VAR>sequence</VAR> is alread a tuple, it
+is returned unchanged.  For instance, <CODE>tuple('abc')</CODE> returns
+returns <CODE>('a', 'b', 'c')</CODE> and <CODE>tuple([1, 2, 3])</CODE> returns
+<CODE>(1, 2, 3)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1472">type</A></STRONG>(<VAR>object</VAR>)
+<DD>
+Return the type of an <VAR>object</VAR>.  The return value is a type
+object.  The standard module <CODE>types</CODE> defines names for all
+built-in types.
+<P>
+<A NAME="1476">&#160;</A><A NAME="1476">&#160;</A>
+For instance:
+<P>
+<PRE>&gt;&gt;&gt; import types
+&gt;&gt;&gt; if type(x) == types.StringType: print &quot;It's a string&quot;</PRE>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1524">vars</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>object</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Without arguments, return a dictionary corresponding to the current
+local symbol table.  With a module, class or class instance object as
+argument (or anything else that has a <CODE>__dict__</CODE> attribute),
+returns a dictionary corresponding to the object's symbol table.
+The returned dictionary should not be modified: the effects on the
+corresponding symbol table are undefined.<A NAME="tex2html276" HREF="footnode.html#1482"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1525">xrange</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>start,</VAR><BIG>]</BIG><VAR> end</VAR><BIG>[</BIG><VAR>, step</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This function is very similar to <CODE>range()</CODE>, but returns an
+``xrange object'' instead of a list.  This is an opaque sequence type
+which yields the same values as the corresponding list, without
+actually storing them all simultaneously.  The advantage of
+<CODE>xrange()</CODE> over <CODE>range()</CODE> is minimal (since <CODE>xrange()</CODE>
+still has to create the values when asked for them) except when a very
+large range is used on a memory-starved machine (e.g. MS-DOS) or when all
+of the range's elements are never used (e.g. when the loop is usually
+terminated with <CODE>break</CODE>).
+<P>
+</DL><HR><A NAME="tex2html2551" HREF="node27.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2549" HREF="node3.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2545" HREF="node25.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2553" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2554" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2552" HREF="node27.html">3 Python Services</A>
+<B>Up:</B> <A NAME="tex2html2550" HREF="node3.html">2 Built-in TypesExceptions </A>
+<B> Previous:</B> <A NAME="tex2html2546" HREF="node25.html">2.2 Built-in Exceptions</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.12 Built-in Module syslog</TITLE>
+<META NAME="description" CONTENT="8.12 Built-in Module syslog">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3317" HREF="node87.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3315" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3311" HREF="node85.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3319" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3320" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3318" HREF="node87.html">9 The Python Debugger</A>
+<B>Up:</B> <A NAME="tex2html3316" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3312" HREF="node85.html">8.11 Standard Module posixfile</A>
+<BR><HR><P>
+<H1><A NAME="SECTION009120000000000000000">8.12 Built-in Module <CODE>syslog</CODE></A></H1>
+<P>
+This module provides an interface to the Unix <CODE>syslog</CODE> library
+routines.  Refer to the Unix manual pages for a detailed description
+of the <CODE>syslog</CODE> facility.
+<P>
+The module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="5413">syslog</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>priority,</VAR><BIG>]</BIG><VAR> message</VAR>)
+<DD>
+Send the string <VAR>message</VAR> to the system logger.
+A trailing newline is added if necessary.
+Each message is tagged with a priority composed of a <VAR>facility</VAR> and
+a <VAR>level</VAR>.
+The optional <VAR>priority</VAR> argument, which defaults to
+<CODE>(LOG_USER | LOG_INFO)</CODE>, determines the message priority.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5417">openlog</A></STRONG>(<VAR>ident, </VAR><BIG>[</BIG><VAR>logopt, </VAR><BIG>[</BIG><VAR>facility</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Logging options other than the defaults can be set by explicitly opening
+the log file with <CODE>openlog()</CODE> prior to calling <CODE>syslog()</CODE>.
+The defaults are (usually) <VAR>ident</VAR> = `<SAMP>syslog</SAMP>', <VAR>logopt</VAR> = 0,
+<VAR>facility</VAR> = <CODE>LOG_USER</CODE>.
+The <VAR>ident</VAR> argument is a string which is prepended to every message.
+The optional <VAR>logopt</VAR> argument is a bit field - see below for possible
+values to combine.
+The optional <VAR>facility</VAR> argument sets the default facility for messages
+which do not have a facility explicitly encoded.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5372">closelog</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the log file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="5376">setlogmask</A></STRONG>(<VAR>maskpri</VAR>)
+<DD>
+This function set the priority mask to <VAR>maskpri</VAR> and returns the
+previous mask value.
+Calls to <CODE>syslog</CODE> with a priority level not set in <VAR>maskpri</VAR>
+are ignored.
+The default is to log all priorities.
+The function <CODE>LOG_MASK(<VAR>pri</VAR>)</CODE> calculates the mask for the
+individual priority <VAR>pri</VAR>.
+The function <CODE>LOG_UPTO(<VAR>pri</VAR>)</CODE> calculates the mask for all priorities
+up to and including <VAR>pri</VAR>.
+<P>
+</DL>
+<P>
+The module defines the following constants:
+<P>
+<DL ><DT><STRONG>Priority levels (high to low):</STRONG>
+<DD>
+<P>
+<CODE>LOG_EMERG</CODE>, <CODE>LOG_ALERT</CODE>, <CODE>LOG_CRIT</CODE>, <CODE>LOG_ERR</CODE>,
+<CODE>LOG_WARNING</CODE>, <CODE>LOG_NOTICE</CODE>, <CODE>LOG_INFO</CODE>, <CODE>LOG_DEBUG</CODE>.
+<P>
+<DT><STRONG>Facilities:</STRONG>
+<DD>
+<P>
+<CODE>LOG_KERN</CODE>, <CODE>LOG_USER</CODE>, <CODE>LOG_MAIL</CODE>, <CODE>LOG_DAEMON</CODE>,
+<CODE>LOG_AUTH</CODE>, <CODE>LOG_LPR</CODE>, <CODE>LOG_NEWS</CODE>, <CODE>LOG_UUCP</CODE>,
+<CODE>LOG_CRON</CODE> and <CODE>LOG_LOCAL0</CODE> to <CODE>LOG_LOCAL7</CODE>.
+<P>
+<DT><STRONG>Log options:</STRONG>
+<DD>
+<P>
+<CODE>LOG_PID</CODE>, <CODE>LOG_CONS</CODE>, <CODE>LOG_NDELAY</CODE>, <CODE>LOG_NOWAIT</CODE>
+and <CODE>LOG_PERROR</CODE> if defined in `<CODE>syslog.h</CODE>'.
+<P>
+ </DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

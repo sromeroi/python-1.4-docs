@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11 Internet and WWW Services</TITLE>
+<META NAME="description" CONTENT="11 Internet and WWW Services">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3517" HREF="node103.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3515" HREF="lib.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3509" HREF="node101.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3519" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3520" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3518" HREF="node103.html">11.1 Standard Module cgi</A>
+<B>Up:</B> <A NAME="tex2html3516" HREF="lib.html">Python Library Reference</A>
+<B> Previous:</B> <A NAME="tex2html3510" HREF="node101.html">10.8.2 HotProfile Class</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001200000000000000000">11 Internet and WWW Services</A></H1>
+<P>
+<A NAME="InternetandWWW">&#160;</A>
+<A NAME="5755">&#160;</A>
+<A NAME="5756">&#160;</A>
+<A NAME="5757">&#160;</A>
+<P>
+The modules described in this chapter provide various services to
+World-Wide Web (WWW) clients and/or services, and a few modules
+related to news and email.  They are all implemented in Python.  Some
+of these modules require the presence of the system-dependent module
+<CODE>sockets</CODE>, which is currently only fully supported on Unix and
+Windows NT.  Here is an overview:
+<P>
+<DL ><DT><STRONG>cgi</STRONG>
+<DD>
+-- Common Gateway Interface, used to interpret forms in server-side
+scripts.
+<P>
+<DT><STRONG>urllib</STRONG>
+<DD>
+-- Open an arbitrary object given by URL (requires sockets).
+<P>
+<DT><STRONG>httplib</STRONG>
+<DD>
+-- HTTP protocol client (requires sockets).
+<P>
+<DT><STRONG>ftplib</STRONG>
+<DD>
+-- FTP protocol client (requires sockets).
+<P>
+<DT><STRONG>gopherlib</STRONG>
+<DD>
+-- Gopher protocol client (requires sockets).
+<P>
+<DT><STRONG>nntplib</STRONG>
+<DD>
+-- NNTP protocol client (requires sockets).
+<P>
+<DT><STRONG>urlparse</STRONG>
+<DD>
+-- Parse a URL string into a tuple (addressing scheme identifier, network
+location, path, parameters, query string, fragment identifier).
+<P>
+<DT><STRONG>sgmllib</STRONG>
+<DD>
+-- Only as much of an SGML parser as needed to parse HTML.
+<P>
+<DT><STRONG>htmllib</STRONG>
+<DD>
+-- A (slow) parser for HTML documents.
+<P>
+<DT><STRONG>formatter</STRONG>
+<DD>
+-- Generic output formatter and device interface.
+<P>
+<DT><STRONG>rfc822</STRONG>
+<DD>
+-- Parse RFC-822 style mail headers.
+<P>
+<DT><STRONG>mimetools</STRONG>
+<DD>
+-- Tools for parsing MIME style message bodies.
+<P>
+ </DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3521" HREF="node103.html#SECTION001210000000000000000">11.1 Standard Module <CODE>cgi</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3522" HREF="node104.html#SECTION001211000000000000000">11.1.1 Introduction</A>
+<LI> <A NAME="tex2html3523" HREF="node105.html#SECTION001212000000000000000">11.1.2 Using the cgi module</A>
+<LI> <A NAME="tex2html3524" HREF="node106.html#SECTION001213000000000000000">11.1.3 Old classes</A>
+<LI> <A NAME="tex2html3525" HREF="node107.html#SECTION001214000000000000000">11.1.4 Functions</A>
+<LI> <A NAME="tex2html3526" HREF="node108.html#SECTION001215000000000000000">11.1.5 Caring about security</A>
+<LI> <A NAME="tex2html3527" HREF="node109.html#SECTION001216000000000000000">11.1.6 Installing your CGI script on a Unix system</A>
+<LI> <A NAME="tex2html3528" HREF="node110.html#SECTION001217000000000000000">11.1.7 Testing your CGI script</A>
+<LI> <A NAME="tex2html3529" HREF="node111.html#SECTION001218000000000000000">11.1.8 Debugging CGI scripts</A>
+<LI> <A NAME="tex2html3530" HREF="node112.html#SECTION001219000000000000000">11.1.9 Common problems and solutions</A>
+</UL> 
+<LI> <A NAME="tex2html3531" HREF="node113.html#SECTION001220000000000000000">11.2 Standard Module <CODE>urllib</CODE></A>
+<LI> <A NAME="tex2html3532" HREF="node114.html#SECTION001230000000000000000">11.3 Standard Module <CODE>httplib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3533" HREF="node115.html#SECTION001231000000000000000">11.3.1 HTTP Objects</A>
+<LI> <A NAME="tex2html3534" HREF="node116.html#SECTION001232000000000000000">11.3.2 Example</A>
+</UL> 
+<LI> <A NAME="tex2html3535" HREF="node117.html#SECTION001240000000000000000">11.4 Standard Module <CODE>ftplib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3536" HREF="node118.html#SECTION001241000000000000000">11.4.1 FTP Objects</A>
+</UL> 
+<LI> <A NAME="tex2html3537" HREF="node119.html#SECTION001250000000000000000">11.5 Standard Module <CODE>gopherlib</CODE></A>
+<LI> <A NAME="tex2html3538" HREF="node120.html#SECTION001260000000000000000">11.6 Standard Module <CODE>nntplib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3539" HREF="node121.html#SECTION001261000000000000000">11.6.1 NNTP Objects</A>
+</UL> 
+<LI> <A NAME="tex2html3540" HREF="node122.html#SECTION001270000000000000000">11.7 Standard Module <CODE>urlparse</CODE></A>
+<LI> <A NAME="tex2html3541" HREF="node123.html#SECTION001280000000000000000">11.8 Standard Module <CODE>sgmllib</CODE></A>
+<LI> <A NAME="tex2html3542" HREF="node124.html#SECTION001290000000000000000">11.9 Standard Module <CODE>htmllib</CODE></A>
+<LI> <A NAME="tex2html3543" HREF="node125.html#SECTION0012100000000000000000">11.10 Standard Module <CODE>formatter</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3544" HREF="node126.html#SECTION0012101000000000000000">11.10.1 The Formatter Interface</A>
+<LI> <A NAME="tex2html3545" HREF="node127.html#SECTION0012102000000000000000">11.10.2 Formatter Implementations</A>
+<LI> <A NAME="tex2html3546" HREF="node128.html#SECTION0012103000000000000000">11.10.3 The Writer Interface</A>
+<LI> <A NAME="tex2html3547" HREF="node129.html#SECTION0012104000000000000000">11.10.4 Writer Implementations</A>
+</UL> 
+<LI> <A NAME="tex2html3548" HREF="node130.html#SECTION0012110000000000000000">11.11 Standard Module <CODE>rfc822</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3549" HREF="node131.html#SECTION0012111000000000000000">11.11.1 Message Objects</A>
+</UL> 
+<LI> <A NAME="tex2html3550" HREF="node132.html#SECTION0012120000000000000000">11.12 Standard Module <CODE>mimetools</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3551" HREF="node133.html#SECTION0012121000000000000000">11.12.1 Additional Methods of Message objects</A>
+</UL> 
+<LI> <A NAME="tex2html3552" HREF="node134.html#SECTION0012130000000000000000">11.13 Standard module <CODE>binhex</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3553" HREF="node135.html#SECTION0012131000000000000000">11.13.1 notes</A>
+</UL> 
+<LI> <A NAME="tex2html3554" HREF="node136.html#SECTION0012140000000000000000">11.14 Standard module <CODE>uu</CODE></A>
+<LI> <A NAME="tex2html3555" HREF="node137.html#SECTION0012150000000000000000">11.15 Built-in Module <CODE>binascii</CODE></A>
+<LI> <A NAME="tex2html3556" HREF="node138.html#SECTION0012160000000000000000">11.16 Standard module <CODE>xdrlib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html3557" HREF="node139.html#SECTION0012161000000000000000">11.16.1 Packer Objects</A>
+<LI> <A NAME="tex2html3558" HREF="node140.html#SECTION0012162000000000000000">11.16.2 Unpacker Objects</A>
+<LI> <A NAME="tex2html3559" HREF="node141.html#SECTION0012163000000000000000">11.16.3 Exceptions</A>
+<LI> <A NAME="tex2html3560" HREF="node142.html#SECTION0012164000000000000000">11.16.4 Supporting Floating Point Data</A>
+</UL>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

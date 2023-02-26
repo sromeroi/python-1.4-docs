@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.1.6 Mapping Types</TITLE>
+<META NAME="description" CONTENT="2.1.6 Mapping Types">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2392" HREF="node14.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2390" HREF="node4.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2384" HREF="node12.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2394" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2395" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2393" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B>Up:</B> <A NAME="tex2html2391" HREF="node4.html">2.1 Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2385" HREF="node12.html">Mutable Sequence Types</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00316000000000000000">2.1.6 Mapping Types</A></H2>
+<P>
+A <I><DFN>mapping</DFN></I> object maps values of one type (the key type) to
+arbitrary objects.  Mappings are mutable objects.  There is currently
+only one standard mapping type, the <I><DFN>dictionary</DFN></I>.  A dictionary's keys are
+almost arbitrary values.  The only types of values not acceptable as
+keys are values containing lists or dictionaries or other mutable
+types that are compared by value rather than by object identity.
+Numeric types used for keys obey the normal rules for numeric
+comparison: if two numbers compare equal (e.g. 1 and 1.0) then they
+can be used interchangeably to index the same dictionary entry.
+<P>
+<A NAME="629">&#160;</A><A NAME="630">&#160;</A>
+<A NAME="631">&#160;</A><A NAME="632">&#160;</A>
+<P>
+Dictionaries are created by placing a comma-separated list of
+<CODE><VAR>key</VAR>:,<VAR>value</VAR></CODE> pairs within braces, for example:
+<CODE>{'jack':,4098, 'sjoerd':,4127}</CODE> or
+<CODE>{4098:,'jack', 4127:,'sjoerd'}</CODE>.
+<P>
+The following operations are defined on mappings (where <VAR>a</VAR> is a
+mapping, <VAR>k</VAR> is a key and <VAR>x</VAR> is an arbitrary object):
+<P>
+<P><P> <IMG WIDTH=469 HEIGHT=181 ALIGN=BOTTOM ALT="tableiii640" SRC="img7.gif"  > <P><P>
+<A NAME="684">&#160;</A><A NAME="685">&#160;</A><A NAME="686">&#160;</A>
+<A NAME="687">&#160;</A><A NAME="688">&#160;</A><A NAME="689">&#160;</A>
+<A NAME="690">&#160;</A><A NAME="690">&#160;</A>
+<P>
+<A NAME="694">&#160;</A>
+<A NAME="695">&#160;</A>
+<P>
+,
+Notes:
+<DL ><DT><STRONG>(1)</STRONG>
+<DD> Raises an exception if <VAR>k</VAR> is not in the map.
+<P>
+<DT><STRONG>(2)</STRONG>
+<DD> Keys and values are listed in random order.
+<P>
+ </DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

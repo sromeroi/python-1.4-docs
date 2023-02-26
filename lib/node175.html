@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.10 Built-in Module mactcp</TITLE>
+<META NAME="description" CONTENT="15.10 Built-in Module mactcp">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4473" HREF="node176.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4471" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4465" HREF="node174.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4475" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4476" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4474" HREF="node176.html">15.10.1 TCP Stream Objects</A>
+<B>Up:</B> <A NAME="tex2html4472" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4466" HREF="node174.html">15.9 Standard module findertools</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0016100000000000000000">15.10 Built-in Module <CODE>mactcp</CODE></A></H1>
+<P>
+This module provides an interface to the Macintosh TCP/IP driver
+MacTCP. There is an accompanying module <CODE>macdnr</CODE> which provides an
+interface to the name-server (allowing you to translate hostnames to
+ip-addresses), a module <CODE>MACTCPconst</CODE> which has symbolic names for
+constants constants used by MacTCP. Since the builtin module
+<CODE>socket</CODE> is also available on the mac it is usually easier to use
+sockets in stead of the mac-specific MacTCP API.
+<P>
+A complete description of the MacTCP interface can be found in the
+Apple MacTCP API documentation.
+<P>
+<DL><DT><STRONG><A NAME="9254">MTU</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the Maximum Transmit Unit (the packet size) of the network
+interface.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9258">IPAddr</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the 32-bit integer IP address of the network interface.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9262">NetMask</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the 32-bit integer network mask of the interface.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9266">TCPCreate</A></STRONG>(<VAR>size</VAR>)
+<DD>
+Create a TCP Stream object. <VAR>size</VAR> is the size of the receive
+buffer, <CODE>4096</CODE> is suggested by various sources.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9272">UDPCreate</A></STRONG>(<VAR>size, port</VAR>)
+<DD>
+Create a UDP stream object. <VAR>size</VAR> is the size of the receive
+buffer (and, hence, the size of the biggest datagram you can receive
+on this port). <VAR>port</VAR> is the UDP port number you want to receive
+datagrams on, a value of zero will make MacTCP select a free port.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4477" HREF="node176.html#SECTION0016101000000000000000">15.10.1 TCP Stream Objects</A>
+<LI> <A NAME="tex2html4478" HREF="node177.html#SECTION0016102000000000000000">15.10.2 TCP Status Objects</A>
+<LI> <A NAME="tex2html4479" HREF="node178.html#SECTION0016103000000000000000">15.10.3 UDP Stream Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

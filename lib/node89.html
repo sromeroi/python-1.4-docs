@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.2 How It Works</TITLE>
+<META NAME="description" CONTENT="9.2 How It Works">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3353" HREF="node90.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3351" HREF="node87.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3347" HREF="node88.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3355" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3356" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3354" HREF="node90.html">10 The Python Profiler</A>
+<B>Up:</B> <A NAME="tex2html3352" HREF="node87.html">9 The Python Debugger</A>
+<B> Previous:</B> <A NAME="tex2html3348" HREF="node88.html">9.1 Debugger Commands</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001020000000000000000">9.2 How It Works</A></H1>
+<P>
+Some changes were made to the interpreter:
+<P>
+<UL><LI> sys.settrace(func) sets the global trace function<LI> there can also a local trace function (see later)
+</UL>
+<P>
+Trace functions have three arguments: (<VAR>frame</VAR>, <VAR>event</VAR>, <VAR>arg</VAR>)
+<P>
+<DL ><DT><STRONG><VAR>frame</VAR></STRONG>
+<DD> is the current stack frame
+<P>
+<DT><STRONG><VAR>event</VAR></STRONG>
+<DD> is a string: <CODE>'call'</CODE>, <CODE>'line'</CODE>, <CODE>'return'</CODE>
+or <CODE>'exception'</CODE>
+<P>
+<DT><STRONG><VAR>arg</VAR></STRONG>
+<DD> is dependent on the event type
+<P>
+ </DL>
+<P>
+A trace function should return a new trace function or None.
+Class methods are accepted (and most useful!) as trace methods.
+<P>
+The events have the following meaning:
+<P>
+<DL ><DT><STRONG><CODE>'call'</CODE></STRONG>
+<DD>
+A function is called (or some other code block entered).  The global
+trace function is called; arg is the argument list to the function;
+the return value specifies the local trace function.
+<P>
+<DT><STRONG><CODE>'line'</CODE></STRONG>
+<DD>
+The interpreter is about to execute a new line of code (sometimes
+multiple line events on one line exist).  The local trace function is
+called; arg in None; the return value specifies the new local trace
+function.
+<P>
+<DT><STRONG><CODE>'return'</CODE></STRONG>
+<DD>
+A function (or other code block) is about to return.  The local trace
+function is called; arg is the value that will be returned.  The trace
+function's return value is ignored.
+<P>
+<DT><STRONG><CODE>'exception'</CODE></STRONG>
+<DD>
+An exception has occurred.  The local trace function is called; arg is
+a triple (exception, value, traceback); the return value specifies the
+new local trace function
+<P>
+ </DL>
+<P>
+Note that as an exception is propagated down the chain of callers, an
+<CODE>'exception'</CODE> event is generated at each level.
+<P>
+Stack frame objects have the following read-only attributes:
+<P>
+<DL ><DT><STRONG>f_code</STRONG>
+<DD>      the code object being executed
+<DT><STRONG>f_lineno</STRONG>
+<DD>    the current line number (<CODE>-1</CODE> for <CODE>'call'</CODE> events)
+<DT><STRONG>f_back</STRONG>
+<DD>      the stack frame of the caller, or None
+<DT><STRONG>f_locals</STRONG>
+<DD>    dictionary containing local name bindings
+<DT><STRONG>f_globals</STRONG>
+<DD>   dictionary containing global name bindings
+<P>
+ </DL>
+<P>
+Code objects have the following read-only attributes:
+<P>
+<DL ><DT><STRONG>co_code</STRONG>
+<DD>     the code string
+<DT><STRONG>co_names</STRONG>
+<DD>    the list of names used by the code
+<DT><STRONG>co_consts</STRONG>
+<DD>   the list of (literal) constants used by the code
+<DT><STRONG>co_filename</STRONG>
+<DD> the filename from which the code was compiled
+<P>
+ </DL><HR><A NAME="tex2html3353" HREF="node90.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3351" HREF="node87.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3347" HREF="node88.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3355" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3356" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3354" HREF="node90.html">10 The Python Profiler</A>
+<B>Up:</B> <A NAME="tex2html3352" HREF="node87.html">9 The Python Debugger</A>
+<B> Previous:</B> <A NAME="tex2html3348" HREF="node88.html">9.1 Debugger Commands</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

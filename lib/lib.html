@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Python Library Reference</TITLE>
+<META NAME="description" CONTENT="Python Library Reference">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1766" HREF="node1.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A>
+ <IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif_gr.gif" BORDER=0> <IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif_gr.gif" BORDER=0>
+ <A NAME="tex2html1768" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>
+ <A NAME="tex2html1769" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A>
+<A NAME="tex2html1769" HREF="../index.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="TOP" SRC="../icons/top_motif.gif" BORDER=0></A> <BR>
+<
+ <B> Next:</B> <A NAME="tex2html1767" HREF="node1.html">Contents</A>
+<BR><HR><P>
+<P>
+<H1 ALIGN=CENTER>Python Library Reference</H1>
+<P ALIGN=CENTER><STRONG>
+	Guido van Rossum <BR> 
+	Corporation for National Research Initiatives (CNRI) <BR> 
+	1895 Preston White Drive, Reston, Va 20191, USA <BR> 
+	E-mail: <TT>guido@CNRI.Reston.Va.US</TT>, <TT>guido@python.org</TT>
+</STRONG></P><P>
+<P ALIGN=CENTER><STRONG>October 25, 1996 <BR> Release 1.4</STRONG></P><P>
+<P>
+Copyright &#169; 1991-1995 by Stichting Mathematisch Centrum,
+Amsterdam, The Netherlands.
+<P>
+<DIV ALIGN=CENTER><P ALIGN=CENTER>All Rights Reserved
+</P></DIV>
+<P>
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation, and that the names of Stichting Mathematisch
+Centrum or CWI or Corporation for National Research Initiatives or
+CNRI not be used in advertising or publicity pertaining to
+distribution of the software without specific, written prior
+permission.
+<P>
+While CWI is the initial source for this software, a modified version
+is made available by the Corporation for National Research Initiatives
+(CNRI) at the Internet address ftp://ftp.python.org.
+<P>
+STICHTING MATHEMATISCH CENTRUM AND CNRI DISCLAIM ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL STICHTING MATHEMATISCH
+CENTRUM OR CNRI BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+<P>
+<H3 CLASS=ABSTRACT>Abstract:</H3>
+<P CLASS=ABSTRACT>
+Python is an extensible, interpreted, object-oriented programming
+language.  It supports a wide range of applications, from simple text
+processing scripts to interactive WWW browsers.
+<P>
+While the <EM>Python Reference Manual</EM> describes the exact syntax and
+semantics of the language, it does not describe the standard library
+that is distributed with the language, and which greatly enhances its
+immediate usability.  This library contains built-in modules (written
+in C) that provide access to system functionality such as file I/O
+that would otherwise be inaccessible to Python programmers, as well as
+modules written in Python that provide standardized solutions for many
+problems that occur in everyday programming.  Some of these modules
+are explicitly designed to encourage and enhance the portability of
+Python programs.
+<P>
+This library reference manual documents Python's standard library, as
+well as many optional library modules (which may or may not be
+available, depending on whether the underlying platform supports them
+and on the configuration choices made at compile time).  It also
+documents the standard types of the language and its built-in
+functions and exceptions, many of which are not or incompletely
+documented in the Reference Manual.
+<P>
+This manual assumes basic knowledge about the Python language.  For an
+informal introduction to Python, see the <EM>Python Tutorial</EM>; the
+Python Reference Manual remains the highest authority on syntactic and
+semantic questions.  Finally, the manual entitled <EM>Extending and
+Embedding the Python Interpreter</EM> describes how to add new extensions
+to Python and how to embed it in other applications.
+<P>
+</P><P>
+<P>
+<P>
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html1770" HREF="node1.html#SECTION00100000000000000000">Contents</A>
+<LI> <A NAME="tex2html1771" HREF="node2.html#SECTION00200000000000000000">1 Introduction</A>
+<LI> <A NAME="tex2html1772" HREF="node3.html#SECTION00300000000000000000">2 Built-in Types, Exceptions and Functions</A>
+<UL> 
+<LI> <A NAME="tex2html1773" HREF="node4.html#SECTION00310000000000000000">2.1 Built-in Types</A>
+<UL> 
+<LI> <A NAME="tex2html1774" HREF="node5.html#SECTION00311000000000000000">2.1.1 Truth Value Testing</A>
+<LI> <A NAME="tex2html1775" HREF="node6.html#SECTION00312000000000000000">2.1.2 Boolean Operations</A>
+<LI> <A NAME="tex2html1776" HREF="node7.html#SECTION00313000000000000000">2.1.3 Comparisons</A>
+<LI> <A NAME="tex2html1777" HREF="node8.html#SECTION00314000000000000000">2.1.4 Numeric Types</A>
+<LI> <A NAME="tex2html1778" HREF="node10.html#SECTION00315000000000000000">2.1.5 Sequence Types</A>
+<LI> <A NAME="tex2html1779" HREF="node13.html#SECTION00316000000000000000">2.1.6 Mapping Types</A>
+<LI> <A NAME="tex2html1780" HREF="node14.html#SECTION00317000000000000000">2.1.7 Other Built-in Types</A>
+<LI> <A NAME="tex2html1781" HREF="node24.html#SECTION00318000000000000000">2.1.8 Special Attributes</A>
+</UL> 
+<LI> <A NAME="tex2html1782" HREF="node25.html#SECTION00320000000000000000">2.2 Built-in Exceptions</A>
+<LI> <A NAME="tex2html1783" HREF="node26.html#SECTION00330000000000000000">2.3 Built-in Functions</A>
+</UL> 
+<LI> <A NAME="tex2html1784" HREF="node27.html#SECTION00400000000000000000">3 Python Services</A>
+<UL> 
+<LI> <A NAME="tex2html1785" HREF="node28.html#SECTION00410000000000000000">3.1 Built-in Module <CODE>sys</CODE></A>
+<LI> <A NAME="tex2html1786" HREF="node29.html#SECTION00420000000000000000">3.2 Standard Module <CODE>types</CODE></A>
+<LI> <A NAME="tex2html1787" HREF="node30.html#SECTION00430000000000000000">3.3 Standard Module <CODE>traceback</CODE></A>
+<LI> <A NAME="tex2html1788" HREF="node31.html#SECTION00440000000000000000">3.4 Standard Module <CODE>pickle</CODE></A>
+<LI> <A NAME="tex2html1789" HREF="node32.html#SECTION00450000000000000000">3.5 Standard Module <CODE>shelve</CODE></A>
+<LI> <A NAME="tex2html1790" HREF="node33.html#SECTION00460000000000000000">3.6 Standard Module <CODE>copy</CODE></A>
+<LI> <A NAME="tex2html1791" HREF="node34.html#SECTION00470000000000000000">3.7 Built-in Module <CODE>marshal</CODE></A>
+<LI> <A NAME="tex2html1792" HREF="node35.html#SECTION00480000000000000000">3.8 Built-in Module <CODE>imp</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1793" HREF="node36.html#SECTION00481000000000000000">3.8.1 Examples</A>
+</UL> 
+<LI> <A NAME="tex2html1794" HREF="node37.html#SECTION00490000000000000000">3.9 Built-in Module <CODE>parser</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1795" HREF="node38.html#SECTION00491000000000000000">3.9.1 Creating AST Objects</A>
+<LI> <A NAME="tex2html1796" HREF="node39.html#SECTION00492000000000000000">3.9.2 Converting AST Objects</A>
+<LI> <A NAME="tex2html1797" HREF="node40.html#SECTION00493000000000000000">3.9.3 Queries on AST Objects</A>
+<LI> <A NAME="tex2html1798" HREF="node41.html#SECTION00494000000000000000">3.9.4 Exceptions and Error Handling</A>
+<LI> <A NAME="tex2html1799" HREF="node42.html#SECTION00495000000000000000">3.9.5 AST Objects</A>
+<LI> <A NAME="tex2html1800" HREF="node43.html#SECTION00496000000000000000">3.9.6 Examples</A>
+</UL> 
+<LI> <A NAME="tex2html1801" HREF="node46.html#SECTION004100000000000000000">3.10 Built-in Module <CODE>__builtin__</CODE></A>
+<LI> <A NAME="tex2html1802" HREF="node47.html#SECTION004110000000000000000">3.11 Built-in Module <CODE>__main__</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1803" HREF="node48.html#SECTION00500000000000000000">4 String Services</A>
+<UL> 
+<LI> <A NAME="tex2html1804" HREF="node49.html#SECTION00510000000000000000">4.1 Standard Module <CODE>string</CODE></A>
+<LI> <A NAME="tex2html1805" HREF="node50.html#SECTION00520000000000000000">4.2 Built-in Module <CODE>regex</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1806" HREF="node51.html#SECTION00521000000000000000">4.2.1 Regular Expressions</A>
+<LI> <A NAME="tex2html1807" HREF="node52.html#SECTION00522000000000000000">4.2.2 Module Contents</A>
+</UL> 
+<LI> <A NAME="tex2html1808" HREF="node53.html#SECTION00530000000000000000">4.3 Standard Module <CODE>regsub</CODE></A>
+<LI> <A NAME="tex2html1809" HREF="node54.html#SECTION00540000000000000000">4.4 Built-in Module <CODE>struct</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1810" HREF="node55.html#SECTION00600000000000000000">5 Miscellaneous Services</A>
+<UL> 
+<LI> <A NAME="tex2html1811" HREF="node56.html#SECTION00610000000000000000">5.1 Built-in Module <CODE>math</CODE></A>
+<LI> <A NAME="tex2html1812" HREF="node57.html#SECTION00620000000000000000">5.2 Standard Module <CODE>rand</CODE></A>
+<LI> <A NAME="tex2html1813" HREF="node58.html#SECTION00630000000000000000">5.3 Standard Module <CODE>whrandom</CODE></A>
+<LI> <A NAME="tex2html1814" HREF="node59.html#SECTION00640000000000000000">5.4 Built-in Module <CODE>array</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1815" HREF="node60.html#SECTION00700000000000000000">6 Generic Operating System Services</A>
+<UL> 
+<LI> <A NAME="tex2html1816" HREF="node61.html#SECTION00710000000000000000">6.1 Standard Module <CODE>os</CODE></A>
+<LI> <A NAME="tex2html1817" HREF="node62.html#SECTION00720000000000000000">6.2 Built-in Module <CODE>time</CODE></A>
+<LI> <A NAME="tex2html1818" HREF="node63.html#SECTION00730000000000000000">6.3 Standard Module <CODE>getopt</CODE></A>
+<LI> <A NAME="tex2html1819" HREF="node64.html#SECTION00740000000000000000">6.4 Standard Module <CODE>tempfile</CODE></A>
+<LI> <A NAME="tex2html1820" HREF="node65.html#SECTION00750000000000000000">6.5 Standard Module <CODE>errno</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1821" HREF="node66.html#SECTION00800000000000000000">7 Optional Operating System Services</A>
+<UL> 
+<LI> <A NAME="tex2html1822" HREF="node67.html#SECTION00810000000000000000">7.1 Built-in Module <CODE>signal</CODE></A>
+<LI> <A NAME="tex2html1823" HREF="node68.html#SECTION00820000000000000000">7.2 Built-in Module <CODE>socket</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1824" HREF="node69.html#SECTION00821000000000000000">7.2.1 Socket Objects</A>
+<LI> <A NAME="tex2html1825" HREF="node70.html#SECTION00822000000000000000">7.2.2 Example</A>
+</UL> 
+<LI> <A NAME="tex2html1826" HREF="node71.html#SECTION00830000000000000000">7.3 Built-in Module <CODE>select</CODE></A>
+<LI> <A NAME="tex2html1827" HREF="node72.html#SECTION00840000000000000000">7.4 Built-in Module <CODE>thread</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1828" HREF="node73.html#SECTION00900000000000000000">8 UNIX Specific Services</A>
+<UL> 
+<LI> <A NAME="tex2html1829" HREF="node74.html#SECTION00910000000000000000">8.1 Built-in Module <CODE>posix</CODE></A>
+<LI> <A NAME="tex2html1830" HREF="node75.html#SECTION00920000000000000000">8.2 Standard Module <CODE>posixpath</CODE></A>
+<LI> <A NAME="tex2html1831" HREF="node76.html#SECTION00930000000000000000">8.3 Built-in Module <CODE>pwd</CODE></A>
+<LI> <A NAME="tex2html1832" HREF="node77.html#SECTION00940000000000000000">8.4 Built-in Module <CODE>grp</CODE></A>
+<LI> <A NAME="tex2html1833" HREF="node78.html#SECTION00950000000000000000">8.5 Built-in module <TT>crypt</TT></A>
+<LI> <A NAME="tex2html1834" HREF="node79.html#SECTION00960000000000000000">8.6 Built-in Module <CODE>dbm</CODE></A>
+<LI> <A NAME="tex2html1835" HREF="node80.html#SECTION00970000000000000000">8.7 Built-in Module <CODE>gdbm</CODE></A>
+<LI> <A NAME="tex2html1836" HREF="node81.html#SECTION00980000000000000000">8.8 Built-in Module <CODE>termios</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1837" HREF="node82.html#SECTION00981000000000000000">8.8.1 Example</A>
+</UL> 
+<LI> <A NAME="tex2html1838" HREF="node83.html#SECTION00990000000000000000">8.9 Standard Module <CODE>TERMIOS</CODE></A>
+<LI> <A NAME="tex2html1839" HREF="node84.html#SECTION009100000000000000000">8.10 Built-in Module <CODE>fcntl</CODE></A>
+<LI> <A NAME="tex2html1840" HREF="node85.html#SECTION009110000000000000000">8.11 Standard Module <CODE>posixfile</CODE></A>
+<LI> <A NAME="tex2html1841" HREF="node86.html#SECTION009120000000000000000">8.12 Built-in Module <CODE>syslog</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1842" HREF="node87.html#SECTION001000000000000000000">9 The Python Debugger</A>
+<UL> 
+<LI> <A NAME="tex2html1843" HREF="node88.html#SECTION001010000000000000000">9.1 Debugger Commands</A>
+<LI> <A NAME="tex2html1844" HREF="node89.html#SECTION001020000000000000000">9.2 How It Works</A>
+</UL> 
+<LI> <A NAME="tex2html1845" HREF="node90.html#SECTION001100000000000000000">10 The Python Profiler</A>
+<UL> 
+<LI> <A NAME="tex2html1846" HREF="node91.html#SECTION001110000000000000000">10.1 Introduction to the profiler</A>
+<LI> <A NAME="tex2html1847" HREF="node92.html#SECTION001120000000000000000">10.2 How Is This Profiler Different From The Old Profiler?</A>
+<LI> <A NAME="tex2html1848" HREF="node93.html#SECTION001130000000000000000">10.3 Instant Users Manual</A>
+<LI> <A NAME="tex2html1849" HREF="node94.html#SECTION001140000000000000000">10.4 What Is Deterministic Profiling?</A>
+<LI> <A NAME="tex2html1850" HREF="node95.html#SECTION001150000000000000000">10.5 Reference Manual</A>
+<UL> 
+<LI> <A NAME="tex2html1851" HREF="node96.html#SECTION001151000000000000000">10.5.1 The <CODE>Stats</CODE> Class</A>
+</UL> 
+<LI> <A NAME="tex2html1852" HREF="node97.html#SECTION001160000000000000000">10.6 Limitations</A>
+<LI> <A NAME="tex2html1853" HREF="node98.html#SECTION001170000000000000000">10.7 Calibration</A>
+<LI> <A NAME="tex2html1854" HREF="node99.html#SECTION001180000000000000000">10.8 Extensions - Deriving Better Profilers</A>
+<UL> 
+<LI> <A NAME="tex2html1855" HREF="node100.html#SECTION001181000000000000000">10.8.1 OldProfile Class</A>
+<LI> <A NAME="tex2html1856" HREF="node101.html#SECTION001182000000000000000">10.8.2 HotProfile Class</A>
+</UL> 
+</UL> 
+<LI> <A NAME="tex2html1857" HREF="node102.html#SECTION001200000000000000000">11 Internet and WWW Services</A>
+<UL> 
+<LI> <A NAME="tex2html1858" HREF="node103.html#SECTION001210000000000000000">11.1 Standard Module <CODE>cgi</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1859" HREF="node104.html#SECTION001211000000000000000">11.1.1 Introduction</A>
+<LI> <A NAME="tex2html1860" HREF="node105.html#SECTION001212000000000000000">11.1.2 Using the cgi module</A>
+<LI> <A NAME="tex2html1861" HREF="node106.html#SECTION001213000000000000000">11.1.3 Old classes</A>
+<LI> <A NAME="tex2html1862" HREF="node107.html#SECTION001214000000000000000">11.1.4 Functions</A>
+<LI> <A NAME="tex2html1863" HREF="node108.html#SECTION001215000000000000000">11.1.5 Caring about security</A>
+<LI> <A NAME="tex2html1864" HREF="node109.html#SECTION001216000000000000000">11.1.6 Installing your CGI script on a Unix system</A>
+<LI> <A NAME="tex2html1865" HREF="node110.html#SECTION001217000000000000000">11.1.7 Testing your CGI script</A>
+<LI> <A NAME="tex2html1866" HREF="node111.html#SECTION001218000000000000000">11.1.8 Debugging CGI scripts</A>
+<LI> <A NAME="tex2html1867" HREF="node112.html#SECTION001219000000000000000">11.1.9 Common problems and solutions</A>
+</UL> 
+<LI> <A NAME="tex2html1868" HREF="node113.html#SECTION001220000000000000000">11.2 Standard Module <CODE>urllib</CODE></A>
+<LI> <A NAME="tex2html1869" HREF="node114.html#SECTION001230000000000000000">11.3 Standard Module <CODE>httplib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1870" HREF="node115.html#SECTION001231000000000000000">11.3.1 HTTP Objects</A>
+<LI> <A NAME="tex2html1871" HREF="node116.html#SECTION001232000000000000000">11.3.2 Example</A>
+</UL> 
+<LI> <A NAME="tex2html1872" HREF="node117.html#SECTION001240000000000000000">11.4 Standard Module <CODE>ftplib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1873" HREF="node118.html#SECTION001241000000000000000">11.4.1 FTP Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1874" HREF="node119.html#SECTION001250000000000000000">11.5 Standard Module <CODE>gopherlib</CODE></A>
+<LI> <A NAME="tex2html1875" HREF="node120.html#SECTION001260000000000000000">11.6 Standard Module <CODE>nntplib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1876" HREF="node121.html#SECTION001261000000000000000">11.6.1 NNTP Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1877" HREF="node122.html#SECTION001270000000000000000">11.7 Standard Module <CODE>urlparse</CODE></A>
+<LI> <A NAME="tex2html1878" HREF="node123.html#SECTION001280000000000000000">11.8 Standard Module <CODE>sgmllib</CODE></A>
+<LI> <A NAME="tex2html1879" HREF="node124.html#SECTION001290000000000000000">11.9 Standard Module <CODE>htmllib</CODE></A>
+<LI> <A NAME="tex2html1880" HREF="node125.html#SECTION0012100000000000000000">11.10 Standard Module <CODE>formatter</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1881" HREF="node126.html#SECTION0012101000000000000000">11.10.1 The Formatter Interface</A>
+<LI> <A NAME="tex2html1882" HREF="node127.html#SECTION0012102000000000000000">11.10.2 Formatter Implementations</A>
+<LI> <A NAME="tex2html1883" HREF="node128.html#SECTION0012103000000000000000">11.10.3 The Writer Interface</A>
+<LI> <A NAME="tex2html1884" HREF="node129.html#SECTION0012104000000000000000">11.10.4 Writer Implementations</A>
+</UL> 
+<LI> <A NAME="tex2html1885" HREF="node130.html#SECTION0012110000000000000000">11.11 Standard Module <CODE>rfc822</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1886" HREF="node131.html#SECTION0012111000000000000000">11.11.1 Message Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1887" HREF="node132.html#SECTION0012120000000000000000">11.12 Standard Module <CODE>mimetools</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1888" HREF="node133.html#SECTION0012121000000000000000">11.12.1 Additional Methods of Message objects</A>
+</UL> 
+<LI> <A NAME="tex2html1889" HREF="node134.html#SECTION0012130000000000000000">11.13 Standard module <CODE>binhex</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1890" HREF="node135.html#SECTION0012131000000000000000">11.13.1 notes</A>
+</UL> 
+<LI> <A NAME="tex2html1891" HREF="node136.html#SECTION0012140000000000000000">11.14 Standard module <CODE>uu</CODE></A>
+<LI> <A NAME="tex2html1892" HREF="node137.html#SECTION0012150000000000000000">11.15 Built-in Module <CODE>binascii</CODE></A>
+<LI> <A NAME="tex2html1893" HREF="node138.html#SECTION0012160000000000000000">11.16 Standard module <CODE>xdrlib</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1894" HREF="node139.html#SECTION0012161000000000000000">11.16.1 Packer Objects</A>
+<LI> <A NAME="tex2html1895" HREF="node140.html#SECTION0012162000000000000000">11.16.2 Unpacker Objects</A>
+<LI> <A NAME="tex2html1896" HREF="node141.html#SECTION0012163000000000000000">11.16.3 Exceptions</A>
+<LI> <A NAME="tex2html1897" HREF="node142.html#SECTION0012164000000000000000">11.16.4 Supporting Floating Point Data</A>
+</UL> 
+</UL> 
+<LI> <A NAME="tex2html1898" HREF="node143.html#SECTION001300000000000000000">12 Restricted Execution</A>
+<UL> 
+<LI> <A NAME="tex2html1899" HREF="node144.html#SECTION001310000000000000000">12.1 Standard Module <CODE>rexec</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1900" HREF="node145.html#SECTION001311000000000000000">12.1.1 An example</A>
+</UL> 
+<LI> <A NAME="tex2html1901" HREF="node146.html#SECTION001320000000000000000">12.2 Standard Module <CODE>Bastion</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1902" HREF="node147.html#SECTION001400000000000000000">13 Multimedia Services</A>
+<UL> 
+<LI> <A NAME="tex2html1903" HREF="node148.html#SECTION001410000000000000000">13.1 Built-in Module <CODE>audioop</CODE></A>
+<LI> <A NAME="tex2html1904" HREF="node149.html#SECTION001420000000000000000">13.2 Built-in Module <CODE>imageop</CODE></A>
+<LI> <A NAME="tex2html1905" HREF="node150.html#SECTION001430000000000000000">13.3 Standard Module <CODE>aifc</CODE></A>
+<LI> <A NAME="tex2html1906" HREF="node151.html#SECTION001440000000000000000">13.4 Built-in Module <CODE>jpeg</CODE></A>
+<LI> <A NAME="tex2html1907" HREF="node152.html#SECTION001450000000000000000">13.5 Built-in Module <CODE>rgbimg</CODE></A>
+<LI> <A NAME="tex2html1908" HREF="node153.html#SECTION001460000000000000000">13.6 Standard module <CODE>imghdr</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1909" HREF="node154.html#SECTION001500000000000000000">14 Cryptographic Services</A>
+<UL> 
+<LI> <A NAME="tex2html1910" HREF="node155.html#SECTION001510000000000000000">14.1 Built-in Module <CODE>md5</CODE></A>
+<LI> <A NAME="tex2html1911" HREF="node156.html#SECTION001520000000000000000">14.2 Built-in Module <CODE>mpz</CODE></A>
+<LI> <A NAME="tex2html1912" HREF="node157.html#SECTION001530000000000000000">14.3 Built-in Module <CODE>rotor</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1913" HREF="node158.html#SECTION001600000000000000000">15 Macintosh Specific Services</A>
+<UL> 
+<LI> <A NAME="tex2html1914" HREF="node159.html#SECTION001610000000000000000">15.1 Built-in Module <CODE>mac</CODE></A>
+<LI> <A NAME="tex2html1915" HREF="node160.html#SECTION001620000000000000000">15.2 Standard Module <CODE>macpath</CODE></A>
+<LI> <A NAME="tex2html1916" HREF="node161.html#SECTION001630000000000000000">15.3 Built-in Module <CODE>ctb</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1917" HREF="node162.html#SECTION001631000000000000000">15.3.1 connection object</A>
+</UL> 
+<LI> <A NAME="tex2html1918" HREF="node163.html#SECTION001640000000000000000">15.4 Built-in Module <CODE>macconsole</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1919" HREF="node164.html#SECTION001641000000000000000">15.4.1 macconsole options object</A>
+<LI> <A NAME="tex2html1920" HREF="node165.html#SECTION001642000000000000000">15.4.2 console window object</A>
+</UL> 
+<LI> <A NAME="tex2html1921" HREF="node166.html#SECTION001650000000000000000">15.5 Built-in Module <CODE>macdnr</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1922" HREF="node167.html#SECTION001651000000000000000">15.5.1 dnr result object</A>
+</UL> 
+<LI> <A NAME="tex2html1923" HREF="node168.html#SECTION001660000000000000000">15.6 Built-in Module <CODE>macfs</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1924" HREF="node169.html#SECTION001661000000000000000">15.6.1 FSSpec objects</A>
+<LI> <A NAME="tex2html1925" HREF="node170.html#SECTION001662000000000000000">15.6.2 alias objects</A>
+<LI> <A NAME="tex2html1926" HREF="node171.html#SECTION001663000000000000000">15.6.3 FInfo objects</A>
+</UL> 
+<LI> <A NAME="tex2html1927" HREF="node172.html#SECTION001670000000000000000">15.7 Built-in Module <CODE>MacOS</CODE></A>
+<LI> <A NAME="tex2html1928" HREF="node173.html#SECTION001680000000000000000">15.8 Standard module <CODE>macostools</CODE></A>
+<LI> <A NAME="tex2html1929" HREF="node174.html#SECTION001690000000000000000">15.9 Standard module <CODE>findertools</CODE></A>
+<LI> <A NAME="tex2html1930" HREF="node175.html#SECTION0016100000000000000000">15.10 Built-in Module <CODE>mactcp</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1931" HREF="node176.html#SECTION0016101000000000000000">15.10.1 TCP Stream Objects</A>
+<LI> <A NAME="tex2html1932" HREF="node177.html#SECTION0016102000000000000000">15.10.2 TCP Status Objects</A>
+<LI> <A NAME="tex2html1933" HREF="node178.html#SECTION0016103000000000000000">15.10.3 UDP Stream Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1934" HREF="node179.html#SECTION0016110000000000000000">15.11 Built-in Module <CODE>macspeech</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1935" HREF="node180.html#SECTION0016111000000000000000">15.11.1 voice objects</A>
+<LI> <A NAME="tex2html1936" HREF="node181.html#SECTION0016112000000000000000">15.11.2 speech channel objects</A>
+</UL> 
+<LI> <A NAME="tex2html1937" HREF="node182.html#SECTION0016120000000000000000">15.12 Standard module <CODE>EasyDialogs</CODE></A>
+<LI> <A NAME="tex2html1938" HREF="node183.html#SECTION0016130000000000000000">15.13 Standard module <CODE>FrameWork</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1939" HREF="node184.html#SECTION0016131000000000000000">15.13.1 Application objects</A>
+<LI> <A NAME="tex2html1940" HREF="node185.html#SECTION0016132000000000000000">15.13.2 Window Objects</A>
+<LI> <A NAME="tex2html1941" HREF="node186.html#SECTION0016133000000000000000">15.13.3 ControlsWindow Object</A>
+<LI> <A NAME="tex2html1942" HREF="node187.html#SECTION0016134000000000000000">15.13.4 ScrolledWindow Object</A>
+<LI> <A NAME="tex2html1943" HREF="node188.html#SECTION0016135000000000000000">15.13.5 DialogWindow Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1944" HREF="node189.html#SECTION0016140000000000000000">15.14 Standard module <CODE>MiniAEFrame</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1945" HREF="node190.html#SECTION0016141000000000000000">15.14.1 AEServer Objects</A>
+</UL> 
+</UL> 
+<LI> <A NAME="tex2html1946" HREF="node191.html#SECTION001700000000000000000">16 Standard Windowing Interface</A>
+<UL> 
+<LI> <A NAME="tex2html1947" HREF="node192.html#SECTION001710000000000000000">16.1 Built-in Module <CODE>stdwin</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1948" HREF="node193.html#SECTION001711000000000000000">16.1.1 Functions Defined in Module <CODE>stdwin</CODE></A>
+<LI> <A NAME="tex2html1949" HREF="node194.html#SECTION001712000000000000000">16.1.2 Window Objects</A>
+<LI> <A NAME="tex2html1950" HREF="node195.html#SECTION001713000000000000000">16.1.3 Drawing Objects</A>
+<LI> <A NAME="tex2html1951" HREF="node196.html#SECTION001714000000000000000">16.1.4 Menu Objects</A>
+<LI> <A NAME="tex2html1952" HREF="node197.html#SECTION001715000000000000000">16.1.5 Bitmap Objects</A>
+<LI> <A NAME="tex2html1953" HREF="node198.html#SECTION001716000000000000000">16.1.6 Text-edit Objects</A>
+<LI> <A NAME="tex2html1954" HREF="node199.html#SECTION001717000000000000000">16.1.7 Example</A>
+</UL> 
+<LI> <A NAME="tex2html1955" HREF="node200.html#SECTION001720000000000000000">16.2 Standard Module <CODE>stdwinevents</CODE></A>
+<LI> <A NAME="tex2html1956" HREF="node201.html#SECTION001730000000000000000">16.3 Standard Module <CODE>rect</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1957" HREF="node202.html#SECTION001800000000000000000">17 SGI IRIX Specific Services</A>
+<UL> 
+<LI> <A NAME="tex2html1958" HREF="node203.html#SECTION001810000000000000000">17.1 Built-in Module <CODE>al</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1959" HREF="node204.html#SECTION001811000000000000000">17.1.1 Configuration Objects</A>
+<LI> <A NAME="tex2html1960" HREF="node205.html#SECTION001812000000000000000">17.1.2 Port Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1961" HREF="node206.html#SECTION001820000000000000000">17.2 Standard Module <CODE>AL</CODE></A>
+<LI> <A NAME="tex2html1962" HREF="node207.html#SECTION001830000000000000000">17.3 Built-in Module <CODE>cd</CODE></A>
+<LI> <A NAME="tex2html1963" HREF="node208.html#SECTION001840000000000000000">17.4 Built-in Module <CODE>fl</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1964" HREF="node209.html#SECTION001841000000000000000">17.4.1 Functions Defined in Module <CODE>fl</CODE></A>
+<LI> <A NAME="tex2html1965" HREF="node210.html#SECTION001842000000000000000">17.4.2 Form Objects</A>
+<LI> <A NAME="tex2html1966" HREF="node211.html#SECTION001843000000000000000">17.4.3 FORMS Objects</A>
+</UL> 
+<LI> <A NAME="tex2html1967" HREF="node212.html#SECTION001850000000000000000">17.5 Standard Module <CODE>FL</CODE></A>
+<LI> <A NAME="tex2html1968" HREF="node213.html#SECTION001860000000000000000">17.6 Standard Module <CODE>flp</CODE></A>
+<LI> <A NAME="tex2html1969" HREF="node214.html#SECTION001870000000000000000">17.7 Built-in Module <CODE>fm</CODE></A>
+<LI> <A NAME="tex2html1970" HREF="node215.html#SECTION001880000000000000000">17.8 Built-in Module <CODE>gl</CODE></A>
+<LI> <A NAME="tex2html1971" HREF="node216.html#SECTION001890000000000000000">17.9 Standard Modules <CODE>GL</CODE> and <CODE>DEVICE</CODE></A>
+<LI> <A NAME="tex2html1972" HREF="node217.html#SECTION0018100000000000000000">17.10 Built-in Module <CODE>imgfile</CODE></A>
+</UL> 
+<LI> <A NAME="tex2html1973" HREF="node218.html#SECTION001900000000000000000">18 SunOS Specific Services</A>
+<UL> 
+<LI> <A NAME="tex2html1974" HREF="node219.html#SECTION001910000000000000000">18.1 Built-in Module <CODE>sunaudiodev</CODE></A>
+<UL> 
+<LI> <A NAME="tex2html1975" HREF="node220.html#SECTION001911000000000000000">18.1.1 Audio Device Objects</A>
+</UL> 
+</UL> 
+<LI> <A NAME="tex2html1976" HREF="node221.html#SECTION002000000000000000000">Index</A>
+<LI> <A NAME="tex2html1977" HREF="node222.html#SECTION002100000000000000000">  About this document ... </A>
+</UL>
+<HR><A NAME="tex2html1766" HREF="node1.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif_gr.gif" BORDER=0> <IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif_gr.gif" BORDER=0> <A NAME="tex2html1768" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html1769" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html1767" HREF="node1.html">Contents</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

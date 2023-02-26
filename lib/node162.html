@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.3.1 connection object</TITLE>
+<META NAME="description" CONTENT="15.3.1 connection object">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4317" HREF="node163.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4315" HREF="node161.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4311" HREF="node161.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4319" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4320" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4318" HREF="node163.html">15.4 Built-in Module macconsole</A>
+<B>Up:</B> <A NAME="tex2html4316" HREF="node161.html">15.3 Built-in Module ctb</A>
+<B> Previous:</B> <A NAME="tex2html4312" HREF="node161.html">15.3 Built-in Module ctb</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001631000000000000000">15.3.1 connection object</A></H2>
+<P>
+For all connection methods that take a <VAR>timeout</VAR> argument, a value
+of <CODE>-1</CODE> is indefinite, meaning that the command runs to completion.
+<P>
+<DL><DT><STRONG><A NAME="">callback</A></STRONG>
+<DD>
+If this member is set to a value other than <CODE>None</CODE> it should point
+to a function accepting a single argument (the connection
+object). This will make all connection object methods work
+asynchronously, with the callback routine being called upon
+completion.
+<P>
+<EM>Note:</EM> for reasons beyond my understanding the callback routine
+is currently never called. You are advised against using asynchronous
+calls for the time being.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8642">Open</A></STRONG>(<VAR>timeout</VAR>)
+<DD>
+Open an outgoing connection, waiting at most <VAR>timeout</VAR> seconds for
+the connection to be established.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8647">Listen</A></STRONG>(<VAR>timeout</VAR>)
+<DD>
+Wait for an incoming connection. Stop waiting after <VAR>timeout</VAR>
+seconds. This call is only meaningful to some tools.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8652">accept</A></STRONG>(<VAR>yesno</VAR>)
+<DD>
+Accept (when <VAR>yesno</VAR> is non-zero) or reject an incoming call after
+<VAR>Listen</VAR> returned.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8658">Close</A></STRONG>(<VAR>timeout, now</VAR>)
+<DD>
+Close a connection. When <VAR>now</VAR> is zero, the close is orderly
+(i.e. outstanding output is flushed, etc.) with a timeout of
+<VAR>timeout</VAR> seconds. When <VAR>now</VAR> is non-zero the close is
+immediate, discarding output.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8665">Read</A></STRONG>(<VAR>len, chan, timeout</VAR>)
+<DD>
+Read <VAR>len</VAR> bytes, or until <VAR>timeout</VAR> seconds have passed, from
+the channel <VAR>chan</VAR> (which is one of <VAR>cmData</VAR>, <VAR>cmCntl</VAR> or
+<VAR>cmAttn</VAR>). Return a 2-tuple: the data read and the end-of-message
+flag.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8675">Write</A></STRONG>(<VAR>buf, chan, timeout, eom</VAR>)
+<DD>
+Write <VAR>buf</VAR> to channel <VAR>chan</VAR>, aborting after <VAR>timeout</VAR>
+seconds. When <VAR>eom</VAR> has the value <VAR>cmFlagsEOM</VAR> an
+end-of-message indicator will be written after the data (if this
+concept has a meaning for this communication tool). The method returns
+the number of bytes written.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8684">Status</A></STRONG>(<VAR></VAR>)
+<DD>
+Return connection status as the 2-tuple <CODE>(<VAR>sizes</VAR>,
+<VAR>flags</VAR>)</CODE>. <VAR>sizes</VAR> is a 6-tuple giving the actual buffer sizes used
+(see <VAR>CMNew</VAR>), <VAR>flags</VAR> is a set of bits describing the state
+of the connection.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8693">GetConfig</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the configuration string of the communication tool. These
+configuration strings are tool-dependent, but usually easily parsed
+and modified.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8697">SetConfig</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Set the configuration string for the tool. The strings are parsed
+left-to-right, with later values taking precedence. This means
+individual configuration parameters can be modified by simply appending
+something like <CODE>'baud 4800'</CODE> to the end of the string returned by
+<VAR>GetConfig</VAR> and passing that to this method. The method returns
+the number of characters actually parsed by the tool before it
+encountered an error (or completed successfully).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8703">Choose</A></STRONG>(<VAR></VAR>)
+<DD>
+Present the user with a dialog to choose a communication tool and
+configure it. If there is an outstanding connection some choices (like
+selecting a different tool) may cause the connection to be
+aborted. The return value (one of the <VAR>choose*</VAR> constants) will
+indicate this.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8708">Idle</A></STRONG>(<VAR></VAR>)
+<DD>
+Give the tool a chance to use the processor. You should call this
+method regularly.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8712">Abort</A></STRONG>(<VAR></VAR>)
+<DD>
+Abort an outstanding asynchronous <VAR>Open</VAR> or <VAR>Listen</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8718">Reset</A></STRONG>(<VAR></VAR>)
+<DD>
+Reset a connection. Exact meaning depends on the tool.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8722">Break</A></STRONG>(<VAR>length</VAR>)
+<DD>
+Send a break. Whether this means anything, what it means and
+interpretation of the <VAR>length</VAR> parameter depend on the tool in
+use.
+<P>
+</DL><HR><A NAME="tex2html4317" HREF="node163.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4315" HREF="node161.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4311" HREF="node161.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4319" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4320" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4318" HREF="node163.html">15.4 Built-in Module macconsole</A>
+<B>Up:</B> <A NAME="tex2html4316" HREF="node161.html">15.3 Built-in Module ctb</A>
+<B> Previous:</B> <A NAME="tex2html4312" HREF="node161.html">15.3 Built-in Module ctb</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

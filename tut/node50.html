@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.4 Raising Exceptions</TITLE>
+<META NAME="description" CONTENT="8.4 Raising Exceptions">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html821" HREF="node51.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html819" HREF="node46.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html813" HREF="node49.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html823" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html822" HREF="node51.html">8.5 User-defined Exceptions</A>
+<B>Up:</B> <A NAME="tex2html820" HREF="node46.html">8 Errors and Exceptions</A>
+<B> Previous:</B> <A NAME="tex2html814" HREF="node49.html">8.3 Handling Exceptions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00940000000000000000">8.4 Raising Exceptions</A></H1>
+<P>
+The <TT>raise</TT> statement allows the programmer to force a specified
+exception to occur.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; raise NameError, 'HiThere'
+Traceback (innermost last):
+  File &quot;&lt;stdin&gt;&quot;, line 1
+NameError: HiThere
+&gt;&gt;&gt;</PRE>
+The first argument to <TT>raise</TT> names the exception to be raised.
+The optional second argument specifies the exception's argument.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

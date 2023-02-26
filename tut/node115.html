@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.4 Configuration and Installation</TITLE>
+<META NAME="description" CONTENT="13.4 Configuration and Installation">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1590" HREF="node116.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1588" HREF="node111.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1584" HREF="node114.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1592" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1591" HREF="node116.html">  About this document </A>
+<B>Up:</B> <A NAME="tex2html1589" HREF="node111.html">13 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1585" HREF="node114.html">13.3 New or Updated </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001440000000000000000">13.4 Configuration and Installation</A></H1>
+<P>
+<UL><LI>
+More configuration information is now available to Python programs.
+The variable <CODE>sys.prefix</CODE> gives the site-specific directory
+prefix where the platform independent Python files are installed; by
+default, this is the string <CODE>&quot;/usr/local&quot;</CODE>.  This can be set at
+build time with the <CODE>-prefix</CODE> argument to the <CODE>configure</CODE>
+script.  The main collection of Python library modules is installed in
+the directory <CODE>sys.prefix+&quot;/lib/python1.4&quot;</CODE> while the platform
+independent header files (all except <CODE>config.h</CODE>) are stored in
+<CODE>sys.prefix+&quot;/include/python1.4&quot;</CODE>.
+<P>
+Similarly, the variable <CODE>sys.exec_prefix</CODE> gives the site-specific
+directory prefix where the platform <EM>de</EM>pendent Python files are
+installed; by default, this is also <CODE>&quot;/usr/local&quot;</CODE>.  This can be
+set at build time with the <CODE>-exec-prefix</CODE> argument to the
+<CODE>configure</CODE> script.  Specifically, all configuration files
+(e.g. the <CODE>config.h</CODE> header file) are installed in the directory
+<CODE>sys.exec_prefix+&quot;/lib/python1.4/config&quot;</CODE>, and shared library
+modules are installed in
+<CODE>sys.exec_prefix+&quot;/lib/python1.4/sharedmodules&quot;</CODE>.
+<P>
+Include files are at <CODE>sys.prefix+&quot;/include/python1.4&quot;</CODE>.
+<P>
+It is not yet decided what the most portable way is to come up with
+the version number used in these pathnames.  For compatibility with
+the 1.4beta releases, sys.version[:3] can be used.
+<P>
+On non-Unix systems, these variables are meaningless.<LI>
+While sites are strongly discouraged from modifying the standard
+Python library (like adding site-specific modules or functions), there
+is now a standard way to invoke site-specific features.  The standard
+module <CODE>site</CODE>, when imported, appends two site-specific
+directories to the end of <CODE>sys.path</CODE>:
+<CODE>$prefix/lib/site-python</CODE> and
+<CODE>$exec_prefix/lib/site-python</CODE>, where <CODE>$prefix</CODE> and
+<CODE>$exec_prefix</CODE> are the directories <CODE>sys.prefix</CODE> and
+<CODE>sys.exec_prefix</CODE> mentioned above.
+<P>
+After this path manipulation has been performed, an attempt is made to
+import the module <CODE>sitecustomize</CODE>.  Any <CODE>ImportError</CODE>
+exception raised by this attempt is silently ignored.
+<P>
+</UL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

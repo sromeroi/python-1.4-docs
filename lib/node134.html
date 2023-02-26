@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.13 Standard module binhex</TITLE>
+<META NAME="description" CONTENT="11.13 Standard module binhex">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3946" HREF="node135.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3944" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3938" HREF="node133.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3948" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3949" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3947" HREF="node135.html">11.13.1 notes</A>
+<B>Up:</B> <A NAME="tex2html3945" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3939" HREF="node133.html">11.12.1 Additional Methods of </A>
+<BR><HR><P>
+<H1><A NAME="SECTION0012130000000000000000">11.13 Standard module <CODE>binhex</CODE></A></H1>
+<P>
+This module encodes and decodes files in binhex4 format, a format
+allowing representation of Macintosh files in ASCII. On the macintosh,
+both forks of a file and the finder information are encoded (or
+decoded), on other platforms only the data fork is handled.
+<P>
+The <CODE>binhex</CODE> module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="7285">binhex</A></STRONG>(<VAR>input, output</VAR>)
+<DD>
+Convert a binary file with filename <VAR>input</VAR> to binhex file
+<VAR>output</VAR>. The <VAR>output</VAR> parameter can either be a filename or a
+file-like object (any object supporting a <VAR>write</VAR> and <VAR>close</VAR>
+method).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7389">hexbin</A></STRONG>(<VAR>input</VAR><BIG>[</BIG><VAR>, output</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Decode a binhex file <VAR>input</VAR>. <VAR>Input</VAR> may be a filename or a
+file-like object supporting <VAR>read</VAR> and <VAR>close</VAR> methods.
+The resulting file is written to a file named <VAR>output</VAR>, unless the
+argument is empty in which case the output filename is read from the
+binhex file.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3950" HREF="node135.html#SECTION0012131000000000000000">11.13.1 notes</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

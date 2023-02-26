@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.1 Invoking the Interpreter</TITLE>
+<META NAME="description" CONTENT="2.1 Invoking the Interpreter">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html326" HREF="node8.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html324" HREF="node6.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html318" HREF="node6.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html328" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html327" HREF="node8.html">2.1.1 Argument Passing</A>
+<B>Up:</B> <A NAME="tex2html325" HREF="node6.html">2 Using the Python </A>
+<B> Previous:</B> <A NAME="tex2html319" HREF="node6.html">2 Using the Python </A>
+<BR><HR><P>
+<H1><A NAME="SECTION00310000000000000000">2.1 Invoking the Interpreter</A></H1>
+<P>
+The Python interpreter is usually installed as <TT>/usr/local/bin/python</TT>
+on those machines where it is available; putting <TT>/usr/local/bin</TT> in
+your Unix shell's search path makes it possible to start it by
+typing the command
+<P>
+<PRE>python</PRE>
+to the shell.  Since the choice of the directory where the interpreter
+lives is an installation option, other places are possible; check with
+your local Python guru or system administrator.  (E.g., <TT>
+/usr/local/python</TT> is a popular alternative location.)
+<P>
+The interpreter operates somewhat like the Unix shell: when called
+with standard input connected to a tty device, it reads and executes
+commands interactively; when called with a file name argument or with
+a file as standard input, it reads and executes a <EM>script</EM> from
+that file.
+<P>
+A third way of starting the interpreter is
+``<TT>python -c command [arg] ...</TT>'', which
+executes the statement(s) in <TT>command</TT>, analogous to the shell's
+<TT>-c</TT> option.  Since Python statements often contain spaces or other
+characters that are special to the shell, it is best to quote <TT>
+command</TT> in its entirety with double quotes.
+<P>
+Note that there is a difference between ``<TT>python file</TT>'' and
+``<TT>python &lt;file</TT>''.  In the latter case, input requests from the
+program, such as calls to <TT>input()</TT> and <TT>raw_input()</TT>, are
+satisfied from <EM>file</EM>.  Since this file has already been read
+until the end by the parser before the program starts executing, the
+program will encounter EOF immediately.  In the former case (which is
+usually what you want) they are satisfied from whatever file or device
+is connected to standard input of the Python interpreter.
+<P>
+When a script file is used, it is sometimes useful to be able to run
+the script and enter interactive mode afterwards.  This can be done by
+passing <TT>-i</TT> before the script.  (This does not work if the script
+is read from standard input, for the same reason as explained in the
+previous paragraph.)
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html329" HREF="node8.html#SECTION00311000000000000000">2.1.1 Argument Passing</A>
+<LI> <A NAME="tex2html330" HREF="node9.html#SECTION00312000000000000000">2.1.2 Interactive Mode</A>
+</UL>
+<HR><A NAME="tex2html326" HREF="node8.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html324" HREF="node6.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html318" HREF="node6.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html328" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html327" HREF="node8.html">2.1.1 Argument Passing</A>
+<B>Up:</B> <A NAME="tex2html325" HREF="node6.html">2 Using the Python </A>
+<B> Previous:</B> <A NAME="tex2html319" HREF="node6.html">2 Using the Python </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

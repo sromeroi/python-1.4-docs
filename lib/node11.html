@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>More String Operations</TITLE>
+<META NAME="description" CONTENT="More String Operations">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2370" HREF="node12.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2368" HREF="node10.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2362" HREF="node10.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2372" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2373" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2371" HREF="node12.html">Mutable Sequence Types</A>
+<B>Up:</B> <A NAME="tex2html2369" HREF="node10.html">2.1.5 Sequence Types</A>
+<B> Previous:</B> <A NAME="tex2html2363" HREF="node10.html">2.1.5 Sequence Types</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00315100000000000000">More String Operations</A></H3>
+<P>
+String objects have one unique built-in operation: the <CODE>%</CODE>
+operator (modulo) with a string left argument interprets this string
+as a C sprintf format string to be applied to the right argument, and
+returns the string resulting from this formatting operation.
+<P>
+The right argument should be a tuple with one item for each argument
+required by the format string; if the string requires a single
+argument, the right argument may also be a single non-tuple object.<A NAME="tex2html139" HREF="footnode.html#491"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+The following format characters are understood:
+%, c, s, i, d, u, o, x, X, e, E, f, g, G.
+Width and precision may be a * to specify that an integer argument
+specifies the actual width or precision.  The flag characters -, +,
+blank, # and 0 are understood.  The size specifiers h, l or L may be
+present but are ignored.  The <CODE>%s</CODE> conversion takes any Python
+object and converts it to a string using <CODE>str()</CODE> before
+formatting it.  The ANSI features <CODE>%p</CODE> and <CODE>%n</CODE>
+are not supported.  Since Python strings have an explicit length,
+<CODE>%s</CODE> conversions don't assume that <CODE>'&#92;0'</CODE> is the end of
+the string.
+<P>
+For safety reasons, floating point precisions are clipped to 50;
+<CODE>%f</CODE> conversions for numbers whose absolute value is over 1e25
+are replaced by <CODE>%g</CODE> conversions.<A NAME="tex2html140" HREF="footnode.html#500"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+All other errors raise exceptions.
+<P>
+If the right argument is a dictionary (or any kind of mapping), then
+the formats in the string must have a parenthesized key into that
+dictionary inserted immediately after the <CODE>%</CODE> character, and
+each format formats the corresponding entry from the mapping.  E.g.
+<PRE>    &gt;&gt;&gt; count = 2
+    &gt;&gt;&gt; language = 'Python'
+    &gt;&gt;&gt; print '%(language)s has %(count)03d quote types.' % vars()
+    Python has 002 quote types.
+    &gt;&gt;&gt;</PRE>
+In this case no * specifiers may occur in a format (since they
+require a sequential parameter list).
+<P>
+Additional string operations are defined in standard module
+<CODE>string</CODE> and in built-in module <CODE>regex</CODE>.
+<A NAME="504">&#160;</A>
+<A NAME="505">&#160;</A>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.10.2 Formatter Implementations</TITLE>
+<META NAME="description" CONTENT="11.10.2 Formatter Implementations">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3866" HREF="node128.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3864" HREF="node125.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3858" HREF="node126.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3868" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3869" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3867" HREF="node128.html">11.10.3 The Writer Interface</A>
+<B>Up:</B> <A NAME="tex2html3865" HREF="node125.html">11.10 Standard Module formatter</A>
+<B> Previous:</B> <A NAME="tex2html3859" HREF="node126.html">11.10.1 The Formatter Interface</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012102000000000000000">11.10.2 Formatter Implementations</A></H2>
+<P>
+Two implementations of formatter objects are provided by this module.
+Most applications may use one of these classes without modification or
+subclassing.
+<P>
+<DL><DT><STRONG><A NAME="7075">NullFormatter</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>writer<CODE> = None</CODE></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+A formatter which does nothing.  If <CODE>writer</CODE> is omitted, a
+<CODE>NullWriter</CODE> instance is created.  No methods of the writer are
+called by <CODE>NullWriter</CODE> instances.  Implementations should inherit
+from this class if implementing a writer interface but don't need to
+inherit any implementation.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6966">AbstractFormatter</A></STRONG>(<VAR>writer</VAR>)
+<DD>
+The standard formatter.  This implementation has demonstrated wide
+applicability to many writers, and may be used directly in most
+circumstances.  It has been used to implement a full-featured
+world-wide web browser.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

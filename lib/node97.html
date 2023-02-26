@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.6 Limitations</TITLE>
+<META NAME="description" CONTENT="10.6 Limitations">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3459" HREF="node98.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3457" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3451" HREF="node96.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3461" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3462" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3460" HREF="node98.html">10.7 Calibration</A>
+<B>Up:</B> <A NAME="tex2html3458" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3452" HREF="node96.html">10.5.1 The Stats Class</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001160000000000000000">10.6 Limitations</A></H1>
+<P>
+There are two fundamental limitations on this profiler.  The first is
+that it relies on the Python interpreter to dispatch <I><DFN>call</DFN></I>,
+<I><DFN>return</DFN></I>, and <I><DFN>exception</DFN></I> events.  Compiled C code does not
+get interpreted, and hence is ``invisible'' to the profiler.  All time
+spent in C code (including builtin functions) will be charged to the
+Python function that invoked the C code.  If the C code calls out
+to some native Python code, then those calls will be profiled
+properly.
+<P>
+The second limitation has to do with accuracy of timing information.
+There is a fundamental problem with deterministic profilers involving
+accuracy.  The most obvious restriction is that the underlying ``clock''
+is only ticking at a rate (typically) of about .001 seconds.  Hence no
+measurements will be more accurate that that underlying clock.  If
+enough measurements are taken, then the ``error'' will tend to average
+out. Unfortunately, removing this first error induces a second source
+of error...
+<P>
+The second problem is that it ``takes a while'' from when an event is
+dispatched until the profiler's call to get the time actually
+<EM>gets</EM> the state of the clock.  Similarly, there is a certain lag
+when exiting the profiler event handler from the time that the clock's
+value was obtained (and then squirreled away), until the user's code
+is once again executing.  As a result, functions that are called many
+times, or call many functions, will typically accumulate this error.
+The error that accumulates in this fashion is typically less than the
+accuracy of the clock (i.e., less than one clock tick), but it
+<EM>can</EM> accumulate and become very significant.  This profiler
+provides a means of calibrating itself for a given platform so that
+this error can be probabilistically (i.e., on the average) removed.
+After the profiler is calibrated, it will be more accurate (in a least
+square sense), but it will sometimes produce negative numbers (when
+call counts are exceptionally low, and the gods of probability work
+against you :-). )  Do <EM>NOT</EM> be alarmed by negative numbers in
+the profile.  They should <EM>only</EM> appear if you have calibrated
+your profiler, and the results are actually better than without
+calibration.
+<P>
+<HR><A NAME="tex2html3459" HREF="node98.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3457" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3451" HREF="node96.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3461" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3462" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3460" HREF="node98.html">10.7 Calibration</A>
+<B>Up:</B> <A NAME="tex2html3458" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3452" HREF="node96.html">10.5.1 The Stats Class</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

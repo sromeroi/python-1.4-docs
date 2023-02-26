@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.8 Extensions - Deriving Better Profilers</TITLE>
+<META NAME="description" CONTENT="10.8 Extensions - Deriving Better Profilers">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3481" HREF="node100.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3479" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3475" HREF="node98.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3483" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3484" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3482" HREF="node100.html">10.8.1 OldProfile Class</A>
+<B>Up:</B> <A NAME="tex2html3480" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3476" HREF="node98.html">10.7 Calibration</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001180000000000000000">10.8 Extensions - Deriving Better Profilers</A></H1>
+<P>
+<A NAME="ProfilerExtensions">&#160;</A>
+<P>
+The <CODE>Profile</CODE> class of module <CODE>profile</CODE> was written so that
+derived classes could be developed to extend the profiler.  Rather
+than describing all the details of such an effort, I'll just present
+the following two examples of derived classes that can be used to do
+profiling.  If the reader is an avid Python programmer, then it should
+be possible to use these as a model and create similar (and perchance
+better) profile classes.
+<P>
+If all you want to do is change how the timer is called, or which
+timer function is used, then the basic class has an option for that in
+the constructor for the class.  Consider passing the name of a
+function to call into the constructor:
+<P>
+<PRE>    pr = profile.Profile(your_time_func)</PRE>
+<P>
+The resulting profiler will call <CODE>your_time_func()</CODE> instead of
+<CODE>os.times()</CODE>.  The function should return either a single number
+or a list of numbers (like what <CODE>os.times()</CODE> returns).  If the
+function returns a single time number, or the list of returned numbers
+has length 2, then you will get an especially fast version of the
+dispatch routine.
+<P>
+Be warned that you <EM>should</EM> calibrate the profiler class for the
+timer function that you choose.  For most machines, a timer that
+returns a lone integer value will provide the best results in terms of
+low overhead during profiling.  (os.times is <EM>pretty</EM> bad, 'cause
+it returns a tuple of floating point values, so all arithmetic is
+floating point in the profiler!).  If you want to substitute a
+better timer in the cleanest fashion, you should derive a class, and
+simply put in the replacement dispatch method that better handles your
+timer call, along with the appropriate calibration constant :-).
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3485" HREF="node100.html#SECTION001181000000000000000">10.8.1 OldProfile Class</A>
+<LI> <A NAME="tex2html3486" HREF="node101.html#SECTION001182000000000000000">10.8.2 HotProfile Class</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

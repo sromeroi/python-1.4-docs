@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>14.3 Built-in Module rotor</TITLE>
+<META NAME="description" CONTENT="14.3 Built-in Module rotor">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4226" HREF="node158.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4224" HREF="node154.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4220" HREF="node156.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4228" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4229" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4227" HREF="node158.html">15 Macintosh Specific Services</A>
+<B>Up:</B> <A NAME="tex2html4225" HREF="node154.html">14 Cryptographic Services</A>
+<B> Previous:</B> <A NAME="tex2html4221" HREF="node156.html">14.2 Built-in Module mpz</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001530000000000000000">14.3 Built-in Module <CODE>rotor</CODE></A></H1>
+<P>
+This module implements a rotor-based encryption algorithm, contributed by
+Lance Ellinghouse.  The design is derived from the Enigma device, a machine
+used during World War II to encipher messages.  A rotor is simply a
+permutation.  For example, if the character `A' is the origin of the rotor,
+then a given rotor might map `A' to `L', `B' to `Z', `C' to `G', and so on.
+To encrypt, we choose several different rotors, and set the origins of the
+rotors to known positions; their initial position is the ciphering key.  To
+encipher a character, we permute the original character by the first rotor,
+and then apply the second rotor's permutation to the result. We continue
+until we've applied all the rotors; the resulting character is our
+ciphertext.  We then change the origin of the final rotor by one position,
+from `A' to `B'; if the final rotor has made a complete revolution, then we
+rotate the next-to-last rotor by one position, and apply the same procedure
+recursively.  In other words, after enciphering one character, we advance
+the rotors in the same fashion as a car's odometer. Decoding works in the
+same way, except we reverse the permutations and apply them in the opposite
+order.
+<A NAME="8488">&#160;</A>
+<A NAME="8489">&#160;</A><A NAME="8490">&#160;</A>
+<P>
+The available functions in this module are:
+<P>
+<DL><DT><STRONG><A NAME="8529">newrotor</A></STRONG>(<VAR>key</VAR><BIG>[</BIG><VAR>, numrotors</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a rotor object. <VAR>key</VAR> is a string containing the encryption key
+for the object; it can contain arbitrary binary data. The key will be used
+to randomly generate the rotor permutations and their initial positions.
+<VAR>numrotors</VAR> is the number of rotor permutations in the returned object;
+if it is omitted, a default value of 6 will be used.
+<P>
+</DL>
+<P>
+Rotor objects have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="8503">setkey</A></STRONG>(<VAR></VAR>)
+<DD>
+Reset the rotor to its initial state.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8507">encrypt</A></STRONG>(<VAR>plaintext</VAR>)
+<DD>
+Reset the rotor object to its initial state and encrypt <VAR>plaintext</VAR>,
+returning a string containing the ciphertext.  The ciphertext is always the
+same length as the original plaintext.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8512">encryptmore</A></STRONG>(<VAR>plaintext</VAR>)
+<DD>
+Encrypt <VAR>plaintext</VAR> without resetting the rotor object, and return a
+string containing the ciphertext.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8517">decrypt</A></STRONG>(<VAR>ciphertext</VAR>)
+<DD>
+Reset the rotor object to its initial state and decrypt <VAR>ciphertext</VAR>,
+returning a string containing the ciphertext.  The plaintext string will
+always be the same length as the ciphertext.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8522">decryptmore</A></STRONG>(<VAR>ciphertext</VAR>)
+<DD>
+Decrypt <VAR>ciphertext</VAR> without resetting the rotor object, and return a
+string containing the ciphertext.
+<P>
+</DL>
+<P>
+An example usage:
+<PRE>&gt;&gt;&gt; import rotor
+&gt;&gt;&gt; rt = rotor.newrotor('key', 12)
+&gt;&gt;&gt; rt.encrypt('bar')
+'\2534\363'
+&gt;&gt;&gt; rt.encryptmore('bar')
+'\357\375$'
+&gt;&gt;&gt; rt.encrypt('bar')
+'\2534\363'
+&gt;&gt;&gt; rt.decrypt('\2534\363')
+'bar'
+&gt;&gt;&gt; rt.decryptmore('\357\375$')
+'bar'
+&gt;&gt;&gt; rt.decrypt('\357\375$')
+'l(\315'
+&gt;&gt;&gt; del rt</PRE>
+<P>
+The module's code is not an exact simulation of the original Enigma device;
+it implements the rotor encryption scheme differently from the original. The
+most important difference is that in the original Enigma, there were only 5
+or 6 different rotors in existence, and they were applied twice to each
+character; the cipher key was the order in which they were placed in the
+machine.  The Python rotor module uses the supplied key to initialize a
+random number generator; the rotor permutations and their initial positions
+are then randomly generated.  The original device only enciphered the
+letters of the alphabet, while this module can handle any 8-bit binary data;
+it also produces binary output.  This module can also operate with an
+arbitrary number of rotors.
+<P>
+The original Enigma cipher was broken in 1944. The version implemented here is probably a good deal more difficult to crack
+(especially if you use many rotors), but it won't be impossible for
+a truly skilful and determined attacker to break the cipher.  So if you want
+to keep the NSA out of your files, this rotor cipher may well be unsafe, but
+for discouraging casual snooping through your files, it will probably be
+just fine, and may be somewhat safer than using the Unix `<CODE>crypt</CODE>'
+command.
+<A NAME="8526">&#160;</A><A NAME="8527">&#160;</A>
+<P>
+<HR><A NAME="tex2html4226" HREF="node158.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4224" HREF="node154.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4220" HREF="node156.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4228" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4229" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4227" HREF="node158.html">15 Macintosh Specific Services</A>
+<B>Up:</B> <A NAME="tex2html4225" HREF="node154.html">14 Cryptographic Services</A>
+<B> Previous:</B> <A NAME="tex2html4221" HREF="node156.html">14.2 Built-in Module mpz</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

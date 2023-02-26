@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.5 Built-in Module rgbimg</TITLE>
+<META NAME="description" CONTENT="13.5 Built-in Module rgbimg">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4167" HREF="node153.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4165" HREF="node147.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4159" HREF="node151.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4169" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4170" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4168" HREF="node153.html">13.6 Standard module imghdr</A>
+<B>Up:</B> <A NAME="tex2html4166" HREF="node147.html">13 Multimedia Services</A>
+<B> Previous:</B> <A NAME="tex2html4160" HREF="node151.html">13.4 Built-in Module jpeg</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001450000000000000000">13.5 Built-in Module <CODE>rgbimg</CODE></A></H1>
+<P>
+The rgbimg module allows python programs to access SGI imglib image
+files (also known as `<CODE>.rgb</CODE>' files).  The module is far from
+complete, but is provided anyway since the functionality that there is
+is enough in some cases.  Currently, colormap files are not supported.
+<P>
+The module defines the following variables and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+This exception is raised on all errors, such as unsupported file type, etc.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8277">sizeofimage</A></STRONG>(<VAR>file</VAR>)
+<DD>
+This function returns a tuple <CODE>(<VAR>x</VAR>, <VAR>y</VAR>)</CODE> where
+<VAR>x</VAR> and <VAR>y</VAR> are the size of the image in pixels.
+Only 4 byte RGBA pixels, 3 byte RGB pixels, and 1 byte greyscale pixels
+are currently supported.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8285">longimagedata</A></STRONG>(<VAR>file</VAR>)
+<DD>
+This function reads and decodes the image on the specified file, and
+returns it as a Python string. The string has 4 byte RGBA pixels.
+The bottom left pixel is the first in
+the string. This format is suitable to pass to <CODE>gl.lrectwrite</CODE>,
+for instance.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8290">longstoimage</A></STRONG>(<VAR>data, x, y, z, file</VAR>)
+<DD>
+This function writes the RGBA data in <VAR>data</VAR> to image
+file <VAR>file</VAR>. <VAR>x</VAR> and <VAR>y</VAR> give the size of the image.
+<VAR>z</VAR> is 1 if the saved image should be 1 byte greyscale, 3 if the
+saved image should be 3 byte RGB data, or 4 if the saved images should
+be 4 byte RGBA data.  The input data always contains 4 bytes per pixel.
+These are the formats returned by <CODE>gl.lrectread</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8300">ttob</A></STRONG>(<VAR>flag</VAR>)
+<DD>
+This function sets a global flag which defines whether the scan lines
+of the image are read or written from bottom to top (flag is zero,
+compatible with SGI GL) or from top to bottom(flag is one,
+compatible with X).  The default is zero.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

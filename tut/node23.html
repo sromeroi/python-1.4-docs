@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.1.1 Numbers</TITLE>
+<META NAME="description" CONTENT="3.1.1 Numbers">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html513" HREF="node24.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html511" HREF="node22.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html505" HREF="node22.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html515" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html514" HREF="node24.html">3.1.2 Strings</A>
+<B>Up:</B> <A NAME="tex2html512" HREF="node22.html">3.1 Using Python as </A>
+<B> Previous:</B> <A NAME="tex2html506" HREF="node22.html">3.1 Using Python as </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00411000000000000000">3.1.1 Numbers</A></H2>
+<P>
+The interpreter acts as a simple calculator: you can type an
+expression at it and it will write the value.  Expression syntax is
+straightforward: the operators <TT>+</TT>, <TT>-</TT>, <TT>*</TT> and <TT>/</TT>
+work just like in most other languages (e.g., Pascal or C); parentheses
+can be used for grouping.  For example:
+<P>
+<PRE>&gt;&gt;&gt; 2+2
+4
+&gt;&gt;&gt; # This is a comment
+... 2+2
+4
+&gt;&gt;&gt; 2+2  # and a comment on the same line as code
+4
+&gt;&gt;&gt; (50-5*6)/4
+5
+&gt;&gt;&gt; # Integer division returns the floor:
+... 7/3
+2
+&gt;&gt;&gt; 7/-3
+-3
+&gt;&gt;&gt;</PRE>
+Like in C, the equal sign (<TT>=</TT>) is used to assign a value to a
+variable.  The value of an assignment is not written:
+<P>
+<PRE>&gt;&gt;&gt; width = 20
+&gt;&gt;&gt; height = 5*9
+&gt;&gt;&gt; width * height
+900
+&gt;&gt;&gt;</PRE>
+A value can be assigned to several variables simultaneously:
+<P>
+<PRE>&gt;&gt;&gt; x = y = z = 0  # Zero x, y and z
+&gt;&gt;&gt; x
+0
+&gt;&gt;&gt; y
+0
+&gt;&gt;&gt; z
+0
+&gt;&gt;&gt;</PRE>
+There is full support for floating point; operators with mixed type
+operands convert the integer operand to floating point:
+<P>
+<PRE>&gt;&gt;&gt; 4 * 2.5 / 3.3
+3.0303030303
+&gt;&gt;&gt; 7.0 / 2
+3.5
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.2 Standard Module posixpath</TITLE>
+<META NAME="description" CONTENT="8.2 Standard Module posixpath">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3188" HREF="node76.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3186" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3180" HREF="node74.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3190" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3191" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3189" HREF="node76.html">8.3 Built-in Module pwd</A>
+<B>Up:</B> <A NAME="tex2html3187" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3181" HREF="node74.html">8.1 Built-in Module posix</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00920000000000000000">8.2 Standard Module <CODE>posixpath</CODE></A></H1>
+<P>
+This module implements some useful functions on POSIX pathnames.
+<P>
+<STRONG>Do not import this module directly.</STRONG>  Instead, import the
+module <CODE>os</CODE> and use <CODE>os.path</CODE>.
+<P>
+<DL><DT><STRONG><A NAME="4775">basename</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return the base name of pathname
+<VAR>p</VAR>.
+This is the second half of the pair returned by
+<CODE>posixpath.split(<VAR>p</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4781">commonprefix</A></STRONG>(<VAR>list</VAR>)
+<DD>
+Return the longest string that is a prefix of all strings in
+<VAR>list</VAR>.
+If
+<VAR>list</VAR>
+is empty, return the empty string (<CODE>''</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4788">exists</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return true if
+<VAR>p</VAR>
+refers to an existing path.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4793">expanduser</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return the argument with an initial component of `<SAMP>~</SAMP>' or
+`<SAMP>~<VAR>user</VAR></SAMP>' replaced by that <VAR>user</VAR>'s home directory.  An
+initial `<SAMP>~</SAMP>' is replaced by the environment variable <CODE>$HOME</CODE>;
+an initial `<SAMP>~<VAR>user</VAR></SAMP>' is looked up in the password directory through
+the built-in module <CODE>pwd</CODE>.  If the expansion fails, or if the
+path does not begin with a tilde, the path is returned unchanged.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4804">expandvars</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return the argument with environment variables expanded.  Substrings
+of the form `<SAMP>$<VAR>name</VAR></SAMP>' or `<SAMP>${<VAR>name</VAR>}</SAMP>' are
+replaced by the value of environment variable <VAR>name</VAR>.  Malformed
+variable names and references to non-existing variables are left
+unchanged.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4811">isabs</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return true if <VAR>p</VAR> is an absolute pathname (begins with a slash).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4816">isfile</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return true if <VAR>p</VAR> is an existing regular file.  This follows
+symbolic links, so both <CODE>islink()</CODE> and <CODE>isfile()</CODE> can be true for the same
+path.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4823">isdir</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return true if <VAR>p</VAR> is an existing directory.  This follows
+symbolic links, so both <CODE>islink()</CODE> and <CODE>isdir()</CODE> can be true for the same
+path.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4830">islink</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return true if
+<VAR>p</VAR>
+refers to a directory entry that is a symbolic link.
+Always false if symbolic links are not supported.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4835">ismount</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Return true if pathname <VAR>p</VAR> is a <I><DFN>mount point</DFN></I>: a point in a
+file system where a different file system has been mounted.  The
+function checks whether <VAR>p</VAR>'s parent, `<CODE><VAR>p</VAR>/..</CODE>', is on a
+different device than <VAR>p</VAR>, or whether `<CODE><VAR>p</VAR>/..</CODE>' and
+<VAR>p</VAR> point to the same i-node on the same device -- this should
+detect mount points for all Unix and POSIX variants.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4847">join</A></STRONG>(<VAR>p, q</VAR>)
+<DD>
+Join the paths
+<VAR>p</VAR>
+and
+<VAR>q</VAR> intelligently:
+If
+<VAR>q</VAR>
+is an absolute path, the return value is
+<VAR>q</VAR>.
+Otherwise, the concatenation of
+<VAR>p</VAR>
+and
+<VAR>q</VAR>
+is returned, with a slash (<CODE>'/'</CODE>) inserted unless
+<VAR>p</VAR>
+is empty or ends in a slash.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4859">normcase</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Normalize the case of a pathname.  This returns the path unchanged;
+however, a similar function in <CODE>macpath</CODE> converts upper case to
+lower case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4864">samefile</A></STRONG>(<VAR>p, q</VAR>)
+<DD>
+Return true if both pathname arguments refer to the same file or directory
+(as indicated by device number and i-node number).
+Raise an exception if a stat call on either pathname fails.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4868">split</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Split the pathname <VAR>p</VAR> in a pair <CODE>(<VAR>head</VAR>, <VAR>tail</VAR>)</CODE>,
+where <VAR>tail</VAR> is the last pathname component and <VAR>head</VAR> is
+everything leading up to that.  The <VAR>tail</VAR> part will never contain
+a slash; if <VAR>p</VAR> ends in a slash, <VAR>tail</VAR> will be empty.  If
+there is no slash in <VAR>p</VAR>, <VAR>head</VAR> will be empty.  If <VAR>p</VAR> is
+empty, both <VAR>head</VAR> and <VAR>tail</VAR> are empty.  Trailing slashes are
+stripped from <VAR>head</VAR> unless it is the root (one or more slashes
+only).  In nearly all cases, <CODE>join(<VAR>head</VAR>, <VAR>tail</VAR>)</CODE>
+equals <VAR>p</VAR> (the only exception being when there were multiple
+slashes separating <VAR>head</VAR> from <VAR>tail</VAR>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4891">splitext</A></STRONG>(<VAR>p</VAR>)
+<DD>
+Split the pathname <VAR>p</VAR> in a pair <CODE>(<VAR>root</VAR>, <VAR>ext</VAR>)</CODE>
+such that <CODE><VAR>root</VAR> + <VAR>ext</VAR> == <VAR>p</VAR></CODE>,
+and <VAR>ext</VAR> is empty or begins with a period and contains
+at most one period.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4902">walk</A></STRONG>(<VAR>p, visit, arg</VAR>)
+<DD>
+Calls the function <VAR>visit</VAR> with arguments
+<CODE>(<VAR>arg</VAR>, <VAR>dirname</VAR>, <VAR>names</VAR>)</CODE> for each directory in the
+directory tree rooted at <VAR>p</VAR> (including <VAR>p</VAR> itself, if it is a
+directory).  The argument <VAR>dirname</VAR> specifies the visited directory,
+the argument <VAR>names</VAR> lists the files in the directory (gotten from
+<CODE>posix.listdir(<VAR>dirname</VAR>)</CODE>, so including `<SAMP>.</SAMP>' and
+`<SAMP>..</SAMP>').  The <VAR>visit</VAR> function may modify <VAR>names</VAR> to
+influence the set of directories visited below <VAR>dirname</VAR>, e.g., to
+avoid visiting certain parts of the tree.  (The object referred to by
+<VAR>names</VAR> must be modified in place, using <CODE>del</CODE> or slice
+assignment.)
+<P>
+</DL><HR><A NAME="tex2html3188" HREF="node76.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3186" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3180" HREF="node74.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3190" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3191" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3189" HREF="node76.html">8.3 Built-in Module pwd</A>
+<B>Up:</B> <A NAME="tex2html3187" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3181" HREF="node74.html">8.1 Built-in Module posix</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

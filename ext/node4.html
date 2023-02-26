@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.2 A Simple Example</TITLE>
+<META NAME="description" CONTENT="1.2 A Simple Example">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html227" HREF="node5.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html225" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html219" HREF="node3.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html229" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html230" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html228" HREF="node5.html">1.3 Intermezzo: Errors and </A>
+<B>Up:</B> <A NAME="tex2html226" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html220" HREF="node3.html">1.1 Introduction</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00220000000000000000">1.2 A Simple Example</A></H1>
+<P>
+Let's create an extension module called `<SAMP>spam</SAMP>' (the favorite food
+of Monty Python fans...) and let's say we want to create a Python
+interface to the C library function <CODE>system()</CODE>.<A NAME="tex2html1" HREF="footnode.html#521"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+This function takes a null-terminated character string as argument and
+returns an integer.  We want this function to be callable from Python
+as follows:
+<P>
+<PRE>    &gt;&gt;&gt; import spam
+    &gt;&gt;&gt; status = spam.system(&quot;ls -l&quot;)</PRE>
+<P>
+Begin by creating a file `<SAMP>spammodule.c</SAMP>'.  (In general, if a
+module is called `<SAMP>spam</SAMP>', the C file containing its implementation
+is called `<CODE>spammodule.c</CODE>'; if the module name is very long, like
+`<SAMP>spammify</SAMP>', the module name can be just `<CODE>spammify.c</CODE>'.)
+<P>
+The first line of our file can be:
+<P>
+<PRE>    #include &quot;Python.h&quot;</PRE>
+<P>
+which pulls in the Python API (you can add a comment describing the
+purpose of the module and a copyright notice if you like).
+<P>
+All user-visible symbols defined by <CODE>&quot;Python.h&quot;</CODE> have a prefix of
+`<SAMP>Py</SAMP>' or `<SAMP>PY</SAMP>', except those defined in standard header files.
+For convenience, and since they are used extensively by the Python
+interpreter, <CODE>&quot;Python.h&quot;</CODE> includes a few standard header files:
+<CODE>&lt;stdio.h&gt;</CODE>, <CODE>&lt;string.h&gt;</CODE>, <CODE>&lt;errno.h&gt;</CODE>, and
+<CODE>&lt;stdlib.h&gt;</CODE>.  If the latter header file does not exist on your
+system, it declares the functions <CODE>malloc()</CODE>, <CODE>free()</CODE> and
+<CODE>realloc()</CODE> directly.
+<P>
+The next thing we add to our module file is the C function that will
+be called when the Python expression `<SAMP>spam.system(<VAR>string</VAR>)</SAMP>'
+is evaluated (we'll see shortly how it ends up being called):
+<P>
+<PRE>    static PyObject *
+    spam_system(self, args)
+        PyObject *self;
+        PyObject *args;
+    {
+        char *command;
+        int sts;
+        if (!PyArg_ParseTuple(args, &quot;s&quot;, &amp;command))
+            return NULL;
+        sts = system(command);
+        return Py_BuildValue(&quot;i&quot;, sts);
+    }</PRE>
+<P>
+There is a straightforward translation from the argument list in
+Python (e.g. the single expression <CODE>&quot;ls -l&quot;</CODE>) to the arguments
+passed to the C function.  The C function always has two arguments,
+conventionally named <VAR>self</VAR> and <VAR>args</VAR>.
+<P>
+The <VAR>self</VAR> argument is only used when the C function implements a
+builtin method.  This will be discussed later. In the example,
+<VAR>self</VAR> will always be a <CODE>NULL</CODE> pointer, since we are defining
+a function, not a method.  (This is done so that the interpreter
+doesn't have to understand two different types of C functions.)
+<P>
+The <VAR>args</VAR> argument will be a pointer to a Python tuple object
+containing the arguments.  Each item of the tuple corresponds to an
+argument in the call's argument list.  The arguments are Python
+objects - in order to do anything with them in our C function we have
+to convert them to C values.  The function <CODE>PyArg_ParseTuple()</CODE>
+in the Python API checks the argument types and converts them to C
+values.  It uses a template string to determine the required types of
+the arguments as well as the types of the C variables into which to
+store the converted values.  More about this later.
+<P>
+<CODE>PyArg_ParseTuple()</CODE> returns true (nonzero) if all arguments have
+the right type and its components have been stored in the variables
+whose addresses are passed.  It returns false (zero) if an invalid
+argument list was passed.  In the latter case it also raises an
+appropriate exception by so the calling function can return
+<CODE>NULL</CODE> immediately (as we saw in the example).
+<P>
+<HR><A NAME="tex2html227" HREF="node5.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html225" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html219" HREF="node3.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html229" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html230" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html228" HREF="node5.html">1.3 Intermezzo: Errors and </A>
+<B>Up:</B> <A NAME="tex2html226" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html220" HREF="node3.html">1.1 Introduction</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

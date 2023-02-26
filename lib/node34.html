@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.7 Built-in Module marshal</TITLE>
+<META NAME="description" CONTENT="3.7 Built-in Module marshal">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2667" HREF="node35.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2665" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2659" HREF="node33.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2669" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2670" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2668" HREF="node35.html">3.8 Built-in Module imp</A>
+<B>Up:</B> <A NAME="tex2html2666" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2660" HREF="node33.html">3.6 Standard Module copy</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00470000000000000000">3.7 Built-in Module <CODE>marshal</CODE></A></H1>
+<P>
+This module contains functions that can read and write Python
+values in a binary format.  The format is specific to Python, but
+independent of machine architecture issues (e.g., you can write a
+Python value to a file on a PC, transport the file to a Sun, and read
+it back there).  Details of the format are undocumented on purpose;
+it may change between Python versions (although it rarely does).<A NAME="tex2html374" HREF="footnode.html#1971"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+This is not a general ``persistency'' module.  For general persistency
+and transfer of Python objects through RPC calls, see the modules
+<CODE>pickle</CODE> and <CODE>shelve</CODE>.  The <CODE>marshal</CODE> module exists
+mainly to support reading and writing the ``pseudo-compiled'' code for
+Python modules of `<SAMP>.pyc</SAMP>' files.
+<P>
+<A NAME="1978">&#160;</A><A NAME="1978">&#160;</A>
+<P>
+Not all Python object types are supported; in general, only objects
+whose value is independent from a particular invocation of Python can
+be written and read by this module.  The following types are supported:
+<CODE>None</CODE>, integers, long integers, floating point numbers,
+strings, tuples, lists, dictionaries, and code objects, where it
+should be understood that tuples, lists and dictionaries are only
+supported as long as the values contained therein are themselves
+supported; and recursive lists and dictionaries should not be written
+(they will cause infinite loops).
+<P>
+<B>Caveat:</B> On machines where C's <CODE>long int</CODE> type has more than
+32 bits (such as the DEC Alpha), it
+is possible to create plain Python integers that are longer than 32
+bits.  Since the current <CODE>marshal</CODE> module uses 32 bits to
+transfer plain Python integers, such values are silently truncated.
+This particularly affects the use of very long integer literals in
+Python modules -- these will be accepted by the parser on such
+machines, but will be silently be truncated when the module is read
+from the <CODE>.pyc</CODE> instead.<A NAME="tex2html379" HREF="footnode.html#2020"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+There are functions that read/write files as well as functions
+operating on strings.
+<P>
+The module defines these functions:
+<P>
+<DL><DT><STRONG><A NAME="1989">dump</A></STRONG>(<VAR>value, file</VAR>)
+<DD>
+  Write the value on the open file.  The value must be a supported
+  type.  The file must be an open file object such as
+  <CODE>sys.stdout</CODE> or returned by <CODE>open()</CODE> or
+  <CODE>posix.popen()</CODE>.
+<P>
+  If the value has (or contains an object that has) an unsupported type,
+  a <CODE>ValueError</CODE> exception is raised - but garbage data will also
+  be written to the file.  The object will not be properly read back by
+  <CODE>load()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1998">load</A></STRONG>(<VAR>file</VAR>)
+<DD>
+  Read one value from the open file and return it.  If no valid value
+  is read, raise <CODE>EOFError</CODE>, <CODE>ValueError</CODE> or
+  <CODE>TypeError</CODE>.  The file must be an open file object.
+<P>
+  Warning: If an object containing an unsupported type was marshalled
+  with <CODE>dump()</CODE>, <CODE>load()</CODE> will substitute <CODE>None</CODE> for the
+  unmarshallable type.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2008">dumps</A></STRONG>(<VAR>value</VAR>)
+<DD>
+  Return the string that would be written to a file by
+  <CODE>dump(value, file)</CODE>.  The value must be a supported type.
+  Raise a <CODE>ValueError</CODE> exception if value has (or contains an
+  object that has) an unsupported type.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2014">loads</A></STRONG>(<VAR>string</VAR>)
+<DD>
+  Convert the string to a value.  If no valid value is found, raise
+  <CODE>EOFError</CODE>, <CODE>ValueError</CODE> or <CODE>TypeError</CODE>.  Extra
+  characters in the string are ignored.
+<P>
+</DL><HR><A NAME="tex2html2667" HREF="node35.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2665" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2659" HREF="node33.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2669" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2670" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2668" HREF="node35.html">3.8 Built-in Module imp</A>
+<B>Up:</B> <A NAME="tex2html2666" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2660" HREF="node33.html">3.6 Standard Module copy</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

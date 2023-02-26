@@ -1,0 +1,565 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.1 Built-in Module posix</TITLE>
+<META NAME="description" CONTENT="8.1 Built-in Module posix">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3176" HREF="node75.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3174" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3168" HREF="node73.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3178" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3179" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3177" HREF="node75.html">8.2 Standard Module posixpath</A>
+<B>Up:</B> <A NAME="tex2html3175" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3169" HREF="node73.html">8 UNIX Specific Services</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00910000000000000000">8.1 Built-in Module <CODE>posix</CODE></A></H1>
+<P>
+This module provides access to operating system functionality that is
+standardized by the C Standard and the POSIX standard (a thinly disguised
+Unix interface).
+<P>
+<STRONG>Do not import this module directly.</STRONG>  Instead, import the
+module <CODE>os</CODE>, which provides a <EM>portable</EM> version of this
+interface.  On Unix, the <CODE>os</CODE> module provides a superset of
+the <CODE>posix</CODE> interface.  On non-Unix operating systems the
+<CODE>posix</CODE> module is not available, but a subset is always available
+through the <CODE>os</CODE> interface.  Once <CODE>os</CODE> is imported, there is
+<EM>no</EM> performance penalty in using it instead of
+<CODE>posix</CODE>.
+<P>
+The descriptions below are very terse; refer to the
+corresponding Unix manual entry for more information.  Arguments
+called <VAR>path</VAR> refer to a pathname given as a string.
+<P>
+Errors are reported as exceptions; the usual exceptions are given
+for type errors, while errors reported by the system calls raise
+<CODE>posix.error</CODE>, described below.
+<P>
+Module <CODE>posix</CODE> defines the following data items:
+<P>
+<DL><DT><STRONG><A NAME="">environ</A></STRONG>
+<DD>
+A dictionary representing the string environment at the time
+the interpreter was started.
+For example,
+<CODE>posix.environ['HOME']</CODE>
+is the pathname of your home directory, equivalent to
+<CODE>getenv(&quot;HOME&quot;)</CODE>
+in C.
+Modifying this dictionary does not affect the string environment
+passed on by <CODE>execv()</CODE>, <CODE>popen()</CODE> or <CODE>system()</CODE>; if you
+need to change the environment, pass <CODE>environ</CODE> to <CODE>execve()</CODE>
+or add variable assignments and export statements to the command
+string for <CODE>system()</CODE> or <CODE>popen()</CODE>.<A NAME="tex2html776" HREF="footnode.html#4756"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+This exception is raised when a POSIX function returns a
+POSIX-related error (e.g., not for illegal argument types).  Its
+string value is <CODE>'posix.error'</CODE>.  The accompanying value is a
+pair containing the numeric error code from <CODE>errno</CODE> and the
+corresponding string, as would be printed by the C function
+<CODE>perror()</CODE>.
+<P>
+</DL>
+<P>
+It defines the following functions and constants:
+<P>
+<DL><DT><STRONG><A NAME="4390">chdir</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Change the current working directory to <VAR>path</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4395">chmod</A></STRONG>(<VAR>path, mode</VAR>)
+<DD>
+Change the mode of <VAR>path</VAR> to the numeric <VAR>mode</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4401">chown</A></STRONG>(<VAR>path, uid, gid</VAR>)
+<DD>
+Change the owner and group id of <VAR>path</VAR> to the numeric <VAR>uid</VAR>
+and <VAR>gid</VAR>.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4408">close</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+Close file descriptor <VAR>fd</VAR>.
+<P>
+Note: this function is intended for low-level I/O and must be applied
+to a file descriptor as returned by <CODE>posix.open()</CODE> or
+<CODE>posix.pipe()</CODE>.  To close a ``file object'' returned by the
+built-in function <CODE>open</CODE> or by <CODE>posix.popen</CODE> or
+<CODE>posix.fdopen</CODE>, use its <CODE>close()</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4419">dup</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+Return a duplicate of file descriptor <VAR>fd</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4424">dup2</A></STRONG>(<VAR>fd, fd2</VAR>)
+<DD>
+Duplicate file descriptor <VAR>fd</VAR> to <VAR>fd2</VAR>, closing the latter
+first if necessary.  Return <CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4431">execv</A></STRONG>(<VAR>path, args</VAR>)
+<DD>
+Execute the executable <VAR>path</VAR> with argument list <VAR>args</VAR>,
+replacing the current process (i.e., the Python interpreter).
+The argument list may be a tuple or list of strings.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4437">execve</A></STRONG>(<VAR>path, args, env</VAR>)
+<DD>
+Execute the executable <VAR>path</VAR> with argument list <VAR>args</VAR>,
+and environment <VAR>env</VAR>,
+replacing the current process (i.e., the Python interpreter).
+The argument list may be a tuple or list of strings.
+The environment must be a dictionary mapping strings to strings.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4444">_exit</A></STRONG>(<VAR>n</VAR>)
+<DD>
+Exit to the system with status <VAR>n</VAR>, without calling cleanup
+handlers, flushing stdio buffers, etc.
+(Not on MS-DOS.)
+<P>
+Note: the standard way to exit is <CODE>sys.exit(<VAR>n</VAR>)</CODE>.
+<CODE>posix._exit()</CODE> should normally only be used in the child process
+after a <CODE>fork()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4763">fdopen</A></STRONG>(<VAR>fd</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>[</BIG><VAR>, bufsize</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return an open file object connected to the file descriptor <VAR>fd</VAR>.
+The <VAR>mode</VAR> and <VAR>bufsize</VAR> arguments have the same meaning as
+the corresponding arguments to the built-in <CODE>open()</CODE> function.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4460">fork</A></STRONG>(<VAR></VAR>)
+<DD>
+Fork a child process.  Return 0 in the child, the child's process id
+in the parent.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4464">fstat</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+Return status for file descriptor <VAR>fd</VAR>, like <CODE>stat()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4470">getcwd</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a string representing the current working directory.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4474">getegid</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current process's effective group id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4478">geteuid</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current process's effective user id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4482">getgid</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current process's group id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4486">getpgrp</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current process group id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4490">getpid</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current process id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4494">getppid</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the parent's process id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4498">getuid</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current process's user id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4502">kill</A></STRONG>(<VAR>pid, sig</VAR>)
+<DD>
+Kill the process <VAR>pid</VAR> with signal <VAR>sig</VAR>.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4508">link</A></STRONG>(<VAR>src, dst</VAR>)
+<DD>
+Create a hard link pointing to <VAR>src</VAR> named <VAR>dst</VAR>.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4514">listdir</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Return a list containing the names of the entries in the directory.
+The list is in arbitrary order.  It does not include the special
+entries <CODE>'.'</CODE> and <CODE>'..'</CODE> even if they are present in the
+directory.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4520">lseek</A></STRONG>(<VAR>fd, pos, how</VAR>)
+<DD>
+Set the current position of file descriptor <VAR>fd</VAR> to position
+<VAR>pos</VAR>, modified by <VAR>how</VAR>: 0 to set the position relative to
+the beginning of the file; 1 to set it relative to the current
+position; 2 to set it relative to the end of the file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4527">lstat</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Like <CODE>stat()</CODE>, but do not follow symbolic links.  (On systems
+without symbolic links, this is identical to <CODE>posix.stat</CODE>.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4759">mkfifo</A></STRONG>(<VAR>path</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Create a FIFO (a POSIX named pipe) named <VAR>path</VAR> with numeric mode
+<VAR>mode</VAR>.  The default <VAR>mode</VAR> is 0666 (octal).  The current
+umask value is first masked out from the mode.
+(Not on MS-DOS.)
+<P>
+FIFOs are pipes that can be accessed like regular files.  FIFOs exist
+until they are deleted (for example with <CODE>os.unlink</CODE>).
+Generally, FIFOs are used as rendez-vous between ``client'' and
+``server'' type processes: the server opens the FIFO for reading, and
+the client opens it for writing.  Note that <CODE>mkfifo()</CODE> doesn't
+open the FIFO - it just creates the rendez-vous point.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4760">mkdir</A></STRONG>(<VAR>path</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Create a directory named <VAR>path</VAR> with numeric mode <VAR>mode</VAR>.
+The default <VAR>mode</VAR> is 0777 (octal).  On some systems, <VAR>mode</VAR>
+is ignored.  Where it is used, the current umask value is first
+masked out.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4550">nice</A></STRONG>(<VAR>increment</VAR>)
+<DD>
+Add <VAR>incr</VAR> to the process' ``niceness''.  Return the new niceness.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4555">open</A></STRONG>(<VAR>file, flags, mode</VAR>)
+<DD>
+Open the file <VAR>file</VAR> and set various flags according to
+<VAR>flags</VAR> and possibly its mode according to <VAR>mode</VAR>.
+Return the file descriptor for the newly opened file.
+<P>
+Note: this function is intended for low-level I/O.  For normal usage,
+use the built-in function <CODE>open</CODE>, which returns a ``file object''
+with <CODE>read()</CODE> and  <CODE>write()</CODE> methods (and many more).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4565">pipe</A></STRONG>(<VAR></VAR>)
+<DD>
+Create a pipe.  Return a pair of file descriptors <CODE>(r, w)</CODE>
+usable for reading and writing, respectively.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4570">plock</A></STRONG>(<VAR>op</VAR>)
+<DD>
+Lock program segments into memory.  The value of <VAR>op</VAR>
+(defined in <CODE>&lt;sys/lock.h&gt;</CODE>) determines which segments are locked.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4764">popen</A></STRONG>(<VAR>command</VAR><BIG>[</BIG><VAR>, mode</VAR><BIG>[</BIG><VAR>, bufsize</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Open a pipe to or from <VAR>command</VAR>.  The return value is an open
+file object connected to the pipe, which can be read or written
+depending on whether <VAR>mode</VAR> is <CODE>'r'</CODE> (default) or <CODE>'w'</CODE>.
+The <VAR>bufsize</VAR> argument has the same meaning as the corresponding
+argument to the built-in <CODE>open()</CODE> function.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4586">read</A></STRONG>(<VAR>fd, n</VAR>)
+<DD>
+Read at most <VAR>n</VAR> bytes from file descriptor <VAR>fd</VAR>.
+Return a string containing the bytes read.
+<P>
+Note: this function is intended for low-level I/O and must be applied
+to a file descriptor as returned by <CODE>posix.open()</CODE> or
+<CODE>posix.pipe()</CODE>.  To read a ``file object'' returned by the
+built-in function <CODE>open</CODE> or by <CODE>posix.popen</CODE> or
+<CODE>posix.fdopen</CODE>, or <CODE>sys.stdin</CODE>, use its
+<CODE>read()</CODE> or <CODE>readline()</CODE> methods.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4600">readlink</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Return a string representing the path to which the symbolic link
+points.  (On systems without symbolic links, this always raises
+<CODE>posix.error</CODE>.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4605">remove</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Remove the file <VAR>path</VAR>.  See <CODE>rmdir</CODE> below to remove a directory.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4611">rename</A></STRONG>(<VAR>src, dst</VAR>)
+<DD>
+Rename the file or directory <VAR>src</VAR> to <VAR>dst</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4617">rmdir</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Remove the directory <VAR>path</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4622">setgid</A></STRONG>(<VAR>gid</VAR>)
+<DD>
+Set the current process's group id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4626">setpgrp</A></STRONG>(<VAR></VAR>)
+<DD>
+Calls the system call <CODE>setpgrp()</CODE> or <CODE>setpgrp(0, 0)</CODE>
+depending on which version is implemented (if any).  See the Unix
+manual for the semantics.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4633">setpgid</A></STRONG>(<VAR>pid, pgrp</VAR>)
+<DD>
+Calls the system call <CODE>setpgid()</CODE>.  See the Unix manual for
+the semantics.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4639">setsid</A></STRONG>(<VAR></VAR>)
+<DD>
+Calls the system call <CODE>setsid()</CODE>.  See the Unix manual for the
+semantics.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4645">setuid</A></STRONG>(<VAR>uid</VAR>)
+<DD>
+Set the current process's user id.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4649">stat</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Perform a <EM>stat</EM> system call on the given path.  The return value
+is a tuple of at least 10 integers giving the most important (and
+portable) members of the <EM>stat</EM> structure, in the order
+<CODE>st_mode</CODE>,
+<CODE>st_ino</CODE>,
+<CODE>st_dev</CODE>,
+<CODE>st_nlink</CODE>,
+<CODE>st_uid</CODE>,
+<CODE>st_gid</CODE>,
+<CODE>st_size</CODE>,
+<CODE>st_atime</CODE>,
+<CODE>st_mtime</CODE>,
+<CODE>st_ctime</CODE>.
+More items may be added at the end by some implementations.
+(On MS-DOS, some items are filled with dummy values.)
+<P>
+Note: The standard module <CODE>stat</CODE> defines functions and constants
+that are useful for extracting information from a stat structure.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4666">symlink</A></STRONG>(<VAR>src, dst</VAR>)
+<DD>
+Create a symbolic link pointing to <VAR>src</VAR> named <VAR>dst</VAR>.  (On
+systems without symbolic links, this always raises
+<CODE>posix.error</CODE>.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4673">system</A></STRONG>(<VAR>command</VAR>)
+<DD>
+Execute the command (a string) in a subshell.  This is implemented by
+calling the Standard C function <CODE>system()</CODE>, and has the same
+limitations.  Changes to <CODE>posix.environ</CODE>, <CODE>sys.stdin</CODE> etc. are
+not reflected in the environment of the executed command.  The return
+value is the exit status of the process as returned by Standard C
+<CODE>system()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4681">tcgetpgrp</A></STRONG>(<VAR>fd</VAR>)
+<DD>
+Return the process group associated with the terminal given by
+<VAR>fd</VAR> (an open file descriptor as returned by <CODE>posix.open()</CODE>).
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4687">tcsetpgrp</A></STRONG>(<VAR>fd, pg</VAR>)
+<DD>
+Set the process group associated with the terminal given by
+<VAR>fd</VAR> (an open file descriptor as returned by <CODE>posix.open()</CODE>)
+to <VAR>pg</VAR>.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4694">times</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a 5-tuple of floating point numbers indicating accumulated (CPU
+or other)
+times, in seconds.  The items are: user time, system time, children's
+user time, children's system time, and elapsed real time since a fixed
+point in the past, in that order.  See the Unix
+manual page <I>times</I>(2).  (Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4700">umask</A></STRONG>(<VAR>mask</VAR>)
+<DD>
+Set the current numeric umask and returns the previous umask.
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4704">uname</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a 5-tuple containing information identifying the current
+operating system.  The tuple contains 5 strings:
+<CODE>(<VAR>sysname</VAR>, <VAR>nodename</VAR>, <VAR>release</VAR>, <VAR>version</VAR>, <VAR>machine</VAR>)</CODE>.
+Some systems truncate the nodename to 8
+characters or to the leading component; a better way to get the
+hostname is <CODE>socket.gethostname()</CODE>.  (Not on MS-DOS, nor on older
+Unix systems.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4715">unlink</A></STRONG>(<VAR>path</VAR>)
+<DD>
+Remove the file <VAR>path</VAR>.  This is the same function as <CODE>remove</CODE>;
+the <CODE>unlink</CODE> name is its traditional Unix name.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4723">utime</A></STRONG>(<VAR>path,  <IMG WIDTH=92 HEIGHT=11 ALIGN=BOTTOM ALT="tex2html_wrap15800" SRC="img11.gif"  > </VAR>)
+<DD>
+Set the access and modified time of the file to the given values.
+(The second argument is a tuple of two items.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4727">wait</A></STRONG>(<VAR></VAR>)
+<DD>
+Wait for completion of a child process, and return a tuple containing
+its pid and exit status indication (encoded as by Unix).
+(Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4732">waitpid</A></STRONG>(<VAR>pid, options</VAR>)
+<DD>
+Wait for completion of a child process given by proces id, and return
+a tuple containing its pid and exit status indication (encoded as by
+Unix).  The semantics of the call are affected by the value of
+the integer options, which should be 0 for normal operation.  (If the
+system does not support <CODE>waitpid()</CODE>, this always raises
+<CODE>posix.error</CODE>.  Not on MS-DOS.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4739">write</A></STRONG>(<VAR>fd, str</VAR>)
+<DD>
+Write the string <VAR>str</VAR> to file descriptor <VAR>fd</VAR>.
+Return the number of bytes actually written.
+<P>
+Note: this function is intended for low-level I/O and must be applied
+to a file descriptor as returned by <CODE>posix.open()</CODE> or
+<CODE>posix.pipe()</CODE>.  To write a ``file object'' returned by the
+built-in function <CODE>open</CODE> or by <CODE>posix.popen</CODE> or
+<CODE>posix.fdopen</CODE>, or <CODE>sys.stdout</CODE> or <CODE>sys.stderr</CODE>, use
+its <CODE>write()</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">WNOHANG</A></STRONG>
+<DD>
+The option for <CODE>waitpid()</CODE> to avoid hanging if no child process
+status is available immediately.
+<P>
+</DL><HR><A NAME="tex2html3176" HREF="node75.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3174" HREF="node73.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3168" HREF="node73.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3178" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3179" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3177" HREF="node75.html">8.2 Standard Module posixpath</A>
+<B>Up:</B> <A NAME="tex2html3175" HREF="node73.html">8 UNIX Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html3169" HREF="node73.html">8 UNIX Specific Services</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

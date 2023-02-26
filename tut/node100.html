@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.5 Documentation Strings</TITLE>
+<META NAME="description" CONTENT="11.5 Documentation Strings">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1421" HREF="node101.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1419" HREF="node93.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1413" HREF="node99.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1423" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1422" HREF="node101.html">11.6 Customizing Import and </A>
+<B>Up:</B> <A NAME="tex2html1420" HREF="node93.html">11 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1414" HREF="node99.html">11.4.2 Copying Objects</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001250000000000000000">11.5 Documentation Strings</A></H1>
+<P>
+A variety of objects now have a new attribute, <CODE>__doc__</CODE>, which
+is supposed to contain a documentation string (if no documentation is
+present, the attribute is <CODE>None</CODE>).  New syntax, compatible with
+the old interpreter, allows for convenient initialization of the
+<CODE>__doc__</CODE> attribute of modules, classes and functions by placing
+a string literal by itself as the first statement in the suite.  It
+must be a literal -- an expression yielding a string object is not
+accepted as a documentation string, since future tools may need to
+derive documentation from source by parsing.
+<P>
+Here is a hypothetical, amply documented module called <CODE>Spam</CODE>:
+<P>
+<PRE>&quot;&quot;&quot;Spam operations.
+
+This module exports two classes, a function and an exception:
+
+class Spam: full Spam functionality --- three can sizes
+class SpamLight: limited Spam functionality --- only one can size
+
+def open(filename): open a file and return a corresponding Spam or
+SpamLight object
+
+GoneOff: exception raised for errors; should never happen
+
+Note that it is always possible to convert a SpamLight object to a
+Spam object by a simple method call, but that the reverse operation is
+generally costly and may fail for a number of reasons.
+&quot;&quot;&quot;
+
+class SpamLight:
+    &quot;&quot;&quot;Limited spam functionality.
+
+    Supports a single can size, no flavor, and only hard disks.
+    &quot;&quot;&quot;
+
+    def __init__(self, size=12):
+        &quot;&quot;&quot;Construct a new SpamLight instance.
+
+        Argument is the can size.
+        &quot;&quot;&quot;
+        # etc.
+
+    # etc.
+
+class Spam(SpamLight):
+    &quot;&quot;&quot;Full spam functionality.
+
+    Supports three can sizes, two flavor varieties, and all floppy
+    disk formats still supported by current hardware.
+    &quot;&quot;&quot;
+
+    def __init__(self, size1=8, size2=12, size3=20):
+        &quot;&quot;&quot;Construct a new Spam instance.
+
+        Arguments are up to three can sizes.
+        &quot;&quot;&quot;
+        # etc.
+
+    # etc.
+
+def open(filename = &quot;/dev/null&quot;):
+    &quot;&quot;&quot;Open a can of Spam.
+
+    Argument must be an existing file.
+    &quot;&quot;&quot;
+    # etc.
+
+class GoneOff:
+    &quot;&quot;&quot;Class used for Spam exceptions.
+
+    There shouldn't be any.
+    &quot;&quot;&quot;
+    pass</PRE>
+<P>
+After executing ``<CODE>import Spam</CODE>'', the following expressions
+return the various documentation strings from the module:
+<P>
+<PRE>Spam.__doc__
+Spam.SpamLight.__doc__
+Spam.SpamLight.__init__.__doc__
+Spam.Spam.__doc__
+Spam.Spam.__init__.__doc__
+Spam.open.__doc__
+Spam.GoneOff.__doc__</PRE>
+<P>
+There are emerging conventions about the content and formatting of
+documentation strings.
+<P>
+The first line should always be a short, concise summary of the
+object's purpose.  For brevity, it should not explicitly state the
+object's name or type, since these are available by other means
+(except if the name happens to be a verb describing a function's
+operation).  This line should begin with a capital letter and end with
+a period.
+<P>
+If there are more lines in the documentation string, the second line
+should be blank, visually separating the summary from the rest of the
+description.  The following lines should be one of more of paragraphs
+describing the objects calling conventions, its side effects, etc.
+<P>
+Some people like to copy the Emacs convention of using UPPER CASE for
+function parameters -- this often saves a few words or lines.
+<P>
+The Python parser does not strip indentation from multi-line string
+literals in Python, so tools that process documentation have to strip
+indentation.  This is done using the following convention.  The first
+non-blank line <EM>after</EM> the first line of the string determines the
+amount of indentation for the entire documentation string.  (We can't
+use the first line since it is generally adjacent to the string's
+opening quotes so its indentation is not apparent in the string
+literal.)  Whitespace ``equivalent'' to this indentation is then
+stripped from the start of all lines of the string.  Lines that are
+indented less should not occur, but if they occur all their leading
+whitespace should be stripped.  Equivalence of whitespace should be
+tested after expansion of tabs (to 8 spaces, normally).
+<P>
+In this release, few of the built-in or standard functions and modules
+have documentation strings.
+<P>
+<HR><A NAME="tex2html1421" HREF="node101.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1419" HREF="node93.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1413" HREF="node99.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1423" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1422" HREF="node101.html">11.6 Customizing Import and </A>
+<B>Up:</B> <A NAME="tex2html1420" HREF="node93.html">11 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1414" HREF="node99.html">11.4.2 Copying Objects</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.1 More on Modules</TITLE>
+<META NAME="description" CONTENT="6.1 More on Modules">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html729" HREF="node43.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html727" HREF="node41.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html721" HREF="node41.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html731" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html730" HREF="node43.html">6.2 Standard Modules</A>
+<B>Up:</B> <A NAME="tex2html728" HREF="node41.html">6 Modules</A>
+<B> Previous:</B> <A NAME="tex2html722" HREF="node41.html">6 Modules</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00710000000000000000">6.1 More on Modules</A></H1>
+<P>
+A module can contain executable statements as well as function
+definitions.
+These statements are intended to initialize the module.
+They are executed only the
+<EM>first</EM>
+time the module is imported somewhere.<A NAME="tex2html5" HREF="footnode.html#296"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+Each module has its own private symbol table, which is used as the
+global symbol table by all functions defined in the module.
+Thus, the author of a module can use global variables in the module
+without worrying about accidental clashes with a user's global
+variables.
+On the other hand, if you know what you are doing you can touch a
+module's global variables with the same notation used to refer to its
+functions,
+<TT>modname.itemname</TT>.
+<P>
+Modules can import other modules.
+It is customary but not required to place all
+<TT>import</TT>
+statements at the beginning of a module (or script, for that matter).
+The imported module names are placed in the importing module's global
+symbol table.
+<P>
+There is a variant of the
+<TT>import</TT>
+statement that imports names from a module directly into the importing
+module's symbol table.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; from fibo import fib, fib2
+&gt;&gt;&gt; fib(500)
+1 1 2 3 5 8 13 21 34 55 89 144 233 377
+&gt;&gt;&gt;</PRE>
+This does not introduce the module name from which the imports are taken
+in the local symbol table (so in the example, <TT>fibo</TT> is not
+defined).
+<P>
+There is even a variant to import all names that a module defines:
+<P>
+<PRE>&gt;&gt;&gt; from fibo import *
+&gt;&gt;&gt; fib(500)
+1 1 2 3 5 8 13 21 34 55 89 144 233 377
+&gt;&gt;&gt;</PRE>
+This imports all names except those beginning with an underscore
+(<TT>_</TT>).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

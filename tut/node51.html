@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.5 User-defined Exceptions</TITLE>
+<META NAME="description" CONTENT="8.5 User-defined Exceptions">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html832" HREF="node52.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html830" HREF="node46.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html824" HREF="node50.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html834" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html833" HREF="node52.html">8.6 Defining Clean-up Actions</A>
+<B>Up:</B> <A NAME="tex2html831" HREF="node46.html">8 Errors and Exceptions</A>
+<B> Previous:</B> <A NAME="tex2html825" HREF="node50.html">8.4 Raising Exceptions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00950000000000000000">8.5 User-defined Exceptions</A></H1>
+<P>
+Programs may name their own exceptions by assigning a string to a
+variable.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; my_exc = 'my_exc'
+&gt;&gt;&gt; try:
+...     raise my_exc, 2*2
+... except my_exc, val:
+...     print 'My exception occurred, value:', val
+... 
+My exception occurred, value: 4
+&gt;&gt;&gt; raise my_exc, 1
+Traceback (innermost last):
+  File &quot;&lt;stdin&gt;&quot;, line 1
+my_exc: 1
+&gt;&gt;&gt;</PRE>
+Many standard modules use this to report errors that may occur in
+functions they define.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

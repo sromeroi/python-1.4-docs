@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.2.1 Error Handling</TITLE>
+<META NAME="description" CONTENT="2.2.1 Error Handling">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html375" HREF="node12.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html373" HREF="node10.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html367" HREF="node10.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html377" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html376" HREF="node12.html">2.2.2 The Module Search </A>
+<B>Up:</B> <A NAME="tex2html374" HREF="node10.html">2.2 The Interpreter and </A>
+<B> Previous:</B> <A NAME="tex2html368" HREF="node10.html">2.2 The Interpreter and </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00321000000000000000">2.2.1 Error Handling</A></H2>
+<P>
+When an error occurs, the interpreter prints an error
+message and a stack trace.  In interactive mode, it then returns to
+the primary prompt; when input came from a file, it exits with a
+nonzero exit status after printing
+the stack trace.  (Exceptions handled by an <TT>except</TT> clause in a
+<TT>try</TT> statement are not errors in this context.)  Some errors are
+unconditionally fatal and cause an exit with a nonzero exit; this
+applies to internal inconsistencies and some cases of running out of
+memory.  All error messages are written to the standard error stream;
+normal output from the executed commands is written to standard
+output.
+<P>
+Typing the interrupt character (usually Control-C or DEL) to the
+primary or secondary prompt cancels the input and returns to the
+primary prompt.<A NAME="tex2html1" HREF="footnode.html#69"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+Typing an interrupt while a command is executing raises the <TT>
+KeyboardInterrupt</TT> exception, which may be handled by a <TT>try</TT>
+statement.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

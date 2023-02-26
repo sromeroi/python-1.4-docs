@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.10.2 Reference Counting in Python</TITLE>
+<META NAME="description" CONTENT="1.10.2 Reference Counting in Python">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html352" HREF="node15.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html350" HREF="node12.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html344" HREF="node13.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html354" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html355" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html353" HREF="node15.html">1.10.3 Ownership Rules</A>
+<B>Up:</B> <A NAME="tex2html351" HREF="node12.html">1.10 Reference Counts</A>
+<B> Previous:</B> <A NAME="tex2html345" HREF="node13.html">1.10.1 Introduction</A>
+<BR><HR><P>
+<H2><A NAME="SECTION002102000000000000000">1.10.2 Reference Counting in Python</A></H2>
+<P>
+There are two macros, <CODE>Py_INCREF(x)</CODE> and <CODE>Py_DECREF(x)</CODE>,
+which handle the incrementing and decrementing of the reference count.
+<CODE>Py_DECREF()</CODE> also frees the object when the count reaches zero.
+For flexibility, it doesn't call <CODE>free()</CODE> directly -- rather, it
+makes a call through a function pointer in the object's <I><DFN>type
+object</DFN></I>.  For this purpose (and others), every object also contains a
+pointer to its type object.
+<P>
+The big question now remains: when to use <CODE>Py_INCREF(x)</CODE> and
+<CODE>Py_DECREF(x)</CODE>?  Let's first introduce some terms.  Nobody
+``owns'' an object; however, you can <I><DFN>own a reference</DFN></I> to an
+object.  An object's reference count is now defined as the number of
+owned references to it.  The owner of a reference is responsible for
+calling <CODE>Py_DECREF()</CODE> when the reference is no longer needed.
+Ownership of a reference can be transferred.  There are three ways to
+dispose of an owned reference: pass it on, store it, or call
+<CODE>Py_DECREF()</CODE>.  Forgetting to dispose of an owned reference creates
+a memory leak.
+<P>
+It is also possible to <I><DFN>borrow</DFN></I><A NAME="tex2html2" HREF="footnode.html#372"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A> a reference to an object.  The borrower
+of a reference should not call <CODE>Py_DECREF()</CODE>.  The borrower must
+not hold on to the object longer than the owner from which it was
+borrowed.  Using a borrowed reference after the owner has disposed of
+it risks using freed memory and should be avoided
+completely.<A NAME="tex2html3" HREF="footnode.html#537"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+The advantage of borrowing over owning a reference is that you don't
+need to take care of disposing of the reference on all possible paths
+through the code -- in other words, with a borrowed reference you
+don't run the risk of leaking when a premature exit is taken.  The
+disadvantage of borrowing over leaking is that there are some subtle
+situations where in seemingly correct code a borrowed reference can be
+used after the owner from which it was borrowed has in fact disposed
+of it.
+<P>
+A borrowed reference can be changed into an owned reference by calling
+<CODE>Py_INCREF()</CODE>.  This does not affect the status of the owner from
+which the reference was borrowed -- it creates a new owned reference,
+and gives full owner responsibilities (i.e., the new owner must
+dispose of the reference properly, as well as the previous owner).
+<P>
+<HR><A NAME="tex2html352" HREF="node15.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html350" HREF="node12.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html344" HREF="node13.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html354" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html355" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html353" HREF="node15.html">1.10.3 Ownership Rules</A>
+<B>Up:</B> <A NAME="tex2html351" HREF="node12.html">1.10 Reference Counts</A>
+<B> Previous:</B> <A NAME="tex2html345" HREF="node13.html">1.10.1 Introduction</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

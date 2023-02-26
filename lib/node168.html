@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.6 Built-in Module macfs</TITLE>
+<META NAME="description" CONTENT="15.6 Built-in Module macfs">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4388" HREF="node169.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4386" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4380" HREF="node167.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4390" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4391" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4389" HREF="node169.html">15.6.1 FSSpec objects</A>
+<B>Up:</B> <A NAME="tex2html4387" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4381" HREF="node167.html">15.5.1 dnr result object</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001660000000000000000">15.6 Built-in Module <CODE>macfs</CODE></A></H1>
+<P>
+This module provides access to macintosh FSSpec handling, the Alias
+Manager, finder aliases and the Standard File package.
+<P>
+Whenever a function or method expects a <VAR>file</VAR> argument, this
+argument can be one of three things: (1) a full or partial Macintosh
+pathname, (2) an FSSpec object or (3) a 3-tuple <CODE>(wdRefNum,
+parID, name)</CODE> as described in Inside Mac VI. A description of aliases
+and the standard file package can also be found there.
+<P>
+<DL><DT><STRONG><A NAME="8921">FSSpec</A></STRONG>(<VAR>file</VAR>)
+<DD>
+Create an FSSpec object for the specified file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8925">RawFSSpec</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Create an FSSpec object given the raw data for the C structure for the
+FSSpec as a string.  This is mainly useful if you have obtained an
+FSSpec structure over a network.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8929">RawAlias</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Create an Alias object given the raw data for the C structure for the
+alias as a string.  This is mainly useful if you have obtained an
+FSSpec structure over a network.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8933">FInfo</A></STRONG>(<VAR></VAR>)
+<DD>
+Create a zero-filled FInfo object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8937">ResolveAliasFile</A></STRONG>(<VAR>file</VAR>)
+<DD>
+Resolve an alias file. Returns a 3-tuple <CODE>(<VAR>fsspec</VAR>, <VAR>isfolder</VAR>,
+<VAR>aliased</VAR>)</CODE> where <VAR>fsspec</VAR> is the resulting FSSpec object,
+<VAR>isfolder</VAR> is true if <VAR>fsspec</VAR> points to a folder and
+<VAR>aliased</VAR> is true if the file was an alias in the first place
+(otherwise the FSSpec object for the file itself is returned).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9089">StandardGetFile</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>type, ...</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Present the user with a standard ``open input file''
+dialog. Optionally, you can pass up to four 4-char file types to limit
+the files the user can choose from. The function returns an FSSpec
+object and a flag indicating that the user completed the dialog
+without cancelling.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9090">PromptGetFile</A></STRONG>(<VAR>prompt</VAR><BIG>[</BIG><VAR>, type, ...</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Similar to <VAR>StandardGetFile</VAR> but allows you to specify a prompt.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9091">StandardPutFile</A></STRONG>(<VAR>prompt, </VAR><BIG>[</BIG><VAR>default</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Present the user with a standard ``open output file''
+dialog. <VAR>prompt</VAR> is the prompt string, and the optional
+<VAR>default</VAR> argument initializes the output file name. The function
+returns an FSSpec object and a flag indicating that the user completed
+the dialog without cancelling.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9092">GetDirectory</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>prompt</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Present the user with a non-standard ``select a directory''
+dialog. <VAR>prompt</VAR> is the prompt string, and the optional.
+Return an FSSpec object and a success-indicator.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9093">SetFolder</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>fsspec</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Set the folder that is initially presented to the user when one of
+the file selection dialogs is presented. <VAR>Fsspec</VAR> should point to
+a file in the folder, not the folder itself (the file need not exist,
+though). If no argument is passed the folder will be set to the
+current directory, i.e. what <CODE>os.getcwd()</CODE> returns.
+<P>
+Note that starting with system 7.5 the user can change Standard File
+behaviour with the ``general controls'' controlpanel, thereby making
+this call inoperative.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8974">FindFolder</A></STRONG>(<VAR>where, which, create</VAR>)
+<DD>
+Locates one of the ``special'' folders that MacOS knows about, such as
+the trash or the Preferences folder. <VAR>Where</VAR> is the disk to
+search, <VAR>which</VAR> is the 4-char string specifying which folder to
+locate. Setting <VAR>create</VAR> causes the folder to be created if it
+does not exist. Returns a <CODE>(vrefnum, dirid)</CODE> tuple.
+<P>
+The constants for <VAR>where</VAR> and <VAR>which</VAR> can be obtained from the
+standard module <VAR>MACFS</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8985">FindApplication</A></STRONG>(<VAR>creator</VAR>)
+<DD>
+Locate the application with 4-char creator code <VAR>creator</VAR>. The
+function returns an FSSpec object pointing to the application.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4392" HREF="node169.html#SECTION001661000000000000000">15.6.1 FSSpec objects</A>
+<LI> <A NAME="tex2html4393" HREF="node170.html#SECTION001662000000000000000">15.6.2 alias objects</A>
+<LI> <A NAME="tex2html4394" HREF="node171.html#SECTION001663000000000000000">15.6.3 FInfo objects</A>
+</UL>
+<HR><A NAME="tex2html4388" HREF="node169.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4386" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4380" HREF="node167.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4390" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4391" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4389" HREF="node169.html">15.6.1 FSSpec objects</A>
+<B>Up:</B> <A NAME="tex2html4387" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4381" HREF="node167.html">15.5.1 dnr result object</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

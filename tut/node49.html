@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.3 Handling Exceptions</TITLE>
+<META NAME="description" CONTENT="8.3 Handling Exceptions">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html810" HREF="node50.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html808" HREF="node46.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html802" HREF="node48.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html812" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html811" HREF="node50.html">8.4 Raising Exceptions</A>
+<B>Up:</B> <A NAME="tex2html809" HREF="node46.html">8 Errors and Exceptions</A>
+<B> Previous:</B> <A NAME="tex2html803" HREF="node48.html">8.2 Exceptions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00930000000000000000">8.3 Handling Exceptions</A></H1>
+<P>
+It is possible to write programs that handle selected exceptions.
+Look at the following example, which prints a table of inverses of
+some floating point numbers:
+<P>
+<PRE>&gt;&gt;&gt; numbers = [0.3333, 2.5, 0, 10]
+&gt;&gt;&gt; for x in numbers:
+...     print x,
+...     try:
+...         print 1.0 / x
+...     except ZeroDivisionError:
+...         print '*** has no inverse ***'
+... 
+0.3333 3.00030003
+2.5 0.4
+0 *** has no inverse ***
+10 0.1
+&gt;&gt;&gt;</PRE>
+The <TT>try</TT> statement works as follows.
+<UL><LI>
+First, the
+<EM>try clause</EM>
+(the statement(s) between the <TT>try</TT> and <TT>except</TT> keywords) is
+executed.<LI>
+If no exception occurs, the
+<EM>except clause</EM>
+is skipped and execution of the <TT>try</TT> statement is finished.<LI>
+If an exception occurs during execution of the try clause,
+the rest of the clause is skipped.  Then if
+its type matches the exception named after the <TT>except</TT> keyword,
+the rest of the try clause is skipped, the except clause is executed,
+and then execution continues after the <TT>try</TT> statement.<LI>
+If an exception occurs which does not match the exception named in the
+except clause, it is passed on to outer try statements; if no handler is
+found, it is an
+<EM>unhandled exception</EM>
+and execution stops with a message as shown above.
+</UL>
+A <TT>try</TT> statement may have more than one except clause, to specify
+handlers for different exceptions.
+At most one handler will be executed.
+Handlers only handle exceptions that occur in the corresponding try
+clause, not in other handlers of the same <TT>try</TT> statement.
+An except clause may name multiple exceptions as a parenthesized list,
+e.g.:
+<P>
+<PRE>... except (RuntimeError, TypeError, NameError):
+...     pass</PRE>
+The last except clause may omit the exception name(s), to serve as a
+wildcard.
+Use this with extreme caution, since it is easy to mask a real
+programming error in this way!
+<P>
+When an exception occurs, it may have an associated value, also known as
+the exceptions's
+<EM>argument</EM>.
+The presence and type of the argument depend on the exception type.
+For exception types which have an argument, the except clause may
+specify a variable after the exception name (or list) to receive the
+argument's value, as follows:
+<P>
+<PRE>&gt;&gt;&gt; try:
+...     spam()
+... except NameError, x:
+...     print 'name', x, 'undefined'
+... 
+name spam undefined
+&gt;&gt;&gt;</PRE>
+If an exception has an argument, it is printed as the last part
+(`detail') of the message for unhandled exceptions.
+<P>
+Exception handlers don't just handle exceptions if they occur
+immediately in the try clause, but also if they occur inside functions
+that are called (even indirectly) in the try clause.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; def this_fails():
+...     x = 1/0
+... 
+&gt;&gt;&gt; try:
+...     this_fails()
+... except ZeroDivisionError, detail:
+...     print 'Handling run-time error:', detail
+... 
+Handling run-time error: integer division or modulo
+&gt;&gt;&gt;</PRE>
+<P>
+<HR><A NAME="tex2html810" HREF="node50.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html808" HREF="node46.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html802" HREF="node48.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html812" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html811" HREF="node50.html">8.4 Raising Exceptions</A>
+<B>Up:</B> <A NAME="tex2html809" HREF="node46.html">8 Errors and Exceptions</A>
+<B> Previous:</B> <A NAME="tex2html803" HREF="node48.html">8.2 Exceptions</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

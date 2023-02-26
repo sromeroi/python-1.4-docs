@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.4.2 console window object</TITLE>
+<META NAME="description" CONTENT="15.4.2 console window object">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4353" HREF="node166.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4351" HREF="node163.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4347" HREF="node164.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4355" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4356" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4354" HREF="node166.html">15.5 Built-in Module macdnr</A>
+<B>Up:</B> <A NAME="tex2html4352" HREF="node163.html">15.4 Built-in Module macconsole</A>
+<B> Previous:</B> <A NAME="tex2html4348" HREF="node164.html">15.4.1 macconsole options object</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001642000000000000000">15.4.2 console window object</A></H2>
+<P>
+<DL><DT><STRONG><A NAME="">file</A></STRONG>
+<DD>
+The file object corresponding to this console window. If the file is
+buffered, you should call <CODE>file.flush()</CODE> between <CODE>write()</CODE>
+and <CODE>read()</CODE> calls.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8792">setmode</A></STRONG>(<VAR>mode</VAR>)
+<DD>
+Set the input mode of the console to <VAR>C_ECHO</VAR>, etc.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8797">settabs</A></STRONG>(<VAR>n</VAR>)
+<DD>
+Set the tabsize to <VAR>n</VAR> spaces.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8802">cleos</A></STRONG>(<VAR></VAR>)
+<DD>
+Clear to end-of-screen.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8806">cleol</A></STRONG>(<VAR></VAR>)
+<DD>
+Clear to end-of-line.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8810">inverse</A></STRONG>(<VAR>onoff</VAR>)
+<DD>
+Enable inverse-video mode: characters with the high bit set are
+displayed in inverse video (this disables the upper half of a
+non-ASCII character set).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8815">gotoxy</A></STRONG>(<VAR>x, y</VAR>)
+<DD>
+Set the cursor to position <CODE>(<VAR>x</VAR>, <VAR>y</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8821">hide</A></STRONG>(<VAR></VAR>)
+<DD>
+Hide the window, remembering the contents.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8825">show</A></STRONG>(<VAR></VAR>)
+<DD>
+Show the window again.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="8829">echo2printer</A></STRONG>(<VAR></VAR>)
+<DD>
+Copy everything written to the window to the printer as well.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

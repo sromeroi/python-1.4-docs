@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.8 Built-in Module imp</TITLE>
+<META NAME="description" CONTENT="3.8 Built-in Module imp">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2679" HREF="node36.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2677" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2671" HREF="node34.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2681" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2682" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2680" HREF="node36.html">3.8.1 Examples</A>
+<B>Up:</B> <A NAME="tex2html2678" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2672" HREF="node34.html">3.7 Built-in Module marshal</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00480000000000000000">3.8 Built-in Module <CODE>imp</CODE></A></H1>
+<P>
+<A NAME="2023">&#160;</A>
+<P>
+This module provides an interface to the mechanisms used to implement
+the <CODE>import</CODE> statement.  It defines the following constants and
+functions:
+<P>
+<DL><DT><STRONG><A NAME="2029">get_magic</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the magic string value used to recognize byte-compiled code
+files (``<CODE>.pyc</CODE> files'').
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2034">get_suffixes</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a list of triples, each describing a particular type of file.
+Each triple has the form <CODE>(<VAR>suffix</VAR>, <VAR>mode</VAR>,
+<VAR>type</VAR>)</CODE>, where <VAR>suffix</VAR> is a string to be appended to the
+module name to form the filename to search for, <VAR>mode</VAR> is the mode
+string to pass to the built-in <CODE>open</CODE> function to open the file
+(this can be <CODE>'r'</CODE> for text files or <CODE>'rb'</CODE> for binary
+files), and <VAR>type</VAR> is the file type, which has one of the values
+<CODE>PY_SOURCE</CODE>, <CODE>PY_COMPILED</CODE> or <CODE>C_EXTENSION</CODE>, defined
+below.  (System-dependent values may also be returned.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2150">find_module</A></STRONG>(<VAR>name, </VAR><BIG>[</BIG><VAR>path</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Try to find the module <VAR>name</VAR> on the search path <VAR>path</VAR>.  The
+default <VAR>path</VAR> is <CODE>sys.path</CODE>.  The return value is a triple
+<CODE>(<VAR>file</VAR>, <VAR>pathname</VAR>, <VAR>description</VAR>)</CODE> where
+<VAR>file</VAR> is an open file object positioned at the beginning,
+<VAR>pathname</VAR> is the pathname of the
+file found, and <VAR>description</VAR> is a triple as contained in the list
+returned by <CODE>get_suffixes</CODE> describing the kind of file found.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2065">init_builtin</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Initialize the built-in module called <VAR>name</VAR> and return its module
+object.  If the module was already initialized, it will be initialized
+<EM>again</EM>.  A few modules cannot be initialized twice -- attempting
+to initialize these again will raise an <CODE>ImportError</CODE> exception.
+If there is no
+built-in module called <VAR>name</VAR>, <CODE>None</CODE> is returned.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2074">init_frozen</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Initialize the frozen module called <VAR>name</VAR> and return its module
+object.  If the module was already initialized, it will be initialized
+<EM>again</EM>.  If there is no frozen module called <VAR>name</VAR>,
+<CODE>None</CODE> is returned.  (Frozen modules are modules written in
+Python whose compiled byte-code object is incorporated into a
+custom-built Python interpreter by Python's <CODE>freeze</CODE> utility.
+See <CODE>Tools/freeze</CODE> for now.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2084">is_builtin</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return <CODE>1</CODE> if there is a built-in module called <VAR>name</VAR> which can be
+initialized again.  Return <CODE>-1</CODE> if there is a built-in module
+called <VAR>name</VAR> which cannot be initialized again (see
+<CODE>init_builtin</CODE>).  Return <CODE>0</CODE> if there is no built-in module
+called <VAR>name</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2095">is_frozen</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return <CODE>1</CODE> if there is a frozen module (see <CODE>init_frozen</CODE>)
+called <VAR>name</VAR>, <CODE>0</CODE> if there is no such module.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2103">load_compiled</A></STRONG>(<VAR>name, pathname, file</VAR>)
+<DD>
+Load and initialize a module implemented as a byte-compiled code file
+and return its module object.  If the module was already initialized,
+it will be initialized <EM>again</EM>.  The <VAR>name</VAR> argument is used
+to create or access a module object.  The <VAR>pathname</VAR> argument
+points to the byte-compiled code file.  The <VAR>file</VAR>
+argument is the byte-compiled code file, open for reading in binary
+mode, from the beginning.
+It must currently be a real file object, not a
+user-defined class emulating a file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2152">load_dynamic</A></STRONG>(<VAR>name, pathname, </VAR><BIG>[</BIG><VAR>file</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Load and initialize a module implemented as a dynamically loadable
+shared library and return its module object.  If the module was
+already initialized, it will be initialized <EM>again</EM>.  Some modules
+don't like that and may raise an exception.  The <VAR>pathname</VAR>
+argument must point to the shared library.  The <VAR>name</VAR> argument is
+used to construct the name of the initialization function: an external
+C function called <CODE>init<VAR>name</VAR>()</CODE> in the shared library is
+called.  The optional <VAR>file</VAR> argment is ignored.  (Note: using
+shared libraries is highly system dependent, and not all systems
+support it.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2120">load_source</A></STRONG>(<VAR>name, pathname, file</VAR>)
+<DD>
+Load and initialize a module implemented as a Python source file and
+return its module object.  If the module was already initialized, it
+will be initialized <EM>again</EM>.  The <VAR>name</VAR> argument is used to
+create or access a module object.  The <VAR>pathname</VAR> argument points
+to the source file.  The <VAR>file</VAR> argument is the source
+file, open for reading as text, from the beginning.
+It must currently be a real file
+object, not a user-defined class emulating a file.  Note that if a
+properly matching byte-compiled file (with suffix <CODE>.pyc</CODE>) exists,
+it will be used instead of parsing the given source file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2129">new_module</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return a new empty module object called <VAR>name</VAR>.  This object is
+<EM>not</EM> inserted in <CODE>sys.modules</CODE>.
+<P>
+</DL>
+<P>
+The following constants with integer values, defined in the module,
+are used to indicate the search result of <CODE>imp.find_module</CODE>.
+<P>
+<DL><DT><STRONG><A NAME="">SEARCH_ERROR</A></STRONG>
+<DD>
+The module was not found.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">PY_SOURCE</A></STRONG>
+<DD>
+The module was found as a source file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">PY_COMPILED</A></STRONG>
+<DD>
+The module was found as a compiled code object file.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">C_EXTENSION</A></STRONG>
+<DD>
+The module was found as dynamically loadable shared library.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html2683" HREF="node36.html#SECTION00481000000000000000">3.8.1 Examples</A>
+</UL>
+<HR><A NAME="tex2html2679" HREF="node36.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2677" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2671" HREF="node34.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2681" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2682" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2680" HREF="node36.html">3.8.1 Examples</A>
+<B>Up:</B> <A NAME="tex2html2678" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2672" HREF="node34.html">3.7 Built-in Module marshal</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

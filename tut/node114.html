@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.3 New or Updated Modules</TITLE>
+<META NAME="description" CONTENT="13.3 New or Updated Modules">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1581" HREF="node115.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1579" HREF="node111.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1573" HREF="node113.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1583" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1582" HREF="node115.html">13.4 Configuration and Installation</A>
+<B>Up:</B> <A NAME="tex2html1580" HREF="node111.html">13 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1574" HREF="node113.html">13.2 Run-time Changes</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001430000000000000000">13.3 New or Updated Modules</A></H1>
+<P>
+<UL><LI>
+New built-in module <CODE>operator</CODE>.  While undocumented, the concept
+is real simply: <CODE>operator.__add__(x, y)</CODE> does exactly the same
+thing as <CODE>x+y</CODE> (for all types -- built-in, user-defined,
+extension-defined).  As a convenience, <CODE>operator.add</CODE> does the
+same thing, but beware -- you can't use <CODE>operator.and</CODE> and a few
+others where the ``natural'' name for an operator is a reserved
+keyword.  You can add a single trailing underscore in such cases.<LI>
+New built-in module <CODE>errno</CODE>.  See the Library Reference Manual.<LI>
+Rewritten <CODE>cgi</CODE> module.  See the Library Reference Manual.<LI>
+Improved restricted execution module (<CODE>rexec</CODE>).  New module 
+<CODE>Bastion</CODE>.  Both are now documented in a new chapter on
+restricted execution in the Library Reference Manual.<LI>
+New string operations (all described in the Library Reference Manual):
+<CODE>lstrip()</CODE>, <CODE>rstrip()</CODE> (strip only the left/right
+whitespace), <CODE>capitalize()</CODE> (uppercase the first character,
+lowercase the rest), <CODE>capwords()</CODE> (capitalize each word,
+delimited a la <CODE>string.split()</CODE>), <CODE>translate()</CODE> (string
+transliteration - this existed before but can now also delete
+characters by specifying a third argument), <CODE>maketrans()</CODE> (a
+convenience function for creating translation tables for
+<CODE>translate()</CODE> and <CODE>regex.compile()</CODE>).  The string function
+<CODE>split()</CODE> has an optional third argument which specifies the
+maximum number of separators to split;
+e.g. <CODE>string.split('a=b=c', '=', 1)</CODE> yields <CODE>['a', 'b=c']</CODE>.
+(Note that for a long time, <CODE>split()</CODE> and <CODE>splitfields()</CODE>
+are synonyms.<LI>
+New regsub operations (see the Library Reference Manual):
+<CODE>regsub.capwords()</CODE> (like <CODE>string.capwords()</CODE> but allows you to
+specify the word delimiter as a regular expression),
+<CODE>regsub.splitx()</CODE> (like <CODE>regsub.split()</CODE> but returns the
+delimiters as well as the words in the resulting list).  The optional
+<CODE>maxsep</CODE> argument is also supported by <CODE>regsub.split()</CODE>.<LI>
+Module files <CODE>pdb.py</CODE> and <CODE>profile.py</CODE> can now be invoked as
+scripts to debug c.q. profile other scripts easily.  For example:
+<CODE>python /usr/local/lib/python1.4/profile.py myscript.py</CODE><LI>
+The <CODE>os</CODE> module now supports the <CODE>putenv()</CODE> function on
+systems where it is provided in the C library (Windows NT and most
+Unix versions).  For example, <CODE>os.putenv('PATH',
+'/bin:/usr/bin')</CODE> sets the environment variable <CODE>PATH</CODE> to the
+string <CODE>'/bin:/usr/bin'</CODE>.  Such changes to the environment affect
+subprocesses started with <CODE>os.system()</CODE>, <CODE>os.popen()</CODE> or
+<CODE>os.fork()</CODE> and <CODE>os.execv()</CODE>.  When <CODE>putenv()</CODE> is
+supported, assignments to items in <CODE>os.environ</CODE> are automatically
+translated into corresponding calls to <CODE>os.putenv()</CODE>; however,
+calls to <CODE>os.putenv()</CODE> don't update <CODE>os.environ</CODE>, so it is
+actually preferable to assign to items of <CODE>os.environ</CODE>.  For this
+purpose, the type of <CODE>os.environ</CODE> is changed to a subclass of
+<CODE>UserDict.UserDict</CODE> when <CODE>os.putenv()</CODE> is supported.
+(Buglet: <CODE>os.execve()</CODE> still requires a real dictionary, so it
+won't accept <CODE>os.environ</CODE> as its third argument.  However, you
+can now use <CODE>os.execv()</CODE> and it will use your changes to
+<CODE>os.environ</CODE>!.)<LI>
+More new functions in the <CODE>os</CODE> module: <CODE>mkfifo</CODE>,
+<CODE>plock</CODE>, <CODE>remove</CODE> (== <CODE>unlink</CODE>), and <CODE>ftruncate</CODE>.
+See the Unix manual (section 2, system calls) for these function.
+More functions are also available under NT.<LI>
+New functions in the fcntl module: <CODE>lockf()</CODE> and <CODE>flock()</CODE>
+(don't ask <CODE>:-)</CODE>).  See the Library Reference Manual.<LI>
+The first item of the module search path, <CODE>sys.path[0]</CODE>, is the 
+directory containing the script that was used to invoke the Python 
+interpreter.  If the script directory is not available (e.g.  if the 
+interpreter is invoked interactively or if the script is read from 
+standard input), <CODE>sys.path[0]</CODE> is the empty string, which directs 
+Python to search modules in the current directory first.  Notice that 
+the script directory is inserted <EM>before</EM> the entries inserted as 
+a result of <CODE>$PYTHONPATH</CODE>.  There is no longer an entry for the 
+current directory later in the path (unless explicitly set in 
+<CODE>$PYTHONPATH</CODE> or overridden at build time).
+<P>
+</UL><HR><A NAME="tex2html1581" HREF="node115.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1579" HREF="node111.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1573" HREF="node113.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1583" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1582" HREF="node115.html">13.4 Configuration and Installation</A>
+<B>Up:</B> <A NAME="tex2html1580" HREF="node111.html">13 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1574" HREF="node113.html">13.2 Run-time Changes</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

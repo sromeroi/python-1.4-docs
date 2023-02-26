@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.2.2 The Module Search Path</TITLE>
+<META NAME="description" CONTENT="2.2.2 The Module Search Path">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html386" HREF="node13.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html384" HREF="node10.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html378" HREF="node11.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html388" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html387" HREF="node13.html">2.2.3 ``Compiled'' Python files</A>
+<B>Up:</B> <A NAME="tex2html385" HREF="node10.html">2.2 The Interpreter and </A>
+<B> Previous:</B> <A NAME="tex2html379" HREF="node11.html">2.2.1 Error Handling</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00322000000000000000">2.2.2 The Module Search Path</A></H2>
+<P>
+When a module named <TT>spam</TT> is imported, the interpreter searches
+for a file named <TT>spam.py</TT> in the current directory,
+and then in the list of directories specified by
+the environment variable <TT>PYTHONPATH</TT>.  This has the same syntax as
+the Unix shell variable <TT>PATH</TT>, i.e., a list of colon-separated
+directory names.  When <TT>PYTHONPATH</TT> is not set, or when the file
+is not found there, the search continues in an installation-dependent
+default path, usually <TT>.:/usr/local/lib/python</TT>.
+<P>
+Actually, modules are searched in the list of directories given by the 
+variable <TT>sys.path</TT> which is initialized from the directory 
+containing the input script (or the current directory), <TT>
+PYTHONPATH</TT> and the installation-dependent default.  This allows 
+Python programs that know what they're doing to modify or replace the 
+module search path.  See the section on Standard Modules later.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

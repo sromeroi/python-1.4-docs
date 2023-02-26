@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.4.3 FORMS Objects</TITLE>
+<META NAME="description" CONTENT="17.4.3 FORMS Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4935" HREF="node212.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4933" HREF="node208.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4929" HREF="node210.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4937" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4938" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4936" HREF="node212.html">17.5 Standard Module FL</A>
+<B>Up:</B> <A NAME="tex2html4934" HREF="node208.html">17.4 Built-in Module fl</A>
+<B> Previous:</B> <A NAME="tex2html4930" HREF="node210.html">17.4.2 Form Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001843000000000000000">17.4.3 FORMS Objects</A></H2>
+<P>
+Besides methods specific to particular kinds of FORMS objects, all
+FORMS objects also have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="11169">set_call_back</A></STRONG>(<VAR>function, argument</VAR>)
+<DD>
+Set the object's callback function and argument.  When the object
+needs interaction, the callback function will be called with two
+arguments: the object, and the callback argument.  (FORMS objects
+without a callback function are returned by <CODE>fl.do_forms()</CODE> or
+<CODE>fl.check_forms()</CODE> when they need interaction.)  Call this method
+without arguments to remove the callback function.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11175">delete_object</A></STRONG>(<VAR></VAR>)
+<DD>
+  Delete the object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11179">show_object</A></STRONG>(<VAR></VAR>)
+<DD>
+  Show the object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11183">hide_object</A></STRONG>(<VAR></VAR>)
+<DD>
+  Hide the object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11187">redraw_object</A></STRONG>(<VAR></VAR>)
+<DD>
+  Redraw the object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11191">freeze_object</A></STRONG>(<VAR></VAR>)
+<DD>
+  Freeze the object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11195">unfreeze_object</A></STRONG>(<VAR></VAR>)
+<DD>
+  Unfreeze the object.
+<P>
+</DL>
+<P>
+FORMS objects have these data attributes; see the FORMS documentation:
+<P>
+<P><P> <IMG WIDTH=390 HEIGHT=480 ALIGN=BOTTOM ALT="tableiii11196" SRC="img27.gif"  > <P><P><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

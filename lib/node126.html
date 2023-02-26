@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.10.1 The Formatter Interface</TITLE>
+<META NAME="description" CONTENT="11.10.1 The Formatter Interface">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3854" HREF="node127.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3852" HREF="node125.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3846" HREF="node125.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3856" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3857" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3855" HREF="node127.html">11.10.2 Formatter Implementations</A>
+<B>Up:</B> <A NAME="tex2html3853" HREF="node125.html">11.10 Standard Module formatter</A>
+<B> Previous:</B> <A NAME="tex2html3847" HREF="node125.html">11.10 Standard Module formatter</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012101000000000000000">11.10.1 The Formatter Interface</A></H2>
+<P>
+Interfaces to create formatters are dependent on the specific
+formatter class being instantiated.  The interfaces described below
+are the required interfaces which all formatters must support once
+initialized.
+<P>
+One data element is defined at the module level:
+<P>
+<DL><DT><STRONG><A NAME="">AS_IS</A></STRONG>
+<DD>
+Value which can be used in the font specification passed to the
+<CODE>push_font()</CODE> method described below, or as the new value to any
+other <CODE>push_<VAR>property</VAR>()</CODE> method.  Pushing the <CODE>AS_IS</CODE>
+value allows the corresponding <CODE>pop_<VAR>property</VAR>()</CODE> method to
+be called without having to track whether the property was changed.
+<P>
+</DL>
+<P>
+The following attributes are defined for formatter instance objects:
+<P>
+<DL><DT><STRONG><A NAME="">writer</A></STRONG>
+<DD>
+The writer instance with which the formatter interacts.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6859">end_paragraph</A></STRONG>(<VAR>blanklines</VAR>)
+<DD>
+Close any open paragraphs and insert at least <CODE>blanklines</CODE>
+before the next paragraph.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6864">add_line_break</A></STRONG>(<VAR></VAR>)
+<DD>
+Add a hard line break if one does not already exist.  This does not
+break the logical paragraph.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6868">add_hor_rule</A></STRONG>(<VAR>*args, **kw</VAR>)
+<DD>
+Insert a horizontal rule in the output.  A hard break is inserted if
+there is data in the current paragraph, but the logical paragraph is
+not broken.  The arguments and keywords are passed on to the writer's
+<CODE>send_line_break()</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6873">add_flowing_data</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Provide data which should be formatted with collapsed whitespaces.
+Whitespace from preceeding and successive calls to
+<CODE>add_flowing_data()</CODE> is considered as well when the whitespace
+collapse is performed.  The data which is passed to this method is
+expected to be word-wrapped by the output device.  Note that any
+word-wrapping still must be performed by the writer object due to the
+need to rely on device and font information.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6878">add_literal_data</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Provide data which should be passed to the writer unchanged.
+Whitespace, including newline and tab characters, are considered legal
+in the value of <CODE>data</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6883">add_label_data</A></STRONG>(<VAR>format, counter</VAR>)
+<DD>
+Insert a label which should be placed to the left of the current left
+margin.  This should be used for constructing bulleted or numbered
+lists.  If the <CODE>format</CODE> value is a string, it is interpreted as a
+format specification for <CODE>counter</CODE>, which should be an integer.
+The result of this formatting becomes the value of the label; if
+<CODE>format</CODE> is not a string it is used as the label value directly.
+The label value is passed as the only argument to the writer's
+<CODE>send_label_data()</CODE> method.  Interpretation of non-string label
+values is dependent on the associated writer.
+<P>
+Format specifications are strings which, in combination with a counter
+value, are used to compute label values.  Each character in the format
+string is copied to the label value, with some characters recognized
+to indicate a transform on the counter value.  Specifically, the
+character ``<CODE>1</CODE>'' represents the counter value formatter as an
+arabic number, the characters ``<CODE>A</CODE>'' and ``<CODE>a</CODE>'' represent
+alphabetic representations of the counter value in upper and lower
+case, respectively, and ``<CODE>I</CODE>'' and ``<CODE>i</CODE>'' represent the
+counter value in Roman numerals, in upper and lower case.  Note that
+the alphabetic and roman transforms require that the counter value be
+greater than zero.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6896">flush_softspace</A></STRONG>(<VAR></VAR>)
+<DD>
+Send any pending whitespace buffered from a previous call to
+<CODE>add_flowing_data()</CODE> to the associated writer object.  This
+should be called before any direct manipulation of the writer object.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6901">push_alignment</A></STRONG>(<VAR>align</VAR>)
+<DD>
+Push a new alignment setting onto the alignment stack.  This may be
+<CODE>AS_IS</CODE> if no change is desired.  If the alignment value is
+changed from the previous setting, the writer's <CODE>new_alignment()</CODE>
+method is called with the <CODE>align</CODE> value.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6908">pop_alignment</A></STRONG>(<VAR></VAR>)
+<DD>
+Restore the previous alignment.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6912">push_font</A></STRONG>(<VAR>(size, italic, bold, teletype)</VAR>)
+<DD>
+Change some or all font properties of the writer object.  Properties
+which are not set to <CODE>AS_IS</CODE> are set to the values passed in
+while others are maintained at their current settings.  The writer's
+<CODE>new_font()</CODE> method is called with the fully resolved font
+specification.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6918">pop_font</A></STRONG>(<VAR></VAR>)
+<DD>
+Restore the previous font.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6922">push_margin</A></STRONG>(<VAR>margin</VAR>)
+<DD>
+Increase the number of left margin indentations by one, associating
+the logical tag <CODE>margin</CODE> with the new indentation.  The initial
+margin level is <CODE>0</CODE>.  Changed values of the logical tag must be
+true values; false values other than <CODE>AS_IS</CODE> are not sufficient
+to change the margin.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6929">pop_margin</A></STRONG>(<VAR></VAR>)
+<DD>
+Restore the previous margin.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6933">push_style</A></STRONG>(<VAR>*styles</VAR>)
+<DD>
+Push any number of arbitrary style specifications.  All styles are
+pushed onto the styles stack in order.  A tuple representing the
+entire stack, including <CODE>AS_IS</CODE> values, is passed to the writer's
+<CODE>new_styles()</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7073">pop_style</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>n<CODE> = 1</CODE></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Pop the last <CODE>n</CODE> style specifications passed to
+<CODE>push_style()</CODE>.  A tuple representing the revised stack,
+including <CODE>AS_IS</CODE> values, is passed to the writer's
+<CODE>new_styles()</CODE> method.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6947">set_spacing</A></STRONG>(<VAR>spacing</VAR>)
+<DD>
+Set the spacing style for the writer.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7074">assert_line_data</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>flag<CODE> = 1</CODE></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Inform the formatter that data has been added to the current paragraph
+out-of-band.  This should be used when the writer has been manipulated
+directly.  The optional <CODE>flag</CODE> argument can be set to false if
+the writer manipulations produced a hard line break at the end of the
+output.
+<P>
+</DL><HR><A NAME="tex2html3854" HREF="node127.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3852" HREF="node125.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3846" HREF="node125.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3856" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3857" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3855" HREF="node127.html">11.10.2 Formatter Implementations</A>
+<B>Up:</B> <A NAME="tex2html3853" HREF="node125.html">11.10 Standard Module formatter</A>
+<B> Previous:</B> <A NAME="tex2html3847" HREF="node125.html">11.10 Standard Module formatter</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

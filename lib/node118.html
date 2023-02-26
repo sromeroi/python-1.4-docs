@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.4.1 FTP Objects</TITLE>
+<META NAME="description" CONTENT="11.4.1 FTP Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3755" HREF="node119.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3753" HREF="node117.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3749" HREF="node117.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3757" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3758" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3756" HREF="node119.html">11.5 Standard Module gopherlib</A>
+<B>Up:</B> <A NAME="tex2html3754" HREF="node117.html">11.4 Standard Module ftplib</A>
+<B> Previous:</B> <A NAME="tex2html3750" HREF="node117.html">11.4 Standard Module ftplib</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001241000000000000000">11.4.1 FTP Objects</A></H2>
+<P>
+FTP instances have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="6104">set_debuglevel</A></STRONG>(<VAR>level</VAR>)
+<DD>
+Set the instance's debugging level.  This controls the amount of
+debugging output printed.  The default, 0, produces no debugging
+output.  A value of 1 produces a moderate amount of debugging output,
+generally a single line per request.  A value of 2 or higher produces
+the maximum amount of debugging output, logging each line sent and
+received on the control connection.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6237">connect</A></STRONG>(<VAR>host</VAR><BIG>[</BIG><VAR>, port</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Connect to the given host and port.  The default port number is 21, as
+specified by the FTP protocol specification.  It is rarely needed to
+specify a different port number.  This function should be called only
+once for each instance; it should not be called at all if a host was
+given when the instance was created.  All other methods can only be
+used after a connection has been made.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6112">getwelcome</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the welcome message sent by the server in reply to the initial
+connection.  (This message sometimes contains disclaimers or help
+information that may be relevant to the user.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6247">login</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>user</VAR><BIG>[</BIG><VAR>, passwd</VAR><BIG>[</BIG><VAR>, acct</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Log in as the given <VAR>user</VAR>.  The <VAR>passwd</VAR> and <VAR>acct</VAR>
+parameters are optional and default to the empty string.  If no
+<VAR>user</VAR> is specified, it defaults to `<SAMP>anonymous</SAMP>'.  If
+<VAR>user</VAR> is <CODE>anonymous</CODE>, the default <VAR>passwd</VAR> is
+`<SAMP><VAR>realuser</VAR>@<VAR>host</VAR></SAMP>' where <VAR>realuser</VAR> is the real user
+name (glanced from the `<SAMP>LOGNAME</SAMP>' or `<SAMP>USER</SAMP>' environment
+variable) and <VAR>host</VAR> is the hostname as returned by
+<CODE>socket.gethostname()</CODE>.  This function should be called only
+once for each instance, after a connection has been established; it
+should not be called at all if a host and user were given when the
+instance was created.  Most FTP commands are only allowed after the
+client has logged in.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6135">abort</A></STRONG>(<VAR></VAR>)
+<DD>
+Abort a file transfer that is in progress.  Using this does not always
+work, but it's worth a try.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6139">sendcmd</A></STRONG>(<VAR>command</VAR>)
+<DD>
+Send a simple command string to the server and return the response
+string.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6143">voidcmd</A></STRONG>(<VAR>command</VAR>)
+<DD>
+Send a simple command string to the server and handle the response.
+Return nothing if a response code in the range 200-299 is received.
+Raise an exception otherwise.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6147">retrbinary</A></STRONG>(<VAR>command, callback, maxblocksize</VAR>)
+<DD>
+Retrieve a file in binary transfer mode.  <VAR>command</VAR> should be an
+appropriate `<SAMP>RETR</SAMP>' command, i.e. <CODE>&quot;RETR <VAR>filename</VAR>&quot;</CODE>.
+The <VAR>callback</VAR> function is called for each block of data received,
+with a single string argument giving the data block.
+The <VAR>maxblocksize</VAR> argument specifies the maximum block size
+(which may not be the actual size of the data blocks passed to
+<VAR>callback</VAR>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6241">retrlines</A></STRONG>(<VAR>command</VAR><BIG>[</BIG><VAR>, callback</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Retrieve a file or directory listing in ASCII transfer mode.
+varcommand should be an appropriate `<SAMP>RETR</SAMP>' command (see
+<CODE>retrbinary()</CODE> or a `<SAMP>LIST</SAMP>' command (usually just the string
+<CODE>&quot;LIST&quot;</CODE>).  The <VAR>callback</VAR> function is called for each line,
+with the trailing CRLF stripped.  The default <VAR>callback</VAR> prints
+the line to <CODE>sys.stdout</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6170">storbinary</A></STRONG>(<VAR>command, file, blocksize</VAR>)
+<DD>
+Store a file in binary transfer mode.  <VAR>command</VAR> should be an
+appropriate `<SAMP>STOR</SAMP>' command, i.e. <CODE>&quot;STOR <VAR>filename</VAR>&quot;</CODE>.
+<VAR>file</VAR> is an open file object which is read until EOF using its
+<CODE>read()</CODE> method in blocks of size <VAR>blocksize</VAR> to provide the
+data to be stored.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6180">storlines</A></STRONG>(<VAR>command, file</VAR>)
+<DD>
+Store a file in ASCII transfer mode.  <VAR>command</VAR> should be an
+appropriate `<SAMP>STOR</SAMP>' command (see <CODE>storbinary()</CODE>).  Lines are
+read until EOF from the open file object <VAR>file</VAR> using its
+<CODE>readline()</CODE> method to privide the data to be stored.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6243">nlst</A></STRONG>(<VAR>argument</VAR><BIG>[</BIG><VAR>, ...</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a list of files as returned by the `<SAMP>NLST</SAMP>' command.  The
+optional varargument is a directory to list (default is the current
+server directory).  Multiple arguments can be used to pass
+non-standard options to the `<SAMP>NLST</SAMP>' command.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6244">dir</A></STRONG>(<VAR>argument</VAR><BIG>[</BIG><VAR>, ...</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a directory listing as returned by the `<SAMP>LIST</SAMP>' command, as
+a list of lines.  The optional varargument is a directory to list
+(default is the current server directory).  Multiple arguments can be
+used to pass non-standard options to the `<SAMP>LIST</SAMP>' command.  If the
+last argument is a function, it is used as a <VAR>callback</VAR> function
+as for <CODE>retrlines()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6206">rename</A></STRONG>(<VAR>fromname, toname</VAR>)
+<DD>
+Rename file <VAR>fromname</VAR> on the server to <VAR>toname</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6212">cwd</A></STRONG>(<VAR>pathname</VAR>)
+<DD>
+Set the current directory on the server.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6216">mkd</A></STRONG>(<VAR>pathname</VAR>)
+<DD>
+Create a new directory on the server.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6220">pwd</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the pathname of the current directory on the server.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6224">quit</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a `<SAMP>QUIT</SAMP>' command to the server and close the connection.
+This is the ``polite'' way to close a connection, but it may raise an
+exception of the server reponds with an error to the <CODE>QUIT</CODE>
+command.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6230">close</A></STRONG>(<VAR></VAR>)
+<DD>
+Close the connection unilaterally.  This should not be applied to an
+already closed connection (e.g. after a successful call to
+<CODE>quit()</CODE>.
+<P>
+</DL><HR><A NAME="tex2html3755" HREF="node119.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3753" HREF="node117.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3749" HREF="node117.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3757" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3758" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3756" HREF="node119.html">11.5 Standard Module gopherlib</A>
+<B>Up:</B> <A NAME="tex2html3754" HREF="node117.html">11.4 Standard Module ftplib</A>
+<B> Previous:</B> <A NAME="tex2html3750" HREF="node117.html">11.4 Standard Module ftplib</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

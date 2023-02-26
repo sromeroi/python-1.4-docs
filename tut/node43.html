@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.2 Standard Modules</TITLE>
+<META NAME="description" CONTENT="6.2 Standard Modules">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html740" HREF="node44.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html738" HREF="node41.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html732" HREF="node42.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html742" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html741" HREF="node44.html">6.3 The dir() function</A>
+<B>Up:</B> <A NAME="tex2html739" HREF="node41.html">6 Modules</A>
+<B> Previous:</B> <A NAME="tex2html733" HREF="node42.html">6.1 More on Modules</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00720000000000000000">6.2 Standard Modules</A></H1>
+<P>
+Python comes with a library of standard modules, described in a separate
+document (Python Library Reference).  Some modules are built into the
+interpreter; these provide access to operations that are not part of the
+core of the language but are nevertheless built in, either for
+efficiency or to provide access to operating system primitives such as
+system calls.  The set of such modules is a configuration option; e.g.,
+the <TT>amoeba</TT> module is only provided on systems that somehow support
+Amoeba primitives.  One particular module deserves some attention: <TT>
+sys</TT>, which is built into every Python interpreter.  The variables <TT>
+sys.ps1</TT> and <TT>sys.ps2</TT> define the strings used as primary and
+secondary prompts:
+<P>
+<PRE>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.ps1
+'&gt;&gt;&gt; '
+&gt;&gt;&gt; sys.ps2
+'... '
+&gt;&gt;&gt; sys.ps1 = 'C&gt; '
+C&gt; print 'Yuck!'
+Yuck!
+C&gt;</PRE>
+These two variables are only defined if the interpreter is in
+interactive mode.
+<P>
+The variable
+<TT>sys.path</TT>
+is a list of strings that determine the interpreter's search path for
+modules.
+It is initialized to a default path taken from the environment variable
+<TT>PYTHONPATH</TT>,
+or from a built-in default if
+<TT>PYTHONPATH</TT>
+is not set.
+You can modify it using standard list operations, e.g.:
+<P>
+<PRE>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path.append('/ufs/guido/lib/python')
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

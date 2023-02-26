@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.10.1 TCP Stream Objects</TITLE>
+<META NAME="description" CONTENT="15.10.1 TCP Stream Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4488" HREF="node177.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4486" HREF="node175.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4480" HREF="node175.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4490" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4491" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4489" HREF="node177.html">15.10.2 TCP Status Objects</A>
+<B>Up:</B> <A NAME="tex2html4487" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<B> Previous:</B> <A NAME="tex2html4481" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016101000000000000000">15.10.1 TCP Stream Objects</A></H2>
+<P>
+<DL><DT><STRONG><A NAME="">asr</A></STRONG>
+<DD>
+When set to a value different than <CODE>None</CODE> this should point to a
+function with two integer parameters: an event code and a detail. This
+function will be called upon network-generated events such as urgent
+data arrival. In addition, it is called with eventcode
+<CODE>MACTCP.PassiveOpenDone</CODE> when a <CODE>PassiveOpen</CODE> completes. This
+is a Python addition to the MacTCP semantics.
+It is safe to do further calls from the <CODE>asr</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9290">PassiveOpen</A></STRONG>(<VAR>port</VAR>)
+<DD>
+Wait for an incoming connection on TCP port <VAR>port</VAR> (zero makes the
+system pick a free port). The call returns immediately, and you should
+use <VAR>wait</VAR> to wait for completion. You should not issue any method
+calls other than
+<CODE>wait</CODE>, <CODE>isdone</CODE> or <CODE>GetSockName</CODE> before the call
+completes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9299">wait</A></STRONG>(<VAR></VAR>)
+<DD>
+Wait for <CODE>PassiveOpen</CODE> to complete.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9304">isdone</A></STRONG>(<VAR></VAR>)
+<DD>
+Return 1 if a <CODE>PassiveOpen</CODE> has completed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9309">GetSockName</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the TCP address of this side of a connection as a 2-tuple
+<CODE>(host, port)</CODE>, both integers.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9314">ActiveOpen</A></STRONG>(<VAR>lport, host, rport</VAR>)
+<DD>
+Open an outgoing connection to TCP address <CODE>(<VAR>host</VAR>, <VAR>rport</VAR>)</CODE>. Use
+local port <VAR>lport</VAR> (zero makes the system pick a free port). This
+call blocks until the connection has been established.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9321">Send</A></STRONG>(<VAR>buf, push, urgent</VAR>)
+<DD>
+Send data <VAR>buf</VAR> over the connection. <VAR>Push</VAR> and <VAR>urgent</VAR>
+are flags as specified by the TCP standard.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9328">Rcv</A></STRONG>(<VAR>timeout</VAR>)
+<DD>
+Receive data. The call returns when <VAR>timeout</VAR> seconds have passed
+or when (according to the MacTCP documentation) ``a reasonable amount
+of data has been received''. The return value is a 3-tuple
+<CODE>(<VAR>data</VAR>, <VAR>urgent</VAR>, <VAR>mark</VAR>)</CODE>. If urgent data is outstanding <CODE>Rcv</CODE>
+will always return that before looking at any normal data. The first
+call returning urgent data will have the <VAR>urgent</VAR> flag set, the
+last will have the <VAR>mark</VAR> flag set.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9339">Close</A></STRONG>(<VAR></VAR>)
+<DD>
+Tell MacTCP that no more data will be transmitted on this
+connection. The call returns when all data has been acknowledged by
+the receiving side.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9343">Abort</A></STRONG>(<VAR></VAR>)
+<DD>
+Forcibly close both sides of a connection, ignoring outstanding data.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9347">Status</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a TCP status object for this stream giving the current status
+(see below).
+<P>
+</DL><HR><A NAME="tex2html4488" HREF="node177.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4486" HREF="node175.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4480" HREF="node175.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4490" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4491" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4489" HREF="node177.html">15.10.2 TCP Status Objects</A>
+<B>Up:</B> <A NAME="tex2html4487" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<B> Previous:</B> <A NAME="tex2html4481" HREF="node175.html">15.10 Built-in Module mactcp</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

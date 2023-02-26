@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.2.1 Shared Libraries</TITLE>
+<META NAME="description" CONTENT="3.2.1 Shared Libraries">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html513" HREF="node28.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html511" HREF="node26.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html505" HREF="node26.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html515" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html516" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html514" HREF="node28.html">3.2.2 SGI IRIX 4 </A>
+<B>Up:</B> <A NAME="tex2html512" HREF="node26.html">3.2 Building a Dynamically </A>
+<B> Previous:</B> <A NAME="tex2html506" HREF="node26.html">3.2 Building a Dynamically </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00421000000000000000">3.2.1 Shared Libraries</A></H2>
+<P>
+You must link the `<SAMP>.o</SAMP>' file to produce a shared library.  This is
+done using a special invocation of the Unix loader/linker, <EM>
+ld</EM>(1).  Unfortunately the invocation differs slightly per system.
+<P>
+On SunOS 4, use
+<PRE>    ld spammodule.o -o spammodule.so</PRE>
+<P>
+On Solaris 2, use
+<PRE>    ld -G spammodule.o -o spammodule.so</PRE>
+<P>
+On SGI IRIX 5, use
+<PRE>    ld -shared spammodule.o -o spammodule.so</PRE>
+<P>
+On other systems, consult the manual page for <CODE>ld</CODE>(1) to find what
+flags, if any, must be used.
+<P>
+If your extension module uses system libraries that haven't already
+been linked with Python (e.g. a windowing system), these must be
+passed to the <CODE>ld</CODE> command as `<SAMP>-l</SAMP>' options after the
+`<SAMP>.o</SAMP>' file.
+<P>
+The resulting file `<CODE>spammodule.so</CODE>' must be copied into a directory
+along the Python module search path.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

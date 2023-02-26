@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.14.1 AEServer Objects</TITLE>
+<META NAME="description" CONTENT="15.14.1 AEServer Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4654" HREF="node191.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4652" HREF="node189.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4648" HREF="node189.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4656" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4657" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4655" HREF="node191.html">16 Standard Windowing Interface</A>
+<B>Up:</B> <A NAME="tex2html4653" HREF="node189.html">15.14 Standard module MiniAEFrame</A>
+<B> Previous:</B> <A NAME="tex2html4649" HREF="node189.html">15.14 Standard module MiniAEFrame</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0016141000000000000000">15.14.1 AEServer Objects</A></H2>
+<P>
+<DL><DT><STRONG><A NAME="9751">installaehandler</A></STRONG>(<VAR>classe, type, callback</VAR>)
+<DD>
+Installs an AppleEvent handler. <CODE>Classe</CODE> and <CODE>type</CODE> are the
+four-char OSA Class and Type designators, <CODE>'****'</CODE> wildcards are
+allowed. When a matching AppleEvent is received the parameters are
+decoded and your callback is invoked.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9758">callback</A></STRONG>(<VAR>_object, **kwargs</VAR>)
+<DD>
+Your callback is called with the OSA Direct Object as first positional
+parameter. The other parameters are passed as keyword arguments, with
+the 4-char designator as name. Three extra keyword parameters are
+passed: <CODE>_class</CODE> and <CODE>_type</CODE> are the Class and Type
+designators and <CODE>_attributes</CODE> is a dictionary with the AppleEvent
+attributes.
+<P>
+The return value of your method is packed with
+<CODE>aetools.packevent</CODE> and sent as reply.
+<P>
+</DL>
+<P>
+Note that there are some serious problems with the current
+design. AppleEvents which have non-identifier 4-char designators for
+arguments are not implementable, and it is not possible to return an
+error to the originator. This will be addressed in a future release.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

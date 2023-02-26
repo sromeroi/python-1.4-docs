@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.2 Standard Module types</TITLE>
+<META NAME="description" CONTENT="3.2 Standard Module types">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2607" HREF="node30.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2605" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2599" HREF="node28.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2609" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2610" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2608" HREF="node30.html">3.3 Standard Module traceback</A>
+<B>Up:</B> <A NAME="tex2html2606" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2600" HREF="node28.html">3.1 Built-in Module sys</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00420000000000000000">3.2 Standard Module <CODE>types</CODE></A></H1>
+<P>
+This module defines names for all object types that are used by the
+standard Python interpreter (but not for the types defined by various
+extension modules).  It is safe to use ``<CODE>from types import *</CODE>'' --
+the module does not export any other names besides the ones listed
+here.  New names exported by future versions of this module will
+all end in <CODE>Type</CODE>.
+<P>
+Typical use is for functions that do different things depending on
+their argument types, like the following:
+<P>
+<PRE>from types import *
+def delete(list, item):
+    if type(item) is IntType:
+       del list[item]
+    else:
+       list.remove(item)</PRE>
+<P>
+The module defines the following names:
+<P>
+<DL><DT><STRONG><A NAME="">NoneType</A></STRONG>
+<DD>
+The type of <CODE>None</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">TypeType</A></STRONG>
+<DD>
+The type of type objects (such as returned by <CODE>type()</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">IntType</A></STRONG>
+<DD>
+The type of integers (e.g. <CODE>1</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">LongType</A></STRONG>
+<DD>
+The type of long integers (e.g. <CODE>1L</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">FloatType</A></STRONG>
+<DD>
+The type of floating point numbers (e.g. <CODE>1.0</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">StringType</A></STRONG>
+<DD>
+The type of character strings (e.g. <CODE>'Spam'</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">TupleType</A></STRONG>
+<DD>
+The type of tuples (e.g. <CODE>(1, 2, 3, 'Spam')</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ListType</A></STRONG>
+<DD>
+The type of lists (e.g. <CODE>[0, 1, 2, 3]</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">DictType</A></STRONG>
+<DD>
+The type of dictionaries (e.g. <CODE>{'Bacon': 1, 'Ham': 0}</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">DictionaryType</A></STRONG>
+<DD>
+An alternative name for <CODE>DictType</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">FunctionType</A></STRONG>
+<DD>
+The type of user-defined functions and lambdas.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">LambdaType</A></STRONG>
+<DD>
+	An alternative name for <CODE>FunctionType</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">CodeType</A></STRONG>
+<DD>
+The type for code objects such as returned by <CODE>compile()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ClassType</A></STRONG>
+<DD>
+The type of user-defined classes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">InstanceType</A></STRONG>
+<DD>
+The type of instances of user-defined classes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">MethodType</A></STRONG>
+<DD>
+The type of methods of user-defined class instances.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">UnboundMethodType</A></STRONG>
+<DD>
+An alternative name for <CODE>MethodType</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">BuiltinFunctionType</A></STRONG>
+<DD>
+The type of built-in functions like <CODE>len</CODE> or <CODE>sys.exit</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">BuiltinMethodType</A></STRONG>
+<DD>
+An alternative name for <CODE>BuiltinFunction</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ModuleType</A></STRONG>
+<DD>
+The type of modules.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">FileType</A></STRONG>
+<DD>
+The type of open file objects such as <CODE>sys.stdout</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">XRangeType</A></STRONG>
+<DD>
+The type of range objects returned by <CODE>xrange()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">TracebackType</A></STRONG>
+<DD>
+The type of traceback objects such as found in <CODE>sys.exc_traceback</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">FrameType</A></STRONG>
+<DD>
+The type of frame objects such as found in <CODE>tb.tb_frame</CODE> if
+<CODE>tb</CODE> is a traceback object.
+<P>
+</DL><HR><A NAME="tex2html2607" HREF="node30.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2605" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2599" HREF="node28.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2609" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2610" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2608" HREF="node30.html">3.3 Standard Module traceback</A>
+<B>Up:</B> <A NAME="tex2html2606" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2600" HREF="node28.html">3.1 Built-in Module sys</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.1.8 Debugging CGI scripts</TITLE>
+<META NAME="description" CONTENT="11.1.8 Debugging CGI scripts">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3674" HREF="node112.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3672" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3666" HREF="node110.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3676" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3677" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3675" HREF="node112.html">11.1.9 Common problems and </A>
+<B>Up:</B> <A NAME="tex2html3673" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3667" HREF="node110.html">11.1.7 Testing your CGI </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001218000000000000000">11.1.8 Debugging CGI scripts</A></H2>
+<P>
+First of all, check for trivial installation errors - reading the
+section above on installing your CGI script carefully can save you a
+lot of time.  If you wonder whether you have understood the
+installation procedure correctly, try installing a copy of this module
+file (<CODE>cgi.py</CODE>) as a CGI script.  When invoked as a script, the file
+will dump its environment and the contents of the form in HTML form.
+Give it the right mode etc, and send it a request.  If it's installed
+in the standard <CODE>cgi-bin</CODE> directory, it should be possible to send it a
+request by entering a URL into your browser of the form:
+<P>
+<PRE>	http://yourhostname/cgi-bin/cgi.py?name=Joe+Blow&amp;addr=At+Home</PRE>
+<P>
+If this gives an error of type 404, the server cannot find the script
+- perhaps you need to install it in a different directory.  If it
+gives another error (e.g.  500), there's an installation problem that
+you should fix before trying to go any further.  If you get a nicely
+formatted listing of the environment and form content (in this
+example, the fields should be listed as ``addr'' with value ``At Home''
+and ``name'' with value ``Joe Blow''), the <CODE>cgi.py</CODE> script has been
+installed correctly.  If you follow the same procedure for your own
+script, you should now be able to debug it.
+<P>
+The next step could be to call the <CODE>cgi</CODE> module's test() function from
+your script: replace its main code with the single statement
+<P>
+<PRE>	cgi.test()</PRE>
+<P>
+This should produce the same results as those gotten from installing
+the <CODE>cgi.py</CODE> file itself.
+<P>
+When an ordinary Python script raises an unhandled exception
+(e.g. because of a typo in a module name, a file that can't be opened,
+etc.), the Python interpreter prints a nice traceback and exits.
+While the Python interpreter will still do this when your CGI script
+raises an exception, most likely the traceback will end up in one of
+the HTTP server's log file, or be discarded altogether.
+<P>
+Fortunately, once you have managed to get your script to execute
+*some* code, it is easy to catch exceptions and cause a traceback to
+be printed.  The <CODE>test()</CODE> function below in this module is an example.
+Here are the rules:
+<P>
+<OL><LI> Import the traceback module (before entering the
+	   try-except!)<LI> Make sure you finish printing the headers and the blank
+	   line early<LI> Assign <CODE>sys.stderr</CODE> to <CODE>sys.stdout</CODE><LI> Wrap all remaining code in a try-except statement<LI> In the except clause, call <CODE>traceback.print_exc()</CODE>
+</OL>
+<P>
+For example:
+<P>
+<PRE>	import sys
+	import traceback
+	print &quot;Content-type: text/html&quot;
+	print
+	sys.stderr = sys.stdout
+	try:
+		...your code here...
+	except:
+		print &quot;\n\n&lt;PRE&gt;&quot;
+		traceback.print_exc()</PRE>
+<P>
+Notes: The assignment to <CODE>sys.stderr</CODE> is needed because the traceback
+prints to <CODE>sys.stderr</CODE>.  The <CODE>print &quot; <IMG WIDTH=6 HEIGHT=17 ALIGN=BOTTOM ALT="tex2html_wrap_inline15991" SRC="img17.gif"  > n <IMG WIDTH=6 HEIGHT=17 ALIGN=BOTTOM ALT="tex2html_wrap_inline15991" SRC="img17.gif"  > n&lt;PRE&gt;&quot;</CODE> statement is necessary to
+disable the word wrapping in HTML.
+<P>
+If you suspect that there may be a problem in importing the traceback
+module, you can use an even more robust approach (which only uses
+built-in modules):
+<P>
+<PRE>	import sys
+	sys.stderr = sys.stdout
+	print &quot;Content-type: text/plain&quot;
+	print
+	...your code here...</PRE>
+<P>
+This relies on the Python interpreter to print the traceback.  The
+content type of the output is set to plain text, which disables all
+HTML processing.  If your script works, the raw HTML will be displayed
+by your client.  If it raises an exception, most likely after the
+first two lines have been printed, a traceback will be displayed.
+Because no HTML interpretation is going on, the traceback will
+readable.
+<P>
+<HR><A NAME="tex2html3674" HREF="node112.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3672" HREF="node103.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3666" HREF="node110.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3676" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3677" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3675" HREF="node112.html">11.1.9 Common problems and </A>
+<B>Up:</B> <A NAME="tex2html3673" HREF="node103.html">11.1 Standard Module cgi</A>
+<B> Previous:</B> <A NAME="tex2html3667" HREF="node110.html">11.1.7 Testing your CGI </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.6 Customizing Import and Built-Ins</TITLE>
+<META NAME="description" CONTENT="11.6 Customizing Import and Built-Ins">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1432" HREF="node102.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1430" HREF="node93.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1424" HREF="node100.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1434" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1433" HREF="node102.html">11.7 Python and the </A>
+<B>Up:</B> <A NAME="tex2html1431" HREF="node93.html">11 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1425" HREF="node100.html">11.5 Documentation Strings</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001260000000000000000">11.6 Customizing Import and Built-Ins</A></H1>
+<P>
+In preparation for a ``restricted execution mode'' which will be
+usable to run code received from an untrusted source (such as a WWW
+server or client), the mechanism by which modules are imported has
+been redesigned.  It is now possible to provide your own function
+<CODE>__import__</CODE> which is called whenever an <CODE>import</CODE> statement
+is executed.  There's a built-in function <CODE>__import__</CODE> which
+provides the default implementation, but more interesting, the various
+steps it takes are available separately from the new built-in module
+<CODE>imp</CODE>.  (See the section on <CODE>imp</CODE> in the Library Reference
+Manual for more information on this module -- it also contains a
+complete example of how to write your own <CODE>__import__</CODE> function.)
+<P>
+When you do <CODE>dir()</CODE> in a fresh interactive interpreter you will
+see another ``secret'' object that's present in every module:
+<CODE>__builtins__</CODE>.  This is either a dictionary or a module
+containing the set of built-in objects used by functions defined in
+current module.  Although normally all modules are initialized with a
+reference to the same dictionary, it is now possible to use a
+different set of built-ins on a per-module basis.  Together with the
+fact that the <CODE>import</CODE> statement uses the <CODE>__import__</CODE>
+function it finds in the importing modules' dictionary of built-ins,
+this forms the basis for a future restricted execution mode.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

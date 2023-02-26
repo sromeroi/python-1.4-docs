@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>1.10.3 Ownership Rules</TITLE>
+<META NAME="description" CONTENT="1.10.3 Ownership Rules">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html364" HREF="node16.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html362" HREF="node12.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html356" HREF="node14.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html366" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html367" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html365" HREF="node16.html">1.10.4 Thin Ice</A>
+<B>Up:</B> <A NAME="tex2html363" HREF="node12.html">1.10 Reference Counts</A>
+<B> Previous:</B> <A NAME="tex2html357" HREF="node14.html">1.10.2 Reference Counting in </A>
+<BR><HR><P>
+<H2><A NAME="SECTION002103000000000000000">1.10.3 Ownership Rules</A></H2>
+<P>
+Whenever an object reference is passed into or out of a function, it
+is part of the function's interface specification whether ownership is
+transferred with the reference or not.
+<P>
+Most functions that return a reference to an object pass on ownership
+with the reference.  In particular, all functions whose function it is
+to create a new object, e.g. <CODE>PyInt_FromLong()</CODE> and
+<CODE>Py_BuildValue()</CODE>, pass ownership to the receiver.  Even if in
+fact, in some cases, you don't receive a reference to a brand new
+object, you still receive ownership of the reference.  For instance,
+<CODE>PyInt_FromLong()</CODE> maintains a cache of popular values and can
+return a reference to a cached item.
+<P>
+Many functions that extract objects from other objects also transfer
+ownership with the reference, for instance
+<CODE>PyObject_GetAttrString()</CODE>.  The picture is less clear, here,
+however, since a few common routines are exceptions:
+<CODE>PyTuple_GetItem()</CODE>, <CODE>PyList_GetItem()</CODE> and
+<CODE>PyDict_GetItem()</CODE> (and <CODE>PyDict_GetItemString()</CODE>) all return
+references that you borrow from the tuple, list or dictionary.
+<P>
+The function <CODE>PyImport_AddModule()</CODE> also returns a borrowed
+reference, even though it may actually create the object it returns:
+this is possible because an owned reference to the object is stored in
+<CODE>sys.modules</CODE>.
+<P>
+When you pass an object reference into another function, in general,
+the function borrows the reference from you -- if it needs to store
+it, it will use <CODE>Py_INCREF()</CODE> to become an independent owner.
+There are exactly two important exceptions to this rule:
+<CODE>PyTuple_SetItem()</CODE> and <CODE>PyList_SetItem()</CODE>.  These functions
+take over ownership of the item passed to them -- even if they fail!
+(Note that <CODE>PyDict_SetItem()</CODE> and friends don't take over
+ownership -- they are ``normal''.)
+<P>
+When a C function is called from Python, it borrows references to its
+arguments from the caller.  The caller owns a reference to the object,
+so the borrowed reference's lifetime is guaranteed until the function
+returns.  Only when such a borrowed reference must be stored or passed
+on, it must be turned into an owned reference by calling
+<CODE>Py_INCREF()</CODE>.
+<P>
+The object reference returned from a C function that is called from
+Python must be an owned reference -- ownership is tranferred from the
+function to its caller.
+<P>
+<HR><A NAME="tex2html364" HREF="node16.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html362" HREF="node12.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html356" HREF="node14.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html366" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html367" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html365" HREF="node16.html">1.10.4 Thin Ice</A>
+<B>Up:</B> <A NAME="tex2html363" HREF="node12.html">1.10 Reference Counts</A>
+<B> Previous:</B> <A NAME="tex2html357" HREF="node14.html">1.10.2 Reference Counting in </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Emulation of compile()</TITLE>
+<META NAME="description" CONTENT="Emulation of compile()">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2794" HREF="node45.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2792" HREF="node43.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2786" HREF="node43.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2796" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2797" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2795" HREF="node45.html">Information Discovery</A>
+<B>Up:</B> <A NAME="tex2html2793" HREF="node43.html">3.9.6 Examples</A>
+<B> Previous:</B> <A NAME="tex2html2787" HREF="node43.html">3.9.6 Examples</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00496100000000000000">Emulation of <CODE>compile()</CODE></A></H3>
+<P>
+While many useful operations may take place between parsing and
+bytecode generation, the simplest operation is to do nothing.  For
+this purpose, using the <CODE>parser</CODE> module to produce an
+intermediate data structure is equivelent to the code
+<P>
+<PRE>&gt;&gt;&gt; code = compile('a + 5', 'eval')
+&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; eval(code)
+10</PRE>
+<P>
+The equivelent operation using the <CODE>parser</CODE> module is somewhat
+longer, and allows the intermediate internal parse tree to be retained
+as an AST object:
+<P>
+<PRE>&gt;&gt;&gt; import parser
+&gt;&gt;&gt; ast = parser.expr('a + 5')
+&gt;&gt;&gt; code = parser.compileast(ast)
+&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; eval(code)
+10</PRE>
+<P>
+An application which needs both AST and code objects can package this
+code into readily available functions:
+<P>
+<PRE>import parser
+
+def load_suite(source_string):
+    ast = parser.suite(source_string)
+    code = parser.compileast(ast)
+    return ast, code
+
+def load_expression(source_string):
+    ast = parser.expr(source_string)
+    code = parser.compileast(ast)
+    return ast, code</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

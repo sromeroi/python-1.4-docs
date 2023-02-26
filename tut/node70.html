@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.2.3 Triple-quoted strings</TITLE>
+<META NAME="description" CONTENT="10.2.3 Triple-quoted strings">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1080" HREF="node71.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1078" HREF="node67.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1072" HREF="node69.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1082" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1081" HREF="node71.html">10.2.4 String Literal Juxtaposition</A>
+<B>Up:</B> <A NAME="tex2html1079" HREF="node67.html">10.2 String Literals</A>
+<B> Previous:</B> <A NAME="tex2html1073" HREF="node69.html">10.2.2 Continuation Of String </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001123000000000000000">10.2.3 Triple-quoted strings</A></H2>
+<P>
+In some cases, when you need to include really long strings (e.g.
+containing several paragraphs of informational text), it is annoying
+that you have to terminate each line with <code>\n\</code>, especially if
+you would like to reformat the text occasionally with a powerful text
+editor like Emacs.  For such situations, ``triple-quoted'' strings can
+be used, e.g.
+<P>
+<PRE>        hello = &quot;&quot;&quot;
+
+            This string is bounded by triple double quotes (3 times &quot;).
+        Unescaped newlines in the string are retained, though \
+        it is still possible\nto use all normal escape sequences.
+
+            Whitespace at the beginning of a line is
+        significant.  If you need to include three opening quotes
+        you have to escape at least one of them, e.g. \&quot;&quot;&quot;.
+
+            This string ends in a newline.
+        &quot;&quot;&quot;</PRE>
+<P>
+Triple-quoted strings can be surrounded by three single quotes as
+well, again without semantic difference.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

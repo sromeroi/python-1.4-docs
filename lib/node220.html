@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>18.1.1 Audio Device Objects</TITLE>
+<META NAME="description" CONTENT="18.1.1 Audio Device Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html5040" HREF="node221.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html5038" HREF="node219.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html5034" HREF="node219.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html5042" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html5043" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html5041" HREF="node221.html">Index</A>
+<B>Up:</B> <A NAME="tex2html5039" HREF="node219.html">18.1 Built-in Module sunaudiodev</A>
+<B> Previous:</B> <A NAME="tex2html5035" HREF="node219.html">18.1 Built-in Module sunaudiodev</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001911000000000000000">18.1.1 Audio Device Objects</A></H2>
+<P>
+The audio device objects are returned by <CODE>open</CODE> define the
+following methods (except <CODE>control</CODE> objects which only provide
+getinfo, setinfo and drain):
+<P>
+<DL><DT><STRONG><A NAME="11551">close</A></STRONG>(<VAR></VAR>)
+<DD>
+This method explicitly closes the device. It is useful in situations
+where deleting the object does not immediately close it since there
+are other references to it. A closed device should not be used again.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11555">drain</A></STRONG>(<VAR></VAR>)
+<DD>
+This method waits until all pending output is processed and then returns.
+Calling this method is often not necessary: destroying the object will
+automatically close the audio device and this will do an implicit drain.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11559">flush</A></STRONG>(<VAR></VAR>)
+<DD>
+This method discards all pending output. It can be used avoid the
+slow response to a user's stop request (due to buffering of up to one
+second of sound).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11563">getinfo</A></STRONG>(<VAR></VAR>)
+<DD>
+This method retrieves status information like input and output volume,
+etc. and returns it in the form of
+an audio status object. This object has no methods but it contains a
+number of attributes describing the current device status. The names
+and meanings of the attributes are described in
+`<CODE>/usr/include/sun/audioio.h</CODE>' and in the audio man page. Member names
+are slightly different from their C counterparts: a status object is
+only a single structure. Members of the <CODE>play</CODE> substructure have
+`<SAMP>o_</SAMP>' prepended to their name and members of the <CODE>record</CODE>
+structure have `<SAMP>i_</SAMP>'. So, the C member <CODE>play.sample_rate</CODE> is
+accessed as <CODE>o_sample_rate</CODE>, <CODE>record.gain</CODE> as <CODE>i_gain</CODE>
+and <CODE>monitor_gain</CODE> plainly as <CODE>monitor_gain</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11578">ibufcount</A></STRONG>(<VAR></VAR>)
+<DD>
+This method returns the number of samples that are buffered on the
+recording side, i.e.
+the program will not block on a <CODE>read</CODE> call of so many samples.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11583">obufcount</A></STRONG>(<VAR></VAR>)
+<DD>
+This method returns the number of samples buffered on the playback
+side. Unfortunately, this number cannot be used to determine a number
+of samples that can be written without blocking since the kernel
+output queue length seems to be variable.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11587">read</A></STRONG>(<VAR>size</VAR>)
+<DD>
+This method reads <VAR>size</VAR> samples from the audio input and returns
+them as a python string. The function blocks until enough data is available.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11592">setinfo</A></STRONG>(<VAR>status</VAR>)
+<DD>
+This method sets the audio device status parameters. The <VAR>status</VAR>
+parameter is an device status object as returned by <CODE>getinfo</CODE> and
+possibly modified by the program.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11598">write</A></STRONG>(<VAR>samples</VAR>)
+<DD>
+Write is passed a python string containing audio samples to be played.
+If there is enough buffer space free it will immediately return,
+otherwise it will block.
+<P>
+</DL>
+<P>
+There is a companion module, <CODE>SUNAUDIODEV</CODE>, which defines useful
+symbolic constants like <CODE>MIN_GAIN</CODE>, <CODE>MAX_GAIN</CODE>,
+<CODE>SPEAKER</CODE>, etc. The names of
+the constants are the same names as used in the C include file
+`<CODE>&lt;sun/audioio.h&gt;</CODE>', with the leading string `<SAMP>AUDIO_</SAMP>' stripped.
+<P>
+Useability of the control device is limited at the moment, since there
+is no way to use the ``wait for something to happen'' feature the
+device provides.
+<P>
+<HR><A NAME="tex2html5040" HREF="node221.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html5038" HREF="node219.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html5034" HREF="node219.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html5042" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html5043" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html5041" HREF="node221.html">Index</A>
+<B>Up:</B> <A NAME="tex2html5039" HREF="node219.html">18.1 Built-in Module sunaudiodev</A>
+<B> Previous:</B> <A NAME="tex2html5035" HREF="node219.html">18.1 Built-in Module sunaudiodev</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

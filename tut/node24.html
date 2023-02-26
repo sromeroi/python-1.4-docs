@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.1.2 Strings</TITLE>
+<META NAME="description" CONTENT="3.1.2 Strings">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html524" HREF="node25.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html522" HREF="node22.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html516" HREF="node23.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html526" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html525" HREF="node25.html">3.1.3 Lists</A>
+<B>Up:</B> <A NAME="tex2html523" HREF="node22.html">3.1 Using Python as </A>
+<B> Previous:</B> <A NAME="tex2html517" HREF="node23.html">3.1.1 Numbers</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00412000000000000000">3.1.2 Strings</A></H2>
+<P>
+Besides numbers, Python can also manipulate strings, enclosed in
+single quotes or double quotes:
+<P>
+<PRE>&gt;&gt;&gt; 'spam eggs'
+'spam eggs'
+&gt;&gt;&gt; 'doesn\'t'
+&quot;doesn't&quot;
+&gt;&gt;&gt; &quot;doesn't&quot;
+&quot;doesn't&quot;
+&gt;&gt;&gt; '&quot;Yes,&quot; he said.'
+'&quot;Yes,&quot; he said.'
+&gt;&gt;&gt; &quot;\"Yes,\" he said.&quot;
+'&quot;Yes,&quot; he said.'
+&gt;&gt;&gt; '&quot;Isn\'t,&quot; she said.'
+'&quot;Isn\'t,&quot; she said.'
+&gt;&gt;&gt;</PRE>
+Strings are written the same way as they are typed for input: inside
+quotes and with quotes and other funny characters escaped by backslashes,
+to show the precise value.  The string is enclosed in double quotes if
+the string contains a single quote and no double quotes, else it's
+enclosed in single quotes.  (The <TT>print</TT> statement, described later,
+can be used to write strings without quotes or escapes.)
+<P>
+Strings can be concatenated (glued together) with the <TT>+</TT>
+operator, and repeated with <TT>*</TT>:
+<P>
+<PRE>&gt;&gt;&gt; word = 'Help' + 'A'
+&gt;&gt;&gt; word
+'HelpA'
+&gt;&gt;&gt; '&lt;' + word*5 + '&gt;'
+'&lt;HelpAHelpAHelpAHelpAHelpA&gt;'
+&gt;&gt;&gt;</PRE>
+Strings can be subscripted (indexed); like in C, the first character of
+a string has subscript (index) 0.
+<P>
+There is no separate character type; a character is simply a string of
+size one.  Like in Icon, substrings can be specified with the <EM>
+slice</EM> notation: two indices separated by a colon.
+<P>
+<PRE>&gt;&gt;&gt; word[4]
+'A'
+&gt;&gt;&gt; word[0:2]
+'He'
+&gt;&gt;&gt; word[2:4]
+'lp'
+&gt;&gt;&gt;</PRE>
+Slice indices have useful defaults; an omitted first index defaults to
+zero, an omitted second index defaults to the size of the string being
+sliced.
+<P>
+<PRE>&gt;&gt;&gt; word[:2]    # The first two characters
+'He'
+&gt;&gt;&gt; word[2:]    # All but the first two characters
+'lpA'
+&gt;&gt;&gt;</PRE>
+Here's a useful invariant of slice operations: <code>s[:i] + s[i:]</code>
+equals <code>s</code>.
+<P>
+<PRE>&gt;&gt;&gt; word[:2] + word[2:]
+'HelpA'
+&gt;&gt;&gt; word[:3] + word[3:]
+'HelpA'
+&gt;&gt;&gt;</PRE>
+Degenerate slice indices are handled gracefully: an index that is too
+large is replaced by the string size, an upper bound smaller than the
+lower bound returns an empty string.
+<P>
+<PRE>&gt;&gt;&gt; word[1:100]
+'elpA'
+&gt;&gt;&gt; word[10:]
+''
+&gt;&gt;&gt; word[2:1]
+''
+&gt;&gt;&gt;</PRE>
+Indices may be negative numbers, to start counting from the right.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; word[-1]     # The last character
+'A'
+&gt;&gt;&gt; word[-2]     # The last-but-one character
+'p'
+&gt;&gt;&gt; word[-2:]    # The last two characters
+'pA'
+&gt;&gt;&gt; word[:-2]    # All but the last two characters
+'Hel'
+&gt;&gt;&gt;</PRE>
+But note that -0 is really the same as 0, so it does not count from
+the right!
+<P>
+<PRE>&gt;&gt;&gt; word[-0]     # (since -0 equals 0)
+'H'
+&gt;&gt;&gt;</PRE>
+Out-of-range negative slice indices are truncated, but don't try this
+for single-element (non-slice) indices:
+<P>
+<PRE>&gt;&gt;&gt; word[-100:]
+'HelpA'
+&gt;&gt;&gt; word[-10]    # error
+Traceback (innermost last):
+  File &quot;&lt;stdin&gt;&quot;, line 1
+IndexError: string index out of range
+&gt;&gt;&gt;</PRE>
+The best way to remember how slices work is to think of the indices as
+pointing <EM>between</EM> characters, with the left edge of the first
+character numbered 0.  Then the right edge of the last character of a
+string of <TT>n</TT> characters has index <TT>n</TT>, for example:
+<P>
+<PRE> +---+---+---+---+---+ 
+ | H | e | l | p | A |
+ +---+---+---+---+---+ 
+ 0   1   2   3   4   5 
+-5  -4  -3  -2  -1</PRE>
+The first row of numbers gives the position of the indices 0...5 in
+the string; the second row gives the corresponding negative indices.
+The slice from <code>i</code> to <code>j</code> consists of all characters between
+the edges labeled <code>i</code> and <code>j</code>, respectively.
+<P>
+For nonnegative indices, the length of a slice is the difference of
+the indices, if both are within bounds, e.g., the length of
+<code>word[1:3]</code> is 2.
+<P>
+The built-in function <TT>len()</TT> returns the length of a string:
+<P>
+<PRE>&gt;&gt;&gt; s = 'supercalifragilisticexpialidocious'
+&gt;&gt;&gt; len(s)
+34
+&gt;&gt;&gt;</PRE>
+<P>
+<HR><A NAME="tex2html524" HREF="node25.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html522" HREF="node22.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html516" HREF="node23.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html526" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html525" HREF="node25.html">3.1.3 Lists</A>
+<B>Up:</B> <A NAME="tex2html523" HREF="node22.html">3.1 Using Python as </A>
+<B> Previous:</B> <A NAME="tex2html517" HREF="node23.html">3.1.1 Numbers</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

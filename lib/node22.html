@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>File Objects</TITLE>
+<META NAME="description" CONTENT="File Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2509" HREF="node23.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2507" HREF="node14.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2501" HREF="node21.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2511" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2512" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2510" HREF="node23.html">Internal Objects</A>
+<B>Up:</B> <A NAME="tex2html2508" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2502" HREF="node21.html">The Null Object</A>
+<BR><HR><P>
+<H3><A NAME="SECTION00317800000000000000">File Objects</A></H3>
+<P>
+File objects are implemented using C's <CODE>stdio</CODE> package and can be
+created with the built-in function <CODE>open()</CODE> described under
+Built-in Functions below.  They are also returned by some other
+built-in functions and methods, e.g. <CODE>posix.popen()</CODE> and
+<CODE>posix.fdopen()</CODE> and the <CODE>makefile()</CODE> method of socket
+objects.
+<P>
+When a file operation fails for an I/O-related reason, the exception
+<CODE>IOError</CODE> is raised.  This includes situations where the
+operation is not defined for some reason, like <CODE>seek()</CODE> on a tty
+device or writing a file opened for reading.
+<P>
+Files have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="778">close</A></STRONG>(<VAR></VAR>)
+<DD>
+  Close the file.  A closed file cannot be read or written anymore.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="782">flush</A></STRONG>(<VAR></VAR>)
+<DD>
+  Flush the internal buffer, like <CODE>stdio</CODE>'s <CODE>fflush()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="788">isatty</A></STRONG>(<VAR></VAR>)
+<DD>
+  Return <CODE>1</CODE> if the file is connected to a tty(-like) device, else
+  <CODE>0</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="990">read</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>size</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Read at most <VAR>size</VAR> bytes from the file (less if the read hits
+  EOF or no more data is immediately available on a pipe, tty or
+  similar device).  If the <VAR>size</VAR> argument is negative or omitted,
+  read all data until EOF is reached.  The bytes are returned as a string
+  object.  An empty string is returned when EOF is encountered
+  immediately.  (For certain files, like ttys, it makes sense to
+  continue reading after an EOF is hit.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="991">readline</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>size</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+  Read one entire line from the file.  A trailing newline character is
+  kept in the string<A NAME="tex2html209" HREF="footnode.html#992"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+  (but may be absent when a file ends with an
+  incomplete line).  If the <VAR>size</VAR> argument is present and
+  non-negative, it is a maximum byte count (including the trailing
+  newline) and an incomplete line may be returned.
+  An empty string is returned when EOF is hit
+  immediately.  Note: unlike <CODE>stdio</CODE>'s <CODE>fgets()</CODE>, the returned
+  string contains null characters (<CODE>'&#92;0'</CODE>) if they occurred in the
+  input.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="814">readlines</A></STRONG>(<VAR></VAR>)
+<DD>
+  Read until EOF using <CODE>readline()</CODE> and return a list containing
+  the lines thus read.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="820">seek</A></STRONG>(<VAR>offset, whence</VAR>)
+<DD>
+  Set the file's current position, like <CODE>stdio</CODE>'s <CODE>fseek()</CODE>.
+  The <VAR>whence</VAR> argument is optional and defaults to <CODE>0</CODE>
+  (absolute file positioning); other values are <CODE>1</CODE> (seek
+  relative to the current position) and <CODE>2</CODE> (seek relative to the
+  file's end).  There is no return value.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="830">tell</A></STRONG>(<VAR></VAR>)
+<DD>
+  Return the file's current position, like <CODE>stdio</CODE>'s <CODE>ftell()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="993">truncate</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>size</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Truncate the file's size.  If the optional size argument present, the
+file is truncated to (at most) that size.  The size defaults to the
+current position.  Availability of this function depends on the
+operating system version (e.g., not all Unix versions support this
+operation).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="841">write</A></STRONG>(<VAR>str</VAR>)
+<DD>
+Write a string to the file.  There is no return value.  Note: due to
+buffering, the string may not actually show up in the file until
+the <CODE>flush()</CODE> or <CODE>close()</CODE> method is called.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="847">writelines</A></STRONG>(<VAR>list</VAR>)
+<DD>
+Write a list of strings to the file.  There is no return value.
+(The name is intended to match <CODE>readlines</CODE>; <CODE>writelines</CODE>
+does not add line separators.)
+<P>
+</DL><HR><A NAME="tex2html2509" HREF="node23.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2507" HREF="node14.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2501" HREF="node21.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2511" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2512" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2510" HREF="node23.html">Internal Objects</A>
+<B>Up:</B> <A NAME="tex2html2508" HREF="node14.html">2.1.7 Other Built-in Types</A>
+<B> Previous:</B> <A NAME="tex2html2502" HREF="node21.html">The Null Object</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

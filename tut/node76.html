@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.4.1 Default Argument Values</TITLE>
+<META NAME="description" CONTENT="10.4.1 Default Argument Values">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1146" HREF="node77.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1144" HREF="node75.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1138" HREF="node75.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1148" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1147" HREF="node77.html">10.4.2 Arbitrary Argument Lists</A>
+<B>Up:</B> <A NAME="tex2html1145" HREF="node75.html">10.4 Optional Function Arguments</A>
+<B> Previous:</B> <A NAME="tex2html1139" HREF="node75.html">10.4 Optional Function Arguments</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001141000000000000000">10.4.1 Default Argument Values</A></H2>
+<P>
+The most useful form is to specify a default value for one or more
+arguments.  This creates a function that can be called with fewer
+arguments than it is defined, e.g.
+<P>
+<PRE>        def ask_ok(prompt, retries = 4, complaint = 'Yes or no, please!'):
+                while 1:
+                        ok = raw_input(prompt)
+                        if ok in ('y', 'ye', 'yes'): return 1
+                        if ok in ('n', 'no', 'nop', 'nope'): return 0
+                        retries = retries - 1
+                        if retries &lt; 0: raise IOError, 'refusenik user'
+                        print complaint</PRE>
+<P>
+This function can be called either like this:
+<code>ask_ok('Do you really want to quit?')</code> or like this:
+<code>ask_ok('OK to overwrite the file?', 2)</code>.
+<P>
+The default values are evaluated at the point of function definition
+in the <EM>defining</EM> scope, so that e.g.
+<P>
+<PRE>        i = 5
+        def f(arg = i): print arg
+        i = 6
+        f()</PRE>
+<P>
+will print <code>5</code>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

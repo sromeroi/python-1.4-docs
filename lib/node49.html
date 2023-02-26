@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.1 Standard Module string</TITLE>
+<META NAME="description" CONTENT="4.1 Standard Module string">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2856" HREF="node50.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2854" HREF="node48.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2848" HREF="node48.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2858" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2859" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2857" HREF="node50.html">4.2 Built-in Module regex</A>
+<B>Up:</B> <A NAME="tex2html2855" HREF="node48.html">4 String Services</A>
+<B> Previous:</B> <A NAME="tex2html2849" HREF="node48.html">4 String Services</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00510000000000000000">4.1 Standard Module <CODE>string</CODE></A></H1>
+<P>
+This module defines some constants useful for checking character
+classes and some useful string functions.  See the modules
+<CODE>regex</CODE> and <CODE>regsub</CODE> for string functions based on regular
+expressions.
+<P>
+The constants defined in this module are are:
+<P>
+<DL><DT><STRONG><A NAME="">digits</A></STRONG>
+<DD>
+  The string <CODE>'0123456789'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">hexdigits</A></STRONG>
+<DD>
+  The string <CODE>'0123456789abcdefABCDEF'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">letters</A></STRONG>
+<DD>
+  The concatenation of the strings <CODE>lowercase</CODE> and
+  <CODE>uppercase</CODE> described below.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">lowercase</A></STRONG>
+<DD>
+  A string containing all the characters that are considered lowercase
+  letters.  On most systems this is the string
+  <CODE>'abcdefghijklmnopqrstuvwxyz'</CODE>.  Do not change its definition --
+  the effect on the routines <CODE>upper</CODE> and <CODE>swapcase</CODE> is
+  undefined.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">octdigits</A></STRONG>
+<DD>
+  The string <CODE>'01234567'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">uppercase</A></STRONG>
+<DD>
+  A string containing all the characters that are considered uppercase
+  letters.  On most systems this is the string
+  <CODE>'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</CODE>.  Do not change its definition --
+  the effect on the routines <CODE>lower</CODE> and <CODE>swapcase</CODE> is
+  undefined.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">whitespace</A></STRONG>
+<DD>
+  A string containing all characters that are considered whitespace.
+  On most systems this includes the characters space, tab, linefeed,
+  return, formfeed, and vertical tab.  Do not change its definition --
+  the effect on the routines <CODE>strip</CODE> and <CODE>split</CODE> is
+  undefined.
+<P>
+</DL>
+<P>
+The functions defined in this module are:
+<P>
+<DL><DT><STRONG><A NAME="2431">atof</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Convert a string to a floating point number.  The string must have
+the standard syntax for a floating point literal in Python, optionally
+preceded by a sign (`<SAMP>+</SAMP>' or `<SAMP>-</SAMP>').
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2628">atoi</A></STRONG>(<VAR>s</VAR><BIG>[</BIG><VAR>, base</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Convert string <VAR>s</VAR> to an integer in the given <VAR>base</VAR>.  The
+string must consist of one or more digits, optionally preceded by a
+sign (`<SAMP>+</SAMP>' or `<SAMP>-</SAMP>').  The <VAR>base</VAR> defaults to 10.  If it is
+0, a default base is chosen depending on the leading characters of the
+string (after stripping the sign): `<SAMP>0x</SAMP>' or `<SAMP>0X</SAMP>' means 16,
+`<SAMP>0</SAMP>' means 8, anything else means 10.  If <VAR>base</VAR> is 16, a
+leading `<SAMP>0x</SAMP>' or `<SAMP>0X</SAMP>' is always accepted.  (Note: for a more
+flexible interpretation of numeric literals, use the built-in function
+<CODE>eval()</CODE>.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2629">atol</A></STRONG>(<VAR>s</VAR><BIG>[</BIG><VAR>, base</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Convert string <VAR>s</VAR> to a long integer in the given <VAR>base</VAR>.  The
+string must consist of one or more digits, optionally preceded by a
+sign (`<SAMP>+</SAMP>' or `<SAMP>-</SAMP>').  The <VAR>base</VAR> argument has the same
+meaning as for <CODE>atoi()</CODE>.  A trailing `<SAMP>l</SAMP>' or `<SAMP>L</SAMP>' is not
+allowed, except if the base is 0.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2466">capitalize</A></STRONG>(<VAR>word</VAR>)
+<DD>
+Capitalize the first character of the argument.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2470">capwords</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Split the argument into words using <CODE>split</CODE>, capitalize each word
+using <CODE>capitalize</CODE>, and join the capitalized words using
+<CODE>join</CODE>.  Note that this replaces runs of whitespace characters by
+a single space.  (See also <CODE>regsub.capwords()</CODE> for a version
+that doesn't change the delimiters, and lets you specify a word
+separator.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2478">expandtabs</A></STRONG>(<VAR>s, tabsize</VAR>)
+<DD>
+Expand tabs in a string, i.e. replace them by one or more spaces,
+depending on the current column and the given tab size.  The column
+number is reset to zero after each newline occurring in the string.
+This doesn't understand other non-printing characters or escape
+sequences.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2630">find</A></STRONG>(<VAR>s, sub</VAR><BIG>[</BIG><VAR>, start</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return the lowest index in <VAR>s</VAR> not smaller than <VAR>start</VAR> where the
+substring <VAR>sub</VAR> is found.  Return <CODE>-1</CODE> when <VAR>sub</VAR>
+does not occur as a substring of <VAR>s</VAR> with index at least <VAR>start</VAR>.
+If <VAR>start</VAR> is omitted, it defaults to <CODE>0</CODE>.  If <VAR>start</VAR> is
+negative, <CODE>len(<VAR>s</VAR>)</CODE> is added.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2632">rfind</A></STRONG>(<VAR>s, sub</VAR><BIG>[</BIG><VAR>, start</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Like <CODE>find</CODE> but find the highest index.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2633">index</A></STRONG>(<VAR>s, sub</VAR><BIG>[</BIG><VAR>, start</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Like <CODE>find</CODE> but raise <CODE>ValueError</CODE> when the substring is
+not found.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2634">rindex</A></STRONG>(<VAR>s, sub</VAR><BIG>[</BIG><VAR>, start</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Like <CODE>rfind</CODE> but raise <CODE>ValueError</CODE> when the substring is
+not found.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2635">count</A></STRONG>(<VAR>s, sub</VAR><BIG>[</BIG><VAR>, start</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return the number of (non-overlapping) occurrences of substring
+<VAR>sub</VAR> in string <VAR>s</VAR> with index at least <VAR>start</VAR>.
+If <VAR>start</VAR> is omitted, it defaults to <CODE>0</CODE>.  If <VAR>start</VAR> is
+negative, <CODE>len(<VAR>s</VAR>)</CODE> is added.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2525">lower</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Convert letters to lower case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2529">maketrans</A></STRONG>(<VAR>from, to</VAR>)
+<DD>
+Return a translation table suitable for passing to <CODE>string.translate</CODE>
+or <CODE>regex.compile</CODE>, that will map each character in <VAR>from</VAR> 
+into the character at the same position in <VAR>to</VAR>; <VAR>from</VAR> and
+<VAR>to</VAR> must have the same length.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2644">split</A></STRONG>(<VAR>s</VAR><BIG>[</BIG><VAR>, sep</VAR><BIG>[</BIG><VAR>, maxsplit</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a list of the words of the string <VAR>s</VAR>.  If the optional
+second argument <VAR>sep</VAR> is absent or <CODE>None</CODE>, the words are
+separated by arbitrary strings of whitespace characters (space, tab,
+newline, return, formfeed).  If the second argument <VAR>sep</VAR> is
+present and not <CODE>None</CODE>, it specifies a string to be used as the
+word separator.  The returned list will then have one more items than
+the number of non-overlapping occurrences of the separator in the
+string.  The optional third argument <VAR>maxsplit</VAR> defaults to 0.  If
+it is nonzero, at most <VAR>maxsplit</VAR> number of splits occur, and the
+remainder of the string is returned as the final element of the list
+(thus, the list will have at most <CODE><VAR>maxsplit</VAR>+1</CODE> elements).
+(See also <CODE>regsub.split()</CODE> for a version that allows specifying a
+regular expression as the separator.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2645">splitfields</A></STRONG>(<VAR>s</VAR><BIG>[</BIG><VAR>, sep</VAR><BIG>[</BIG><VAR>, maxsplit</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This function behaves identical to <CODE>split</CODE>.  (In the past,
+<CODE>split</CODE> was only used with one argument, while <CODE>splitfields</CODE>
+was only used with two arguments.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2640">join</A></STRONG>(<VAR>words</VAR><BIG>[</BIG><VAR>, sep</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Concatenate a list or tuple of words with intervening occurrences of
+<VAR>sep</VAR>.  The default value for <VAR>sep</VAR> is a single space character.
+It is always true that
+<CODE>string.join(string.split(<VAR>s</VAR>, <VAR>sep</VAR>), <VAR>sep</VAR>)</CODE>
+equals <VAR>s</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2642">joinfields</A></STRONG>(<VAR>words</VAR><BIG>[</BIG><VAR>, sep</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+This function behaves identical to <CODE>join</CODE>.  (In the past,
+<CODE>join</CODE> was only used with one argument, while <CODE>joinfields</CODE>
+was only used with two arguments.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2576">lstrip</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Remove leading whitespace from the string <VAR>s</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2581">rstrip</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Remove trailing whitespace from the string <VAR>s</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2586">strip</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Remove leading and trailing whitespace from the string <VAR>s</VAR>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2591">swapcase</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Convert lower case letters to upper case and vice versa.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2643">translate</A></STRONG>(<VAR>s, table</VAR><BIG>[</BIG><VAR>, deletechars</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Delete all characters from <VAR>s</VAR> that are in <VAR>deletechars</VAR> (if present), and 
+then translate the characters using <VAR>table</VAR>, which must be
+a 256-character string giving the translation for each character
+value, indexed by its ordinal.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2602">upper</A></STRONG>(<VAR>s</VAR>)
+<DD>
+Convert letters to upper case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2606">ljust</A></STRONG>(<VAR>s, width</VAR>)
+<DD>
+,rjusts, width
+,centers, width
+These functions respectively left-justify, right-justify and center a
+string in a field of given width.
+They return a string that is at least
+<VAR>width</VAR>
+characters wide, created by padding the string
+<VAR>s</VAR>
+with spaces until the given width on the right, left or both sides.
+The string is never truncated.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="2616">zfill</A></STRONG>(<VAR>s, width</VAR>)
+<DD>
+Pad a numeric string on the left with zero digits until the given
+width is reached.  Strings starting with a sign are handled correctly.
+<P>
+</DL>
+<P>
+This module is implemented in Python.  Much of its functionality has
+been reimplemented in the built-in module <CODE>strop</CODE>.  However, you
+should <EM>never</EM> import the latter module directly.  When
+<CODE>string</CODE> discovers that <CODE>strop</CODE> exists, it transparently
+replaces parts of itself with the implementation from <CODE>strop</CODE>.
+After initialization, there is <EM>no</EM> overhead in using
+<CODE>string</CODE> instead of <CODE>strop</CODE>.
+<P>
+<HR><A NAME="tex2html2856" HREF="node50.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2854" HREF="node48.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2848" HREF="node48.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2858" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2859" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2857" HREF="node50.html">4.2 Built-in Module regex</A>
+<B>Up:</B> <A NAME="tex2html2855" HREF="node48.html">4 String Services</A>
+<B> Previous:</B> <A NAME="tex2html2849" HREF="node48.html">4 String Services</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

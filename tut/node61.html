@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.4 Random remarks</TITLE>
+<META NAME="description" CONTENT="9.4 Random remarks">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html953" HREF="node62.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html951" HREF="node53.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html945" HREF="node60.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html955" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html954" HREF="node62.html">9.5 Inheritance</A>
+<B>Up:</B> <A NAME="tex2html952" HREF="node53.html">9 Classes</A>
+<B> Previous:</B> <A NAME="tex2html946" HREF="node60.html">9.3.4 Method objects</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001040000000000000000">9.4 Random remarks</A></H1>
+<P>
+[These should perhaps be placed more carefully...]
+<P>
+Data attributes override method attributes with the same name; to
+avoid accidental name conflicts, which may cause hard-to-find bugs in
+large programs, it is wise to use some kind of convention that
+minimizes the chance of conflicts, e.g., capitalize method names,
+prefix data attribute names with a small unique string (perhaps just
+an underscore), or use verbs for methods and nouns for data attributes.
+<P>
+Data attributes may be referenced by methods as well as by ordinary
+users (``clients'') of an object.  In other words, classes are not
+usable to implement pure abstract data types.  In fact, nothing in
+Python makes it possible to enforce data hiding -- it is all based
+upon convention.  (On the other hand, the Python implementation,
+written in C, can completely hide implementation details and control
+access to an object if necessary; this can be used by extensions to
+Python written in C.)
+<P>
+Clients should use data attributes with care -- clients may mess up
+invariants maintained by the methods by stamping on their data
+attributes.  Note that clients may add data attributes of their own to
+an instance object without affecting the validity of the methods, as
+long as name conflicts are avoided -- again, a naming convention can
+save a lot of headaches here.
+<P>
+There is no shorthand for referencing data attributes (or other
+methods!) from within methods.  I find that this actually increases
+the readability of methods: there is no chance of confusing local
+variables and instance variables when glancing through a method.
+<P>
+Conventionally, the first argument of methods is often called
+<code>self</code>.  This is nothing more than a convention: the name
+<code>self</code> has absolutely no special meaning to Python.  (Note,
+however, that by not following the convention your code may be less
+readable by other Python programmers, and it is also conceivable that
+a <EM>class browser</EM> program be written which relies upon such a
+convention.)
+<P>
+Any function object that is a class attribute defines a method for
+instances of that class.  It is not necessary that the function
+definition is textually enclosed in the class definition: assigning a
+function object to a local variable in the class is also ok.  For
+example:
+<P>
+<PRE>        # Function defined outside the class
+        def f1(self, x, y):
+                return min(x, x+y)
+
+        class C:
+                f = f1
+                def g(self):
+                        return 'hello world'
+                h = g</PRE>
+<P>
+Now <code>f</code>, <code>g</code> and <code>h</code> are all attributes of class
+<code>C</code> that refer to function objects, and consequently they are all
+methods of instances of <code>C</code> -- <code>h</code> being exactly equivalent
+to <code>g</code>.  Note that this practice usually only serves to confuse
+the reader of a program.
+<P>
+Methods may call other methods by using method attributes of the
+<code>self</code> argument, e.g.:
+<P>
+<PRE>        class Bag:
+                def empty(self):
+                        self.data = []
+                def add(self, x):
+                        self.data.append(x)
+                def addtwice(self, x):
+                        self.add(x)
+                        self.add(x)</PRE>
+<P>
+The instantiation operation (``calling'' a class object) creates an
+empty object.  Many classes like to create objects in a known initial
+state.  Therefore a class may define a special method named
+<code>__init__</code>, like this:
+<P>
+<PRE>                def __init__(self):
+                        self.empty()</PRE>
+<P>
+When a class defines an <code>__init__</code> method, class instantiation
+automatically invokes <code>__init__</code> for the newly-created class
+instance.  So in the <code>Bag</code> example, a new and initialized instance
+can be obtained by:
+<P>
+<PRE>        x = Bag()</PRE>
+<P>
+Of course, the <code>__init__</code> method may have arguments for greater
+flexibility.  In that case, arguments given to the class instantiation
+operator are passed on to <code>__init__</code>.  For example,
+<P>
+<PRE>&gt;&gt;&gt; class Complex:
+...     def __init__(self, realpart, imagpart):
+...         self.r = realpart
+...         self.i = imagpart
+... 
+&gt;&gt;&gt; x = Complex(3.0,-4.5)
+&gt;&gt;&gt; x.r, x.i
+(3.0, -4.5)
+&gt;&gt;&gt;</PRE>
+Methods may reference global names in the same way as ordinary
+functions.  The global scope associated with a method is the module
+containing the class definition.  (The class itself is never used as a
+global scope!)  While one rarely encounters a good reason for using
+global data in a method, there are many legitimate uses of the global
+scope: for one thing, functions and modules imported into the global
+scope can be used by methods, as well as functions and classes defined
+in it.  Usually, the class containing the method is itself defined in
+this global scope, and in the next section we'll find some good
+reasons why a method would want to reference its own class!
+<P>
+<HR><A NAME="tex2html953" HREF="node62.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html951" HREF="node53.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html945" HREF="node60.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html955" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html954" HREF="node62.html">9.5 Inheritance</A>
+<B>Up:</B> <A NAME="tex2html952" HREF="node53.html">9 Classes</A>
+<B> Previous:</B> <A NAME="tex2html946" HREF="node60.html">9.3.4 Method objects</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

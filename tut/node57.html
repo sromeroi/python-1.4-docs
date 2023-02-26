@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.3.1 Class definition syntax</TITLE>
+<META NAME="description" CONTENT="9.3.1 Class definition syntax">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html911" HREF="node58.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html909" HREF="node56.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html903" HREF="node56.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html913" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html912" HREF="node58.html">9.3.2 Class objects</A>
+<B>Up:</B> <A NAME="tex2html910" HREF="node56.html">9.3 A first look </A>
+<B> Previous:</B> <A NAME="tex2html904" HREF="node56.html">9.3 A first look </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001031000000000000000">9.3.1 Class definition syntax</A></H2>
+<P>
+The simplest form of class definition looks like this:
+<P>
+<PRE>        class ClassName:
+                &lt;statement-1&gt;
+                .
+                .
+                .
+                &lt;statement-N&gt;</PRE>
+<P>
+Class definitions, like function definitions (<code>def</code> statements)
+must be executed before they have any effect.  (You could conceivably
+place a class definition in a branch of an <code>if</code> statement, or
+inside a function.)
+<P>
+In practice, the statements inside a class definition will usually be
+function definitions, but other statements are allowed, and sometimes
+useful -- we'll come back to this later.  The function definitions
+inside a class normally have a peculiar form of argument list,
+dictated by the calling conventions for methods -- again, this is
+explained later.
+<P>
+When a class definition is entered, a new name space is created, and
+used as the local scope -- thus, all assignments to local variables
+go into this new name space.  In particular, function definitions bind
+the name of the new function here.
+<P>
+When a class definition is left normally (via the end), a <EM>class
+object</EM> is created.  This is basically a wrapper around the contents
+of the name space created by the class definition; we'll learn more
+about class objects in the next section.  The original local scope
+(the one in effect just before the class definitions was entered) is
+reinstated, and the class object is bound here to class name given in
+the class definition header (ClassName in the example).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

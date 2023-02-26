@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>8.8.1 Example</TITLE>
+<META NAME="description" CONTENT="8.8.1 Example">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3271" HREF="node83.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3269" HREF="node81.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3265" HREF="node81.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3273" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3274" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3272" HREF="node83.html">8.9 Standard Module TERMIOS</A>
+<B>Up:</B> <A NAME="tex2html3270" HREF="node81.html">8.8 Built-in Module termios</A>
+<B> Previous:</B> <A NAME="tex2html3266" HREF="node81.html">8.8 Built-in Module termios</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00981000000000000000">8.8.1 Example</A></H2>
+<P>
+<A NAME="termiosExample">&#160;</A>
+<P>
+Here's a function that prompts for a password with echoing turned off.
+Note the technique using a separate <CODE>termios.tcgetattr()</CODE> call
+and a <CODE>try ... finally</CODE> statement to ensure that the old tty
+attributes are restored exactly no matter what happens:
+<P>
+<PRE>def getpass(prompt = &quot;Password: &quot;):
+    import termios, TERMIOS, sys
+    fd = sys.stdin.fileno()
+    old = termios.tcgetattr(fd)
+    new = termios.tcgetattr(fd)
+    new[3] = new[3] &amp; ~TERMIOS.ECHO          # lflags
+    try:
+        termios.tcsetattr(fd, TERMIOS.TCSADRAIN, new)
+        passwd = raw_input(prompt)
+    finally:
+        termios.tcsetattr(fd, TERMIOS.TCSADRAIN, old)
+    return passwd</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

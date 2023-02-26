@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.4 Standard Module ftplib</TITLE>
+<META NAME="description" CONTENT="11.4 Standard Module ftplib">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3744" HREF="node118.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3742" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3736" HREF="node116.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3746" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3747" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3745" HREF="node118.html">11.4.1 FTP Objects</A>
+<B>Up:</B> <A NAME="tex2html3743" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3737" HREF="node116.html">11.3.2 Example</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001240000000000000000">11.4 Standard Module <CODE>ftplib</CODE></A></H1>
+<P>
+This module defines the class <CODE>FTP</CODE> and a few related items.  The
+<CODE>FTP</CODE> class implements the client side of the FTP protocol.  You
+can use this to write Python programs that perform a variety of
+automated FTP jobs, such as mirroring other ftp servers.  It is also
+used by the module <CODE>urllib</CODE> to handle URLs that use FTP.  For
+more information on FTP (File Transfer Protocol), see Internet RFC
+959.
+<P>
+Here's a sample session using the <CODE>ftplib</CODE> module:
+<P>
+<PRE>&gt;&gt;&gt; from ftplib import FTP
+&gt;&gt;&gt; ftp = FTP('ftp.cwi.nl')   # connect to host, default port
+&gt;&gt;&gt; ftp.login()               # user anonymous, passwd user@hostname
+&gt;&gt;&gt; ftp.retrlines('LIST')     # list directory contents
+total 24418
+drwxrwsr-x   5 ftp-usr  pdmaint     1536 Mar 20 09:48 .
+dr-xr-srwt 105 ftp-usr  pdmaint     1536 Mar 21 14:32 ..
+-rw-r--r--   1 ftp-usr  pdmaint     5305 Mar 20 09:48 INDEX
+ .
+ .
+ .
+&gt;&gt;&gt; ftp.quit()</PRE>
+<P>
+The module defines the following items:
+<P>
+<DL><DT><STRONG><A NAME="6245">FTP</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>host</VAR><BIG>[</BIG><VAR>, user, passwd, acct</VAR><BIG>]</BIG><VAR></VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Return a new instance of the <CODE>FTP</CODE> class.  When
+<VAR>host</VAR> is given, the method call <CODE>connect(<VAR>host</VAR>)</CODE> is
+made.  When <VAR>user</VAR> is given, additionally the method call
+<CODE>login(<VAR>user</VAR>, <VAR>passwd</VAR>, <VAR>acct</VAR>)</CODE> is made (where
+<VAR>passwd</VAR> and <VAR>acct</VAR> default to the empty string when not given).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">all_errors</A></STRONG>
+<DD>
+The set of all exceptions (as a tuple) that methods of <CODE>FTP</CODE>
+instances may raise as a result of problems with the FTP connection
+(as opposed to programming errors made by the caller).  This set
+includes the four exceptions listed below as well as
+<CODE>socket.error</CODE> and <CODE>IOError</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_reply</A></STRONG>
+<DD>
+Exception raised when an unexpected reply is received from the server.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_temp</A></STRONG>
+<DD>
+Exception raised when an error code in the range 400-499 is received.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_perm</A></STRONG>
+<DD>
+Exception raised when an error code in the range 500-599 is received.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">error_proto</A></STRONG>
+<DD>
+Exception raised when a reply is received from the server that does
+not begin with a digit in the range 1-5.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3748" HREF="node118.html#SECTION001241000000000000000">11.4.1 FTP Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

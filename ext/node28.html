@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.2.2 SGI IRIX 4 Dynamic Loading</TITLE>
+<META NAME="description" CONTENT="3.2.2 SGI IRIX 4 Dynamic Loading">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html525" HREF="node29.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html523" HREF="node26.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html517" HREF="node27.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html527" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html528" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html526" HREF="node29.html">3.2.3 GNU Dynamic Loading</A>
+<B>Up:</B> <A NAME="tex2html524" HREF="node26.html">3.2 Building a Dynamically </A>
+<B> Previous:</B> <A NAME="tex2html518" HREF="node27.html">3.2.1 Shared Libraries</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00422000000000000000">3.2.2 SGI IRIX 4 Dynamic Loading</A></H2>
+<P>
+<B>IMPORTANT:</B> You must compile your extension module with the
+additional C flag `<SAMP>-G0</SAMP>' (or `<SAMP>-G 0</SAMP>').  This instruct the
+assembler to generate position-independent code.
+<P>
+You don't need to link the resulting `<CODE>spammodule.o</CODE>' file; just
+copy it into a directory along the Python module search path.
+<P>
+The first time your extension is loaded, it takes some extra time and
+a few messages may be printed.  This creates a file
+`<CODE>spammodule.ld</CODE>' which is an image that can be loaded quickly into
+the Python interpreter process.  When a new Python interpreter is
+installed, the <CODE>dl</CODE> package detects this and rebuilds
+`<CODE>spammodule.ld</CODE>'.  The file `<CODE>spammodule.ld</CODE>' is placed in the
+directory where `<CODE>spammodule.o</CODE>' was found, unless this directory is
+unwritable; in that case it is placed in a temporary
+directory.<A NAME="tex2html5" HREF="footnode.html#543"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+If your extension modules uses additional system libraries, you must
+create a file `<CODE>spammodule.libs</CODE>' in the same directory as the
+`<CODE>spammodule.o</CODE>'.  This file should contain one or more lines with
+whitespace-separated options that will be passed to the linker --
+normally only `<SAMP>-l</SAMP>' options or absolute pathnames of libraries
+(`<SAMP>.a</SAMP>' files) should be used.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.5.1 Multiple inheritance</TITLE>
+<META NAME="description" CONTENT="9.5.1 Multiple inheritance">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html974" HREF="node64.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html972" HREF="node62.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html968" HREF="node62.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html976" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html975" HREF="node64.html">9.6 Odds and ends</A>
+<B>Up:</B> <A NAME="tex2html973" HREF="node62.html">9.5 Inheritance</A>
+<B> Previous:</B> <A NAME="tex2html969" HREF="node62.html">9.5 Inheritance</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001051000000000000000">9.5.1 Multiple inheritance</A></H2>
+<P>
+Python supports a limited form of multiple inheritance as well.  A
+class definition with multiple base classes looks as follows:
+<P>
+<PRE>        class DerivedClassName(Base1, Base2, Base3):
+                &lt;statement-1&gt;
+                .
+                .
+                .
+                &lt;statement-N&gt;</PRE>
+<P>
+The only rule necessary to explain the semantics is the resolution
+rule used for class attribute references.  This is depth-first,
+left-to-right.  Thus, if an attribute is not found in
+<code>DerivedClassName</code>, it is searched in <code>Base1</code>, then
+(recursively) in the base classes of <code>Base1</code>, and only if it is
+not found there, it is searched in <code>Base2</code>, and so on.
+<P>
+(To some people breadth first--searching <code>Base2</code> and
+<code>Base3</code> before the base classes of <code>Base1</code>--looks more
+natural.  However, this would require you to know whether a particular
+attribute of <code>Base1</code> is actually defined in <code>Base1</code> or in
+one of its base classes before you can figure out the consequences of
+a name conflict with an attribute of <code>Base2</code>.  The depth-first
+rule makes no differences between direct and inherited attributes of
+<code>Base1</code>.)
+<P>
+It is clear that indiscriminate use of multiple inheritance is a
+maintenance nightmare, given the reliance in Python on conventions to
+avoid accidental name conflicts.  A well-known problem with multiple
+inheritance is a class derived from two classes that happen to have a
+common base class.  While it is easy enough to figure out what happens
+in this case (the instance will have a single copy of ``instance
+variables'' or data attributes used by the common base class), it is
+not clear that these semantics are in any way useful.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>5.6 Comparing Sequences and Other Types</TITLE>
+<META NAME="description" CONTENT="5.6 Comparing Sequences and Other Types">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html704" HREF="node41.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html702" HREF="node34.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html698" HREF="node39.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html706" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html705" HREF="node41.html">6 Modules</A>
+<B>Up:</B> <A NAME="tex2html703" HREF="node34.html">5 Odds and Ends</A>
+<B> Previous:</B> <A NAME="tex2html699" HREF="node39.html">5.5 More on Conditions</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00660000000000000000">5.6 Comparing Sequences and Other Types</A></H1>
+<P>
+Sequence objects may be compared to other objects with the same
+sequence type.  The comparison uses <EM>lexicographical</EM> ordering:
+first the first two items are compared, and if they differ this
+determines the outcome of the comparison; if they are equal, the next
+two items are compared, and so on, until either sequence is exhausted.
+If two items to be compared are themselves sequences of the same type,
+the lexicographical comparison is carried out recursively.  If all
+items of two sequences compare equal, the sequences are considered
+equal.  If one sequence is an initial subsequence of the other, the
+shorted sequence is the smaller one.  Lexicographical ordering for
+strings uses the ASCII ordering for individual characters.  Some
+examples of comparisons between sequences with the same types:
+<P>
+<PRE>(1, 2, 3)              &lt; (1, 2, 4)
+[1, 2, 3]              &lt; [1, 2, 4]
+'ABC' &lt; 'C' &lt; 'Pascal' &lt; 'Python'
+(1, 2, 3, 4)           &lt; (1, 2, 4)
+(1, 2)                 &lt; (1, 2, -1)
+(1, 2, 3)              = (1.0, 2.0, 3.0)
+(1, 2, ('aa', 'ab'))   &lt; (1, 2, ('abc', 'a'), 4)</PRE>
+Note that comparing objects of different types is legal.  The outcome
+is deterministic but arbitrary: the types are ordered by their name.
+Thus, a list is always smaller than a string, a string is always
+smaller than a tuple, etc.  Mixed numeric types are compared according
+to their numeric value, so 0 equals 0.0, etc.<A NAME="tex2html4" HREF="footnode.html#283"><IMG  ALIGN=BOTTOM ALT="gif" SRC="../icons/foot_motif.gif" BORDER=0></A>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

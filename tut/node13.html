@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.2.3 ``Compiled'' Python files</TITLE>
+<META NAME="description" CONTENT="2.2.3 ``Compiled'' Python files">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html397" HREF="node14.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html395" HREF="node10.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html389" HREF="node12.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html399" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html398" HREF="node14.html">2.2.4 Executable Python scripts</A>
+<B>Up:</B> <A NAME="tex2html396" HREF="node10.html">2.2 The Interpreter and </A>
+<B> Previous:</B> <A NAME="tex2html390" HREF="node12.html">2.2.2 The Module Search </A>
+<BR><HR><P>
+<H2><A NAME="SECTION00323000000000000000">2.2.3 ``Compiled'' Python files</A></H2>
+<P>
+As an important speed-up of the start-up time for short programs that
+use a lot of standard modules, if a file called <TT>spam.pyc</TT> exists
+in the directory where <TT>spam.py</TT> is found, this is assumed to
+contain an already-``compiled'' version of the module <TT>spam</TT>.  The
+modification time of the version of <TT>spam.py</TT> used to create <TT>
+spam.pyc</TT> is recorded in <TT>spam.pyc</TT>, and the file is ignored if
+these don't match.
+<P>
+Normally, you don't need to do anything to create the <TT>spam.pyc</TT> file.
+Whenever <TT>spam.py</TT> is successfully compiled, an attempt is made to
+write the compiled version to <TT>spam.pyc</TT>.  It is not an error if
+this attempt fails; if for any reason the file is not written
+completely, the resulting <TT>spam.pyc</TT> file will be recognized as
+invalid and thus ignored later.  The contents of the <TT>spam.pyc</TT>
+file is platform independent, so a Python module directory can be
+shared by machines of different architectures.  (Tip for experts:
+the module <TT>compileall</TT> creates <TT>.pyc</TT> files for all modules.)
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

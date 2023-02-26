@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>17.7 Built-in Module fm</TITLE>
+<META NAME="description" CONTENT="17.7 Built-in Module fm">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4971" HREF="node215.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4969" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4963" HREF="node213.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4973" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4974" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4972" HREF="node215.html">17.8 Built-in Module gl</A>
+<B>Up:</B> <A NAME="tex2html4970" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4964" HREF="node213.html">17.6 Standard Module flp</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001870000000000000000">17.7 Built-in Module <CODE>fm</CODE></A></H1>
+<P>
+This module provides access to the IRIS <EM>Font Manager</EM> library.
+It is available only on Silicon Graphics machines.
+See also: 4Sight User's Guide, Section 1, Chapter 5: Using the IRIS
+Font Manager.
+<P>
+This is not yet a full interface to the IRIS Font Manager.
+Among the unsupported features are: matrix operations; cache
+operations; character operations (use string operations instead); some
+details of font info; individual glyph metrics; and printer matching.
+<P>
+It supports the following operations:
+<P>
+<DL><DT><STRONG><A NAME="11297">init</A></STRONG>(<VAR></VAR>)
+<DD>
+Initialization function.
+Calls <CODE>fminit()</CODE>.
+It is normally not necessary to call this function, since it is called
+automatically the first time the <CODE>fm</CODE> module is imported.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11303">findfont</A></STRONG>(<VAR>fontname</VAR>)
+<DD>
+Return a font handle object.
+Calls <CODE>fmfindfont(<VAR>fontname</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11308">enumerate</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns a list of available font names.
+This is an interface to <CODE>fmenumerate()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11313">prstr</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Render a string using the current font (see the <CODE>setfont()</CODE> font
+handle method below).
+Calls <CODE>fmprstr(<VAR>string</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11319">setpath</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Sets the font search path.
+Calls <CODE>fmsetpath(string)</CODE>.
+(XXX Does not work!?!)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11324">fontpath</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns the current font search path.
+<P>
+</DL>
+<P>
+Font handle objects support the following operations:
+<P>
+<DL><DT><STRONG><A NAME="11330">scalefont</A></STRONG>(<VAR>factor</VAR>)
+<DD>
+Returns a handle for a scaled version of this font.
+Calls <CODE>fmscalefont(<VAR>fh</VAR>, <VAR>factor</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11336">setfont</A></STRONG>(<VAR></VAR>)
+<DD>
+Makes this font the current font.
+Note: the effect is undone silently when the font handle object is
+deleted.
+Calls <CODE>fmsetfont(<VAR>fh</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11341">getfontname</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns this font's name.
+Calls <CODE>fmgetfontname(<VAR>fh</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11346">getcomment</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns the comment string associated with this font.
+Raises an exception if there is none.
+Calls <CODE>fmgetcomment(<VAR>fh</VAR>)</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11351">getfontinfo</A></STRONG>(<VAR></VAR>)
+<DD>
+Returns a tuple giving some pertinent data about this font.
+This is an interface to <CODE>fmgetfontinfo()</CODE>.
+The returned tuple contains the following numbers:
+<TT>(<VAR>printermatched</VAR>, <VAR>fixed_width</VAR>, <VAR>xorig</VAR>, <VAR>yorig</VAR>,
+<VAR>xsize</VAR>, <VAR>ysize</VAR>, <VAR>height</VAR>, <VAR>nglyphs</VAR>)</TT>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="11364">getstrwidth</A></STRONG>(<VAR>string</VAR>)
+<DD>
+Returns the width, in pixels, of the string when drawn in this font.
+Calls <CODE>fmgetstrwidth(<VAR>fh</VAR>, <VAR>string</VAR>)</CODE>.
+<P>
+</DL><HR><A NAME="tex2html4971" HREF="node215.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4969" HREF="node202.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4963" HREF="node213.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4973" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4974" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4972" HREF="node215.html">17.8 Built-in Module gl</A>
+<B>Up:</B> <A NAME="tex2html4970" HREF="node202.html">17 SGI IRIX Specific </A>
+<B> Previous:</B> <A NAME="tex2html4964" HREF="node213.html">17.6 Standard Module flp</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

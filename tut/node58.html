@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.3.2 Class objects</TITLE>
+<META NAME="description" CONTENT="9.3.2 Class objects">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html922" HREF="node59.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html920" HREF="node56.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html914" HREF="node57.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html924" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html923" HREF="node59.html">9.3.3 Instance objects</A>
+<B>Up:</B> <A NAME="tex2html921" HREF="node56.html">9.3 A first look </A>
+<B> Previous:</B> <A NAME="tex2html915" HREF="node57.html">9.3.1 Class definition syntax</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001032000000000000000">9.3.2 Class objects</A></H2>
+<P>
+Class objects support two kinds of operations: attribute references
+and instantiation.
+<P>
+<EM>Attribute references</EM> use the standard syntax used for all
+attribute references in Python: <code>obj.name</code>.  Valid attribute
+names are all the names that were in the class's name space when the
+class object was created.  So, if the class definition looked like
+this:
+<P>
+<PRE>        class MyClass:
+                i = 12345
+                def f(x):
+                        return 'hello world'</PRE>
+<P>
+then <code>MyClass.i</code> and <code>MyClass.f</code> are valid attribute
+references, returning an integer and a function object, respectively.
+Class attributes can also be assigned to, so you can change the
+value of <code>MyClass.i</code> by assignment.
+<P>
+Class <EM>instantiation</EM> uses function notation.  Just pretend that
+the class object is a parameterless function that returns a new
+instance of the class.  For example, (assuming the above class):
+<P>
+<PRE>        x = MyClass()</PRE>
+<P>
+creates a new <EM>instance</EM> of the class and assigns this object to
+the local variable <code>x</code>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.6.2 alias objects</TITLE>
+<META NAME="description" CONTENT="15.6.2 alias objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4415" HREF="node171.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4413" HREF="node168.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4407" HREF="node169.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4417" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4418" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4416" HREF="node171.html">15.6.3 FInfo objects</A>
+<B>Up:</B> <A NAME="tex2html4414" HREF="node168.html">15.6 Built-in Module macfs</A>
+<B> Previous:</B> <A NAME="tex2html4408" HREF="node169.html">15.6.1 FSSpec objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001662000000000000000">15.6.2 alias objects</A></H2>
+<P>
+<DL><DT><STRONG><A NAME="">data</A></STRONG>
+<DD>
+The raw data for the Alias record, suitable for storing in a resource
+or transmitting to other programs.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9096">Resolve</A></STRONG>(<VAR></VAR><BIG>[</BIG><VAR>file</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Resolve the alias. If the alias was created as a relative alias you
+should pass the file relative to which it is. Return the FSSpec for
+the file pointed to and a flag indicating whether the alias object
+itself was modified during the search process.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9055">GetInfo</A></STRONG>(<VAR>num</VAR>)
+<DD>
+An interface to the C routine <CODE>GetAliasInfo()</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9097">Update</A></STRONG>(<VAR>file, </VAR><BIG>[</BIG><VAR>file2</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Update the alias to point to the <VAR>file</VAR> given. If <VAR>file2</VAR> is
+present a relative alias will be created.
+<P>
+</DL>
+<P>
+Note that it is currently not possible to directly manipulate a resource
+as an alias object. Hence, after calling <VAR>Update</VAR> or after
+<VAR>Resolve</VAR> indicates that the alias has changed the Python program
+is responsible for getting the <VAR>data</VAR> from the alias object and
+modifying the resource.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

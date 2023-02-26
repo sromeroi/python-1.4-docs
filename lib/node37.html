@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.9 Built-in Module parser</TITLE>
+<META NAME="description" CONTENT="3.9 Built-in Module parser">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2702" HREF="node38.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2700" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2694" HREF="node36.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2704" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2705" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2703" HREF="node38.html">3.9.1 Creating AST Objects</A>
+<B>Up:</B> <A NAME="tex2html2701" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2695" HREF="node36.html">3.8.1 Examples</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00490000000000000000">3.9 Built-in Module <CODE>parser</CODE></A></H1>
+<P>
+The <CODE>parser</CODE> module provides an interface to Python's internal
+parser and byte-code compiler.  The primary purpose for this interface
+is to allow Python code to edit the parse tree of a Python expression
+and create executable code from this.  This is better than trying
+to parse and modify an arbitrary Python code fragment as a string
+because parsing is performed in a manner identical to the code
+forming the application.  It is also faster.
+<P>
+There are a few things to note about this module which are important
+to making use of the data structures created.  This is not a tutorial
+on editing the parse trees for Python code, but some examples of using
+the <CODE>parser</CODE> module are presented.
+<P>
+Most importantly, a good understanding of the Python grammar processed
+by the internal parser is required.  For full information on the
+language syntax, refer to the Language Reference.  The parser itself
+is created from a grammar specification defined in the file
+`<CODE>Grammar/Grammar</CODE>' in the standard Python distribution.  The parse
+trees stored in the ``AST objects'' created by this module are the
+actual output from the internal parser when created by the
+<CODE>expr()</CODE> or <CODE>suite()</CODE> functions, described below.  The AST
+objects created by <CODE>sequence2ast()</CODE> faithfully simulate those
+structures.  Be aware that the values of the sequences which are
+considered ``correct'' will vary from one version of Python to another
+as the formal grammar for the language is revised.  However,
+transporting code from one Python version to another as source text
+will always allow correct parse trees to be created in the target
+version, with the only restriction being that migrating to an older
+version of the interpreter will not support more recent language
+constructs.  The parse trees are not typically compatible from one
+version to another, whereas source code has always been
+forward-compatible.
+<P>
+Each element of the sequences returned by <CODE>ast2list</CODE> or
+<CODE>ast2tuple()</CODE> has a simple form.  Sequences representing
+non-terminal elements in the grammar always have a length greater than
+one.  The first element is an integer which identifies a production in
+the grammar.  These integers are given symbolic names in the C header
+file `<CODE>Include/graminit.h</CODE>' and the Python module
+`<CODE>Lib/symbol.py</CODE>'.  Each additional element of the sequence represents
+a component of the production as recognized in the input string: these
+are always sequences which have the same form as the parent.  An
+important aspect of this structure which should be noted is that
+keywords used to identify the parent node type, such as the keyword
+<CODE>if</CODE> in an <CODE>if_stmt</CODE>, are included in the node tree without
+any special treatment.  For example, the <CODE>if</CODE> keyword is
+represented by the tuple <CODE>(1, 'if')</CODE>, where <CODE>1</CODE> is the
+numeric value associated with all <CODE>NAME</CODE> tokens, including
+variable and function names defined by the user.  In an alternate form
+returned when line number information is requested, the same token
+might be represented as <CODE>(1, 'if', 12)</CODE>, where the <CODE>12</CODE>
+represents the line number at which the terminal symbol was found.
+<P>
+Terminal elements are represented in much the same way, but without
+any child elements and the addition of the source text which was
+identified.  The example of the <CODE>if</CODE> keyword above is
+representative.  The various types of terminal symbols are defined in
+the C header file `<CODE>Include/token.h</CODE>' and the Python module
+`<CODE>Lib/token.py</CODE>'.
+<P>
+The AST objects are not required to support the functionality of this
+module, but are provided for three purposes: to allow an application
+to amortize the cost of processing complex parse trees, to provide a
+parse tree representation which conserves memory space when compared
+to the Python list or tuple representation, and to ease the creation
+of additional modules in C which manipulate parse trees.  A simple
+``wrapper'' class may be created in Python to hide the use of AST
+objects; the <CODE>AST</CODE> library module provides a variety of such
+classes.
+<P>
+The <CODE>parser</CODE> module defines functions for a few distinct
+purposes.  The most important purposes are to create AST objects and
+to convert AST objects to other representations such as parse trees
+and compiled code objects, but there are also functions which serve to
+query the type of parse tree represented by an AST object.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html2706" HREF="node38.html#SECTION00491000000000000000">3.9.1 Creating AST Objects</A>
+<LI> <A NAME="tex2html2707" HREF="node39.html#SECTION00492000000000000000">3.9.2 Converting AST Objects</A>
+<LI> <A NAME="tex2html2708" HREF="node40.html#SECTION00493000000000000000">3.9.3 Queries on AST Objects</A>
+<LI> <A NAME="tex2html2709" HREF="node41.html#SECTION00494000000000000000">3.9.4 Exceptions and Error Handling</A>
+<LI> <A NAME="tex2html2710" HREF="node42.html#SECTION00495000000000000000">3.9.5 AST Objects</A>
+<LI> <A NAME="tex2html2711" HREF="node43.html#SECTION00496000000000000000">3.9.6 Examples</A>
+<UL> 
+<LI> <A NAME="tex2html2712" HREF="node44.html#SECTION00496100000000000000">Emulation of <CODE>compile()</CODE></A>
+<LI> <A NAME="tex2html2713" HREF="node45.html#SECTION00496200000000000000">Information Discovery</A>
+</UL>
+</UL>
+<HR><A NAME="tex2html2702" HREF="node38.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2700" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2694" HREF="node36.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2704" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2705" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2703" HREF="node38.html">3.9.1 Creating AST Objects</A>
+<B>Up:</B> <A NAME="tex2html2701" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2695" HREF="node36.html">3.8.1 Examples</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

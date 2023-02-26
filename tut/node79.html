@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.5.1 Lambda Forms</TITLE>
+<META NAME="description" CONTENT="10.5.1 Lambda Forms">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1182" HREF="node80.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1180" HREF="node78.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1174" HREF="node78.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1184" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1183" HREF="node80.html">10.5.2 MapReduce and </A>
+<B>Up:</B> <A NAME="tex2html1181" HREF="node78.html">10.5 Lambda And Functional </A>
+<B> Previous:</B> <A NAME="tex2html1175" HREF="node78.html">10.5 Lambda And Functional </A>
+<BR><HR><P>
+<H2><A NAME="SECTION001151000000000000000">10.5.1 Lambda Forms</A></H2>
+<P>
+By popular demand, a few features commonly found in functional
+programming languages and Lisp have been added to Python.  With the
+<code>lambda</code> keyword, small anonymous functions can be created.
+Here's a function that returns the sum of its two arguments:
+<code>lambda a, b: a+b</code>.  Lambda forms can be used wherever function
+objects are required.  They are syntactically restricted to a single
+expression.  Semantically, they are just syntactic sugar for a normal
+function definition.  Like nested function definitions, lambda forms
+cannot reference variables from the containing scope, but this can be
+overcome through the judicious use of default argument values, e.g.
+<P>
+<PRE>        def make_incrementor(n):
+                return lambda x, incr=n: x+incr</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

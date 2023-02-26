@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>9.3.3 Instance objects</TITLE>
+<META NAME="description" CONTENT="9.3.3 Instance objects">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html933" HREF="node60.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html931" HREF="node56.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html925" HREF="node58.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html935" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html934" HREF="node60.html">9.3.4 Method objects</A>
+<B>Up:</B> <A NAME="tex2html932" HREF="node56.html">9.3 A first look </A>
+<B> Previous:</B> <A NAME="tex2html926" HREF="node58.html">9.3.2 Class objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001033000000000000000">9.3.3 Instance objects</A></H2>
+<P>
+Now what can we do with instance objects?  The only operations
+understood by instance objects are attribute references.  There are
+two kinds of valid attribute names.
+<P>
+The first I'll call <EM>data attributes</EM>.  These correspond to
+``instance variables'' in Smalltalk, and to ``data members'' in C++.
+Data attributes need not be declared; like local variables, they
+spring into existence when they are first assigned to.  For example,
+if <code>x</code> in the instance of <code>MyClass</code> created above, the
+following piece of code will print the value 16, without leaving a
+trace:
+<P>
+<PRE>        x.counter = 1
+        while x.counter &lt; 10:
+                x.counter = x.counter * 2
+        print x.counter
+        del x.counter</PRE>
+<P>
+The second kind of attribute references understood by instance objects
+are <EM>methods</EM>.  A method is a function that ``belongs to'' an
+object.  (In Python, the term method is not unique to class instances:
+other object types can have methods as well, e.g., list objects have
+methods called append, insert, remove, sort, and so on.  However,
+below, we'll use the term method exclusively to mean methods of class
+instance objects, unless explicitly stated otherwise.)
+<P>
+Valid method names of an instance object depend on its class.  By
+definition, all attributes of a class that are (user-defined) function
+objects define corresponding methods of its instances.  So in our
+example, <code>x.f</code> is a valid method reference, since
+<code>MyClass.f</code> is a function, but <code>x.i</code> is not, since
+<code>MyClass.i</code> is not.  But <code>x.f</code> is not the
+same thing as <code>MyClass.f</code> -- it is a <EM>method object</EM>, not a
+function object.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

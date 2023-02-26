@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.3.2 Example</TITLE>
+<META NAME="description" CONTENT="11.3.2 Example">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3732" HREF="node117.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3730" HREF="node114.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3726" HREF="node115.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3734" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3735" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3733" HREF="node117.html">11.4 Standard Module ftplib</A>
+<B>Up:</B> <A NAME="tex2html3731" HREF="node114.html">11.3 Standard Module httplib</A>
+<B> Previous:</B> <A NAME="tex2html3727" HREF="node115.html">11.3.1 HTTP Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001232000000000000000">11.3.2 Example</A></H2>
+<P>
+<A NAME="HTTPExample">&#160;</A>
+<P>
+Here is an example session:
+<P>
+<PRE>&gt;&gt;&gt; import httplib
+&gt;&gt;&gt; h = httplib.HTTP('www.cwi.nl')
+&gt;&gt;&gt; h.putrequest('GET', '/index.html')
+&gt;&gt;&gt; h.putheader('Accept', 'text/html')
+&gt;&gt;&gt; h.putheader('Accept', 'text/plain')
+&gt;&gt;&gt; h.endheaders()
+&gt;&gt;&gt; errcode, errmsg, headers = h.getreply()
+&gt;&gt;&gt; print errcode # Should be 200
+&gt;&gt;&gt; f = h.getfile()
+&gt;&gt;&gt; data f.read() # Get the raw HTML
+&gt;&gt;&gt; f.close()
+&gt;&gt;&gt;</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

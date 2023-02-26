@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>3.1 Built-in Module sys</TITLE>
+<META NAME="description" CONTENT="3.1 Built-in Module sys">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html2595" HREF="node29.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2593" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2587" HREF="node27.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2597" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2598" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2596" HREF="node29.html">3.2 Standard Module types</A>
+<B>Up:</B> <A NAME="tex2html2594" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2588" HREF="node27.html">3 Python Services</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00410000000000000000">3.1 Built-in Module <CODE>sys</CODE></A></H1>
+<P>
+This module provides access to some variables used or maintained by the
+interpreter and to functions that interact strongly with the interpreter.
+It is always available.
+<P>
+<DL><DT><STRONG><A NAME="">argv</A></STRONG>
+<DD>
+  The list of command line arguments passed to a Python script.
+  <CODE>sys.argv[0]</CODE> is the script name (it is operating system
+  dependent whether this is a full pathname or not).
+  If the command was executed using the `<SAMP>-c</SAMP>' command line option
+  to the interpreter, <CODE>sys.argv[0]</CODE> is set to the string
+  <CODE>&quot;-c&quot;</CODE>.
+  If no script name was passed to the Python interpreter,
+  <CODE>sys.argv</CODE> has zero length.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">builtin_module_names</A></STRONG>
+<DD>
+  A list of strings giving the names of all modules that are compiled
+  into this Python interpreter.  (This information is not available in
+  any other way -- <CODE>sys.modules.keys()</CODE> only lists the imported
+  modules.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">exc_type</A></STRONG>
+<DD>
+,exc_value
+,exc_traceback
+  These three variables are not always defined; they are set when an
+  exception handler (an <CODE>except</CODE> clause of a <CODE>try</CODE> statement) is
+  invoked.  Their meaning is: <CODE>exc_type</CODE> gets the exception type of
+  the exception being handled; <CODE>exc_value</CODE> gets the exception
+  parameter (its <I><DFN>associated value</DFN></I> or the second argument to
+  <CODE>raise</CODE>); <CODE>exc_traceback</CODE> gets a traceback object (see the
+  Reference Manual) which
+  encapsulates the call stack at the point where the exception
+  originally occurred.
+<A NAME="1560">&#160;</A><A NAME="1560">&#160;</A>
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1564">exit</A></STRONG>(<VAR>n</VAR>)
+<DD>
+  Exit from Python with numeric exit status <VAR>n</VAR>.  This is
+  implemented by raising the <CODE>SystemExit</CODE> exception, so cleanup
+  actions specified by <CODE>finally</CODE> clauses of <CODE>try</CODE> statements
+  are honored, and it is possible to catch the exit attempt at an outer
+  level.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">exitfunc</A></STRONG>
+<DD>
+  This value is not actually defined by the module, but can be set by
+  the user (or by a program) to specify a clean-up action at program
+  exit.  When set, it should be a parameterless function.  This function
+  will be called when the interpreter exits in any way (except when a
+  fatal error occurs: in that case the interpreter's internal state
+  cannot be trusted).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">last_type</A></STRONG>
+<DD>
+,last_value
+,last_traceback
+  These three variables are not always defined; they are set when an
+  exception is not handled and the interpreter prints an error message
+  and a stack traceback.  Their intended use is to allow an interactive
+  user to import a debugger module and engage in post-mortem debugging
+  without having to re-execute the command that caused the error (which
+  may be hard to reproduce).  The meaning of the variables is the same
+  as that of <CODE>exc_type</CODE>, <CODE>exc_value</CODE> and <CODE>exc_tracaback</CODE>,
+  respectively.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">modules</A></STRONG>
+<DD>
+  Gives the list of modules that have already been loaded.
+  This can be manipulated to force reloading of modules and other tricks.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">path</A></STRONG>
+<DD>
+  A list of strings that specifies the search path for modules.
+  Initialized from the environment variable <CODE>PYTHONPATH</CODE>, or an
+  installation-dependent default.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">platform</A></STRONG>
+<DD>
+This string contains a platform identifier.  This can be used to
+append platform-specific components to <CODE>sys.path</CODE>, for instance.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ps1</A></STRONG>
+<DD>
+,ps2
+  Strings specifying the primary and secondary prompt of the
+  interpreter.  These are only defined if the interpreter is in
+  interactive mode.  Their initial values in this case are
+  <CODE>'&gt;&gt;&gt; '</CODE> and <CODE>'... '</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1600">setcheckinterval</A></STRONG>(<VAR>interval</VAR>)
+<DD>
+Set the interpreter's ``check interval''.  This integer value
+determines how often the interpreter checks for periodic things such
+as thread switches and signal handlers.  The default is 10, meaning
+the check is performed every 10 Python virtual instructions.  Setting
+it to a larger value may increase performance for programs using
+threads.  Setting it to a value  <IMG WIDTH=24 HEIGHT=14 ALIGN=BOTTOM ALT="tex2html_wrap_inline15356" SRC="img8.gif"  >  checks every virtual instruction,
+maximizing responsiveness as well as overhead.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="1604">settrace</A></STRONG>(<VAR>tracefunc</VAR>)
+<DD>
+  Set the system's trace function, which allows you to implement a
+  Python source code debugger in Python.  See section ``How It Works''
+  in the chapter on the Python Debugger.
+<P>
+</DL>
+<A NAME="1606">&#160;</A>
+<A NAME="1607">&#160;</A>
+<P>
+<DL><DT><STRONG><A NAME="1610">setprofile</A></STRONG>(<VAR>profilefunc</VAR>)
+<DD>
+  Set the system's profile function, which allows you to implement a
+  Python source code profiler in Python.  See the chapter on the
+  Python Profiler.  The system's profile function
+  is called similarly to the system's trace function (see
+  <CODE>sys.settrace</CODE>), but it isn't called for each executed line of
+  code (only on call and return and when an exception occurs).  Also,
+  its return value is not used, so it can just return <CODE>None</CODE>.
+<P>
+</DL>
+<A NAME="1614">&#160;</A>
+<A NAME="1615">&#160;</A>
+<P>
+<DL><DT><STRONG><A NAME="">stdin</A></STRONG>
+<DD>
+,stdout
+,stderr
+  File objects corresponding to the interpreter's standard input,
+  output and error streams.  <CODE>sys.stdin</CODE> is used for all
+  interpreter input except for scripts but including calls to
+  <CODE>input()</CODE> and <CODE>raw_input()</CODE>.  <CODE>sys.stdout</CODE> is used
+  for the output of <CODE>print</CODE> and expression statements and for the
+  prompts of <CODE>input()</CODE> and <CODE>raw_input()</CODE>.  The interpreter's
+  own prompts and (almost all of) its error messages go to
+  <CODE>sys.stderr</CODE>.  <CODE>sys.stdout</CODE> and <CODE>sys.stderr</CODE> needn't
+  be built-in file objects: any object is acceptable as long as it has
+  a <CODE>write</CODE> method that takes a string argument.  (Changing these
+  objects doesn't affect the standard I/O streams of processes
+  executed by <CODE>popen()</CODE>, <CODE>system()</CODE> or the <CODE>exec*()</CODE>
+  family of functions in the <CODE>os</CODE> module.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">tracebacklimit</A></STRONG>
+<DD>
+When this variable is set to an integer value, it determines the
+maximum number of levels of traceback information printed when an
+unhandled exception occurs.  The default is 1000.  When set to 0 or
+less, all traceback information is suppressed and only the exception
+type and value are printed.
+<P>
+</DL><HR><A NAME="tex2html2595" HREF="node29.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html2593" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html2587" HREF="node27.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html2597" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html2598" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html2596" HREF="node29.html">3.2 Standard Module types</A>
+<B>Up:</B> <A NAME="tex2html2594" HREF="node27.html">3 Python Services</A>
+<B> Previous:</B> <A NAME="tex2html2588" HREF="node27.html">3 Python Services</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.7 Calibration</TITLE>
+<META NAME="description" CONTENT="10.7 Calibration">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3471" HREF="node99.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3469" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3463" HREF="node97.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3473" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3474" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3472" HREF="node99.html">10.8 Extensions - Deriving </A>
+<B>Up:</B> <A NAME="tex2html3470" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3464" HREF="node97.html">10.6 Limitations</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001170000000000000000">10.7 Calibration</A></H1>
+<P>
+The profiler class has a hard coded constant that is added to each
+event handling time to compensate for the overhead of calling the time
+function, and socking away the results.  The following procedure can
+be used to obtain this constant for a given platform (see discussion
+in section Limitations above).
+<P>
+<PRE>    import profile
+    pr = profile.Profile()
+    pr.calibrate(100)
+    pr.calibrate(100)
+    pr.calibrate(100)</PRE>
+<P>
+The argument to calibrate() is the number of times to try to do the
+sample calls to get the CPU times.  If your computer is <EM>very</EM>
+fast, you might have to do:
+<P>
+<PRE>    pr.calibrate(1000)</PRE>
+<P>
+or even:
+<P>
+<PRE>    pr.calibrate(10000)</PRE>
+<P>
+The object of this exercise is to get a fairly consistent result.
+When you have a consistent answer, you are ready to use that number in
+the source code.  For a Sun Sparcstation 1000 running Solaris 2.3, the
+magical number is about .00053.  If you have a choice, you are better
+off with a smaller constant, and your results will ``less often'' show
+up as negative in profile statistics.
+<P>
+The following shows how the trace_dispatch() method in the Profile
+class should be modified to install the calibration constant on a Sun
+Sparcstation 1000:
+<P>
+<PRE>    def trace_dispatch(self, frame, event, arg):
+        t = self.timer()
+        t = t[0] + t[1] - self.t - .00053 # Calibration constant
+
+        if self.dispatch[event](frame,t):
+            t = self.timer()
+            self.t = t[0] + t[1]
+        else:
+            r = self.timer()
+            self.t = r[0] + r[1] - t # put back unrecorded delta
+        return</PRE>
+<P>
+Note that if there is no calibration constant, then the line
+containing the callibration constant should simply say:
+<P>
+<PRE>        t = t[0] + t[1] - self.t  # no calibration constant</PRE>
+<P>
+You can also achieve the same results using a derived class (and the
+profiler will actually run equally fast!!), but the above method is
+the simplest to use.  I could have made the profiler ``self
+calibrating'', but it would have made the initialization of the
+profiler class slower, and would have required some <EM>very</EM> fancy
+coding, or else the use of a variable where the constant `<SAMP>.00053</SAMP>'
+was placed in the code shown.  This is a <STRONG>VERY</STRONG> critical
+performance section, and there is no reason to use a variable lookup
+at this point, when a constant can be used.
+<P>
+<HR><A NAME="tex2html3471" HREF="node99.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3469" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3463" HREF="node97.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3473" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3474" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3472" HREF="node99.html">10.8 Extensions - Deriving </A>
+<B>Up:</B> <A NAME="tex2html3470" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3464" HREF="node97.html">10.6 Limitations</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

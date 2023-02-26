@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>15.14 Standard module MiniAEFrame</TITLE>
+<META NAME="description" CONTENT="15.14 Standard module MiniAEFrame">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4643" HREF="node190.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4641" HREF="node158.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4637" HREF="node188.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4645" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4646" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4644" HREF="node190.html">15.14.1 AEServer Objects</A>
+<B>Up:</B> <A NAME="tex2html4642" HREF="node158.html">15 Macintosh Specific Services</A>
+<B> Previous:</B> <A NAME="tex2html4638" HREF="node188.html">15.13.5 DialogWindow Objects</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0016140000000000000000">15.14 Standard module <CODE>MiniAEFrame</CODE></A></H1>
+<P>
+The module <VAR>MiniAEFrame</VAR> provides a framework for an application
+that can function as an OSA server, i.e. receive and process
+AppleEvents. It can be used in conjunction with <VAR>FrameWork</VAR> or
+standalone.
+<P>
+This module is temporary, it will eventually be replaced by a module
+that handles argument names better and possibly automates making your
+application scriptable.
+<P>
+The <VAR>MiniAEFrame</VAR> module defines the following classes:
+<P>
+<DL><DT><STRONG><A NAME="9734">AEServer</A></STRONG>(<VAR></VAR>)
+<DD>
+A class that handles AppleEvent dispatch. Your application should
+subclass this class together with either
+<CODE>MiniAEFrame.MiniApplication</CODE> or
+<CODE>FrameWork.Application</CODE>. Your <CODE>__init__</CODE> method should call
+the <CODE>__init__</CODE> method for both classes.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="9742">MiniApplication</A></STRONG>(<VAR></VAR>)
+<DD>
+A class that is more or less compatible with
+<CODE>FrameWork.Application</CODE> but with less functionality. Its
+eventloop supports the apple menu, command-dot and AppleEvents, other
+events are passed on to the Python interpreter and/or Sioux.
+Useful if your application wants to use <CODE>AEServer</CODE> but does not
+provide its own windows, etc.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html4647" HREF="node190.html#SECTION0016141000000000000000">15.14.1 AEServer Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

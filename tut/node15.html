@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>2.2.5 The Interactive Startup File</TITLE>
+<META NAME="description" CONTENT="2.2.5 The Interactive Startup File">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html417" HREF="node16.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html415" HREF="node10.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html411" HREF="node14.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html419" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html418" HREF="node16.html">2.3 Interactive Input Editing </A>
+<B>Up:</B> <A NAME="tex2html416" HREF="node10.html">2.2 The Interpreter and </A>
+<B> Previous:</B> <A NAME="tex2html412" HREF="node14.html">2.2.4 Executable Python scripts</A>
+<BR><HR><P>
+<H2><A NAME="SECTION00325000000000000000">2.2.5 The Interactive Startup File</A></H2>
+<P>
+When you use Python interactively, it is frequently handy to have some
+standard commands executed every time the interpreter is started.  You
+can do this by setting an environment variable named <TT>
+PYTHONSTARTUP</TT> to the name of a file containing your start-up
+commands.  This is similar to the <TT>.profile</TT> feature of the UNIX
+shells.
+<P>
+This file is only read in interactive sessions, not when Python reads
+commands from a script, and not when <TT>/dev/tty</TT> is given as the
+explicit source of commands (which otherwise behaves like an
+interactive session).  It is executed in the same name space where
+interactive commands are executed, so that objects that it defines or
+imports can be used without qualification in the interactive session.
+You can also change the prompts <TT>sys.ps1</TT> and <TT>sys.ps2</TT> in
+this file.
+<P>
+If you want to read an additional start-up file from the current
+directory, you can program this in the global start-up file, e.g.
+<code>execfile('.pythonrc')</code>.  If you want to use the startup file
+in a script, you must write this explicitly in the script, e.g.
+<code>import os;</code> <code>execfile(os.environ['PYTHONSTARTUP'])</code>.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

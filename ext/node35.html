@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.4 Sequence protocol</TITLE>
+<META NAME="description" CONTENT="4.4 Sequence protocol">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html613" HREF="node36.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html611" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html605" HREF="node34.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html615" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html616" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html614" HREF="node36.html">4.5 Mapping protocol</A>
+<B>Up:</B> <A NAME="tex2html612" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html606" HREF="node34.html">4.3 Number Protocol</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00540000000000000000">4.4 Sequence protocol</A></H1>
+<P>
+     <DL><DT>int <STRONG><A NAME="926">PySequence_Check</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+         Return 1 if the object provides sequence protocol, and 0
+	 otherwise.  
+	 This function always succeeds.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="931">PySequence_Concat</A></STRONG>(<VAR>PyObject *o1, PyObject *o2</VAR>)
+<DD>
+	 Return the concatination of <CODE>o1</CODE> and <CODE>o2</CODE> on success, and <CODE>NULL</CODE> on
+	 failure.   This is the equivalent of the Python
+	 expression: <CODE>o1+o2</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="940">PySequence_Repeat</A></STRONG>(<VAR>PyObject *o, int count</VAR>)
+<DD>
+	 Return the result of repeating sequence object <CODE>o</CODE> count times,
+	 or <CODE>NULL</CODE> on failure.  This is the equivalent of the Python
+	 expression: <CODE>o*count</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="948">PySequence_GetItem</A></STRONG>(<VAR>PyObject *o, int i</VAR>)
+<DD>
+	 Return the ith element of <CODE>o</CODE>, or <CODE>NULL</CODE> on failure. This is the
+	 equivalent of the Python expression: <CODE>o[i]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="956">PySequence_GetSlice</A></STRONG>(<VAR>PyObject *o, int i1, int i2</VAR>)
+<DD>
+	 Return the slice of sequence object <CODE>o</CODE> between <CODE>i1</CODE> and <CODE>i2</CODE>, or
+	 <CODE>NULL</CODE> on failure. This is the equivalent of the Python
+	 expression, <CODE>o[i1:i2]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="966">PySequence_SetItem</A></STRONG>(<VAR>PyObject *o, int i, PyObject *v</VAR>)
+<DD>
+	 Assign object <CODE>v</CODE> to the <CODE>i</CODE>th element of <CODE>o</CODE>.
+Returns -1 on failure.  This is the equivalent of the Python
+	 statement, <CODE>o[i]=v</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="975">PySequence_DelItem</A></STRONG>(<VAR>PyObject *o, int i</VAR>)
+<DD>
+	 Delete the <CODE>i</CODE>th element of object <CODE>v</CODE>.  Returns
+	 -1 on failure.  This is the equivalent of the Python
+	 statement: <CODE>del o[i]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="983">PySequence_SetSlice</A></STRONG>(<VAR>PyObject *o, int i1, int i2, PyObject *v</VAR>)
+<DD>
+         Assign the sequence object <CODE>v</CODE> to the slice in sequence
+	 object <CODE>o</CODE> from <CODE>i1</CODE> to <CODE>i2</CODE>.  This is the equivalent of the Python
+	 statement, <CODE>o[i1:i2]=v</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="993">PySequence_DelSlice</A></STRONG>(<VAR>PyObject *o, int i1, int i2</VAR>)
+<DD>
+	 Delete the slice in sequence object, <CODE>o</CODE>, from <CODE>i1</CODE> to <CODE>i2</CODE>.
+	 Returns -1 on failure. This is the equivalent of the Python
+	 statement: <CODE>del o[i1:i2]</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>PyObject* <STRONG><A NAME="1002">PySequence_Tuple</A></STRONG>(<VAR>PyObject *o</VAR>)
+<DD>
+	 Returns the <CODE>o</CODE> as a tuple on success, and <CODE>NULL</CODE> on failure.
+	 This is equivalent to the Python expression: <CODE>tuple(o)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1010">PySequence_Count</A></STRONG>(<VAR>PyObject *o, PyObject *value</VAR>)
+<DD>
+         Return the number of occurrences of <CODE>value</CODE> on <CODE>o</CODE>, that is,
+	 return the number of keys for which <CODE>o[key]==value</CODE>.  On
+	 failure, return -1.  This is equivalent to the Python
+	 expression: <CODE>o.count(value)</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1019">PySequence_In</A></STRONG>(<VAR>PyObject *o, PyObject *value</VAR>)
+<DD>
+	 Determine if <CODE>o</CODE> contains <CODE>value</CODE>.  If an item in <CODE>o</CODE> is equal to
+	 <CODE>value</CODE>, return 1, otherwise return 0.  On error, return -1.  This
+	 is equivalent to the Python expression: <CODE>value in o</CODE>.
+<P>
+</DL>
+<P>
+     <DL><DT>int <STRONG><A NAME="1029">PySequence_Index</A></STRONG>(<VAR>PyObject *o, PyObject *value</VAR>)
+<DD>
+	 Return the first index for which <CODE>o[i]=value</CODE>.  On error,
+	 return -1.    This is equivalent to the Python
+	 expression: <CODE>o.index(value)</CODE>.
+<P>
+</DL><HR><A NAME="tex2html613" HREF="node36.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html611" HREF="node30.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html605" HREF="node34.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html615" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html616" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html614" HREF="node36.html">4.5 Mapping protocol</A>
+<B>Up:</B> <A NAME="tex2html612" HREF="node30.html">4 Extension Reference</A>
+<B> Previous:</B> <A NAME="tex2html606" HREF="node34.html">4.3 Number Protocol</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.3.1 HTTP Objects</TITLE>
+<META NAME="description" CONTENT="11.3.1 HTTP Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3722" HREF="node116.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3720" HREF="node114.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3714" HREF="node114.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3724" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3725" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3723" HREF="node116.html">11.3.2 Example</A>
+<B>Up:</B> <A NAME="tex2html3721" HREF="node114.html">11.3 Standard Module httplib</A>
+<B> Previous:</B> <A NAME="tex2html3715" HREF="node114.html">11.3 Standard Module httplib</A>
+<BR><HR><P>
+<H2><A NAME="SECTION001231000000000000000">11.3.1 HTTP Objects</A></H2>
+<P>
+<CODE>HTTP</CODE> instances have the following methods:
+<P>
+<DL><DT><STRONG><A NAME="6004">set_debuglevel</A></STRONG>(<VAR>level</VAR>)
+<DD>
+Set the debugging level (the amount of debugging output printed).
+The default debug level is <CODE>0</CODE>, meaning no debugging output is
+printed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6058">connect</A></STRONG>(<VAR>host</VAR><BIG>[</BIG><VAR>, port</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Connect to the server given by <VAR>host</VAR> and <VAR>port</VAR>.  See the
+intro for the default port.  This should be called directly only if
+the instance was instantiated without passing a host.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6015">send</A></STRONG>(<VAR>data</VAR>)
+<DD>
+Send data to the server.  This should be used directly only after the
+<CODE>endheaders()</CODE> method has been called and before
+<CODE>getreply()</CODE> has been called.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6021">putrequest</A></STRONG>(<VAR>request, selector</VAR>)
+<DD>
+This should be the first call after the connection to the server has
+been made.  It sends a line to the server consisting of the
+<VAR>request</VAR> string, the <VAR>selector</VAR> string, and the HTTP version
+(<CODE>HTTP/1.0</CODE>).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6059">putheader</A></STRONG>(<VAR>header, argument</VAR><BIG>[</BIG><VAR>, ...</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Send an RFC-822 style header to the server.  It sends a line to the
+server consisting of the header, a colon and a space, and the first
+argument.  If more arguments are given, continuation lines are sent,
+each consisting of a tab and an argument.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6032">endheaders</A></STRONG>(<VAR></VAR>)
+<DD>
+Send a blank line to the server, signalling the end of the headers.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6036">getreply</A></STRONG>(<VAR></VAR>)
+<DD>
+Complete the request by shutting down the sending end of the socket,
+read the reply from the server, and return a triple (<VAR>replycode</VAR>,
+<VAR>message</VAR>, <VAR>headers</VAR>).  Here <VAR>replycode</VAR> is the integer
+reply code from the request (e.g. <CODE>200</CODE> if the request was
+handled properly); <VAR>message</VAR> is the message string corresponding
+to the reply code; and <VAR>header</VAR> is an instance of the class
+<CODE>rfc822.Message</CODE> containing the headers received from the server.
+See the description of the <CODE>rfc822</CODE> module.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6050">getfile</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a file object from which the data returned by the server can be
+read, using the <CODE>read()</CODE>, <CODE>readline()</CODE> or <CODE>readlines()</CODE>
+methods.
+<P>
+</DL><HR><A NAME="tex2html3722" HREF="node116.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3720" HREF="node114.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3714" HREF="node114.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3724" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3725" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3723" HREF="node116.html">11.3.2 Example</A>
+<B>Up:</B> <A NAME="tex2html3721" HREF="node114.html">11.3 Standard Module httplib</A>
+<B> Previous:</B> <A NAME="tex2html3715" HREF="node114.html">11.3 Standard Module httplib</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

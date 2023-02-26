@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.3 Instant Users Manual</TITLE>
+<META NAME="description" CONTENT="10.3 Instant Users Manual">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3412" HREF="node94.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3410" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3404" HREF="node92.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3414" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3415" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3413" HREF="node94.html">10.4 What Is Deterministic </A>
+<B>Up:</B> <A NAME="tex2html3411" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3405" HREF="node92.html">10.2 How Is This </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001130000000000000000">10.3 Instant Users Manual</A></H1>
+<P>
+This section is provided for users that ``don't want to read the
+manual.'' It provides a very brief overview, and allows a user to
+rapidly perform profiling on an existing application.
+<P>
+To profile an application with a main entry point of `<SAMP>foo()</SAMP>', you
+would add the following to your module:
+<P>
+<PRE>    import profile
+    profile.run(&quot;foo()&quot;)</PRE>
+<P>
+The above action would cause `<SAMP>foo()</SAMP>' to be run, and a series of
+informative lines (the profile) to be printed.  The above approach is
+most useful when working with the interpreter.  If you would like to
+save the results of a profile into a file for later examination, you
+can supply a file name as the second argument to the <CODE>run()</CODE>
+function:
+<P>
+<PRE>    import profile
+    profile.run(&quot;foo()&quot;, 'fooprof')</PRE>
+<P>
+When you wish to review the profile, you should use the methods in the
+<CODE>pstats</CODE> module.  Typically you would load the statistics data as
+follows:
+<P>
+<PRE>    import pstats
+    p = pstats.Stats('fooprof')</PRE>
+<P>
+The class <CODE>Stats</CODE> (the above code just created an instance of
+this class) has a variety of methods for manipulating and printing the
+data that was just read into `<SAMP>p</SAMP>'.  When you ran
+<CODE>profile.run()</CODE> above, what was printed was the result of three
+method calls:
+<P>
+<PRE>    p.strip_dirs().sort_stats(-1).print_stats()</PRE>
+<P>
+The first method removed the extraneous path from all the module
+names. The second method sorted all the entries according to the
+standard module/line/name string that is printed (this is to comply
+with the semantics of the old profiler).  The third method printed out
+all the statistics.  You might try the following sort calls:
+<P>
+<PRE>    p.sort_stats('name')
+    p.print_stats()</PRE>
+<P>
+The first call will actually sort the list by function name, and the
+second call will print out the statistics.  The following are some
+interesting calls to experiment with:
+<P>
+<PRE>    p.sort_stats('cumulative').print_stats(10)</PRE>
+<P>
+This sorts the profile by cumulative time in a function, and then only
+prints the ten most significant lines.  If you want to understand what
+algorithms are taking time, the above line is what you would use.
+<P>
+If you were looking to see what functions were looping a lot, and
+taking a lot of time, you would do:
+<P>
+<PRE>    p.sort_stats('time').print_stats(10)</PRE>
+<P>
+to sort according to time spent within each function, and then print
+the statistics for the top ten functions.
+<P>
+You might also try:
+<P>
+<PRE>    p.sort_stats('file').print_stats('__init__')</PRE>
+<P>
+This will sort all the statistics by file name, and then print out
+statistics for only the class init methods ('cause they are spelled
+with <CODE>__init__</CODE> in them).  As one final example, you could try:
+<P>
+<PRE>    p.sort_stats('time', 'cum').print_stats(.5, 'init')</PRE>
+<P>
+This line sorts statistics with a primary key of time, and a secondary
+key of cumulative time, and then prints out some of the statistics.
+To be specific, the list is first culled down to 50% (re: `<SAMP>.5</SAMP>')
+of its original size, then only lines containing <CODE>init</CODE> are
+maintained, and that sub-sub-list is printed.
+<P>
+If you wondered what functions called the above functions, you could
+now (`<SAMP>p</SAMP>' is still sorted according to the last criteria) do:
+<P>
+<PRE>    p.print_callers(.5, 'init')</PRE>
+<P>
+and you would get a list of callers for each of the listed functions.
+<P>
+If you want more functionality, you're going to have to read the
+manual, or guess what the following functions do:
+<P>
+<PRE>    p.print_callees()
+    p.add('fooprof')</PRE>
+<P>
+<HR><A NAME="tex2html3412" HREF="node94.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3410" HREF="node90.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3404" HREF="node92.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3414" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3415" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3413" HREF="node94.html">10.4 What Is Deterministic </A>
+<B>Up:</B> <A NAME="tex2html3411" HREF="node90.html">10 The Python Profiler</A>
+<B> Previous:</B> <A NAME="tex2html3405" HREF="node92.html">10.2 How Is This </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

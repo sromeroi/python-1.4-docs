@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>4.1 If Statements</TITLE>
+<META NAME="description" CONTENT="4.1 If Statements">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html570" HREF="node29.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html568" HREF="node27.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html562" HREF="node27.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html572" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html571" HREF="node29.html">4.2 For Statements</A>
+<B>Up:</B> <A NAME="tex2html569" HREF="node27.html">4 More Control Flow </A>
+<B> Previous:</B> <A NAME="tex2html563" HREF="node27.html">4 More Control Flow </A>
+<BR><HR><P>
+<H1><A NAME="SECTION00510000000000000000">4.1 If Statements</A></H1>
+<P>
+Perhaps the most well-known statement type is the <TT>if</TT> statement.
+For example:
+<P>
+<PRE>&gt;&gt;&gt; if x &lt; 0:
+...      x = 0
+...      print 'Negative changed to zero'
+... elif x == 0:
+...      print 'Zero'
+... elif x == 1:
+...      print 'Single'
+... else:
+...      print 'More'
+...</PRE>
+There can be zero or more <TT>elif</TT> parts, and the <TT>else</TT> part is
+optional.  The keyword `<TT>elif</TT>' is short for `<TT>else if</TT>', and is
+useful to avoid excessive indentation.  An <TT>if...elif...elif...</TT>
+sequence is a substitute for the <EM>switch</EM> or <EM>case</EM> statements
+found in other languages.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

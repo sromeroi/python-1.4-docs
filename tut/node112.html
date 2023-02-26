@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>13.1 Language Changes</TITLE>
+<META NAME="description" CONTENT="13.1 Language Changes">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1559" HREF="node113.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1557" HREF="node111.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1551" HREF="node111.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1561" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1560" HREF="node113.html">13.2 Run-time Changes</A>
+<B>Up:</B> <A NAME="tex2html1558" HREF="node111.html">13 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1552" HREF="node111.html">13 New in Release </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001410000000000000000">13.1 Language Changes</A></H1>
+<P>
+<UL><LI>
+Power operator.  <CODE>x**y</CODE> is equivalent to <CODE>pow(x, y)</CODE>.
+This operator binds more tightly than <CODE>*</CODE>, <CODE>/</CODE> or <CODE>%</CODE>,
+and binds from right to left when repeated or combined with unary 
+operators.  For example, <CODE>x**y**z</CODE> is equivalent to 
+<CODE>x**(y**z)</CODE>, and <CODE>-x**y</CODE> is <CODE>-(x**y)</CODE>.<LI>
+Complex numbers.  Imaginary literals are writen with a <CODE>'j'</CODE>
+suffix (<CODE>'J'</CODE> is allowed as well.) Complex numbers with a nonzero
+real component are written as <CODE>(<VAR>real</VAR>+<VAR>imag</VAR>j)</CODE>.  You
+can also use the new built-in function <CODE>complex()</CODE> which takes
+one or two arguments: <CODE>complex(x)</CODE> is equivalent to <CODE>x +
+0j</CODE>, and <CODE>complex(x, y)</CODE> is <CODE>x + y*0j</CODE>.  For example,
+<CODE>1j**2</CODE> yields <CODE>complex(-1.0)</CODE> (which is another way of
+saying ``the real value 1.0 represented as a complex number.''
+<P>
+Complex numbers are always represented as two floating point numbers,
+the real and imaginary part.
+To extract these parts from a complex number <CODE>z</CODE>, 
+use <CODE>z.real</CODE> and <CODE>z.imag</CODE>.  The conversion functions to 
+floating point and integer (<CODE>float()</CODE>, <CODE>int()</CODE> and 
+<CODE>long()</CODE>) don't work for complex numbers -- there is no one 
+correct way to convert a complex number to a real number.  Use 
+<CODE>abs(z)</CODE> to get its magnitude (as a float) or <CODE>z.real</CODE> to 
+get its real part.
+<P>
+Module <CODE>cmath</CODE> provides versions of all math functions that take 
+complex arguments and return complex results.  (Module <CODE>math</CODE> 
+only supports real numbers, so that <CODE>math.sqrt(-1)</CODE> still raises 
+a <CODE>ValueError</CODE> exception.  Numerical experts agree that this is 
+the way it should be.)<LI>
+New indexing syntax.  It is now possible to use a tuple as an indexing
+expression for a mapping object without parenthesizing it,
+e.g. <CODE>x[1, 2, 3]</CODE> is equivalent to <CODE>x[(1, 2, 3)]</CODE>.<LI>
+New slicing syntax.  In support of the Numerical Python extension
+(distributed independently), slice indices of the form
+<CODE>x[lo:hi:stride]</CODE> are possible, multiple slice indices separated by
+commas are allowed, and an index position may be replaced by an ellipsis,
+as follows: <CODE>x[a, ..., z]</CODE>.  There's also a new built-in function
+<CODE>slice(lo, hi, stride)</CODE> and a new built-in object
+<CODE>Ellipsis</CODE>, which yield the same effect without using special
+syntax.  None of the standard sequence types support indexing with
+slice objects or ellipses yet.
+<P>
+Note that when this new slicing syntax is used, the mapping interface
+will be used, not the sequence interface.  In particular, when a
+user-defined class instance is sliced using this new slicing syntax,
+its <CODE>__getitem__</CODE> method is invoked -- the
+<CODE>__getslice__</CODE> method is only invoked when a single old-style
+slice is used, i.e. <CODE>x[lo:hi]</CODE>, with possible omission of
+<CODE>lo</CODE> and/or <CODE>hi</CODE>.  Some examples:
+<P>
+<PRE>x[0:10:2]        -&gt; slice(0, 10, 2)
+x[:2:]           -&gt; slice(None, 2, None)
+x[::-1]          -&gt; slice(None, None, -1)
+x[::]            -&gt; slice(None, None, None)
+x[1, 2:3]        -&gt; (1, slice(2, 3, None))
+x[1:2, 3:4]      -&gt; (slice(1, 2, None), slice(3, 4, None))
+x[1:2, ..., 3:4] -&gt; (slice(1, 2, None), Ellipsis,
+                     slice(3, 4, None))</PRE>
+<P>
+For more help with this you are referred to the matrix-sig.<LI>
+The <CODE>access</CODE> statement is now truly gone; <CODE>access</CODE> is no 
+longer a reserved word.  This saves a few cycles here and there.<LI>
+Private variables through name mangling.
+There is now limited support for class-private
+identifiers.  Any identifier of the form <CODE>__spam</CODE> (at least two
+leading underscores, at most one trailing underscore) is now textually
+replaced with <CODE>_classname__spam</CODE>, where <CODE>classname</CODE> is the
+current class name with leading underscore(s) stripped.  This mangling
+is done without regard of the syntactic position of the identifier, so
+it can be used to define class-private instance and class variables,
+methods, as well as globals, and even to store instance variables
+private to this class on instances of <EM>other</EM> classes.  Truncation
+may occur when the mangled name would be longer than 255 characters.
+Outside classes, or when the class name consists of only underscores,
+no mangling occurs.
+<P>
+Name mangling is intended to give classes an easy way to define
+``private'' instance variables and methods, without having to worry
+about instance variables defined by derived classes, or mucking with
+instance variables by code outside the class.  Note that the mangling
+rules are designed mostly to avoid accidents; it still is possible for
+a determined soul to access or modify a variable that is considered
+private.  This can even be useful, e.g. for the debugger, and that's
+one reason why this loophole is not closed.  (Buglet: derivation of a
+class with the same name as the base class makes use of private
+variables of the base class possible.)
+<P>
+Notice that code passed to <CODE>exec</CODE>, <CODE>eval()</CODE> or
+<CODE>evalfile()</CODE> does not consider the classname of the invoking 
+class to be the current class; this is similar to the effect of the 
+<CODE>global</CODE> statement, the effect of which is likewise restricted to 
+code that is byte-compiled together.  The same restriction applies to
+<CODE>getattr()</CODE>, <CODE>setattr()</CODE> and <CODE>delattr()</CODE>, as well as
+when referencing <CODE>__dict__</CODE> directly.
+<P>
+Here's an example of a class that implements its own
+<CODE>__getattr__</CODE> and <CODE>__setattr__</CODE> methods and stores all
+attributes in a private variable, in a way that works in Python 1.4 as
+well as in previous versions:
+<P>
+<PRE>class VirtualAttributes:
+    __vdict = None
+    __vdict_name = locals().keys()[0]
+     
+    def __init__(self):
+        self.__dict__[self.__vdict_name] = {}
+    
+    def __getattr__(self, name):
+        return self.__vdict[name]
+    
+    def __setattr__(self, name, value):
+        self.__vdict[name] = value</PRE>
+<P>
+<EM>Warning: this is an experimental feature.</EM>  To avoid all
+potential problems, refrain from using identifiers starting with
+double underscore except for predefined uses like <CODE>__init__</CODE>.  To
+use private names while maintaining future compatibility: refrain from
+using the same private name in classes related via subclassing; avoid
+explicit (manual) mangling/unmangling; and assume that at some point
+in the future, leading double underscore will revert to being just a
+naming convention.  Discussion on extensive compile-time declarations
+are currently underway, and it is impossible to predict what solution
+will eventually be chosen for private names.  Double leading
+underscore is still a candidate, of course -- just not the only one.
+It is placed in the distribution in the belief that it is useful, and
+so that widespread experience with its use can be gained.  It will not
+be removed without providing a better solution and a migration path.
+<P>
+</UL><HR><A NAME="tex2html1559" HREF="node113.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1557" HREF="node111.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1551" HREF="node111.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1561" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1560" HREF="node113.html">13.2 Run-time Changes</A>
+<B>Up:</B> <A NAME="tex2html1558" HREF="node111.html">13 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1552" HREF="node111.html">13 New in Release </A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

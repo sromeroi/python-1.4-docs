@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>6.2 Built-in Module time</TITLE>
+<META NAME="description" CONTENT="6.2 Built-in Module time">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3017" HREF="node63.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3015" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3009" HREF="node61.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3019" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3020" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3018" HREF="node63.html">6.3 Standard Module getopt</A>
+<B>Up:</B> <A NAME="tex2html3016" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3010" HREF="node61.html">6.1 Standard Module os</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00720000000000000000">6.2 Built-in Module <CODE>time</CODE></A></H1>
+<P>
+This module provides various time-related functions.
+It is always available.
+<P>
+An explanation of some terminology and conventions is in order.
+<P>
+<UL><LI>
+The ``epoch'' is the point where the time starts.  On January 1st of that
+year, at 0 hours, the ``time since the epoch'' is zero.  For UNIX, the
+epoch is 1970.  To find out what the epoch is, look at <CODE>gmtime(0)</CODE>.<LI>
+UTC is Coordinated Universal Time (formerly known as Greenwich Mean
+Time).  The acronym UTC is not a mistake but a compromise between
+English and French.<LI>
+DST is Daylight Saving Time, an adjustment of the timezone by
+(usually) one hour during part of the year.  DST rules are magic
+(determined by local law) and can change from year to year.  The C
+library has a table containing the local rules (often it is read from
+a system file for flexibility) and is the only source of True Wisdom
+in this respect.<LI>
+The precision of the various real-time functions may be less than
+suggested by the units in which their value or argument is expressed.
+E.g. on most UNIX systems, the clock ``ticks'' only 50 or 100 times a
+second, and on the Mac, times are only accurate to whole seconds.<LI>
+The time tuple as returned by <CODE>gmtime()</CODE> and <CODE>localtime()</CODE>,
+or as accpted by <CODE>mktime()</CODE> is a tuple of 9
+integers: year (e.g. 1993), month (1-12), day (1-31), hour
+(0-23), minute (0-59), second (0-59), weekday (0-6, monday is 0),
+Julian day (1-366) and daylight savings flag (-1, 0  or 1).
+Note that unlike the C structure, the month value is a range of 1-12, not
+0-11.  A year value of &lt; 100 will typically be silently converted to
+1900 + year value.  A -1 argument as daylight savings flag, passed to
+<CODE>mktime()</CODE> will usually result in the correct daylight savings
+state to be filled in.
+<P>
+</UL>
+<P>
+The module defines the following functions and data items:
+<P>
+<DL><DT><STRONG><A NAME="">altzone</A></STRONG>
+<DD>
+The offset of the local DST timezone, in seconds west of the 0th
+meridian, if one is defined.  Negative if the local DST timezone is
+east of the 0th meridian (as in Western Europe, including the UK).
+Only use this if <CODE>daylight</CODE> is nonzero.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3382">asctime</A></STRONG>(<VAR>tuple</VAR>)
+<DD>
+Convert a tuple representing a time as returned by <CODE>gmtime()</CODE> or
+<CODE>localtime()</CODE> to a 24-character string of the following form:
+<CODE>'Sun Jun 20 23:21:05 1993'</CODE>.  Note: unlike the C function of
+the same name, there is no trailing newline.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3389">clock</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the current CPU time as a floating point number expressed in
+seconds.  The precision, and in fact the very definiton of the meaning
+of ``CPU time'', depends on that of the C function of the same name.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3393">ctime</A></STRONG>(<VAR>secs</VAR>)
+<DD>
+Convert a time expressed in seconds since the epoch to a string
+representing local time.  <CODE>ctime(t)</CODE> is equivalent to
+<CODE>asctime(localtime(t))</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">daylight</A></STRONG>
+<DD>
+Nonzero if a DST timezone is defined.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3402">gmtime</A></STRONG>(<VAR>secs</VAR>)
+<DD>
+Convert a time expressed in seconds since the epoch to a time tuple
+in UTC in which the dst flag is always zero.  Fractions of a second are
+ignored.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3406">localtime</A></STRONG>(<VAR>secs</VAR>)
+<DD>
+Like <CODE>gmtime</CODE> but converts to local time.  The dst flag is set
+to 1 when DST applies to the given time.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3411">mktime</A></STRONG>(<VAR>tuple</VAR>)
+<DD>
+This is the inverse function of <CODE>localtime</CODE>.  Its argument is the
+full 9-tuple (since the dst flag is needed -- pass -1 as the dst flag if
+it is unknown) which expresses the time
+in <EM>local time, not UTC.  It returns a floating
+point number, for compatibility with <CODE>time.time()</CODE>.  If the input
+value can't be represented as a valid time, OverflowError is raised.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3418">sleep</A></STRONG>(<VAR>secs</VAR>)
+<DD>
+Suspend execution for the given number of seconds.  The argument may
+be a floating point number to indicate a more precise sleep time.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3422">strftime</A></STRONG>(<VAR>format, tuple</VAR>)
+<DD>
+Convert a tuple representing a time as returned by <CODE>gmtime()</CODE> or
+<CODE>localtime()</CODE> to a string as specified by the format argument.
+<P>
+      The following directives, shown without the optional field width and
+      precision specification, are replaced by the indicated characters:
+<P>
+<TABLE COLS=2>
+<COL ALIGN=LEFT><COL ALIGN=JUSTIFY>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP>
+           %a  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's abbreviated weekday name. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %A  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's full weekday name. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %b  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's abbreviated month name. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %B  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's full month name. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %c  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's appropriate date and time representation. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %d  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Day of the month as a decimal number [01,31]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %E  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's combined Emperor/Era name and year. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %H  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Hour (24-hour clock) as a decimal number [00,23]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %I  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Hour (12-hour clock) as a decimal number [01,12]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %j  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Day of the year as a decimal number [001,366]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %m  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Month as a decimal number [01,12]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %M  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Minute as a decimal number [00,59]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %n  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      New-line character. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %N  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's Emperor/Era name. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %o  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's Emperor/Era year. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %p  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's equivalent of either AM or PM. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %S  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Second as a decimal number [00,61]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %t  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Tab character. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %U  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Week number of the year (Sunday as the first day of the
+                     week) as a decimal number [00,53].  All days in a new
+                     year preceding the first Sunday are considered to be in
+                     week 0. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %w  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Weekday as a decimal number [0(Sunday),6]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %W  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Week number of the year (Monday as the first day of the
+                     week) as a decimal number [00,53].  All days in a new
+                     year preceding the first Sunday are considered to be in
+                     week 0. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %x  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's appropriate date representation. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %X  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Locale's appropriate time representation. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %y  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Year without century as a decimal number [00,99]. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %Y  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Year with century as a decimal number. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %Z  </TD><TD VALIGN=BASELINE ALIGN=LEFT>      Time zone name (or by no characters if no time zone
+                     exists). </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+           %% </TD><TD VALIGN=BASELINE ALIGN=LEFT>     % </TD></TR>
+</TABLE>
+<P>
+      An optional field width and precision specification can immediately
+      follow the initial % of a directive in the following order: <BR>
+<P>
+<TABLE COLS=2>
+<COL ALIGN=LEFT><COL ALIGN=JUSTIFY>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP>
+      [-|0]w  </TD><TD VALIGN=BASELINE ALIGN=LEFT>       the decimal digit string w specifies a minimum field
+                     width in which the result of the conversion is right-
+                     or left-justified.  It is right-justified (with space
+                     padding) by default.  If the optional flag `-' is
+                     specified, it is left-justified with space padding on
+                     the right.  If the optional flag `0' is specified, it
+                     is right-justified and padded with zeros on the left. </TD></TR>
+<TR><TD VALIGN=BASELINE ALIGN=LEFT NOWRAP> 
+      .p      </TD><TD VALIGN=BASELINE ALIGN=LEFT>       the decimal digit string p specifies the minimum number
+                     of digits to appear for the d, H, I, j, m, M, o, S, U,
+                     w, W, y and Y directives, and the maximum number of
+                     characters to be used from the a, A, b, B, c, D, E, F,
+                     h, n, N, p, r, t, T, x, X, z, Z, and the first case, if a directive supplies fewer digits
+                     than specified by the precision, it will be expanded
+                     with leading zeros.  In the second case, if a directive
+                     supplies more characters than specified by the
+                     precision, excess characters will truncated on the
+                     right.
+</TD></TR>
+</TABLE>
+<P>
+      If no field width or precision is specified for a d, H, I, m, M, S, U,
+      W, y, or j directive, a default of .2 is used for all but j for which
+      .3 is used.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="3434">time</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the time as a floating point number expressed in seconds since
+the epoch, in UTC.  Note that even though the time is always returned
+as a floating point number, not all systems provide time with a better
+precision than 1 second.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">timezone</A></STRONG>
+<DD>
+The offset of the local (non-DST) timezone, in seconds west of the 0th
+meridian (i.e. negative in most of Western Europe, positive in the US,
+zero in the UK).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">tzname</A></STRONG>
+<DD>
+A tuple of two strings: the first is the name of the local non-DST
+timezone, the second is the name of the local DST timezone.  If no DST
+timezone is defined, the second string should not be used.
+<P>
+</DL></EM><HR><A NAME="tex2html3017" HREF="node63.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3015" HREF="node60.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3009" HREF="node61.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3019" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3020" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3018" HREF="node63.html">6.3 Standard Module getopt</A>
+<B>Up:</B> <A NAME="tex2html3016" HREF="node60.html">6 Generic Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3010" HREF="node61.html">6.1 Standard Module os</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

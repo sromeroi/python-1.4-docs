@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.5 Standard Module gopherlib</TITLE>
+<META NAME="description" CONTENT="11.5 Standard Module gopherlib">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3767" HREF="node120.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3765" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3759" HREF="node118.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3769" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3770" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3768" HREF="node120.html">11.6 Standard Module nntplib</A>
+<B>Up:</B> <A NAME="tex2html3766" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3760" HREF="node118.html">11.4.1 FTP Objects</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001250000000000000000">11.5 Standard Module <CODE>gopherlib</CODE></A></H1>
+<P>
+This module provides a minimal implementation of client side of the
+the Gopher protocol.  It is used by the module <CODE>urllib</CODE> to handle
+URLs that use the Gopher protocol.
+<P>
+The module defines the following functions:
+<P>
+<DL><DT><STRONG><A NAME="6274">send_selector</A></STRONG>(<VAR>selector, host</VAR><BIG>[</BIG><VAR>, port</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Send a <VAR>selector</VAR> string to the gopher server at <VAR>host</VAR> and
+<VAR>port</VAR> (default 70).  Return an open file object from which the
+returned document can be read.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="6275">send_query</A></STRONG>(<VAR>selector, query, host</VAR><BIG>[</BIG><VAR>, port</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Send a <VAR>selector</VAR> string and a <VAR>query</VAR> string to a gopher
+server at <VAR>host</VAR> and <VAR>port</VAR> (default 70).  Return an open file
+object from which the returned document can be read.
+<P>
+</DL>
+<P>
+Note that the data returned by the Gopher server can be of any type,
+depending on the first character of the selector string.  If the data
+is text (first character of the selector is `<SAMP>0</SAMP>'), lines are
+terminated by CRLF, and the data is terminated by a line consisting of
+a single `<SAMP>.</SAMP>', and a leading `<SAMP>.</SAMP>' should be stripped from
+lines that begin with `<SAMP>..</SAMP>'.  Directory listings (first charactger
+of the selector is `<SAMP>1</SAMP>') are transferred using the same protocol.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

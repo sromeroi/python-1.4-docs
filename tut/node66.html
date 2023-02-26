@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>10.1 The Last Printed Expression</TITLE>
+<META NAME="description" CONTENT="10.1 The Last Printed Expression">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1032" HREF="node67.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1030" HREF="node65.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1024" HREF="node65.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1034" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1033" HREF="node67.html">10.2 String Literals</A>
+<B>Up:</B> <A NAME="tex2html1031" HREF="node65.html">10 Recent Additions as </A>
+<B> Previous:</B> <A NAME="tex2html1025" HREF="node65.html">10 Recent Additions as </A>
+<BR><HR><P>
+<H1><A NAME="SECTION001110000000000000000">10.1 The Last Printed Expression</A></H1>
+<P>
+In interactive mode, the last printed expression is assigned to the
+variable <CODE>_</CODE>.  This means that when you are using Python as a
+desk calculator, it is somewhat easier to continue calculations, for
+example:
+<P>
+<PRE>        &gt;&gt;&gt; tax = 17.5 / 100
+        &gt;&gt;&gt; price = 3.50
+        &gt;&gt;&gt; price * tax
+        0.6125
+        &gt;&gt;&gt; price + _
+        4.1125
+        &gt;&gt;&gt; round(_, 2)
+        4.11
+        &gt;&gt;&gt;</PRE>
+<P>
+For reasons too embarrassing to explain, this variable is implemented
+as a built-in (living in the module <CODE>__builtin__</CODE>), so it should
+be treated as read-only by the user.  I.e. don't explicitly assign a
+value to it -- you would create an independent local variable with
+the same name masking the built-in variable with its magic behavior.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

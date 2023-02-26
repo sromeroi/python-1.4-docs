@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.3 Exceptions Can Be Classes</TITLE>
+<META NAME="description" CONTENT="11.3 Exceptions Can Be Classes">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="tut.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html1377" HREF="node97.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html1375" HREF="node93.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html1369" HREF="node95.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html1379" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A>  <BR>
+<B> Next:</B> <A NAME="tex2html1378" HREF="node97.html">11.4 Object Persistency and </A>
+<B>Up:</B> <A NAME="tex2html1376" HREF="node93.html">11 New in Release </A>
+<B> Previous:</B> <A NAME="tex2html1370" HREF="node95.html">11.2 Unix Signal Handling</A>
+<BR><HR><P>
+<H1><A NAME="SECTION001230000000000000000">11.3 Exceptions Can Be Classes</A></H1>
+<P>
+User-defined exceptions are no longer limited to being string objects
+-- they can be identified by classes as well.  Using this mechanism it
+is possible to create extensible hierarchies of exceptions.
+<P>
+There are two new valid (semantic) forms for the raise statement:
+<P>
+<PRE>raise Class, instance
+
+raise instance</PRE>
+<P>
+In the first form, <CODE>instance</CODE> must be an instance of <CODE>Class</CODE>
+or of a class derived from it.  The second form is a shorthand for
+<P>
+<PRE>raise instance.__class__, instance</PRE>
+<P>
+An except clause may list classes as well as string objects.  A class
+in an except clause is compatible with an exception if it is the same
+class or a base class thereof (but not the other way around -- an
+except clause listing a derived class is not compatible with a base
+class).  For example, the following code will print B, C, D in that
+order:
+<P>
+<PRE>class B:
+    pass
+class C(B):
+    pass
+class D(C):
+    pass
+
+for c in [B, C, D]:
+    try:
+        raise c()
+    except D:
+        print &quot;D&quot;
+    except C:
+        print &quot;C&quot;
+    except B:
+        print &quot;B&quot;</PRE>
+<P>
+Note that if the except clauses were reversed (with ``<CODE>except B</CODE>''
+first), it would have printed B, B, B -- the first matching except
+clause is triggered.
+<P>
+When an error message is printed for an unhandled exception which is a
+class, the class name is printed, then a colon and a space, and
+finally the instance converted to a string using the built-in function
+<CODE>str()</CODE>.
+<P>
+In this release, the built-in exceptions are still strings.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.11 Standard Module rfc822</TITLE>
+<META NAME="description" CONTENT="11.11 Standard Module rfc822">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3900" HREF="node131.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3898" HREF="node102.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3892" HREF="node129.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3902" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3903" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3901" HREF="node131.html">11.11.1 Message Objects</A>
+<B>Up:</B> <A NAME="tex2html3899" HREF="node102.html">11 Internet and WWW </A>
+<B> Previous:</B> <A NAME="tex2html3893" HREF="node129.html">11.10.4 Writer Implementations</A>
+<BR><HR><P>
+<H1><A NAME="SECTION0012110000000000000000">11.11 Standard Module <CODE>rfc822</CODE></A></H1>
+<P>
+This module defines a class, <CODE>Message</CODE>, which represents a
+collection of ``email headers'' as defined by the Internet standard
+RFC 822.  It is used in various contexts, usually to read such headers
+from a file.
+<P>
+A <CODE>Message</CODE> instance is instantiated with an open file object as
+parameter.  Instantiation reads headers from the file up to a blank
+line and stores them in the instance; after instantiation, the file is
+positioned directly after the blank line that terminates the headers.
+<P>
+Input lines as read from the file may either be terminated by CR-LF or
+by a single linefeed; a terminating CR-LF is replaced by a single
+linefeed before the line is stored.
+<P>
+All header matching is done independent of upper or lower case;
+e.g. <CODE>m['From']</CODE>, <CODE>m['from']</CODE> and <CODE>m['FROM']</CODE> all yield
+the same result.
+<P>
+<BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3904" HREF="node131.html#SECTION0012111000000000000000">11.11.1 Message Objects</A>
+</UL>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

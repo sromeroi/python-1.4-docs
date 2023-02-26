@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.12.1 Additional Methods of Message objects</TITLE>
+<META NAME="description" CONTENT="11.12.1 Additional Methods of Message objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3934" HREF="node134.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3932" HREF="node132.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3928" HREF="node132.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3936" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3937" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3935" HREF="node134.html">11.13 Standard module binhex</A>
+<B>Up:</B> <A NAME="tex2html3933" HREF="node132.html">11.12 Standard Module mimetools</A>
+<B> Previous:</B> <A NAME="tex2html3929" HREF="node132.html">11.12 Standard Module mimetools</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012121000000000000000">11.12.1 Additional Methods of Message objects</A></H2>
+<P>
+<A NAME="mimetoolsMessageMethods">&#160;</A>
+<P>
+The <CODE>mimetools.Message</CODE> class defines the following methods in
+addition to the <CODE>rfc822.Message</CODE> class:
+<P>
+<DL><DT><STRONG><A NAME="7225">getplist</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the parameter list of the <CODE>Content-type</CODE> header.  This is
+a list if strings.  For parameters of the form
+`<SAMP><VAR>key</VAR>=<VAR>value</VAR></SAMP>', <VAR>key</VAR> is converted to lower case but
+<VAR>value</VAR> is not.  For example, if the message contains the header
+`<SAMP>Content-type: text/html; spam=1; Spam=2; Spam</SAMP>' then
+<CODE>getplist()</CODE> will return the Python list <CODE>['spam=1',
+'spam=2', 'Spam']</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7237">getparam</A></STRONG>(<VAR>name</VAR>)
+<DD>
+Return the <VAR>value</VAR> of the first parameter (as returned by
+<CODE>getplist()</CODE> of the form `<SAMP><VAR>name</VAR>=<VAR>value</VAR></SAMP>' for the
+given <VAR>name</VAR>.  If <VAR>value</VAR> is surrounded by quotes of the form
+<VAR>&lt;...&gt;</VAR> or <VAR>&quot;...&quot;</VAR>, these are removed.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7249">getencoding</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the encoding specified in the `<SAMP>Content-transfer-encoding</SAMP>'
+message header.  If no such header exists, return <CODE>&quot;7bit&quot;</CODE>.  The
+encoding is converted to lower case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7255">gettype</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the message type (of the form `<SAMP><VAR>type</VAR>/varsubtype</SAMP>')
+as specified in the `<SAMP>Content-type</SAMP>' header.  If no such header
+exists, return <CODE>&quot;text/plain&quot;</CODE>.  The type is converted to lower
+case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7263">getmaintype</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the main type as specified in the `<SAMP>Content-type</SAMP>' header.
+If no such header exists, return <CODE>&quot;text&quot;</CODE>.  The main type is
+converted to lower case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="7269">getsubtype</A></STRONG>(<VAR></VAR>)
+<DD>
+Return the subtype as specified in the `<SAMP>Content-type</SAMP>' header.  If
+no such header exists, return <CODE>&quot;plain&quot;</CODE>.  The subtype is
+converted to lower case.
+<P>
+</DL><BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

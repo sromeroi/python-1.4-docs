@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>11.16.3 Exceptions</TITLE>
+<META NAME="description" CONTENT="11.16.3 Exceptions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html4031" HREF="node142.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html4029" HREF="node138.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html4023" HREF="node140.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html4033" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html4034" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html4032" HREF="node142.html">11.16.4 Supporting Floating Point </A>
+<B>Up:</B> <A NAME="tex2html4030" HREF="node138.html">11.16 Standard module xdrlib</A>
+<B> Previous:</B> <A NAME="tex2html4024" HREF="node140.html">11.16.2 Unpacker Objects</A>
+<BR><HR><P>
+<H2><A NAME="SECTION0012163000000000000000">11.16.3 Exceptions</A></H2>
+<P>
+Exceptions in this module are coded as class instances:
+<P>
+<DL><DT><STRONG><A NAME="">Error</A></STRONG>
+<DD>
+The base exception class.  <CODE>Error</CODE> has a single public data
+member <CODE>msg</CODE> containing the description of the error.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">ConversionError</A></STRONG>
+<DD>
+Class derived from <CODE>Error</CODE>.  Contains no additional instance
+variables.
+<P>
+</DL>
+<P>
+Here is an example of how you would catch one of these exceptions:
+<P>
+<PRE>import xdrlib
+p = xdrlib.Packer()
+try:
+    p.pack_double(8.01)
+except xdrlib.ConversionError, instance:
+    print 'packing the double failed:', instance.msg</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

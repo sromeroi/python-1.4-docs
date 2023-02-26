@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>The Py_BuildValue() Function</TITLE>
+<META NAME="description" CONTENT="The Py_BuildValue() Function">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="ext.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html311" HREF="node12.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html309" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html303" HREF="node10.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html313" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html314" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html312" HREF="node12.html">1.10 Reference Counts</A>
+<B>Up:</B> <A NAME="tex2html310" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html304" HREF="node10.html">Format Strings for PyArg_ParseTuple()</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00290000000000000000">The <TT>Py_BuildValue()</TT> Function</A></H1>
+<P>
+This function is the counterpart to <CODE>PyArg_ParseTuple()</CODE>.  It is
+declared as follows:
+<P>
+<PRE>    PyObject *Py_BuildValue(char *format, ...);</PRE>
+<P>
+It recognizes a set of format units similar to the ones recognized by
+<CODE>PyArg_ParseTuple()</CODE>, but the arguments (which are input to the
+function, not output) must not be pointers, just values.  It returns a
+new Python object, suitable for returning from a C function called
+from Python.
+<P>
+One difference with <CODE>PyArg_ParseTuple()</CODE>: while the latter
+requires its first argument to be a tuple (since Python argument lists
+are always represented as tuples internally), <CODE>BuildValue()</CODE> does
+not always build a tuple.  It builds a tuple only if its format string
+contains two or more format units.  If the format string is empty, it
+returns <CODE>None</CODE>; if it contains exactly one format unit, it
+returns whatever object is described by that format unit.  To force it
+to return a tuple of size 0 or one, parenthesize the format string.
+<P>
+In the following description, the quoted form is the format unit; the
+entry in (round) parentheses is the Python object type that the format
+unit will return; and the entry in [square] brackets is the type of
+the C value(s) to be passed.
+<P>
+The characters space, tab, colon and comma are ignored in format
+strings (but not within format units such as `<SAMP>s#</SAMP>').  This can be
+used to make long format strings a tad more readable.
+<P>
+<DL ><DT><STRONG>`<SAMP>s</SAMP>' (string) [char *]</STRONG>
+<DD>
+Convert a null-terminated C string to a Python object.  If the C
+string pointer is <CODE>NULL</CODE>, <CODE>None</CODE> is returned.
+<P>
+<DT><STRONG>`<SAMP>s#</SAMP>' (string) [char *, int]</STRONG>
+<DD>
+Convert a C string and its length to a Python object.  If the C string
+pointer is <CODE>NULL</CODE>, the length is ignored and <CODE>None</CODE> is
+returned.
+<P>
+<DT><STRONG>`<SAMP>z</SAMP>' (string or <CODE>None</CODE>) [char *]</STRONG>
+<DD>
+Same as `<SAMP>s</SAMP>'.
+<P>
+<DT><STRONG>`<SAMP>z#</SAMP>' (string or <CODE>None</CODE>) [char *, int]</STRONG>
+<DD>
+Same as `<SAMP>s#</SAMP>'.
+<P>
+<DT><STRONG>`<SAMP>i</SAMP>' (integer) [int]</STRONG>
+<DD>
+Convert a plain C <CODE>int</CODE> to a Python integer object.
+<P>
+<DT><STRONG>`<SAMP>b</SAMP>' (integer) [char]</STRONG>
+<DD>
+Same as `<SAMP>i</SAMP>'.
+<P>
+<DT><STRONG>`<SAMP>h</SAMP>' (integer) [short int]</STRONG>
+<DD>
+Same as `<SAMP>i</SAMP>'.
+<P>
+<DT><STRONG>`<SAMP>l</SAMP>' (integer) [long int]</STRONG>
+<DD>
+Convert a C <CODE>long int</CODE> to a Python integer object.
+<P>
+<DT><STRONG>`<SAMP>c</SAMP>' (string of length 1) [char]</STRONG>
+<DD>
+Convert a C <CODE>int</CODE> representing a character to a Python string of
+length 1.
+<P>
+<DT><STRONG>`<SAMP>d</SAMP>' (float) [double]</STRONG>
+<DD>
+Convert a C <CODE>double</CODE> to a Python floating point number.
+<P>
+<DT><STRONG>`<SAMP>f</SAMP>' (float) [float]</STRONG>
+<DD>
+Same as `<SAMP>d</SAMP>'.
+<P>
+<DT><STRONG>`<SAMP>O</SAMP>' (object) [PyObject *]</STRONG>
+<DD>
+Pass a Python object untouched (except for its reference count, which
+is incremented by one).  If the object passed in is a <CODE>NULL</CODE>
+pointer, it is assumed that this was caused because the call producing
+the argument found an error and set an exception.  Therefore,
+<CODE>Py_BuildValue()</CODE> will return <CODE>NULL</CODE> but won't raise an
+exception.  If no exception has been raised yet,
+<CODE>PyExc_SystemError</CODE> is set.
+<P>
+<DT><STRONG>`<SAMP>S</SAMP>' (object) [PyObject *]</STRONG>
+<DD>
+Same as `<SAMP>O</SAMP>'.
+<P>
+<DT><STRONG>`<SAMP>O&amp;</SAMP>' (object) [<VAR>converter</VAR>, <VAR>anything</VAR>]</STRONG>
+<DD>
+Convert <VAR>anything</VAR> to a Python object through a <VAR>converter</VAR>
+function.  The function is called with <VAR>anything</VAR> (which should be
+compatible with <CODE>void *</CODE>) as its argument and should return a
+``new'' Python object, or <CODE>NULL</CODE> if an error occurred.
+<P>
+<DT><STRONG>`<SAMP>(<VAR>items</VAR>)</SAMP>' (tuple) [<VAR>matching-items</VAR>]</STRONG>
+<DD>
+Convert a sequence of C values to a Python tuple with the same number
+of items.
+<P>
+<DT><STRONG>`<SAMP>[<VAR>items</VAR>]</SAMP>' (list) [<VAR>matching-items</VAR>]</STRONG>
+<DD>
+Convert a sequence of C values to a Python list with the same number
+of items.
+<P>
+<DT><STRONG>`<SAMP>{<VAR>items</VAR>}</SAMP>' (dictionary) [<VAR>matching-items</VAR>]</STRONG>
+<DD>
+Convert a sequence of C values to a Python dictionary.  Each pair of
+consecutive C values adds one item to the dictionary, serving as key
+and value, respectively.
+<P>
+ </DL>
+<P>
+If there is an error in the format string, the
+<CODE>PyExc_SystemError</CODE> exception is raised and <CODE>NULL</CODE> returned.
+<P>
+Examples (to the left the call, to the right the resulting Python value):
+<P>
+<PRE>    Py_BuildValue(&quot;&quot;)                        None
+    Py_BuildValue(&quot;i&quot;, 123)                  123
+    Py_BuildValue(&quot;iii&quot;, 123, 456, 789)      (123, 456, 789)
+    Py_BuildValue(&quot;s&quot;, &quot;hello&quot;)              'hello'
+    Py_BuildValue(&quot;ss&quot;, &quot;hello&quot;, &quot;world&quot;)    ('hello', 'world')
+    Py_BuildValue(&quot;s#&quot;, &quot;hello&quot;, 4)          'hell'
+    Py_BuildValue(&quot;()&quot;)                      ()
+    Py_BuildValue(&quot;(i)&quot;, 123)                (123,)
+    Py_BuildValue(&quot;(ii)&quot;, 123, 456)          (123, 456)
+    Py_BuildValue(&quot;(i,i)&quot;, 123, 456)         (123, 456)
+    Py_BuildValue(&quot;[i,i]&quot;, 123, 456)         [123, 456]
+    Py_BuildValue(&quot;{s:i,s:i}&quot;,
+                  &quot;abc&quot;, 123, &quot;def&quot;, 456)    {'abc': 123, 'def': 456}
+    Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
+                  1, 2, 3, 4, 5, 6)          (((1, 2), (3, 4)), (5, 6))</PRE>
+<P>
+<HR><A NAME="tex2html311" HREF="node12.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html309" HREF="node2.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html303" HREF="node10.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html313" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html314" HREF="node38.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html312" HREF="node12.html">1.10 Reference Counts</A>
+<B>Up:</B> <A NAME="tex2html310" HREF="node2.html">Extending Python with C </A>
+<B> Previous:</B> <A NAME="tex2html304" HREF="node10.html">Format Strings for PyArg_ParseTuple()</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>7.2 Built-in Module socket</TITLE>
+<META NAME="description" CONTENT="7.2 Built-in Module socket">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="lib.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html3093" HREF="node69.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3091" HREF="node66.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3085" HREF="node67.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3095" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3096" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3094" HREF="node69.html">7.2.1 Socket Objects</A>
+<B>Up:</B> <A NAME="tex2html3092" HREF="node66.html">7 Optional Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3086" HREF="node67.html">7.1 Built-in Module signal</A>
+<BR><HR><P>
+<H1><A NAME="SECTION00820000000000000000">7.2 Built-in Module <CODE>socket</CODE></A></H1>
+<P>
+This module provides access to the BSD <EM>socket</EM> interface.
+It is available on Unix systems that support this interface.
+<P>
+For an introduction to socket programming (in C), see the following
+papers: <EM>An Introductory 4.3BSD Interprocess Communication
+Tutorial</EM>, by Stuart Sechrest and <EM>An Advanced 4.3BSD Interprocess
+Communication Tutorial</EM>, by Samuel J.  Leffler et al, both in the
+Unix Programmer's Manual, Supplementary Documents 1 (sections PS1:7
+and PS1:8).  The Unix manual pages for the various socket-related
+system calls are also a valuable source of information on the details of
+socket semantics.
+<P>
+The Python interface is a straightforward transliteration of the
+Unix system call and library interface for sockets to Python's
+object-oriented style: the <CODE>socket()</CODE> function returns a
+<I><DFN>socket object</DFN></I> whose methods implement the various socket system
+calls.  Parameter types are somewhat higer-level than in the C
+interface: as with <CODE>read()</CODE> and <CODE>write()</CODE> operations on Python
+files, buffer allocation on receive operations is automatic, and
+buffer length is implicit on send operations.
+<P>
+Socket addresses are represented as a single string for the
+<CODE>AF_UNIX</CODE> address family and as a pair
+<CODE>(<VAR>host</VAR>, <VAR>port</VAR>)</CODE> for the <CODE>AF_INET</CODE> address family,
+where <VAR>host</VAR> is a string representing
+either a hostname in Internet domain notation like
+<CODE>'daring.cwi.nl'</CODE> or an IP address like <CODE>'100.50.200.5'</CODE>,
+and <VAR>port</VAR> is an integral port number.  Other address families are
+currently not supported.  The address format required by a particular
+socket object is automatically selected based on the address family
+specified when the socket object was created.
+<P>
+All errors raise exceptions.  The normal exceptions for invalid
+argument types and out-of-memory conditions can be raised; errors
+related to socket or address semantics raise the error <CODE>socket.error</CODE>.
+<P>
+Non-blocking mode is supported through the <CODE>setblocking()</CODE>
+method.
+<P>
+The module <CODE>socket</CODE> exports the following constants and functions:
+<P>
+<DL><DT><STRONG><A NAME="">error</A></STRONG>
+<DD>
+This exception is raised for socket- or address-related errors.
+The accompanying value is either a string telling what went wrong or a
+pair <CODE>(<VAR>errno</VAR>, <VAR>string</VAR>)</CODE>
+representing an error returned by a system
+call, similar to the value accompanying <CODE>posix.error</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">AF_UNIX</A></STRONG>
+<DD>
+,AF_INET
+These constants represent the address (and protocol) families,
+used for the first argument to <CODE>socket()</CODE>.  If the <CODE>AF_UNIX</CODE>
+constant is not defined then this protocol is unsupported.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">SOCK_STREAM</A></STRONG>
+<DD>
+,SOCK_DGRAM
+,SOCK_RAW
+,SOCK_RDM
+,SOCK_SEQPACKET
+These constants represent the socket types,
+used for the second argument to <CODE>socket()</CODE>.
+(Only <CODE>SOCK_STREAM</CODE> and
+<CODE>SOCK_DGRAM</CODE> appear to be generally useful.)
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="">SO_*</A></STRONG>
+<DD>
+,SOMAXCONN
+,MSG_*
+,SOL_*
+,IPPROTO_*
+,IPPORT_*
+,INADDR_*
+,IP_*
+Many constants of these forms, documented in the Unix documentation on
+sockets and/or the IP protocol, are also defined in the socket module.
+They are generally used in arguments to the <CODE>setsockopt</CODE> and
+<CODE>getsockopt</CODE> methods of socket objects.  In most cases, only
+those symbols that are defined in the Unix header files are defined;
+for a few symbols, default values are provided.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4027">gethostbyname</A></STRONG>(<VAR>hostname</VAR>)
+<DD>
+Translate a host name to IP address format.  The IP address is
+returned as a string, e.g.,  <CODE>'100.50.200.5'</CODE>.  If the host name
+is an IP address itself it is returned unchanged.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4032">gethostname</A></STRONG>(<VAR></VAR>)
+<DD>
+Return a string containing the hostname of the machine where 
+the Python interpreter is currently executing.  If you want to know the
+current machine's IP address, use
+<CODE>socket.gethostbyname(socket.gethostname())</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4037">gethostbyaddr</A></STRONG>(<VAR>ip_address</VAR>)
+<DD>
+Return a triple <CODE>(hostname, aliaslist, ipaddrlist)</CODE> where
+<CODE>hostname</CODE> is the primary host name responding to the given
+<VAR>ip_address</VAR>, <CODE>aliaslist</CODE> is a (possibly empty) list of
+alternative host names for the same address, and <CODE>ipaddrlist</CODE> is
+a list of IP addresses for the same interface on the same
+host (most likely containing only a single address).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4046">getservbyname</A></STRONG>(<VAR>servicename, protocolname</VAR>)
+<DD>
+Translate an Internet service name and protocol name to a port number
+for that service.  The protocol name should be <CODE>'tcp'</CODE> or
+<CODE>'udp'</CODE>.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4222">socket</A></STRONG>(<VAR>family, type</VAR><BIG>[</BIG><VAR>, proto</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Create a new socket using the given address family, socket type and
+protocol number.  The address family should be <CODE>AF_INET</CODE> or
+<CODE>AF_UNIX</CODE>.  The socket type should be <CODE>SOCK_STREAM</CODE>,
+<CODE>SOCK_DGRAM</CODE> or perhaps one of the other `<SAMP>SOCK_</SAMP>' constants.
+The protocol number is usually zero and may be omitted in that case.
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4223">fromfd</A></STRONG>(<VAR>fd, family, type</VAR><BIG>[</BIG><VAR>, proto</VAR><BIG>]</BIG><VAR></VAR>)
+<DD>
+Build a socket object from an existing file descriptor (an integer as
+returned by a file object's <CODE>fileno</CODE> method).  Address family,
+socket type and protocol number are as for the <CODE>socket</CODE> function
+above.  The file descriptor should refer to a socket, but this is not
+checked -- subsequent operations on the object may fail if the file
+descriptor is invalid.  This function is rarely needed, but can be
+used to get or set socket options on a socket passed to a program as
+standard input or output (e.g. a server started by the Unix inet
+daemon).
+<P>
+</DL>
+<P>
+<DL><DT><STRONG><A NAME="4068">ntohl</A></STRONG>(<VAR>x</VAR>)
+<DD>
+,ntohsx
+,htonlx
+,htonsx
+These functions convert 32-bit (`l' suffix) and 16-bit (`s' suffix)
+integers between network and host byte order.  On machines where the
+host byte order is the same as the network byte order, they are no-ops
+(assuming the values fit in the indicated size); otherwise, they
+perform 2-byte or 4-byte swap operations.
+<P>
+</DL><BR> <HR>
+<UL> 
+<LI> <A NAME="tex2html3097" HREF="node69.html#SECTION00821000000000000000">7.2.1 Socket Objects</A>
+<LI> <A NAME="tex2html3098" HREF="node70.html#SECTION00822000000000000000">7.2.2 Example</A>
+</UL>
+<HR><A NAME="tex2html3093" HREF="node69.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="../icons/next_motif.gif" BORDER=0></A> <A NAME="tex2html3091" HREF="node66.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="../icons/up_motif.gif" BORDER=0></A> <A NAME="tex2html3085" HREF="node67.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="../icons/previous_motif.gif" BORDER=0></A> <A NAME="tex2html3095" HREF="node1.html"><IMG WIDTH=65 HEIGHT=24 ALIGN=BOTTOM ALT="contents" SRC="../icons/contents_motif.gif" BORDER=0></A> <A NAME="tex2html3096" HREF="node221.html"><IMG WIDTH=43 HEIGHT=24 ALIGN=BOTTOM ALT="index" SRC="../icons/index_motif.gif" BORDER=0></A> <BR>
+<B> Next:</B> <A NAME="tex2html3094" HREF="node69.html">7.2.1 Socket Objects</A>
+<B>Up:</B> <A NAME="tex2html3092" HREF="node66.html">7 Optional Operating System </A>
+<B> Previous:</B> <A NAME="tex2html3086" HREF="node67.html">7.1 Built-in Module signal</A>
+<P><ADDRESS>
+guido@cnri.reston.va.us
+</ADDRESS>
+</BODY>
+</HTML>
